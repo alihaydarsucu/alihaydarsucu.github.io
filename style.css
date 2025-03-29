@@ -726,6 +726,7 @@ footer {
 }
 
 /* Dark Mode Styles */
+
 body.dark-mode {
     background-color: var(--dark-bg);
     color: var(--dark-text);
@@ -735,6 +736,14 @@ body.dark-mode header {
     background-color: var(--dark-card);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     border-bottom: 1px solid var(--dark-border);
+}
+
+body.dark-mode .logo a {
+    color: var(--dark-text);
+}
+
+body.dark-mode .bar {
+    background-color: var(--dark-text); 
 }
 
 /* Cards and content blocks */
@@ -780,7 +789,7 @@ body.dark-mode .experience-content h3 {
 
 /* Interactive elements */
 body.dark-mode .project-link {
-    background-color: var(--dark-accent-orange);
+    background-color: var(--dark-accent-blue);
     color: #121212;
     font-weight: 600;
 }
