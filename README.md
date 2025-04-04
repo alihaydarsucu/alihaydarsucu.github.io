@@ -2,8 +2,6 @@
 
 Welcome to my personal portfolio website! This site showcases my background, skills, projects, experience, education, and certifications.
 
-## 🖥️ Live Website
-
 You can visit my portfolio here: **[Portfolio](https://github.com/alihaydarsucu/alihaydarsucu.github.io)**
 
 ## 📌 Features
@@ -40,15 +38,5 @@ You can visit my portfolio here: **[Portfolio](https://github.com/alihaydarsucu/
 
 This project is open-source and available under the [MIT License](LICENSE).
 
-## 📬 Contact Me
-
-Feel free to connect with me:
-
-- 📧 Email: [alihaydarsucu@gmail.com](mailto:alihaydarsucu@gmail.com)
-- 💼 LinkedIn: [Ali Haydar Sucu](https://linkedin.com/in/ali-haydar-sucu)
-- 🐙 GitHub: [alihaydarsucu](https://github.com/alihaydarsucu)
-- 📸 Instagram: [@alihaydarsucu](https://instagram.com/alihaydarsucu)
-
----
 
 ⭐ If you like this project, consider giving it a **star** on GitHub!
