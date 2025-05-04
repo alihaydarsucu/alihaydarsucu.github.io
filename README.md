@@ -2,7 +2,7 @@
 
 Welcome to my personal portfolio website! This site showcases my background, skills, projects, experience, education, and certifications.
 
-🌟 **Check it out here**: [Portfolio](https://github.com/alihaydarsucu/alihaydarsucu.github.io)
+🌟 **Check it out here**: [Portfolio](https://alihaydarsucu.github.io)
 
 ## 📌 Key Features
 
