@@ -191,6 +191,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
             container.appendChild(repoCard);
+            setTimeout(() => {
+                repoCard.classList.add('show');
+            }, 10);
         });
     }
     

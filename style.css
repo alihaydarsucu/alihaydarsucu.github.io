@@ -589,12 +589,19 @@ body.dark-mode .mobile-nav-links a {
 
 /* GitHub Projeleri */
 .github-project-card {
+    opacity: 0;
     background: white;
     border-radius: 6px;
     padding: 16px;
     border: 1px solid #e1e4e8;
-    transition: all 0.2s;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
     margin-bottom: 16px;
+}
+
+.github-project-card.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .github-project-card:hover {
