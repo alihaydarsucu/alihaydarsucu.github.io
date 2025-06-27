@@ -158,6 +158,25 @@ nav {
     background: var(--blue);
 }
 
+.resume-download {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.resume-btn {
+  display: inline-block;
+  background-color: #0077cc;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+.resume-btn:hover {
+  background-color: #005fa3;
+}
+
 /* Skills Section */
 .skills-container {
     display: grid;
@@ -172,6 +191,20 @@ nav {
     text-align: center;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s;
+}
+
+.skill-card img {
+    width: 60px;
+    height: 60px;
+    max-width: 60px;
+    max-height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+    margin-bottom: 15px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .skill-card:hover {
@@ -239,10 +272,28 @@ nav {
     transition: background 0.3s;
     margin-top: 15px; /* Space above the button */
     align-self: flex-start; /* Align to the left */
+    margin-right: 10px; /* Add gap between buttons */
 }
 
 .project-link:hover {
     background: var(--dark-purple);
+}
+
+.website {
+    display: inline-block;
+    background: var(--dark-accent-orange);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s;
+    margin-top: 15px;
+    align-self: flex-start;
+}
+
+.website:hover {
+    background: var(--red);
 }
 
 .project-image {
