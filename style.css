@@ -281,14 +281,18 @@ body.dark-mode .mobile-nav-links a {
     color: var(--dark-text);
 }
 
+body.dark-mode .mobile-menu-close {
+    color: #fff;
+}
+
 /* Theme Toggle Switch */
 /* Toggle Switch */
 .theme-toggle {
     position: relative;
     display: block;
-    width: 60px;
-    height: 30px;
-    margin-left: 15px;
+    width: 72px;
+    height: 36px;
+    margin-left: 8px;
 }
 
 .theme-toggle input {
@@ -312,9 +316,10 @@ body.dark-mode .mobile-nav-links a {
 .theme-slider:before {
     position: absolute;
     content: "";
-    height: 22px;
-    width: 22px;
-    left: 4px;
+    height: 28px;
+    width: 28px;
+    right: 7px;
+    left: 7px;
     bottom: 4px;
     background-color: white;
     transition: .4s;
@@ -324,7 +329,7 @@ body.dark-mode .mobile-nav-links a {
     justify-content: center;
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
-    font-size: 12px;
+    font-size: 16px;
     color: #333;
 }
 
