@@ -1400,4 +1400,21 @@ body.dark-mode .filter-btn:hover {
     }
 }
 
+@media screen and (max-width: 370px) {
+    .project-link-container {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .project-link,
+    .website {
+        display: inline-block;
+        width: auto;
+        min-width: 0;
+        margin: 0;
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}
+
 
