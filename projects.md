@@ -1,0 +1,204 @@
+---
+layout: default
+title: "Projects | Ali Haydar Sucu"
+lang: en
+permalink: /projects/
+---
+
+<header>
+    <div class="container">
+        <nav>
+            <div class="hamburger-menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <div class="logo">
+                <img src="Images/Icons/icon.png" alt="Logo" class="logo-img">
+                <a href="/">Ali Haydar Sucu</a>
+            </div>
+            <div class="nav-links">
+                <a href="/">
+                    <i class="fas fa-user"></i>
+                    <span class="nav-text">About</span>
+                </a>
+                <a href="/skills">
+                    <i class="fas fa-code"></i>
+                    <span class="nav-text">Skills</span>
+                </a>
+                <a href="/projects" class="active">
+                    <i class="fas fa-project-diagram"></i>
+                    <span class="nav-text">Projects</span>
+                </a>
+                <a href="/experience">
+                    <i class="fas fa-briefcase"></i>
+                    <span class="nav-text">Experience</span>
+                </a>
+                <div class="language-selector">
+                    <div class="language-selector-toggle">
+                        <a href="/projects" class="language-option active">EN</a>
+                        <a href="/projeler" class="language-option">TR</a>
+                    </div>
+                </div>
+                <label class="theme-toggle">
+                    <input type="checkbox">
+                    <span class="theme-slider"></span>
+                </label>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu-overlay"></div>
+<div class="mobile-menu">
+    <div class="mobile-menu-header">
+        <button class="mobile-menu-close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="mobile-nav-links">
+        <a href="/">
+            <i class="fas fa-user"></i>
+            <span class="nav-text-mobile">About</span>
+        </a>
+        <a href="/skills">
+            <i class="fas fa-code"></i>
+            <span class="nav-text-mobile">Skills</span>
+        </a>
+        <a href="/projects" class="active">
+            <i class="fas fa-project-diagram"></i>
+            <span class="nav-text-mobile">Projects</span>
+        </a>
+        <a href="/experience">
+            <i class="fas fa-briefcase"></i>
+            <span class="nav-text-mobile">Experience</span>
+        </a>
+        <div class="mobile-language-selector">
+            <span class="language-label">Language:</span>
+            <div class="language-selector-toggle">
+                <a href="/projects" class="language-option active">EN</a>
+                <a href="/projeler" class="language-option">TR</a>
+            </div>
+        </div>
+        <div class="mobile-theme-toggle">
+            <label class="theme-toggle">
+                <input type="checkbox">
+                <span class="theme-slider"></span>
+            </label>
+        </div>
+    </div>
+</div>
+
+<main class="container">
+    <section id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-container">
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="Images/Projects/pusula-usv-website.png" alt="PUSULA USV Website" loading="lazy">
+                </div>
+                <div class="project-content">
+                    <h3>PUSULA USV Website</h3>
+                    <p>Website for PUSULA USV, showcasing our autonomous marine vehicle project and team information.</p>
+                    <div class="project-link-container">
+                        <a href="https://github.com/alihaydarsucu/pusula.github.io" class="project-link">View Project</a>
+                        <a href="https://alihaydarsucu.github.io/pusula.github.io/" class="website" target="_blank">View Demo</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="Images/Projects/aybu-tdgt.png" alt="AYBU TDGT Website" loading="lazy">
+                </div>
+                <div class="project-content">
+                    <h3>AYBU TDGT Website</h3>
+                    <p>Website for Ankara Yıldırım Beyazıt University Turkish World Youth Community.</p>
+                    <div class="project-link-container">
+                        <a href="https://github.com/alihaydarsucu/aybu-tdgt" class="project-link">View Project</a>
+                        <a href="https://aybuturkdunyasi.neocities.org/" class="website" target="_blank">View Demo</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="Images/Projects/Portfolio.png" alt="Personal Portfolio" loading="lazy">
+                </div>
+                <div class="project-content">
+                    <h3>Personal Portfolio</h3>
+                    <p>This website you're currently viewing - my personal portfolio showcasing my skills and projects.</p>
+                    <div class="project-link-container">
+                        <a href="https://github.com/alihaydarsucu/portfolio" class="project-link">View Project</a>
+                        <a href="https://alihaydarsucu.github.io" class="website" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="github-projects">
+        <h2 class="section-title">GitHub Projects</h2>
+        <div class="github-filter">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="web">Web Development</button>
+            <button class="filter-btn" data-filter="embedded">Embedded Systems</button>
+            <button class="filter-btn" data-filter="other">Other</button>
+        </div>
+        <div id="repos" class="projects-container">
+            <p style="text-align: center;">Loading GitHub projects...</p>
+        </div>
+    </section>
+
+    <section id="licenses-certifications">
+        <h2 class="section-title">Licenses & Certifications</h2>
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-card">
+                    <div class="timeline-logo">
+                        <img src="Images/Licenses/freeCodeCamp.jpeg" alt="freeCodeCamp Logo">
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Issued Feb 2024</div>
+                        <h3 class="timeline-title">Responsive Web Design</h3>
+                        <p class="timeline-subtitle">freeCodeCamp</p>
+                        <p class="timeline-details">
+                            <b>Skills:</b> Front-End Development · HTML · HTML5 · Cascading Style Sheets (CSS) · Web Design
+                        </p>
+                        <br>
+                        <a href="https://www.freecodecamp.org/certification/alihaydarsucu/responsive-web-design" class="credential-link">Show credential <i class="credential-icon">➚</i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-card">
+                    <div class="timeline-logo">
+                        <img src="Images/Licenses/developer_students_community.jpeg" alt="Developer Students Community Logo">
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Issued Dec 2023</div>
+                        <h3 class="timeline-title">Data Science Bootcamp</h3>
+                        <p class="timeline-subtitle">Developer Students Community</p>
+                        <p class="timeline-details">
+                            <b>Skills:</b> Python (Programming Language) · Data Modelling · Data Visualization
+                        </p>
+                        <br>
+                        <a href="https://credsverse.com/credentials/68cd1cdc-0d63-4095-a93c-3523b0d87402" class="credential-link">Show credential <i class="credential-icon">➚</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <div class="footer-content">
+        <p>&copy; Copyright 2025 - Ali Haydar Sucu</p>
+        <p>Computer Engineering Student | Embedded Software Developer</p>
+    </div>
+</footer>
+
+<a href="#" class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+</a>

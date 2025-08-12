@@ -1,0 +1,278 @@
+---
+layout: default
+title: "Experience | Ali Haydar Sucu"
+lang: en
+permalink: /experience/
+---
+
+<header>
+    <div class="container">
+        <nav>
+            <div class="hamburger-menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <div class="logo">
+                <img src="Images/Icons/icon.png" alt="Logo" class="logo-img">
+                <a href="/">Ali Haydar Sucu</a>
+            </div>
+            <div class="nav-links">
+                <a href="/">
+                    <i class="fas fa-user"></i>
+                    <span class="nav-text">About</span>
+                </a>
+                <a href="/skills">
+                    <i class="fas fa-code"></i>
+                    <span class="nav-text">Skills</span>
+                </a>
+                <a href="/projects">
+                    <i class="fas fa-project-diagram"></i>
+                    <span class="nav-text">Projects</span>
+                </a>
+                <a href="/experience" class="active">
+                    <i class="fas fa-briefcase"></i>
+                    <span class="nav-text">Experience</span>
+                </a>
+                <div class="language-selector">
+                    <div class="language-selector-toggle">
+                        <a href="/experience" class="language-option active">EN</a>
+                        <a href="/deneyim" class="language-option">TR</a>
+                    </div>
+                </div>
+                <label class="theme-toggle">
+                    <input type="checkbox">
+                    <span class="theme-slider"></span>
+                </label>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu-overlay"></div>
+<div class="mobile-menu">
+    <div class="mobile-menu-header">
+        <button class="mobile-menu-close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="mobile-nav-links">
+        <a href="/">
+            <i class="fas fa-user"></i>
+            <span class="nav-text-mobile">About</span>
+        </a>
+        <a href="/skills">
+            <i class="fas fa-code"></i>
+            <span class="nav-text-mobile">Skills</span>
+        </a>
+        <a href="/projects">
+            <i class="fas fa-project-diagram"></i>
+            <span class="nav-text-mobile">Projects</span>
+        </a>
+        <a href="/experience" class="active">
+            <i class="fas fa-briefcase"></i>
+            <span class="nav-text-mobile">Experience</span>
+        </a>
+        <div class="mobile-language-selector">
+            <span class="language-label">Language:</span>
+            <div class="language-selector-toggle">
+                <a href="/experience" class="language-option active">EN</a>
+                <a href="/deneyim" class="language-option">TR</a>
+            </div>
+        </div>
+        <div class="mobile-theme-toggle">
+            <label class="theme-toggle">
+                <input type="checkbox">
+                <span class="theme-slider"></span>
+            </label>
+        </div>
+    </div>
+</div>
+
+<main class="container">
+    <section id="experience">
+        <h2 class="section-title">Professional Experience</h2>
+        <div class="experience-container">
+            <div class="experience-card">
+                <div class="experience-logo">
+                    <img src="Images/Places/buraitech.png" alt="BURAI TECH Logo">
+                </div>
+                <div class="experience-content">
+                    <div class="experience-date">May 2025 - June 2025</div>
+                    <h3 class="experience-title">Project Leader</h3>
+                    <p class="experience-subtitle">AYBU ÖĞMER | Burai Tech</p>
+                    <div class="experience-details">
+                        <ul>
+                            <li>Led a team to design and develop a document-interactive AI agent using LLaMA 3 and PySide6.</li>
+                            <li>Assigned tasks, conducted prompt engineering, designed modular architecture.</li>
+                            <li>Developed NLP features (summarization, paraphrasing, QA).</li>
+                            <li>Tested multi-language capabilities, file parsing (PDF, DOCX, TXT), and integrated FFmpeg for avatar video rendering.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="experience-card">
+                <div class="experience-logo">
+                    <img src="Images/Places/pusulausv.jpeg" alt="PUSULA USV Logo">
+                </div>
+                <div class="experience-content">
+                    <div class="experience-date">October 2024 - Present</div>
+                    <h3 class="experience-title">Embedded Software Developer</h3>
+                    <p class="experience-subtitle">PUSULA USV, Ankara, Turkiye</p>
+                    <div class="experience-details">
+                        <ul>
+                            <li>Designed autonomous motion algorithms using Python for unmanned marine vehicles.</li>
+                            <li>Designed and deployed systemd services for automatically launching ROS 2 and MAVROS nodes on Jetson board running Ubuntu 22.04.</li>
+                            <li>Collaborated with the electrical team to perform integration and live sensor tests, including Pixhawk motor tests and GPS.</li>
+                            <li>Configured Linux-based system for real-time ROS communication and telemetry control.</li>
+                            <li>Performed real-world tests on the actual marine vehicle.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="experience-card">
+                <div class="experience-logo">
+                    <img src="Images/Places/ogmer.png" alt="AYBU Ogmer Logo">
+                </div>
+                <div class="experience-content">
+                    <div class="experience-date">August 2024 - May 2025</div>
+                    <h3 class="experience-title">Bootcamp Tutor & Student Mentor</h3>
+                    <p class="experience-subtitle">Ankara Yıldırım Beyazıt University, Ankara, Turkiye</p>
+                    <div class="experience-details">
+                        <ul>
+                            <li>Led a summer bootcamp aimed at introducing college students to front-end web development, 
+                                with a focus on HTML, CSS, and the foundations of how the web works. Fostered a supportive 
+                                and engaging environment to help beginners build confidence and create simple, functional websites.</li>
+                            <li>Represented my university at many international conferences, 
+                                showcasing our initiatives at the Learning and Teaching Center. </li>
+                            <li>Provided technological support and mentorship to engineering freshmen, assisting them under the 
+                                "Meet Your Student Tech Staff" program, helping them navigate academic and technical challenges.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="experience-card">
+                <div class="experience-logo">
+                    <img src="Images/Places/hezarfen.jpeg" alt="Hezarfen Club Logo">
+                </div>
+                <div class="experience-content">
+                    <div class="experience-date">September 2023 - June 2024</div>
+                    <h3 class="experience-title">Avionics Team Member</h3>
+                    <p class="experience-subtitle">Aybü HEZARFEN Club | Gökçen Rocket Project, Ankara, Turkiye</p>
+                    <div class="experience-details">
+                        <ul>
+                            <li>Conducted research to determine suitable sensors for the system.</li>
+                            <li>Contributed to the flight control board and assisted 
+                                in integrating sensors and components.</li>
+                            <li>Performed initial testing of the avionics 
+                                system with team and documented the avionics system in detail for Teknofest.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-card">
+                    <div class="timeline-logo">
+                        <img src="Images/Places/aybü-logo.webp" alt="AYBÜ Logo">
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">September 2023 - June 2028 (Expected)</div>
+                        <h3 class="timeline-title">Bachelor of Science, Computer Engineering</h3>
+                        <p class="timeline-subtitle">Ankara Yıldırım Beyazıt University, Ankara, Turkiye</p>
+                        <p class="timeline-details">
+                            Current GPA: <b>3.36/4.00</b>
+                        </p>
+                        <p class="timeline-details">
+                            Activities and societies: AYBÜ Hezarfen Student Club & Developer Students Community & IEEE Student Branch - AYBU
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-card">
+                    <div class="timeline-logo">
+                        <img src="Images/Places/tevfikileriaihl.jpeg" alt="High School Logo">
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">September 2019 - June 2023</div>
+                        <h3 class="timeline-title">High School Diploma</h3>
+                        <p class="timeline-subtitle">Tevfik İleri Anatolian High School, Ankara, Turkiye</p>
+                        <p class="timeline-details">
+                            Graduated with the grade of <b>96.43</b>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="volunteering">
+        <h2 class="section-title">Volunteering Works</h2>
+        <div class="experience-container">
+            <div class="experience-card">
+                <div class="experience-logo">
+                    <img src="Images/Places/toft.jpeg" alt="Trio of Thought Logo">
+                </div>
+                <div class="experience-content">
+                    <div class="experience-date">October 2023 - February 2024</div>
+                    <h3 class="experience-title">Podcast Host</h3>
+                    <p class="experience-subtitle">Trio of Thought, Ankara, Turkiye</p>
+                    <div class="experience-details">
+                        <ul>
+                            <li>As an engineering student with a passion for AI technologies,
+                                I co-published the 'Trio of Thought' podcast with my two colleagues.
+                                I served as the podcast host, where we discussed new technologies and developments, particularly in AI.
+                                In addition to hosting, I also contributed as a transcript writer.</li>
+                            <li>You can still access our Spotify account from the link below.
+                                <br><br> <a href="https://open.spotify.com/show/5e7U7UMTUi8K9n11wK9nmM"><b>Trio of Thought (Spotify Podcast)</b></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-logo">
+                    <img src="Images/Places/blank.png" alt="Anonymous Logo">
+                </div>
+                <div class="experience-content">
+                    <div class="experience-date">March 2020 - July 2023</div>
+                    <h3 class="experience-title">Writer & Editor</h3>
+                    <p class="experience-subtitle">Civil Society Organizations in Ankara, Turkiye</p>
+                    <div class="experience-details">
+                        <ul>
+                            <li>I worked as a writer in several school magazines,
+                                blogs and local civil society organizations.</li>
+                            <li>After doing it for a while, with influence of  my writing skills,
+                                I became an editor on one of the blog websites. We published more than
+                                50 articles in 8 months. During this process, I have reduced writing and
+                                contextual errors to almost zero.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <div class="footer-content">
+        <p>&copy; Copyright 2025 - Ali Haydar Sucu</p>
+        <p>Computer Engineering Student | Embedded Software Developer</p>
+    </div>
+</footer>
+
+<a href="#" class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+</a>

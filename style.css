@@ -1216,6 +1216,234 @@ body.dark-mode .filter-btn:hover {
     background: rgba(58, 123, 255, 0.1);
 }
 
+/* Add these new styles to your existing CSS file */
+
+/* Language Selector Styles */
+.language-selector {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    position: relative;
+}
+
+.language-selector i {
+    color: var(--blue);
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.language-selector select {
+    appearance: none;
+    background: transparent;
+    border: none;
+    padding: 5px 25px 5px 10px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.language-selector::after {
+    content: '\f078';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 12px;
+    color: var(--blue);
+}
+
+/* Dark Mode Language Selector */
+body.dark-mode .language-selector i {
+    color: var(--dark-accent-blue);
+}
+
+body.dark-mode .language-selector select {
+    color: var(--dark-text);
+}
+
+body.dark-mode .language-selector::after {
+    color: var(--dark-accent-blue);
+}
+
+/* Mobile Language Selector */
+.mobile-language-selector {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    margin-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.mobile-language-selector i {
+    color: var(--blue);
+    margin-right: 15px;
+    font-size: 20px;
+}
+
+.mobile-language-selector select {
+    appearance: none;
+    background: transparent;
+    border: none;
+    padding: 8px 30px 8px 15px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s;
+    flex-grow: 1;
+}
+
+body.dark-mode .mobile-language-selector {
+    border-color: var(--dark-border);
+}
+
+body.dark-mode .mobile-language-selector i {
+    color: var(--dark-accent-blue);
+}
+
+body.dark-mode .mobile-language-selector select {
+    color: var(--dark-text);
+}
+
+/* Explore Section Styles */
+.explore-section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.explore-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.explore-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: #333;
+}
+
+.explore-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.explore-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: var(--blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
+    transition: all 0.3s ease;
+}
+
+.explore-card:hover .explore-icon {
+    background: var(--orange);
+    transform: scale(1.1);
+}
+
+.explore-card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: var(--dark-purple);
+}
+
+.explore-card p {
+    color: #666;
+    font-size: 16px;
+}
+
+/* Dark Mode Styles for Explore Section */
+body.dark-mode .explore-card {
+    background: var(--dark-card);
+    color: var(--dark-text);
+}
+
+body.dark-mode .explore-card h3 {
+    color: var(--dark-accent-orange);
+}
+
+body.dark-mode .explore-card p {
+    color: var(--dark-text-secondary);
+}
+
+/* Language Selector Redesign */
+.language-selector {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.language-selector-toggle {
+    display: flex;
+    background: var(--light-gray);
+    border-radius: 30px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.language-option {
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.language-option.active {
+    background: var(--blue);
+    color: white;
+}
+
+/* Mobile Language Selector */
+.mobile-language-selector {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.mobile-language-selector-toggle {
+    display: flex;
+    background: var(--light-gray);
+    border-radius: 30px;
+    padding: 5px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+/* Dark Mode Language Selector */
+body.dark-mode .language-selector-toggle,
+body.dark-mode .mobile-language-selector-toggle {
+    background: var(--dark-card);
+    border: 1px solid var(--dark-border);
+}
+
+body.dark-mode .language-option {
+    color: var(--dark-text);
+}
+
+body.dark-mode .language-option.active {
+    background: var(--dark-accent-blue);
+}
+
 /* Responsive Adjustments */
 @media screen and (max-width: 1200px) {
     body {

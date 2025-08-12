@@ -1,0 +1,159 @@
+---
+layout: default
+title: "Yetenekler | Ali Haydar Sucu"
+lang: tr
+permalink: /yetenekler/
+---
+
+<header>
+    <div class="container">
+        <nav>
+            <div class="hamburger-menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <div class="logo">
+                <img src="Images/Icons/icon.png" alt="Logo" class="logo-img">
+                <a href="/hakkimda">Ali Haydar Sucu</a>
+            </div>
+            <div class="nav-links">
+                <a href="/hakkimda">
+                    <i class="fas fa-user"></i>
+                    <span class="nav-text">Hakkımda</span>
+                </a>
+                <a href="/yetenekler" class="active">
+                    <i class="fas fa-code"></i>
+                    <span class="nav-text">Yetenekler</span>
+                </a>
+                <a href="/projeler">
+                    <i class="fas fa-project-diagram"></i>
+                    <span class="nav-text">Projeler</span>
+                </a>
+                <a href="/deneyim">
+                    <i class="fas fa-briefcase"></i>
+                    <span class="nav-text">Deneyim</span>
+                </a>
+                <div class="language-selector">
+                    <div class="language-selector-toggle">
+                        <a href="/skills" class="language-option">EN</a>
+                        <a href="/yetenekler" class="language-option active">TR</a>
+                    </div>
+                </div>
+                <label class="theme-toggle">
+                    <input type="checkbox">
+                    <span class="theme-slider"></span>
+                </label>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu-overlay"></div>
+<div class="mobile-menu">
+    <div class="mobile-menu-header">
+        <button class="mobile-menu-close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="mobile-nav-links">
+        <a href="/hakkimda">
+            <i class="fas fa-user"></i>
+            Hakkımda
+        </a>
+        <a href="/yetenekler" class="active">
+            <i class="fas fa-code"></i>
+            Yetenekler
+        </a>
+        <a href="/projeler">
+            <i class="fas fa-project-diagram"></i>
+            Projeler
+        </a>
+        <a href="/deneyim">
+            <i class="fas fa-briefcase"></i>
+            Deneyim
+        </a>
+        <div class="mobile-language-selector">
+            <span>Dil:</span>
+            <div class="language-selector-toggle">
+                <a href="/skills" class="language-option">EN</a>
+                <a href="/yetenekler" class="language-option active">TR</a>
+            </div>
+        </div>
+        <div class="mobile-theme-toggle">
+            <label class="theme-toggle">
+                <input type="checkbox">
+                <span class="theme-slider"></span>
+            </label>
+        </div>
+    </div>
+</div>
+
+<main class="container">
+    <section id="skills">
+        <h2 class="section-title">Yeteneklerim</h2>
+        <div class="skills-container">
+            <div class="skill-card">
+                <img src="Images/Icons/icons8-html-5.svg" alt="HTML5" loading="lazy">
+                <h3>HTML5</h3>
+            </div>
+            <div class="skill-card">
+                <img src="Images/Icons/icons8-css3.svg" alt="CSS3" loading="lazy">
+                <h3>CSS3</h3>
+            </div>
+            <div class="skill-card">
+                <img src="Images/Icons/icons8-javascript.svg" alt="JavaScript" loading="lazy">
+                <h3>JavaScript</h3>
+            </div>
+            <div class="skill-card python">
+                <img src="Images/Icons/python.webp" alt="Python" loading="lazy">
+                <h3>Python</h3>
+            </div>
+            <div class="skill-card">
+                <img src="Images/Icons/java.jpg" alt="Java" loading="lazy">
+                <h3>Java</h3>
+            </div>
+            <div class="skill-card">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" loading="lazy">
+                <h3>Linux</h3>
+            </div>
+            <div class="skill-card">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" height="40" alt="Bash" loading="lazy" />
+                <h3>Bash</h3>
+            </div>
+            <div class="skill-card">
+                <img src="Images/Icons/icons8-git.svg" alt="Git" loading="lazy">
+                <h3>Git</h3>
+            </div>
+            <div class="skill-card">
+                <img src="Images/Icons/qgroundcontrol.png" alt="QGroundControl" loading="lazy">
+                <h3>QGroundControl</h3>
+            </div>
+            <div class="skill-card">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ros/ros-original.svg" alt="ROS 2" loading="lazy">
+                <h3>ROS 2</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="github-stats">
+        <h2 class="section-title">GitHub İstatistikleri</h2>
+        <div class="github-stats-container">
+            <img src="https://github-readme-stats.vercel.app/api?username=alihaydarsucu&show_icons=true&theme=nightowl" alt="GitHub Stats" loading="lazy">
+            <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=alihaydarsucu&layout=compact&theme=nightowl" alt="Top Languages" loading="lazy">
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <div class="footer-content">
+        <p>&copy; Copyright 2025 - Ali Haydar Sucu</p>
+        <p>Bilgisayar Mühendisliği Öğrencisi | Gömülü Yazılım Geliştirici</p>
+    </div>
+</footer>
+
+<a href="#" class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+</a>

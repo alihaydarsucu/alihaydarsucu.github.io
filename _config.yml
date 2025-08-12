@@ -1,0 +1,46 @@
+# Jekyll Configuration
+title: Ali Haydar Sucu
+email: your-email@domain.com
+description: >- # this means to ignore newlines until "baseurl:"
+  Computer Engineering Student | Embedded Software Developer
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://alihaydarsucu.github.io" # the base hostname & protocol for your site
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+
+# Permalink structure
+permalink: /:title/
+
+# Collections
+collections:
+  pages:
+    output: true
+    permalink: /:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+
+# Language settings
+languages: ["tr", "en"]
+default_lang: "en"
+exclude_from_localizations: ["javascript", "images", "css", "Assets"]

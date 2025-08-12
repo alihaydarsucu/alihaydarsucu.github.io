@@ -1,41 +1,89 @@
-# 🌐 My Portfolio Website
+# Jekyll Portfolio Website
 
-Welcome to my personal portfolio website! This site showcases my background, skills, projects, experience, education, and certifications.
+Bu proje Jekyll kullanarak temiz URL'ler ile çalışacak şekilde yapılandırılmıştır.
 
-🌟 **Check it out here**: [Portfolio](https://alihaydarsucu.github.io)
+## Kurulum
 
-## 📌 Key Features
+1. Jekyll'i yükleyin:
 
-- **Responsive Design**: Optimized for all screen sizes and devices.
-- **Dark/Light Mode**: Seamlessly toggle between themes with preferences saved.
-- **Interactive Navigation**: Smooth scrolling and a mobile-friendly hamburger menu.
-- **Detailed Sections**:
-  - About Me
-  - Skills
-  - Projects
-  - Experience
-  - Education
-  - Volunteering
-  - Licenses & Certifications
-  - Contact
+```bash
+sudo apt update
+sudo apt install ruby-full build-essential zlib1g-dev
+echo '# Install Ruby Gems to ~/gems' >> ~/.bashrc
+echo 'export GEM_HOME="$HOME/gems"' >> ~/.bashrc
+echo 'export PATH="$HOME/gems/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+gem install jekyll bundler
+```
 
-## 🚀 Technologies Used
+2. Projeyi çalıştırın:
 
-- **Frontend**: HTML5, CSS3, JavaScript
-- **Version Control**: Git & GitHub
+```bash
+cd /home/ali/Desktop/Portfolio
+bundle install
+bundle exec jekyll serve
+```
 
-## 📷 Previews
+## URL Yapısı
 
-### **Light Mode:**
+### İngilizce Sayfalar:
 
-![Portfolio Screenshot](Images/readme_light.png)
+- Ana sayfa: `https://alihaydarsucu.github.io/`
+- Yetenekler: `https://alihaydarsucu.github.io/skills/`
+- Projeler: `https://alihaydarsucu.github.io/projects/`
+- Deneyim: `https://alihaydarsucu.github.io/experience/`
 
-### **Dark Mode:**
+### Türkçe Sayfalar:
 
-![Portfolio Screenshot](Images/readme_dark.png)
+- Ana sayfa: `https://alihaydarsucu.github.io/hakkimda/`
+- Yetenekler: `https://alihaydarsucu.github.io/yetenekler/`
+- Projeler: `https://alihaydarsucu.github.io/projeler/`
+- Deneyim: `https://alihaydarsucu.github.io/deneyim/`
 
-## 📜 License
+### 404 Sayfası:
 
-This project is open-source and available under the [MIT License](LICENSE).
+- `https://alihaydarsucu.github.io/404/`
 
-⭐ If you like this project, consider giving it a **star** on GitHub!
+## GitHub Pages'e Yayınlama
+
+1. GitHub repository'nizde Settings > Pages bölümüne gidin
+2. Source olarak "Deploy from a branch" seçin
+3. Branch olarak "main" ve folder olarak "/ (root)" seçin
+4. Jekyll build işlemi otomatik olarak gerçekleşecektir
+
+## Dosya Yapısı
+
+```
+Portfolio/
+├── _config.yml          # Jekyll konfigürasyonu
+├── _layouts/
+│   └── default.html     # Ana layout
+├── Gemfile              # Ruby gem bağımlılıkları
+├── index.md             # İngilizce ana sayfa
+├── hakkimda.md          # Türkçe ana sayfa
+├── skills.md            # İngilizce yetenekler sayfası
+├── yetenekler.md        # Türkçe yetenekler sayfası
+├── projects.md          # İngilizce projeler sayfası
+├── projeler.md          # Türkçe projeler sayfası
+├── experience.md        # İngilizce deneyim sayfası
+├── deneyim.md           # Türkçe deneyim sayfası
+├── 404.md               # 404 sayfası
+├── style.css            # Stil dosyası
+├── script.js            # JavaScript dosyası
+└── Assets/              # Varlık dosyaları
+    └── Images/          # Resim dosyaları
+```
+
+## Özellikler
+
+- ✅ Temiz URL'ler (dosya uzantısı yok)
+- ✅ İki dilli destek (İngilizce/Türkçe)
+- ✅ Responsive tasarım
+- ✅ Dark mode
+- ✅ GitHub projelerini otomatik çekme
+- ✅ SEO optimizasyonu
+- ✅ 404 sayfası
+
+## Not
+
+Eski HTML dosyalarınızı (`index.html`, `skills.html`, vb.) silebilirsiniz çünkü artık Jekyll Markdown dosyaları kullanıyor.

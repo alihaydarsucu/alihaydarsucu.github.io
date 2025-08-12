@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: site.title }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+    {% if page.preload_image %}
+    <link rel="preload" href="{{ page.preload_image | relative_url }}" as="image">
+    {% endif %}
+    <link rel="icon" type="image/x-icon" href="/Images/Icons/icon.png">
+    
+    {% if page.lang == 'tr' %}
+    <link rel="alternate" hreflang="en" href="{{ site.url }}{{ page.url | replace: '-tr', '' }}" />
+    <link rel="alternate" hreflang="tr" href="{{ site.url }}{{ page.url }}" />
+    {% else %}
+    <link rel="alternate" hreflang="en" href="{{ site.url }}{{ page.url }}" />
+    <link rel="alternate" hreflang="tr" href="{{ site.url }}{{ page.url | append: '-tr' }}" />
+    {% endif %}
+    
+    <base href="{{ site.baseurl }}/">
+</head>
+<body>
+    {{ content }}
+    
+    <script src="{{ '/script.js' | relative_url }}"></script>
+</body>
+</html>
