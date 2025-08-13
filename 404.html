@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayfa Bulunamadı | Ali Haydar Sucu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+        
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .error-container {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .error-code {
+            font-size: 6rem;
+            font-weight: bold;
+            color: var(--blue);
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+        
+        .error-message {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--dark-purple);
+        }
+        
+        .home-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .home-link:hover {
+            background: var(--orange);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        body.dark-mode .error-message {
+            color: var(--dark-accent-orange);
+        }
+        
+        body.dark-mode .error-code {
+            color: var(--dark-accent-blue);
+        }
+        
+        footer {
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Header içeriği buraya -->
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="Images/Icons/icon.png" alt="Logo" class="logo-img">
+                    <a href="/">Ali Haydar Sucu</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="error-container">
+            <div class="error-code">404</div>
+            <div class="error-message" id="message">Sayfa Bulunamadı</div>
+            <a href="/" class="home-link" id="homeLink">
+                <i class="fas fa-home"></i>
+                <span id="homeText">Ana Sayfaya Dön</span>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; Copyright 2025 - Ali Haydar Sucu</p>
+        </div>
+    </footer>
+
+    <script>
+        // Basit dil algılama ve yönlendirme
+        document.addEventListener('DOMContentLoaded', function() {
+            const messageEl = document.getElementById('message');
+            const homeTextEl = document.getElementById('homeText');
+            const homeLinkEl = document.getElementById('homeLink');
+            
+            // Tarayıcı dilini kontrol et
+            const browserLang = navigator.language.substring(0, 2);
+            const isTurkish = browserLang === 'tr';
+            
+            if (isTurkish) {
+                messageEl.textContent = 'Sayfa Bulunamadı';
+                homeTextEl.textContent = 'Ana Sayfaya Dön';
+                document.title = 'Sayfa Bulunamadı | Ali Haydar Sucu';
+                homeLinkEl.href = '/hakkimda';
+            } else {
+                messageEl.textContent = 'Page Not Found';
+                homeTextEl.textContent = 'Return to Home';
+                document.title = 'Page Not Found | Ali Haydar Sucu';
+                homeLinkEl.href = '/';
+            }
+        });
+    </script>
+</body>
+</html>

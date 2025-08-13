@@ -1,0 +1,21 @@
+RewriteEngine On
+
+# .html uzantısını gizle
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# Ana sayfa için
+RewriteRule ^$ index.html [L]
+
+# Diğer sayfalar için
+RewriteRule ^skills/?$ skills.html [L]
+RewriteRule ^projects/?$ projects.html [L]
+RewriteRule ^experience/?$ experience.html [L]
+RewriteRule ^hakkimda/?$ hakkimda.html [L]
+RewriteRule ^yetenekler/?$ yetenekler.html [L]
+RewriteRule ^projeler/?$ projeler.html [L]
+RewriteRule ^deneyim/?$ deneyim.html [L]
+
+# 404 sayfası için
+RewriteRule ^404/?$ 404.html [L]

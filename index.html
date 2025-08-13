@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ali Haydar Sucu | Computer Engineering Student</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preload" href="Images/Profile.jpg" as="image">
+    <link rel="icon" type="image/x-icon" href="/Images/Icons/icon.png">
+    <link rel="alternate" hreflang="en" href="https://alihaydarsucu.github.io/en" />
+    <link rel="alternate" hreflang="tr" href="https://alihaydarsucu.github.io/tr" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="hamburger-menu">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <div class="logo">
+                    <img src="Images/Icons/icon.png" alt="Logo" class="logo-img">
+                    <a href="/">Ali Haydar Sucu</a>
+                </div>
+                <div class="nav-links">
+                    <a href="/" class="active">
+                        <i class="fas fa-user"></i>
+                        <span class="nav-text">About</span>
+                    </a>
+                    <a href="/skills">
+                        <i class="fas fa-code"></i>
+                        <span class="nav-text">Skills</span>
+                    </a>
+                    <a href="/projects">
+                        <i class="fas fa-project-diagram"></i>
+                        <span class="nav-text">Projects</span>
+                    </a>
+                    <a href="/experience">
+                        <i class="fas fa-briefcase"></i>
+                        <span class="nav-text">Experience</span>
+                    </a>
+                    <div class="language-selector">
+                        <div class="language-selector-toggle">
+                            <div class="language-option active">EN</div>
+                            <div class="language-option">TR</div>
+                        </div>
+                    </div>
+                    <label class="theme-toggle">
+                        <input type="checkbox">
+                        <span class="theme-slider"></span>
+                    </label>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay"></div>
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <button class="mobile-menu-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="/" class="active">
+                <i class="fas fa-user"></i>
+                <span class="nav-text-mobile">About</span>
+            </a>
+            <a href="/skills">
+                <i class="fas fa-code"></i>
+                <span class="nav-text-mobile">Skills</span>
+            </a>
+            <a href="/projects">
+                <i class="fas fa-project-diagram"></i>
+                <span class="nav-text-mobile">Projects</span>
+            </a>
+            <a href="/experience">
+                <i class="fas fa-briefcase"></i>
+                <span class="nav-text-mobile">Experience</span>
+            </a>
+            <div class="mobile-language-selector">
+                <span class="language-label">Language:</span>
+                <div class="language-selector-toggle">
+                    <div class="language-option active">EN</div>
+                    <div class="language-option">TR</div>
+                </div>
+            </div>
+            <div class="mobile-theme-toggle">
+                <label class="theme-toggle">
+                    <input type="checkbox">
+                    <span class="theme-slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <main class="container">
+        <section id="about" class="hero">
+            <div class="hero-image">
+                <img src="Images/Profile.jpg" alt="Ali Haydar Sucu" loading="lazy">
+            </div>
+            <div class="hero-content">
+                <h1>Hello, there!</h1>
+                <p>My name is Ali, I am a freshman Computer Engineering student at Ankara Yıldırım Beyazıt University.</p>
+                <p>I'm passionate about embedded software development and currently working on embedded systems for unmanned marine vehicles. Beyond embedded systems, 
+                    I have a strong interest in Linux, open-source technologies, and algorithmic problem-solving. I also enjoy creative writing, reading, and playing chess.</p>
+                <p>With experience in Python, Java, HTML/CSS, and embedded systems technologies, I'm constantly looking to expand my skills and tackle new challenges.</p>
+            </div>
+        </section>
+
+        <section class="resume-download">
+            <a href="Assets/AliHaydarSucu_Resume_20.03.25.pdf" download class="resume-btn">
+                <i class="fas fa-file-download"></i>&nbsp;&nbsp;&nbsp;Download My Resume
+            </a>
+        </section>
+
+        <!-- Hero section'dan sonra bu kısmı ekleyin -->
+        <section class="explore-section">
+            <h2 class="section-title-main">Explore My Website</h2>
+                        <div class="explore-grid">
+                <a href="/skills" class="explore-card">
+                    <div class="explore-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Skills</h3>
+                    <p>View my technical skills and capabilities</p>
+                </a>
+                <a href="/projects" class="explore-card">
+                    <div class="explore-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Projects</h3>
+                    <p>Discover my projects and certifications</p>
+                </a>
+                <a href="/experience" class="explore-card">
+                    <div class="explore-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Experience</h3>
+                    <p>Review my professional background</p>
+                </a>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">alihaydarsucu@gmail.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">Ankara, Turkiye</div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/alihaydarsucu" class="social-link" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/ali-haydar-sucu" class="social-link" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="mailto:alihaydarsucu@gmail.com" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://instagram.com/alihaydarsucu" class="social-link" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; Copyright 2025 - Ali Haydar Sucu</p>
+            <p>Computer Engineering Student | Embedded Software Developer</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>
