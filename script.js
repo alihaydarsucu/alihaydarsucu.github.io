@@ -163,7 +163,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const reposContainer = document.getElementById('repos');
         const filteredRepos = repos.filter(repo => {
             if (filter === 'all') return !repo.fork;
-            return !repo.fork && categorizeRepo(repo) === filter;
+            const categories = categorizeRepo(repo);
+            // Çoklu kategori desteği
+            if (categories.includes(',')) {
+                return !repo.fork && categories.split(',').includes(filter);
+            }
+            return !repo.fork && categories === filter;
         });
 
         reposContainer.innerHTML = filteredRepos.map(repo => `
@@ -196,11 +201,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const description = (repo.description || '').toLowerCase();
         const language = (repo.language || '').toLowerCase();
         
+        // Özel durum: pusula.github.io hem web hem embedded olarak gösterilecek
+        if (name === 'pusula.github.io') {
+            return 'web,embedded'; // Çoklu kategori
+        }
+        
         if (name.includes('web') || name.includes('site') || language.includes('html') || language.includes('css') || language.includes('javascript')) {
             return 'web';
         }
         
-        if (name.includes('embedded') || name.includes('arduino') || description.includes('embedded') || language.includes('c++') || language.includes('c')) {
+        if (name.includes('embedded') || name.includes('arduino') || description.includes('embedded') || 
+            language.includes('c++') || language.includes('c') || language.includes('shell') || language.includes('makefile')) {
             return 'embedded';
         }
         
