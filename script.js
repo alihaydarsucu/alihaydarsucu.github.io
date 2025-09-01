@@ -148,8 +148,24 @@ document.addEventListener('DOMContentLoaded', function() {
             const repos = await response.json();
             
             if (Array.isArray(repos)) {
-                displayRepos(repos);
-                setupFilterButtons(repos);
+                // Özel projeler - kendi GitHub'ımda olmayan ortak projeler
+                const externalProjects = [
+                    {
+                        name: 'Pusula-GCS',
+                        description: 'Custom-built Ground Control Station software for real-time communication with unmanned surface vehicles (USV). Features telemetry, mission planning, and interactive mapping.',
+                        html_url: 'https://github.com/abdullah-aksoy/Pusula-GCS',
+                        language: 'Python',
+                        stargazers_count: 0,
+                        updated_at: '2024-12-01T00:00:00Z',
+                        fork: false
+                    }
+                    // Gelecekte eklenecek diğer external projeler buraya eklenebilir
+                ];
+                
+                // GitHub repos ile external projeleri birleştir
+                const allRepos = [...repos, ...externalProjects];
+                displayRepos(allRepos);
+                setupFilterButtons(allRepos);
             } else {
                 document.getElementById('repos').innerHTML = '<p style="text-align: center;">GitHub projeleri yüklenemedi.</p>';
             }
@@ -201,11 +217,19 @@ document.addEventListener('DOMContentLoaded', function() {
         const description = (repo.description || '').toLowerCase();
         const language = (repo.language || '').toLowerCase();
         
-        // Özel durum: pusula.github.io hem web hem embedded olarak gösterilecek
-        if (name === 'pusula.github.io') {
-            return 'web,embedded'; // Çoklu kategori
+        // Özel projeler - hard coded kategoriler
+        const specialProjects = {
+            'pusula.github.io': 'web,embedded',
+            'pusula-gcs': 'embedded',
+            // Gelecekte eklenecek özel projeler buraya eklenebilir
+        };
+        
+        // Önce özel projeler kontrolü
+        if (specialProjects[name]) {
+            return specialProjects[name];
         }
         
+        // Genel kategorizasyon kuralları
         if (name.includes('web') || name.includes('site') || language.includes('html') || language.includes('css') || language.includes('javascript')) {
             return 'web';
         }
