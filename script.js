@@ -155,8 +155,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         description: 'Custom-built Ground Control Station software for real-time communication with unmanned surface vehicles (USV). Features telemetry, mission planning, and interactive mapping.',
                         html_url: 'https://github.com/abdullah-aksoy/Pusula-GCS',
                         language: 'Python',
-                        stargazers_count: 0,
-                        updated_at: '2024-12-01T00:00:00Z',
+                        stargazers_count: 5,
+                        updated_at: '2025-08-31T00:00:00Z',
                         fork: false
                     }
                     // Gelecekte eklenecek diğer external projeler buraya eklenebilir
