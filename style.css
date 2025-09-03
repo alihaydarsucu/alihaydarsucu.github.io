@@ -679,6 +679,7 @@ body.dark-mode .resume-btn:hover {
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
+    margin-bottom: 30px;
 }
 
 .github-stats-container img {
@@ -686,6 +687,26 @@ body.dark-mode .resume-btn:hover {
     height: auto;
     border-radius: 10px;
     height: 200px;
+}
+
+/* GitHub Activity Graph */
+.github-activity-graph {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.github-activity-graph img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.github-activity-graph img:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 /* Projects Section */
@@ -1090,6 +1111,7 @@ body.dark-mode .filter-btn:hover {
 .experience-details ul {
     padding-left: 20px;
     margin: 0;
+    list-style: none; /* Varsayılan liste işaretini kaldır */
 }
 
 .experience-details li {
@@ -1514,6 +1536,15 @@ body.dark-mode .hero-content h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+/* GitHub Activity Graph Dark Mode */
+body.dark-mode .github-activity-graph img {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .github-activity-graph img:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 /* Cards and sections */
@@ -1983,6 +2014,15 @@ body.dark-mode .mobile-language-selector {
         flex-direction: column;
         align-items: center;
     }
+    
+    .github-activity-graph {
+        margin-top: 15px;
+    }
+    
+    .github-activity-graph img {
+        width: 100%;
+        max-width: 900px;
+    }
 }
 
 /* Mobile Devices */
@@ -1998,6 +2038,15 @@ body.dark-mode .mobile-language-selector {
     
     .hero-content {
         order: 1; /* Mobilde metin altta */
+        text-align: center; /* Center the text on mobile */
+        width: 100%; /* Ensure full width */
+        max-width: none; /* Remove any max-width constraints */
+    }
+    
+    .hero-content p {
+        max-width: 100%; /* Use full width for paragraphs */
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .hamburger-menu {
@@ -2037,29 +2086,18 @@ body.dark-mode .mobile-language-selector {
             position: relative;
         }
 
+        /* Remove hover lines on mobile navigation */
         .nav-links a.active::after,
-        .mobile-nav-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            height: 3px;
-            background: var(--primary);
-            animation: fadeIn 0.3s ease-out;
-            border-radius: 2px;
+        .mobile-nav-links a.active::after,
+        .nav-links a:hover::after,
+        .mobile-nav-links a:hover::after {
+            display: none;
         }
 
         /* Dark mode için mobil aktif link stilleri */
         body.dark-mode .nav-links a.active,
         body.dark-mode .mobile-nav-links a.active {
             color: var(--primary);
-        }
-
-        body.dark-mode .nav-links a.active::after,
-        body.dark-mode .mobile-nav-links a.active::after {
-            background: var(--primary);
         }
     }
     
@@ -2116,6 +2154,15 @@ body.dark-mode .mobile-language-selector {
     
     .hero-content {
         order: 1; /* Küçük mobilde de metin altta */
+        text-align: center; /* Center the text on small mobile */
+        width: 100%; /* Ensure full width */
+        padding: 0; /* Remove any padding that might offset content */
+    }
+    
+    .hero-content p {
+        max-width: 100%; /* Use full width for paragraphs */
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .hero-image img {
