@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(files => {
                 // Find the most recent CV file
                 const cvFiles = files.filter(file => 
-                    file.name.includes('AliHaydarSucu_Resume_') && file.name.endsWith('.pdf')
+                    file.name.includes('AliHaydarSucu_CV_') && file.name.endsWith('.pdf')
                 );
                 
                 if (cvFiles.length > 0) {

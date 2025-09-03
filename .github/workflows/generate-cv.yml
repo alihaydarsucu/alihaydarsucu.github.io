@@ -32,7 +32,6 @@ jobs:
       - name: Copy CV to Assets
         run: |
           cp cv/cv.pdf Assets/AliHaydarSucu_CV_$(date +%Y%m%d).pdf
-          cp cv/cv.pdf Assets/AliHaydarSucu_Resume_$(date +%d.%m.%y).pdf
 
       - name: Commit and push CV
         run: |
