@@ -548,6 +548,22 @@ body.dark-mode .resume-btn:hover {
     box-shadow: 0 5px 15px rgba(77, 148, 255, 0.25);
 }
 
+.cv-note {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.cv-note i {
+    margin-right: 0.5rem;
+    color: var(--success);
+}
+
+body.dark-mode .cv-note {
+    color: var(--dark-text-secondary);
+}
+
 /* Section Titles */
 .section-title {
     font-size: 28px;

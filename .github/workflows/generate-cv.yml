@@ -1,0 +1,43 @@
+name: Generate CV
+
+on:
+  push:
+    branches: [main, v2]
+  pull_request:
+    branches: [main, v2]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-cv:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra texlive-luatex texlive-xetex
+
+      - name: Generate CV
+        run: |
+          cd cv
+          lualatex --interaction=nonstopmode cv.tex
+          lualatex --interaction=nonstopmode cv.tex  # Run twice for proper cross-references
+
+      - name: Copy CV to Assets
+        run: |
+          cp cv/cv.pdf Assets/AliHaydarSucu_CV_$(date +%Y%m%d).pdf
+          cp cv/cv.pdf Assets/AliHaydarSucu_Resume_$(date +%d.%m.%y).pdf
+
+      - name: Commit and push CV
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add Assets/*.pdf
+          git diff --staged --quiet || git commit -m "Auto-update CV - $(date +%Y-%m-%d)"
+          git push

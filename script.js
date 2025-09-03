@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setupMobileMenu();
         setupBackToTop();
         setupLanguageSwitcher();
+        setupCVDownload();
         
         // GitHub Projects sadece ilgili sayfalarda
         if (document.getElementById('repos')) {
@@ -139,6 +140,50 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
+    }
+
+    function setupCVDownload() {
+        const cvBtn = document.getElementById('cv-download-btn');
+        if (cvBtn) {
+            updateCVLink();
+        }
+    }
+
+    function updateCVLink() {
+        // Try to get the latest CV file from Assets directory
+        const cvBtn = document.getElementById('cv-download-btn');
+        if (!cvBtn) return;
+
+        // Check for newer CV files via GitHub API
+        fetch('https://api.github.com/repos/alihaydarsucu/alihaydarsucu.github.io/contents/Assets')
+            .then(response => response.json())
+            .then(files => {
+                // Find the most recent CV file
+                const cvFiles = files.filter(file => 
+                    file.name.includes('AliHaydarSucu_Resume_') && file.name.endsWith('.pdf')
+                );
+                
+                if (cvFiles.length > 0) {
+                    // Sort by name (which includes date) and get the latest
+                    cvFiles.sort((a, b) => b.name.localeCompare(a.name));
+                    const latestCV = cvFiles[0];
+                    cvBtn.href = `Assets/${latestCV.name}`;
+                    
+                    // Update the note with last update time
+                    const cvNote = document.querySelector('.cv-note');
+                    if (cvNote) {
+                        const lastUpdate = new Date().toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric'
+                        });
+                        cvNote.innerHTML = `<i class="fas fa-sync-alt"></i> CV automatically updated - Last: ${lastUpdate}`;
+                    }
+                }
+            })
+            .catch(error => {
+                console.log('Using default CV link');
+            });
     }
 
     // GitHub Projects fonksiyonları

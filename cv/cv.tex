@@ -1,0 +1,239 @@
+%-------------------------
+% CV Template - Oxford Style for ATS Compatibility
+% Author: Ali Haydar Sucu
+% License: MIT
+%-------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\usepackage{geometry}
+\usepackage{xcolor}
+
+% Font setup for better ATS compatibility and Turkish characters
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[default]{lato}
+
+% Page setup
+\geometry{left=0.7in,right=0.7in,top=0.7in,bottom=0.7in}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Color definitions
+\definecolor{oxfordblue}{RGB}{0,33,71}
+\definecolor{darkgray}{RGB}{64,64,64}
+
+% Section formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\color{oxfordblue}
+}{}{0em}{}[\color{oxfordblue}\titlerule \vspace{-5pt}]
+
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge Ali Haydar Sucu} \\ \vspace{1pt}
+    \small \href{mailto:alihaydarsucu@gmail.com}{\faEnvelope\ alihaydarsucu@gmail.com} $|$ 
+    \href{https://linkedin.com/in/ali-haydar-sucu}{\faLinkedin\ linkedin.com/in/ali-haydar-sucu} \\
+    \href{https://github.com/alihaydarsucu}{\faGithub\ github.com/alihaydarsucu} $|$
+    \href{https://alihaydarsucu.github.io}{\faGlobe\ alihaydarsucu.github.io} \\
+    \small \faMapMarker\ Ankara, Turkey
+\end{center}
+
+%----------SUMMARY----------
+\section{Summary}
+\small{Dedicated Computer Engineering student with hands-on experience in embedded software development and autonomous systems. Proven track record in developing unmanned marine vehicle systems using ROS 2, Python, and embedded technologies. Strong leadership abilities demonstrated through project management and team mentoring roles. Passionate about Linux, open-source technologies, and algorithmic problem-solving with expertise in web development and system integration.}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Ankara Yıldırım Beyazıt University}{Ankara, Turkey}
+      {Bachelor of Science in Computer Engineering}{Sep 2023 -- Jun 2028 (Expected)}
+      \resumeItemListStart
+        \resumeItem{Current GPA: 3.36/4.00}
+        \resumeItem{Activities: AYBÜ Hezarfen Student Club, Developer Students Community, IEEE Student Branch - AYBU}
+      \resumeItemListEnd
+      
+    \resumeSubheading
+      {Tevfik İleri Anatolian High School}{Ankara, Turkey}
+      {High School Diploma}{Sep 2019 -- Jun 2023}
+      \resumeItemListStart
+        \resumeItem{Graduated with honors: 96.43/100}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------
+\section{Professional Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Embedded Software Developer}{Oct 2024 -- Present}
+      {PUSULA USV}{Ankara, Turkey}
+      \resumeItemListStart
+        \resumeItem{Implemented autonomous motion algorithms using Python for unmanned marine vehicle navigation and control}
+        \resumeItem{Designed and deployed systemd services for automatically launching ROS 2 nodes for Lidar, ZED Camera, autonomous algorithms and system logs on Jetson board}
+        \resumeItem{Collaborated with electrical team to perform integration and live sensor tests, including A2M12 Lidar integration, ZED 2 Camera detection, Pixhawk motor tests and GPS}
+        \resumeItem{Built comprehensive ground control station for monitoring and controlling unmanned marine vehicle operations}
+        \resumeItem{Conducted real-world testing on actual marine vehicle, ensuring system reliability and performance}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Project Leader}{May 2025 -- Jun 2025}
+      {AYBU ÖĞMER | Burai Tech}{Ankara, Turkey}
+      \resumeItemListStart
+        \resumeItem{Led cross-functional team to design and develop document-interactive AI agent using LLaMA 3 and PySide6}
+        \resumeItem{Assigned tasks, conducted prompt engineering, and designed modular architecture for scalable AI solution}
+        \resumeItem{Developed NLP features including text summarization, paraphrasing, and question-answering capabilities}
+        \resumeItem{Tested multi-language capabilities, file parsing (PDF, DOCX, TXT), and integrated avatar video rendering}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Bootcamp Tutor \& Student Mentor}{Aug 2024 -- May 2025}
+      {Ankara Yıldırım Beyazıt University}{Ankara, Turkey}
+      \resumeItemListStart
+        \resumeItem{Led summer bootcamp introducing college students to front-end web development, focusing on HTML, CSS, and web fundamentals}
+        \resumeItem{Represented university at international conferences, showcasing Learning and Teaching Center initiatives}
+        \resumeItem{Provided technological support and mentorship to engineering freshmen through "Meet Your Student Tech Staff" program}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Avionics Team Member}{Sep 2023 -- Jun 2024}
+      {Aybü HEZARFEN Club | Gökçen Rocket Project}{Ankara, Turkey}
+      \resumeItemListStart
+        \resumeItem{Conducted research to determine suitable sensors for rocket avionics system}
+        \resumeItem{Contributed to flight control board development and assisted in sensor/component integration}
+        \resumeItem{Performed initial testing of avionics system and documented comprehensive system specifications for Teknofest competition}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\section{Featured Projects}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{Pusula Ground Control Station} $|$ \emph{Python, Flask, FastAPI, JavaScript, Leaflet.js}}{2024}
+          \resumeItemListStart
+            \resumeItem{GitHub: \href{https://github.com/abdullah-aksoy/Pusula-GCS}{github.com/abdullah-aksoy/Pusula-GCS}}
+            \resumeItem{Developed custom Ground Control Station software enabling real-time communication with unmanned surface vehicle through telemetry}
+            \resumeItem{Implemented interactive mapping with waypoint management, mission planning, and real-time vehicle tracking on integrated maps}
+            \resumeItem{Built comprehensive dashboard with ARM/DISARM controls, mode switching, and algorithm start/stop functionality for USV operations}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{AYBÜ TDGT Website} $|$ \emph{Node.js, Express.js, MySQL, HTML5, CSS3, JavaScript}}{2024}
+          \resumeItemListStart
+            \resumeItem{GitHub: \href{https://github.com/alihaydarsucu/aybu-tdgt}{github.com/alihaydarsucu/aybu-tdgt} | Live: \href{https://aybuturkdunyasi.com}{aybuturkdunyasi.com}}
+            \resumeItem{Developed comprehensive digital platform for Turkish World Youth Community at Ankara Yıldırım Beyazıt University}
+            \resumeItem{Implemented admin panel with magazine management, team profiles, event coordination, and analytics dashboard}
+            \resumeItem{Built secure authentication system with JWT, role-based access control, and integrated contact form with notifications}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{Sucu - Arch Linux Assistant} $|$ \emph{Bash, Shell Scripting, Linux System Administration}}{2024}
+          \resumeItemListStart
+            \resumeItem{GitHub: \href{https://github.com/alihaydarsucu/sucu}{github.com/alihaydarsucu/sucu}}
+            \resumeItem{Created command-line assistant tool specifically designed to simplify Arch Linux system management for new users}
+            \resumeItem{Implemented automated package operations, system maintenance scripts, and interactive tutorials for Linux newcomers}
+            \resumeItem{Designed user-friendly CLI interface bridging the gap between beginner and advanced Linux usage patterns}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{Personal Portfolio Website} $|$ \emph{HTML5, CSS3, JavaScript, GitHub Pages, LaTeX}}{2024}
+          \resumeItemListStart
+            \resumeItem{GitHub: \href{https://github.com/alihaydarsucu/alihaydarsucu.github.io}{github.com/alihaydarsucu/alihaydarsucu.github.io} | Live: \href{https://alihaydarsucu.github.io}{alihaydarsucu.github.io}}
+            \resumeItem{Designed and developed responsive portfolio website showcasing technical skills, projects, and professional experience}
+            \resumeItem{Implemented automatic CV generation system using LaTeX and GitHub Actions, creating ATS-compatible Oxford-style CVs}
+            \resumeItem{Built bilingual support (English/Turkish) with dynamic content switching and integrated GitHub API for project updates}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Programming Languages}{: Python, JavaScript, Java, Bash, HTML5, CSS3} \\
+     \textbf{Embedded Systems}{: Ros 2, Jetson Orin, Pixhawk, Sensor Integration, Real-Time Systems} \\
+     \textbf{Robotics \& Automation}{: Autonomous Navigation, Lidar Systems, ZED Camera, GPS Integration} \\
+     \textbf{Development Tools}{: Git, Linux, QGroundControl, GitHub Actions, VS Code, LaTeX} \\
+     \textbf{Languages}{: Turkish (Native), English (Professional), Arabic (Limited)} \\
+     \textbf{Soft Skills}{: Team Leadership, Project Management, Technical Documentation, Mentoring}
+    }}
+ \end{itemize}
+
+%-----------CERTIFICATIONS-----------
+\section{Certifications \& Licenses}
+    \resumeSubHeadingListStart
+      \resumeSubheading
+        {Responsive Web Design Certification}{Feb 2024}
+        {freeCodeCamp}{}
+        \resumeItemListStart
+          \resumeItem{Comprehensive certification covering HTML5, CSS3, responsive design principles, and modern web development practices}
+        \resumeItemListEnd
+
+      \resumeSubheading
+        {Data Science Bootcamp Certification}{Dec 2023}
+        {Developer Students Community}{}
+        \resumeItemListStart
+          \resumeItem{Completed intensive bootcamp covering Python programming, data modeling, and data visualization techniques}
+        \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+\end{document}
