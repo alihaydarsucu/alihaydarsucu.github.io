@@ -1,0 +1,93 @@
+/* Accessibility Improvements */
+
+/* Hide elements visually but keep them available for screen readers */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus styles for keyboard navigation */
+:focus-visible {
+    outline: 3px solid #4d90fe;
+    outline-offset: 2px;
+}
+
+/* Skip to main content link */
+.skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000;
+    color: white;
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.3s;
+}
+
+.skip-to-content:focus {
+    top: 0;
+}
+
+/* Improve contrast for better readability */
+body {
+    color: #333;
+    line-height: 1.6;
+}
+
+a {
+    color: #0066cc;
+}
+
+a:hover, a:focus {
+    text-decoration: underline;
+}
+
+/* Ensure buttons have sufficient contrast */
+button, .btn, .filter-btn {
+    background-color: #4d90fe;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover, .btn:hover, .filter-btn:hover {
+    background-color: #357ae8;
+}
+
+button:focus, .btn:focus, .filter-btn:focus {
+    outline: 3px solid #4d90fe;
+    outline-offset: 2px;
+}
+
+/* Ensure form controls have proper contrast */
+input, select, textarea {
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+/* Improve focus states for form elements */
+input:focus, select:focus, textarea:focus {
+    border-color: #4d90fe;
+    box-shadow: 0 0 0 2px rgba(77, 144, 254, 0.3);
+}
+
+/* Ensure sufficient color contrast for text */
+.project-card h3, .experience-title, .timeline-title {
+    color: #1a1a1a;
+}
+
+/* Improve contrast for disabled buttons */
+button:disabled, .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

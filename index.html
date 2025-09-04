@@ -1,27 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ali Haydar Sucu - Computer Engineering Student with expertise in software development, web technologies, and embedded systems. Explore my portfolio, projects, and experience.">
+    <meta name="keywords" content="Ali Haydar Sucu, Computer Engineering Student, Software Developer, Web Developer, Embedded Systems, Portfolio, Projects">
+    <meta name="author" content="Ali Haydar Sucu">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alihaydarsucu.github.io/">
+    <meta property="og:title" content="Ali Haydar Sucu | Computer Engineering Student">
+    <meta property="og:description" content="Computer Engineering Student with expertise in software development, web technologies, and embedded systems. Explore my portfolio and projects.">
+    <meta property="og:image" content="https://alihaydarsucu.github.io/Images/og-image.webp">
+    <meta property="og:site_name" content="Ali Haydar Sucu">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://alihaydarsucu.github.io/">
+    <meta property="twitter:title" content="Ali Haydar Sucu | Computer Engineering Student">
+    <meta property="twitter:description" content="Computer Engineering Student with expertise in software development, web technologies, and embedded systems. Explore my portfolio and projects.">
+    <meta property="twitter:image" content="https://alihaydarsucu.github.io/Images/og-image.webp">
+    <meta name="twitter:creator" content="@alihaydarsucu">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://alihaydarsucu.github.io/" />
+    
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="en" href="https://alihaydarsucu.github.io/" />
+    <link rel="alternate" hreflang="tr" href="https://alihaydarsucu.github.io/tr/" />
+    
     <title>Ali Haydar Sucu | Computer Engineering Student</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="preload" href="Images/Profile.jpg" as="image">
-    <link rel="icon" type="image/x-icon" href="/Images/Icons/icon.png">
-    <link rel="alternate" hreflang="en" href="https://alihaydarsucu.github.io/en" />
-    <link rel="alternate" hreflang="tr" href="https://alihaydarsucu.github.io/tr" />
+    <link rel="preload" href="Images/Profile.webp" as="image">
+    <link rel="icon" type="image/x-icon" href="/Images/Icons/icon.webp">
+    <link rel="apple-touch-icon" href="/Images/Icons/icon-192x192.webp">
+    <meta name="theme-color" content="#2563eb">
 </head>
 <body>
     <header>
         <div class="container">
             <nav>
-                <div class="hamburger-menu">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </div>
+                <button class="hamburger-menu" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+                    <div class="bar" aria-hidden="true"></div>
+                    <div class="bar" aria-hidden="true"></div>
+                    <div class="bar" aria-hidden="true"></div>
+                    <span class="sr-only">Menu</span>
+                </button>
                 <div class="logo">
-                    <img src="Images/Icons/icon.png" alt="Logo" class="logo-img">
+                    <img src="Images/Icons/icon.webp" alt="Logo" class="logo-img">
                     <a href="/">Ali Haydar Sucu</a>
                 </div>
                 <div class="nav-links">
@@ -41,15 +70,16 @@
                         <i class="fas fa-briefcase"></i>
                         <span class="nav-text">Experience</span>
                     </a>
-                    <div class="language-selector">
-                        <div class="language-selector-toggle">
-                            <div class="language-option active">EN</div>
-                            <div class="language-option">TR</div>
+                    <div class="language-selector" role="region" aria-label="Language selector">
+                        <div class="language-selector-toggle" role="radiogroup" aria-label="Select language">
+                            <button class="language-option active" role="radio" aria-checked="true" aria-label="English">EN</button>
+                            <button class="language-option" role="radio" aria-checked="false" aria-label="Türkçe">TR</button>
                         </div>
                     </div>
-                    <label class="theme-toggle">
-                        <input type="checkbox">
-                        <span class="theme-slider"></span>
+                    <label class="theme-toggle" aria-label="Toggle dark mode">
+                        <input type="checkbox" aria-label="Toggle dark mode">
+                        <span class="theme-slider" aria-hidden="true"></span>
+                        <span class="sr-only">Toggle dark mode</span>
                     </label>
                 </div>
             </nav>
@@ -60,8 +90,9 @@
     <div class="mobile-menu-overlay"></div>
     <div class="mobile-menu">
         <div class="mobile-menu-header">
-            <button class="mobile-menu-close">
-                <i class="fas fa-times"></i>
+            <button class="mobile-menu-close" aria-label="Close menu">
+                <i class="fas fa-times" aria-hidden="true"></i>
+                <span class="sr-only">Close menu</span>
             </button>
         </div>
         <div class="mobile-nav-links">
@@ -99,7 +130,7 @@
     <main class="container">
         <section id="about" class="hero">
             <div class="hero-image">
-                <img src="Images/Profile.jpg" alt="Ali Haydar Sucu">
+                <img src="Images/Profile.webp" alt="Ali Haydar Sucu">
             </div>
             <div class="hero-content">
                 <h1>Hello, there!</h1>
@@ -162,17 +193,21 @@
                         <div class="contact-text">Ankara, Turkiye</div>
                     </div>
                     <div class="social-links">
-                        <a href="https://github.com/alihaydarsucu" class="social-link" target="_blank">
-                            <i class="fab fa-github"></i>
+                        <a href="https://github.com/alihaydarsucu" class="social-link" target="_blank" aria-label="GitHub profile">
+                            <i class="fab fa-github" aria-hidden="true"></i>
+                            <span class="sr-only">GitHub</span>
                         </a>
-                        <a href="https://linkedin.com/in/ali-haydar-sucu" class="social-link" target="_blank">
-                            <i class="fab fa-linkedin-in"></i>
+                        <a href="https://linkedin.com/in/ali-haydar-sucu" class="social-link" target="_blank" aria-label="LinkedIn profile">
+                            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                            <span class="sr-only">LinkedIn</span>
                         </a>
-                        <a href="mailto:alihaydarsucu@gmail.com" class="social-link">
-                            <i class="fas fa-envelope"></i>
+                        <a href="mailto:alihaydarsucu@gmail.com" class="social-link" aria-label="Send email">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                            <span class="sr-only">Email</span>
                         </a>
-                        <a href="https://instagram.com/alihaydarsucu" class="social-link" target="_blank">
-                            <i class="fab fa-instagram"></i>
+                        <a href="https://instagram.com/alihaydarsucu" class="social-link" target="_blank" aria-label="Instagram profile">
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
+                            <span class="sr-only">Instagram</span>
                         </a>
                     </div>
                 </div>
@@ -183,12 +218,13 @@
     <footer>
         <div class="footer-content">
             <p>&copy; Copyright 2025 - Ali Haydar Sucu</p>
-            <p>Computer Engineering Student | Embedded Software Developer</p>
+            <p>Computer Engineering Student</p>
         </div>
     </footer>
 
-    <a href="#" class="back-to-top">
-        <i class="fas fa-arrow-up"></i>
+    <a href="#" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        <span class="sr-only">Back to top</span>
     </a>
 
     <script src="script.js"></script>

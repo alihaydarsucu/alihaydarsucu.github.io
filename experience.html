@@ -1,27 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Experience | Ali Haydar Sucu</title>
+    <meta name="description" content="Explore my professional experience, education, and career journey in computer engineering and software development. Learn about my work history, skills, and achievements.">
+    <meta name="keywords" content="Ali Haydar Sucu, Experience, Resume, CV, Work History, Education, Computer Engineering, Software Development, Career">
+    <meta name="author" content="Ali Haydar Sucu">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alihaydarsucu.github.io/experience">
+    <meta property="og:title" content="Experience & Education | Ali Haydar Sucu">
+    <meta property="og:description" content="Explore my professional experience, education, and career journey in computer engineering and software development.">
+    <meta property="og:image" content="https://alihaydarsucu.github.io/Images/og-image.webp">
+    <meta property="og:site_name" content="Ali Haydar Sucu">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://alihaydarsucu.github.io/experience">
+    <meta property="twitter:title" content="Experience & Education | Ali Haydar Sucu">
+    <meta property="twitter:description" content="Explore my professional experience, education, and career journey in computer engineering and software development.">
+    <meta property="twitter:image" content="https://alihaydarsucu.github.io/Images/og-image.webp">
+    <meta name="twitter:creator" content="@alihaydarsucu">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://alihaydarsucu.github.io/experience" />
+    
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="en" href="https://alihaydarsucu.github.io/experience" />
+    <link rel="alternate" hreflang="tr" href="https://alihaydarsucu.github.io/deneyim" />
+    
+    <title>Experience & Education | Ali Haydar Sucu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="/Images/Icons/icon.png">
-    <link rel="alternate" hreflang="en" href="https://alihaydarsucu.github.io/en" />
-    <link rel="alternate" hreflang="tr" href="https://alihaydarsucu.github.io/tr" />
+    <link rel="icon" type="image/x-icon" href="/Images/Icons/icon.webp">
+    <link rel="apple-touch-icon" href="/Images/Icons/icon-192x192.webp">
+    <meta name="theme-color" content="#2563eb">
     <base href="/">
 </head>
 <body>
     <header>
         <div class="container">
             <nav>
-                <div class="hamburger-menu">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </div>
+                <button class="hamburger-menu" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+                    <div class="bar" aria-hidden="true"></div>
+                    <div class="bar" aria-hidden="true"></div>
+                    <div class="bar" aria-hidden="true"></div>
+                    <span class="sr-only">Menu</span>
+                </button>
                 <div class="logo">
-                    <img src="Images/Icons/icon.png" alt="Logo" class="logo-img">
+                    <img src="Images/Icons/icon.webp" alt="Logo" class="logo-img">
                     <a href="/">Ali Haydar Sucu</a>
                 </div>
                 <div class="nav-links">
@@ -41,15 +70,16 @@
                         <i class="fas fa-briefcase"></i>
                         <span class="nav-text">Experience</span>
                     </a>
-                    <div class="language-selector">
-                        <div class="language-selector-toggle">
-                            <div class="language-option active">EN</div>
-                            <div class="language-option">TR</div>
+                    <div class="language-selector" role="region" aria-label="Language selector">
+                        <div class="language-selector-toggle" role="radiogroup" aria-label="Select language">
+                            <button class="language-option active" role="radio" aria-checked="true" aria-label="English">EN</button>
+                            <button class="language-option" role="radio" aria-checked="false" aria-label="Türkçe">TR</button>
                         </div>
                     </div>
-                    <label class="theme-toggle">
-                        <input type="checkbox">
-                        <span class="theme-slider"></span>
+                    <label class="theme-toggle" aria-label="Toggle dark mode">
+                        <input type="checkbox" aria-label="Toggle dark mode">
+                        <span class="theme-slider" aria-hidden="true"></span>
+                        <span class="sr-only">Toggle dark mode</span>
                     </label>
                 </div>
             </nav>
@@ -58,41 +88,54 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu-overlay"></div>
-    <div class="mobile-menu">
+    <div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
         <div class="mobile-menu-header">
-            <button class="mobile-menu-close">
-                <i class="fas fa-times"></i>
+            <button class="mobile-menu-close" aria-label="Close menu">
+                <i class="fas fa-times" aria-hidden="true"></i>
+                <span class="sr-only">Close menu</span>
             </button>
         </div>
-        <div class="mobile-nav-links">
-            <a href="/">
-                <i class="fas fa-user"></i>
-                <span class="nav-text-mobile">About</span>
-            </a>
-            <a href="/skills">
-                <i class="fas fa-code"></i>
-                <span class="nav-text-mobile">Skills</span>
-            </a>
-            <a href="/projects">
-                <i class="fas fa-project-diagram"></i>
-                <span class="nav-text-mobile">Projects</span>
-            </a>
-            <a href="/experience" class="active">
-                <i class="fas fa-briefcase"></i>
-                <span class="nav-text-mobile">Experience</span>
-            </a>
-            <div class="mobile-language-selector">
-                <div class="language-selector-toggle">
-                    <div class="language-option active">EN</div>
-                    <div class="language-option">TR</div>
+        <div class="mobile-nav-links" role="list">
+            <div role="listitem">
+                <a href="/">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">About</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/skills">
+                    <i class="fas fa-code" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Skills</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/projects">
+                    <i class="fas fa-project-diagram" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Projects</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/experience" class="active">
+                    <i class="fas fa-briefcase" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Experience</span>
+                </a>
+            </div>
+        </div>
+        <div class="mobile-menu-actions">
+            <div class="mobile-language-selector" role="region" aria-label="Language selector">
+                <div class="language-selector-toggle" role="radiogroup" aria-label="Select language">
+                    <button class="language-option active" role="radio" aria-checked="true" aria-label="English">EN</button>
+                    <button class="language-option" role="radio" aria-checked="false" aria-label="Türkçe">TR</button>
                 </div>
             </div>
             <div class="mobile-theme-toggle">
-                <label class="theme-toggle">
-                    <input type="checkbox">
-                    <span class="theme-slider"></span>
+                <label class="theme-toggle" aria-label="Toggle dark mode">
+                    <input type="checkbox" aria-label="Toggle dark mode">
+                    <span class="theme-slider" aria-hidden="true"></span>
+                    <span class="sr-only">Toggle dark mode</span>
                 </label>
             </div>
+        </div>
         </div>
     </div>
 
@@ -101,17 +144,17 @@
     <main class="container">
         <section id="experience">
             <h2 class="section-title">Professional Experience</h2>
-            <div class="experience-container">
-                <div class="experience-card">
+            <div class="experience-container" role="list">
+                <div class="experience-card" role="listitem">
                     <div class="experience-logo">
-                        <img src="Images/Places/buraitech.png" alt="BURAI TECH Logo">
+                        <img src="Images/Places/buraitech.webp" alt="" aria-hidden="true">
                     </div>
                     <div class="experience-content">
                         <div class="experience-date">May 2025 - June 2025</div>
                         <h3 class="experience-title">Project Leader</h3>
                         <p class="experience-subtitle">AYBU ÖĞMER | Burai Tech</p>
                         <div class="experience-details">
-                            <ul>
+                            <ul role="list">
                                 <li>Led a team to design and develop a document-interactive AI agent using LLaMA 3 and PySide6.</li>
                                 <li>Assigned tasks, conducted prompt engineering, designed modular architecture.</li>
                                 <li>Developed NLP features (summarization, paraphrasing, QA) with the team.</li>
@@ -120,16 +163,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="experience-card">
+                <div class="experience-card" role="listitem">
                     <div class="experience-logo">
-                        <img src="Images/Places/pusulausv.jpeg" alt="PUSULA USV Logo">
+                        <img src="Images/Places/pusulausv.jpeg" alt="" aria-hidden="true">
                     </div>
                     <div class="experience-content">
                         <div class="experience-date">October 2024 - Present</div>
                         <h3 class="experience-title">Embedded Software Developer</h3>
                         <p class="experience-subtitle">PUSULA USV, Ankara, Turkiye</p>
                         <div class="experience-details">
-                            <ul>
+                            <ul role="list">
                                 <li>Implemented autonomous motion algorithms using Python for unmanned marine vehicle.</li>
                                 <li>Designed and deployed systemd services for automatically launching ROS 2 nodes for Lidar, ZED Camera, autonomous algorithm and system logs on Jetson board.</li>
                                 <li>Collaborated with the electrical team to perform integration and live sensor tests, including A2M12 Lidar integration, ZED 2 Camera's detection, Pixhawk motor tests and GPS.</li>
@@ -140,16 +183,16 @@
                     </div>
                 </div>
                 
-                <div class="experience-card">
+                <div class="experience-card" role="listitem">
                     <div class="experience-logo">
-                        <img src="Images/Places/ogmer.png" alt="AYBU Ogmer Logo">
+                        <img src="Images/Places/ogmer.webp" alt="" aria-hidden="true">
                     </div>
                     <div class="experience-content">
                         <div class="experience-date">August 2024 - May 2025</div>
                         <h3 class="experience-title">Bootcamp Tutor & Student Mentor</h3>
                         <p class="experience-subtitle">Ankara Yıldırım Beyazıt University, Ankara, Turkiye</p>
                         <div class="experience-details">
-                            <ul>
+                            <ul role="list">
                                 <li>Led a summer bootcamp aimed at introducing college students to front-end web development, 
                                     with a focus on HTML, CSS, and the foundations of how the web works. Fostered a supportive 
                                     and engaging environment to help beginners build confidence and create simple, functional websites.</li>
@@ -162,16 +205,16 @@
                     </div>
                 </div>
                 
-                <div class="experience-card">
+                <div class="experience-card" role="listitem">
                     <div class="experience-logo">
-                        <img src="Images/Places/hezarfen.jpeg" alt="Hezarfen Club Logo">
+                        <img src="Images/Places/hezarfen.jpeg" alt="" aria-hidden="true">
                     </div>
                     <div class="experience-content">
                         <div class="experience-date">September 2023 - June 2024</div>
                         <h3 class="experience-title">Avionics Team Member</h3>
                         <p class="experience-subtitle">Aybü HEZARFEN Club | Gökçen Rocket Project, Ankara, Turkiye</p>
                         <div class="experience-details">
-                            <ul>
+                            <ul role="list">
                                 <li>Conducted research to determine suitable sensors for the system.</li>
                                 <li>Contributed to the flight control board and assisted 
                                     in integrating sensors and components.</li>
@@ -186,11 +229,11 @@
 
         <section id="education">
             <h2 class="section-title">Education</h2>
-            <div class="timeline-container">
+            <div class="timeline-container" role="list" aria-label="Education timeline">
                 <div class="timeline-item">
                     <div class="timeline-card">
                         <div class="timeline-logo">
-                            <img src="Images/Places/aybü-logo.webp" alt="AYBÜ Logo">
+                            <img src="Images/Places/aybü-logo.webp" alt="AYBÜ Logo" aria-hidden="true">
                         </div>
                         <div class="timeline-content">
                             <div class="timeline-date">September 2023 - June 2028 (Expected)</div>
@@ -226,8 +269,8 @@
 
         <section id="volunteering">
             <h2 class="section-title">Volunteering Works</h2>
-            <div class="experience-container">
-                <div class="experience-card">
+            <div class="experience-container" role="list">
+                <div class="experience-card" role="listitem">
                     <div class="experience-logo">
                         <img src="Images/Places/toft.jpeg" alt="Trio of Thought Logo">
                     </div>
@@ -236,7 +279,7 @@
                         <h3 class="experience-title">Podcast Host</h3>
                         <p class="experience-subtitle">Trio of Thought, Ankara, Turkiye</p>
                         <div class="experience-details">
-                            <ul>
+                            <ul role="list">
                                 <li>As an engineering student with a passion for AI technologies, 
                                     I co-published the 'Trio of Thought' podcast with my two colleagues. 
                                     I served as the podcast host, where we discussed new technologies and developments, particularly in AI. 
@@ -249,16 +292,16 @@
                     </div>
                 </div>
                 
-                <div class="experience-card">
+                <div class="experience-card" role="listitem">
                     <div class="experience-logo">
-                        <img src="Images/Places/blank.png" alt="Anonymous Logo">
+                        <img src="Images/Places/blank.webp" alt="Anonymous Logo">
                     </div>
                     <div class="experience-content">
                         <div class="experience-date">March 2020 - July 2023</div>
                         <h3 class="experience-title">Writer & Editor</h3>
                         <p class="experience-subtitle">Civil Society Organizations in Ankara, Turkiye</p>
                         <div class="experience-details">
-                            <ul>
+                            <ul role="list">
                                 <li>I worked as a writer in several school magazines, 
                                     blogs and local civil society organizations.</li>
                                 <li>After doing it for a while, with influence of  my writing skills, 
@@ -280,12 +323,13 @@
     <footer>
         <div class="footer-content">
             <p>&copy; Copyright 2025 - Ali Haydar Sucu</p>
-            <p>Computer Engineering Student | Embedded Software Developer</p>
+            <p>Computer Engineering Student</p>
         </div>
     </footer>
 
-    <a href="#" class="back-to-top">
-        <i class="fas fa-arrow-up"></i>
+    <a href="#" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        <span class="sr-only">Back to top</span>
     </a>
 
     <script src="script.js"></script>

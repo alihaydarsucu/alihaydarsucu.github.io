@@ -117,6 +117,11 @@ nav {
     height: 21px;
     cursor: pointer;
     z-index: 200;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
 }
 
 .bar {
@@ -488,8 +493,10 @@ body.dark-mode .theme-toggle input:checked + .theme-slider:before {
     position: relative;
 }
 
+/* Explicitly set font size in pixels for better browser compatibility */
 .hero-content h1 {
-    font-size: 2.8rem;
+    font-size: 44.8px; /* 2.8rem equivalent for base 16px */
+    font-size: 2.8rem; /* Fallback for browsers that support rem */
     margin-bottom: 1.5rem;
     color: var(--text-primary);
     line-height: 1.2;
@@ -2073,7 +2080,7 @@ body.dark-mode .mobile-language-selector {
     
     .logo {
         order: 1;
-        margin-left: 15px;
+        margin-left: 10px; /* Reduced from 15px to 10px to move logo left */
     }
     
     .nav-links {
@@ -2217,13 +2224,22 @@ body.dark-mode .mobile-language-selector {
     }
 
     .github-filter {
-        flex-direction: column;
-        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin: 0 auto;
+        max-width: 100%;
+        padding: 0 15px;
+        margin-bottom: 30px;
     }
 
     .filter-btn {
-        width: 80%;
+        flex: 1 0 calc(50% - 15px);
+        max-width: 200px;
         text-align: center;
+        margin: 5px;
+        padding: 8px 12px;
     }
 }
 

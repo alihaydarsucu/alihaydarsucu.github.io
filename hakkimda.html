@@ -1,27 +1,56 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ali Haydar Sucu - Ankara Yıldırım Beyazıt Üniversitesi Bilgisayar Mühendisliği öğrencisi. Yazılım geliştirme, web teknolojileri ve gömülü sistemler alanlarında çalışmalar yapıyorum.">
+    <meta name="keywords" content="Ali Haydar Sucu, Bilgisayar Mühendisliği, Yazılım Geliştirici, Web Geliştirici, Gömülü Sistemler, Portföy, Projeler">
+    <meta name="author" content="Ali Haydar Sucu">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alihaydarsucu.github.io/hakkimda">
+    <meta property="og:title" content="Ali Haydar Sucu | Bilgisayar Mühendisliği Öğrencisi">
+    <meta property="og:description" content="Ankara Yıldırım Beyazıt Üniversitesi Bilgisayar Mühendisliği öğrencisi. Yazılım geliştirme, web teknolojileri ve gömülü sistemler alanlarında çalışmalar yapıyorum.">
+    <meta property="og:image" content="https://alihaydarsucu.github.io/Images/og-image.webp">
+    <meta property="og:site_name" content="Ali Haydar Sucu">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://alihaydarsucu.github.io/hakkimda">
+    <meta property="twitter:title" content="Ali Haydar Sucu | Bilgisayar Mühendisliği Öğrencisi">
+    <meta property="twitter:description" content="Ankara Yıldırım Beyazıt Üniversitesi Bilgisayar Mühendisliği öğrencisi. Yazılım geliştirme, web teknolojileri ve gömülü sistemler alanlarında çalışmalar yapıyorum.">
+    <meta property="twitter:image" content="https://alihaydarsucu.github.io/Images/og-image.webp">
+    <meta name="twitter:creator" content="@alihaydarsucu">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://alihaydarsucu.github.io/hakkimda" />
+    
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="tr" href="https://alihaydarsucu.github.io/hakkimda" />
+    <link rel="alternate" hreflang="en" href="https://alihaydarsucu.github.io/" />
+    
     <title>Ali Haydar Sucu | Bilgisayar Mühendisliği Öğrencisi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="preload" href="Images/Profile.jpg" as="image">
-    <link rel="icon" type="image/x-icon" href="/Images/Icons/icon.png">
-    <link rel="alternate" hreflang="en" href="https://alihaydarsucu.github.io/" />
-    <link rel="alternate" hreflang="tr" href="https://alihaydarsucu.github.io/hakkimda" />
+    <link rel="preload" href="Images/Profile.webp" as="image">
+    <link rel="icon" type="image/x-icon" href="/Images/Icons/icon.webp">
+    <link rel="apple-touch-icon" href="/Images/Icons/icon-192x192.webp">
+    <meta name="theme-color" content="#2563eb">
 </head>
 <body>
     <header>
         <div class="container">
             <nav>
-                <div class="hamburger-menu">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </div>
+                <button class="hamburger-menu" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="mobile-menu">
+                    <div class="bar" aria-hidden="true"></div>
+                    <div class="bar" aria-hidden="true"></div>
+                    <div class="bar" aria-hidden="true"></div>
+                    <span class="sr-only">Menüyü Aç</span>
+                </button>
                 <div class="logo">
-                    <img src="Images/Icons/icon.png" alt="Logo" class="logo-img">
+                    <img src="Images/Icons/icon.webp" alt="Logo" class="logo-img">
                     <a href="/hakkimda">Ali Haydar Sucu</a>
                 </div>
                 <div class="nav-links">
@@ -41,10 +70,10 @@
                         <i class="fas fa-briefcase"></i>
                         <span class="nav-text">Deneyim</span>
                     </a>
-                    <div class="language-selector">
-                        <div class="language-selector-toggle">
-                            <div class="language-option">EN</div>
-                            <div class="language-option active">TR</div>
+                    <div class="language-selector" role="region" aria-label="Dil seçici">
+                        <div class="language-selector-toggle" role="radiogroup" aria-label="Dil seçin">
+                            <button class="language-option" role="radio" aria-checked="false" aria-label="English">EN</button>
+                            <button class="language-option active" role="radio" aria-checked="true" aria-label="Türkçe">TR</button>
                         </div>
                     </div>
                     <label class="theme-toggle">
@@ -58,39 +87,51 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu-overlay"></div>
-    <div class="mobile-menu">
+    <div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigasyon menüsü">
         <div class="mobile-menu-header">
-            <button class="mobile-menu-close" aria-label="Mobil menüyü kapat">
-                <i class="fas fa-times"></i>
+            <button class="mobile-menu-close" aria-label="Menüyü kapat">
+                <i class="fas fa-times" aria-hidden="true"></i>
+                <span class="sr-only">Menüyü Kapat</span>
             </button>
         </div>
-        <div class="mobile-nav-links">
-            <a href="/hakkimda" class="active">
-                <i class="fas fa-user"></i>
-                Hakkımda
-            </a>
-            <a href="/yetenekler">
-                <i class="fas fa-code"></i>
-                Yetenekler
-            </a>
-            <a href="/projeler">
-                <i class="fas fa-project-diagram"></i>
-                Projeler
-            </a>
-            <a href="/deneyim">
-                <i class="fas fa-briefcase"></i>
-                Deneyim
-            </a>
-            <div class="mobile-language-selector">
-                <div class="language-selector-toggle">
-                    <div class="language-option">EN</div>
-                    <div class="language-option active">TR</div>
+        <div class="mobile-nav-links" role="list">
+            <div role="listitem">
+                <a href="/hakkimda" class="active">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Hakkımda</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/yetenekler">
+                    <i class="fas fa-code" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Yetenekler</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/projeler">
+                    <i class="fas fa-project-diagram" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Projeler</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/deneyim">
+                    <i class="fas fa-briefcase" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Deneyim</span>
+                </a>
+            </div>
+        </div>
+        <div class="mobile-menu-actions">
+            <div class="mobile-language-selector" role="region" aria-label="Dil seçici">
+                <div class="language-selector-toggle" role="radiogroup" aria-label="Dil seçin">
+                    <button class="language-option" role="radio" aria-checked="false" aria-label="English">EN</button>
+                    <button class="language-option active" role="radio" aria-checked="true" aria-label="Türkçe">TR</button>
                 </div>
             </div>
             <div class="mobile-theme-toggle">
-                <label class="theme-toggle">
+                <label class="theme-toggle" aria-label="Karanlık modu değiştir">
                     <input type="checkbox" aria-label="Karanlık modu değiştir">
-                    <span class="theme-slider"></span>
+                    <span class="theme-slider" aria-hidden="true"></span>
+                    <span class="sr-only">Karanlık modu değiştir</span>
                 </label>
             </div>
         </div>
@@ -99,7 +140,7 @@
     <main class="container">
         <section id="about" class="hero">
             <div class="hero-image">
-                <img src="Images/Profile.jpg" alt="Ali Haydar Sucu">
+                <img src="Images/Profile.webp" alt="Ali Haydar Sucu">
             </div>
             <div class="hero-content">
                 <h1>Merhaba!</h1>
@@ -181,7 +222,7 @@
     <footer>
         <div class="footer-content">
             <p>&copy; Copyright 2025 - Ali Haydar Sucu</p>
-            <p>Bilgisayar Mühendisliği Öğrencisi | Gömülü Yazılım Geliştirici</p>
+            <p>Bilgisayar Mühendisliği Öğrencisi</p>
         </div>
     </footer>
 

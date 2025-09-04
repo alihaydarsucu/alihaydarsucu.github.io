@@ -1,27 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skills | Ali Haydar Sucu</title>
+    <meta name="description" content="Explore my technical skills and expertise in software development, web technologies, and embedded systems. Discover my programming languages, frameworks, and tools.">
+    <meta name="keywords" content="Ali Haydar Sucu, Skills, Programming, Web Development, Software Engineering, Embedded Systems, Technical Skills, Portfolio">
+    <meta name="author" content="Ali Haydar Sucu">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alihaydarsucu.github.io/skills">
+    <meta property="og:title" content="Skills & Expertise | Ali Haydar Sucu">
+    <meta property="og:description" content="Explore my technical skills and expertise in software development, web technologies, and embedded systems.">
+    <meta property="og:image" content="https://alihaydarsucu.github.io/Images/og-image.webp">
+    <meta property="og:site_name" content="Ali Haydar Sucu">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://alihaydarsucu.github.io/skills">
+    <meta property="twitter:title" content="Skills & Expertise | Ali Haydar Sucu">
+    <meta property="twitter:description" content="Explore my technical skills and expertise in software development, web technologies, and embedded systems.">
+    <meta property="twitter:image" content="https://alihaydarsucu.github.io/Images/og-image.webp">
+    <meta name="twitter:creator" content="@alihaydarsucu">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://alihaydarsucu.github.io/skills" />
+    
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="en" href="https://alihaydarsucu.github.io/skills" />
+    <link rel="alternate" hreflang="tr" href="https://alihaydarsucu.github.io/yetenekler" />
+    
+    <title>Skills & Expertise | Ali Haydar Sucu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="/Images/Icons/icon.png">
-    <link rel="alternate" hreflang="en" href="https://alihaydarsucu.github.io/en" />
-    <link rel="alternate" hreflang="tr" href="https://alihaydarsucu.github.io/tr" />
+    <link rel="icon" type="image/x-icon" href="/Images/Icons/icon.webp">
+    <link rel="apple-touch-icon" href="/Images/Icons/icon-192x192.webp">
+    <meta name="theme-color" content="#2563eb">
     <base href="/">
 </head>
 <body>
     <header>
         <div class="container">
             <nav>
-                <div class="hamburger-menu">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </div>
+                <button class="hamburger-menu" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+                    <div class="bar" aria-hidden="true"></div>
+                    <div class="bar" aria-hidden="true"></div>
+                    <div class="bar" aria-hidden="true"></div>
+                    <span class="sr-only">Menu</span>
+                </button>
                 <div class="logo">
-                    <img src="Images/Icons/icon.png" alt="Logo" class="logo-img">
+                    <img src="Images/Icons/icon.webp" alt="Logo" class="logo-img">
                     <a href="/">Ali Haydar Sucu</a>
                 </div>
                 <div class="nav-links">
@@ -41,15 +70,16 @@
                         <i class="fas fa-briefcase"></i>
                         <span class="nav-text">Experience</span>
                     </a>
-                    <div class="language-selector">
-                        <div class="language-selector-toggle">
-                            <div class="language-option active">EN</div>
-                            <div class="language-option">TR</div>
+                    <div class="language-selector" role="region" aria-label="Language selector">
+                        <div class="language-selector-toggle" role="radiogroup" aria-label="Select language">
+                            <button class="language-option active" role="radio" aria-checked="true" aria-label="English">EN</button>
+                            <button class="language-option" role="radio" aria-checked="false" aria-label="Türkçe">TR</button>
                         </div>
                     </div>
-                    <label class="theme-toggle">
-                        <input type="checkbox">
-                        <span class="theme-slider"></span>
+                    <label class="theme-toggle" aria-label="Toggle dark mode">
+                        <input type="checkbox" aria-label="Toggle dark mode">
+                        <span class="theme-slider" aria-hidden="true"></span>
+                        <span class="sr-only">Toggle dark mode</span>
                     </label>
                 </div>
             </nav>
@@ -60,8 +90,9 @@
     <div class="mobile-menu-overlay"></div>
     <div class="mobile-menu">
         <div class="mobile-menu-header">
-            <button class="mobile-menu-close">
-                <i class="fas fa-times"></i>
+            <button class="mobile-menu-close" aria-label="Close menu">
+                <i class="fas fa-times" aria-hidden="true"></i>
+                <span class="sr-only">Close menu</span>
             </button>
         </div>
         <div class="mobile-nav-links">
@@ -99,61 +130,61 @@
     <main class="container">
         <section id="skills">
             <h2 class="section-title">My Skills</h2>
-            <div class="skills-container">
+            <div class="skills-container" role="list" aria-label="Technical skills">
                 <!-- Frontend Technologies -->
-                <div class="skill-card">
-                    <img src="Images/Icons/icons8-html-5.svg" alt="HTML5" loading="lazy">
+                <div class="skill-card" role="listitem">
+                    <img src="Images/Icons/icons8-html-5.svg" alt="" aria-hidden="true" loading="lazy">
                     <h3>HTML5</h3>
                 </div>
-                <div class="skill-card">
-                    <img src="Images/Icons/icons8-css3.svg" alt="CSS3" loading="lazy">
+                <div class="skill-card" role="listitem">
+                    <img src="Images/Icons/icons8-css3.svg" alt="" aria-hidden="true" loading="lazy">
                     <h3>CSS3</h3>
                 </div>
-                <div class="skill-card">
-                    <img src="Images/Icons/icons8-javascript.svg" alt="JavaScript" loading="lazy">
+                <div class="skill-card" role="listitem">
+                    <img src="Images/Icons/icons8-javascript.svg" alt="" aria-hidden="true" loading="lazy">
                     <h3>JavaScript</h3>
                 </div>
                 
                 <!-- Programming Languages -->
-                <div class="skill-card python">
-                    <img src="Images/Icons/python.webp" alt="Python" loading="lazy">
+                <div class="skill-card python" role="listitem">
+                    <img src="Images/Icons/python.webp" alt="" aria-hidden="true" loading="lazy">
                     <h3>Python</h3>
                 </div>
-                <div class="skill-card">
-                    <img src="Images/Icons/java.jpg" alt="Java" loading="lazy">
+                <div class="skill-card" role="listitem">
+                    <img src="Images/Icons/java.webp" alt="" aria-hidden="true" loading="lazy">
                     <h3>Java</h3>
                 </div>
-                <div class="skill-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" height="40" alt="Bash" loading="lazy" />
+                <div class="skill-card" role="listitem">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" height="40" alt="" aria-hidden="true" loading="lazy" />
                     <h3>Bash</h3>
                 </div>
                 <!-- Databases & DevOps -->
-                <div class="skill-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mariadb/mariadb-original.svg" alt="MariaDB" loading="lazy">
+                <div class="skill-card" role="listitem">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mariadb/mariadb-original.svg" alt="" aria-hidden="true" loading="lazy">
                     <h3>MariaDB</h3>
                 </div>
-                <div class="skill-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" loading="lazy">
+                <div class="skill-card" role="listitem">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="" aria-hidden="true" loading="lazy">
                     <h3>Docker</h3>
                 </div>
                 
                 <!-- System & Tools -->
-                <div class="skill-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" loading="lazy">
+                <div class="skill-card" role="listitem">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="" aria-hidden="true" loading="lazy">
                     <h3>Linux</h3>
                 </div>
-                <div class="skill-card">
-                    <img src="Images/Icons/icons8-git.svg" alt="Git" loading="lazy">
+                <div class="skill-card" role="listitem">
+                    <img src="Images/Icons/icons8-git.svg" alt="" aria-hidden="true" loading="lazy">
                     <h3>Git</h3>
                 </div>
                 
                 <!-- Robotics & Embedded -->
-                <div class="skill-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ros/ros-original.svg" alt="ROS 2" loading="lazy">
+                <div class="skill-card" role="listitem">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ros/ros-original.svg" alt="" aria-hidden="true" loading="lazy">
                     <h3>ROS 2</h3>
                 </div>
-                <div class="skill-card">
-                    <img src="Images/Icons/qgroundcontrol.png" alt="QGroundControl" loading="lazy">
+                <div class="skill-card" role="listitem">
+                    <img src="Images/Icons/qgroundcontrol.webp" alt="" aria-hidden="true" loading="lazy">
                     <h3>QGroundControl</h3>
                 </div>
             </div>
@@ -161,17 +192,17 @@
 
         <section class="github-stats">
             <h2 class="section-title">GitHub Stats</h2>
-            <div class="github-stats-container">
-                <img src="https://github-readme-stats.vercel.app/api?username=alihaydarsucu&show_icons=true&theme=nightowl" alt="GitHub Stats" loading="lazy">
-                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=alihaydarsucu&layout=compact&theme=nightowl" alt="Top Languages" loading="lazy">
+            <div class="github-stats-container" role="region" aria-label="GitHub Statistics">
+                <img src="https://github-readme-stats.vercel.app/api?username=alihaydarsucu&show_icons=true&theme=nightowl" alt="GitHub statistics showing commits, pull requests, and other activity" loading="lazy">
+                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=alihaydarsucu&layout=compact&theme=nightowl" alt="Most used programming languages" loading="lazy">
             </div>
             
              <!-- GitHub Streak Stats -->
-            <div class="github-stats-container">
+            <div class="github-stats-container" role="region" aria-label="GitHub Contribution Streak">
                 <img src="https://streak-stats.demolab.com/?user=alihaydarsucu&theme=nightowl" 
-                     alt="GitHub Streak Stats" 
+                     alt="GitHub contribution streak showing current and longest streak" 
                      loading="lazy"
-                     onerror="this.src='https://github-readme-streak-stats.herokuapp.com/?user=alihaydarsucu&theme=nightowl'; this.onerror=function(){this.style.display='none';};">
+                     onerror="this.src='https://github-readme-streak-stats.herokuapp.com/?user=alihaydarsucu&theme=nightowl'; this.onerror=function(){this.style.display='none'};">
             </div>
         </section>
     </main>
@@ -179,12 +210,13 @@
     <footer>
         <div class="footer-content">
             <p>&copy; Copyright 2025 - Ali Haydar Sucu</p>
-            <p>Computer Engineering Student | Embedded Software Developer</p>
+            <p>Computer Engineering Student</p>
         </div>
     </footer>
 
-    <a href="#" class="back-to-top">
-        <i class="fas fa-arrow-up"></i>
+    <a href="#" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        <span class="sr-only">Back to top</span>
     </a>
 
     <script src="script.js"></script>
