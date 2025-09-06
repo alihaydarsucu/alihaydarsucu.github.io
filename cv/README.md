@@ -5,7 +5,7 @@ This directory contains the LaTeX source files for automatically generating an A
 ## Features
 
 - **Oxford-style academic CV** optimized for ATS (Applicant Tracking System) compatibility
-- **Automatic generation** via GitHub Actions on every push
+- **Automatic generation** via GitHub Actions when CV files are modified
 - **Professional formatting** with clean, readable layout
 - **Two-page support** without strict single-page limitations
 - **Modern typography** using LaTeX best practices
@@ -17,11 +17,13 @@ This directory contains the LaTeX source files for automatically generating an A
 
 ## Automatic Updates
 
-The CV is automatically regenerated whenever:
+The CV is automatically regenerated **only** when:
 
-- Code is pushed to the main or v2 branch
-- A pull request is created
+- Changes are made to files in the `cv/` directory
+- A pull request modifies files in the `cv/` directory
 - The workflow is manually triggered
+
+**Note:** The automation now only triggers when CV-related files are modified, not on every commit to the repository.
 
 The generated PDF is automatically placed in the `Assets/` directory with timestamped filenames:
 
@@ -44,6 +46,14 @@ To manually generate the CV locally:
    lualatex cv.tex
    lualatex cv.tex  # Run twice for proper cross-references
    ```
+
+## Workflow Triggers
+
+The GitHub Actions workflow is configured to trigger on:
+
+- **Push to main/v2 branches** - Only when `cv/` directory files are modified
+- **Pull requests** - Only when `cv/` directory files are modified
+- **Manual trigger** - Can be run manually from GitHub Actions tab
 
 ## Customization
 

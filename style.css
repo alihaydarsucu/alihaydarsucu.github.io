@@ -1,41 +1,39 @@
 :root {
-    /* Light Mode Colors */
+    /* Light Mode Colors - New 5-Color Palette */
     --primary: #3A86FF;
     --primary-dark: #2667CC;
-    --secondary: #8338EC;
-    --accent: #FF006E;
+    --secondary: #34CE97;
+    --accent: #FF6B35;
     --background: #F8F9FA;
     --surface: #FFFFFF;
-    --text-primary: #212529;
-    --text-secondary: #6C757D;
-    --border: #E9ECEF;
-    --success: #28A745;
+    --text-primary: #1F2937;
+    --text-secondary: #6B7280;
+    --border: #E5E7EB;
+    --success: #34CE97;
     --warning: #FFC107;
     --danger: #DC3545;
     --info: #17A2B8;
-    --orange: #FF7E1D;
-    --purple: #6F42C1;
+    --orange: #FF6B35;
     --light-gray: #F1F3F4;
     
-    /* Dark Mode Colors - Will be applied when .dark-mode class is present */
-    --dark-bg: #121212;
-    --dark-surface: #1E1E1E;
-    --dark-surface-elevated: #2D2D2D;
+    /* Dark Mode Colors - Updated to match new palette */
+    --dark-bg: #1F2937;
+    --dark-surface: #374151;
+    --dark-surface-elevated: #4B5563;
     --dark-text: #F8F9FA;
-    --dark-text-secondary: #ADB5BD;
-    --dark-border: #444444;
-    --dark-primary: #4D94FF;
-    --dark-primary-dark: #3A86FF;
-    --dark-secondary: #9D4EDD;
-    --dark-accent: #FF4D8D;
+    --dark-text-secondary: #D1D5DB;
+    --dark-border: #6B7280;
+    --dark-primary: #3A86FF;
+    --dark-primary-dark: #2667CC;
+    --dark-secondary: #34CE97;
+    --dark-accent: #FF6B35;
     --dark-success: #34CE97;
-    --dark-warning: #FFD43B;
-    --dark-danger: #FF6B6B;
-    --dark-info: #20C997;
-    --dark-orange: #FF9A3D;
-    --dark-purple: #845EF7;
-    --dark-light-gray: #2D2D2D;
-    --dark-card: #1E1E1E;
+    --dark-warning: #FFC107;
+    --dark-danger: #DC3545;
+    --dark-info: #17A2B8;
+    --dark-orange: #FF6B35;
+    --dark-light-gray: #4B5563;
+    --dark-card: #374151;
 }
 
 * {
@@ -463,7 +461,7 @@ body.dark-mode .theme-toggle input:checked + .theme-slider:before {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background: var(--primary);
     top: 0;
     left: 0;
     z-index: -1;
@@ -495,13 +493,13 @@ body.dark-mode .theme-toggle input:checked + .theme-slider:before {
 
 /* Explicitly set font size in pixels for better browser compatibility */
 .hero-content h1 {
-    font-size: 44.8px; /* 2.8rem equivalent for base 16px */
-    font-size: 2.8rem; /* Fallback for browsers that support rem */
+    font-size: 44.8px;
+    font-size: 2.8rem;
     margin-bottom: 1.5rem;
     color: var(--text-primary);
     line-height: 1.2;
     font-weight: 800;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background: var(--primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -587,7 +585,8 @@ body.dark-mode .cv-note {
     left: 0;
     width: 50px;
     height: 3px;
-    background: var(--blue);
+    background: var(--primary);
+    border-radius: 3px;
 }
 
 /* Mobile için section title altındaki çizgiyi kaldır */
@@ -624,7 +623,7 @@ body.dark-mode .cv-note {
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    background: var(--primary);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -688,7 +687,7 @@ body.dark-mode .cv-note {
     left: 0;
     width: 50px;
     height: 3px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    background: var(--primary);
     border-radius: 3px;
 }
 
@@ -1048,7 +1047,7 @@ body.dark-mode .filter-btn:hover {
     left: 0;
     width: 4px;
     height: 100%;
-    background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    background: var(--primary);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -1177,7 +1176,7 @@ a:hover {
     content: '';
     position: absolute;
     width: 4px;
-    background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    background: var(--primary);
     top: 0;
     bottom: 0;
     left: 50%;
@@ -1246,7 +1245,7 @@ a:hover {
     left: 0;
     width: 4px;
     height: 100%;
-    background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    background: var(--primary);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -1465,7 +1464,7 @@ a:hover {
 
 /* Footer */
 footer {
-    background: var(--dark-purple);
+    background: var(--dark-bg);
     color: white;
     padding: 30px 0;
     margin-top: 100px;
@@ -1545,7 +1544,7 @@ body.dark-mode .hero {
 }
 
 body.dark-mode .hero-image::before {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background: var(--primary);
     opacity: 0.15;
 }
 
@@ -1555,7 +1554,7 @@ body.dark-mode .hero-image img {
 }
 
 body.dark-mode .hero-content h1 {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background: var(--primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -1734,12 +1733,25 @@ body.dark-mode .back-to-top:hover {
 }
 
 /* Dark Mode Language Selector */
-body.dark-mode .language-selector i {
-    color: var(--dark-accent-blue);
+body.dark-mode .language-selector-toggle,
+body.dark-mode .mobile-language-selector-toggle {
+    background: var(--dark-surface-elevated);
+    border: 1px solid var(--border);
 }
 
-body.dark-mode .language-selector select {
-    color: var(--dark-text);
+body.dark-mode .language-option {
+    color: #9CA3AF;
+}
+
+body.dark-mode .language-option.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 2px 8px rgba(58, 134, 255, 0.3);
+}
+
+body.dark-mode .language-option:hover:not(.active) {
+    color: var(--primary);
+    background: var(--dark-surface);
 }
 
 /* Mobile Language Selector */
@@ -1958,27 +1970,23 @@ body.dark-mode .explore-card p {
 /* Dark Mode Language Selector */
 body.dark-mode .language-selector-toggle,
 body.dark-mode .mobile-language-selector-toggle {
-    background: var(--dark-light-gray);
-    border: 1px solid var(--primary);
+    background: var(--dark-surface-elevated);
+    border: 1px solid var(--border);
 }
 
 body.dark-mode .language-option {
-    color: var(--text-secondary);
+    color: #9CA3AF;
 }
 
 body.dark-mode .language-option.active {
     background: var(--primary);
     color: white;
-    box-shadow: 0 2px 8px rgba(77, 148, 255, 0.3);
+    box-shadow: 0 2px 8px rgba(58, 134, 255, 0.3);
 }
 
 body.dark-mode .language-option:hover:not(.active) {
     color: var(--primary);
-    background: rgba(77, 148, 255, 0.1);
-}
-
-body.dark-mode .mobile-language-selector {
-    border-color: var(--border);
+    background: var(--dark-surface);
 }
 
 /* Responsive Adjustments */
@@ -2273,6 +2281,10 @@ section h1 {
     font-size: 2.5rem;
 }
 
+/* Or more specifically for the hero section h1 */
+.hero h1 {
+    font-size: 2.5rem;
+}
 /* Or more specifically for the hero section h1 */
 .hero h1 {
     font-size: 2.5rem;

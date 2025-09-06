@@ -3,9 +3,13 @@ name: Generate CV
 on:
   push:
     branches: [main, v2]
+    paths:
+      - "cv/**" # Sadece cv klasöründeki değişiklikler için tetiklenir
   pull_request:
-    branches: [main, v2]
-  workflow_dispatch:
+    branches: [main]
+    paths:
+      - "cv/**" # Sadece cv klasöründeki değişiklikler için tetiklenir
+  workflow_dispatch: # Manuel tetikleme için
 
 permissions:
   contents: write
@@ -15,28 +19,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Install LaTeX
         run: |
           sudo apt-get update
-          sudo apt-get install -y texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra texlive-luatex texlive-xetex
+          sudo apt-get install -y texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra texlive-luatex
 
       - name: Generate CV
         run: |
           cd cv
-          lualatex --interaction=nonstopmode cv.tex
-          lualatex --interaction=nonstopmode cv.tex  # Run twice for proper cross-references
+          lualatex cv.tex
+          lualatex cv.tex  # İkinci kez çalıştır (cross-references için)
 
-      - name: Copy CV to Assets
+      - name: Create timestamped filename
+        id: timestamp
         run: |
-          cp cv/cv.pdf Assets/AliHaydarSucu_CV_$(date +%Y%m%d).pdf
+          echo "date=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
+          echo "short_date=$(date +'%d.%m.%y')" >> $GITHUB_OUTPUT
+
+      - name: Copy CV to Assets directory
+        run: |
+          mkdir -p Assets
+          cp cv/cv.pdf "Assets/AliHaydarSucu_CV_${{ steps.timestamp.outputs.date }}.pdf"
+          cp cv/cv.pdf "Assets/AliHaydarSucu_Resume_${{ steps.timestamp.outputs.short_date }}.pdf"
 
       - name: Commit and push CV
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add Assets/*.pdf
-          git diff --staged --quiet || git commit -m "Auto-update CV - $(date +%Y-%m-%d)"
+          git add Assets/
+          git commit -m "Auto-update CV - $(date +'%Y-%m-%d')" || exit 0
           git push
