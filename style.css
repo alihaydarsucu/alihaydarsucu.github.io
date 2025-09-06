@@ -2268,4 +2268,14 @@ body.dark-mode .mobile-language-selector {
     }
 }
 
+/* Add this rule to explicitly set h1 font-size within sections */
+section h1 {
+    font-size: 2.5rem;
+}
+
+/* Or more specifically for the hero section h1 */
+.hero h1 {
+    font-size: 2.5rem;
+}
+
 
