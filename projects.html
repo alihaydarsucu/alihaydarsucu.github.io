@@ -39,9 +39,9 @@
     <meta name="theme-color" content="#2563eb">
 </head>
 <body>
-    <header>
+    <header role="banner">
         <div class="container">
-            <nav>
+            <nav role="navigation" aria-label="Main navigation">
                 <button class="hamburger-menu" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
                     <div class="bar" aria-hidden="true"></div>
                     <div class="bar" aria-hidden="true"></div>
@@ -49,24 +49,24 @@
                     <span class="sr-only">Menu</span>
                 </button>
                 <div class="logo">
-                    <img src="Images/Icons/icon.webp" alt="Logo" class="logo-img">
-                    <a href="/">Ali Haydar Sucu</a>
+                    <img src="Images/Icons/icon.webp" alt="Ali Haydar Sucu logo" class="logo-img">
+                    <a href="/" aria-label="Go to homepage">Ali Haydar Sucu</a>
                 </div>
-                <div class="nav-links">
-                    <a href="/">
-                        <i class="fas fa-user"></i>
+                <div class="nav-links" role="menubar">
+                    <a href="/" role="menuitem">
+                        <i class="fas fa-user" aria-hidden="true"></i>
                         <span class="nav-text">About</span>
                     </a>
-                    <a href="/skills">
-                        <i class="fas fa-code"></i>
+                    <a href="/skills" role="menuitem">
+                        <i class="fas fa-code" aria-hidden="true"></i>
                         <span class="nav-text">Skills</span>
                     </a>
-                    <a href="/projects" class="active">
-                        <i class="fas fa-project-diagram"></i>
+                    <a href="/projects" class="active" role="menuitem" aria-current="page">
+                        <i class="fas fa-project-diagram" aria-hidden="true"></i>
                         <span class="nav-text">Projects</span>
                     </a>
-                    <a href="/experience">
-                        <i class="fas fa-briefcase"></i>
+                    <a href="/experience" role="menuitem">
+                        <i class="fas fa-briefcase" aria-hidden="true"></i>
                         <span class="nav-text">Experience</span>
                     </a>
                     <div class="language-selector" role="region" aria-label="Language selector">
@@ -87,30 +87,38 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu-overlay"></div>
-    <div class="mobile-menu">
+    <div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
         <div class="mobile-menu-header">
             <button class="mobile-menu-close" aria-label="Close menu">
                 <i class="fas fa-times" aria-hidden="true"></i>
                 <span class="sr-only">Close menu</span>
             </button>
         </div>
-        <div class="mobile-nav-links">
-            <a href="/">
-                <i class="fas fa-user"></i>
-                <span class="nav-text-mobile">About</span>
-            </a>
-            <a href="/skills">
-                <i class="fas fa-code"></i>
-                <span class="nav-text-mobile">Skills</span>
-            </a>
-            <a href="/projects" class="active">
-                <i class="fas fa-project-diagram"></i>
-                <span class="nav-text-mobile">Projects</span>
-            </a>
-            <a href="/experience">
-                <i class="fas fa-briefcase"></i>
-                <span class="nav-text-mobile">Experience</span>
-            </a>
+        <div class="mobile-nav-links" role="list">
+            <div role="listitem">
+                <a href="/">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">About</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/skills">
+                    <i class="fas fa-code" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Skills</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/projects" class="active">
+                    <i class="fas fa-project-diagram" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Projects</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/experience">
+                    <i class="fas fa-briefcase" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Experience</span>
+                </a>
+            </div>
             <div class="mobile-language-selector" role="region" aria-label="Language selector">
                 <div class="language-selector-toggle" role="radiogroup" aria-label="Select language">
                     <button class="language-option active" role="radio" aria-checked="true" aria-label="English">EN</button>
@@ -127,9 +135,9 @@
         </div>
     </div>
 
-    <main class="container">
-        <section id="projects">
-            <h2 class="section-title">Featured Projects</h2>
+    <main class="container" role="main">
+        <section id="projects" role="region" aria-labelledby="projects-heading">
+            <h2 class="section-title" id="projects-heading">Featured Projects</h2>
             <div class="projects-container" role="list" aria-label="Featured projects">
                 <div class="project-card" role="article">
                     <div class="project-image">
@@ -210,8 +218,8 @@
             </div>
         </section>
 
-        <section id="github-projects">
-            <h2 class="section-title">GitHub Projects</h2>
+        <section id="github-projects" role="region" aria-labelledby="github-projects-heading">
+            <h2 class="section-title" id="github-projects-heading">GitHub Projects</h2>
             <div class="github-filter" role="search" aria-label="Filter GitHub projects">
                 <div role="radiogroup" aria-label="Filter projects by category">
                     <button class="filter-btn active" data-filter="all" role="radio" aria-checked="true" aria-label="Show all projects">All Projects</button>
@@ -225,13 +233,13 @@
             </div>
         </section>
 
-        <section id="licenses-certifications">
-            <h2 class="section-title">Licenses & Certifications</h2>
+        <section id="licenses-certifications" role="region" aria-labelledby="licenses-heading">
+            <h2 class="section-title" id="licenses-heading">Licenses & Certifications</h2>
             <div class="timeline-container" role="list" aria-label="Licenses and certifications timeline">
-                <div class="timeline-item">
+                <div class="timeline-item" role="listitem">
                     <div class="timeline-card">
                         <div class="timeline-logo">
-                            <img src="Images/Licenses/freeCodeCamp.jpeg" alt="freeCodeCamp Logo">
+                            <img src="Images/Licenses/freeCodeCamp.jpeg" alt="freeCodeCamp logo">
                         </div>
                         <div class="timeline-content">
                             <div class="timeline-date">Issued Feb 2024</div>
@@ -241,15 +249,15 @@
                                 <b>Skills:</b> Front-End Development · HTML · HTML5 · Cascading Style Sheets (CSS) · Web Design
                             </p>
                             <br>
-                            <a href="https://www.freecodecamp.org/certification/alihaydarsucu/responsive-web-design" class="credential-link">Show credential <i class="credential-icon">➚</i></a>
+                            <a href="https://www.freecodecamp.org/certification/alihaydarsucu/responsive-web-design" class="credential-link" aria-label="View freeCodeCamp certificate">Show credential <i class="credential-icon" aria-hidden="true">➚</i></a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="timeline-item">
+                <div class="timeline-item" role="listitem">
                     <div class="timeline-card">
                         <div class="timeline-logo">
-                            <img src="Images/Licenses/developer_students_community.jpeg" alt="Developer Students Community Logo">
+                            <img src="Images/Licenses/developer_students_community.jpeg" alt="Developer Students Community logo">
                         </div>
                         <div class="timeline-content">
                             <div class="timeline-date">Issued Dec 2023</div>
@@ -259,7 +267,7 @@
                                 <b>Skills:</b> Python (Programming Language) · Data Modelling · Data Visualization
                             </p>
                             <br>
-                            <a href="https://credsverse.com/credentials/68cd1cdc-0d63-4095-a93c-3523b0d87402" class="credential-link">Show credential <i class="credential-icon">➚</i></a>
+                            <a href="https://credsverse.com/credentials/68cd1cdc-0d63-4095-a93c-3523b0d87402" class="credential-link" aria-label="View Developer Students Community certificate">Show credential <i class="credential-icon" aria-hidden="true">➚</i></a>
                         </div>
                     </div>
                 </div>
@@ -267,7 +275,7 @@
         </section>
     </main>
 
-    <footer>
+    <footer role="contentinfo">
         <div class="footer-content">
             <p>&copy; Copyright 2025 - Ali Haydar Sucu</p>
             <p>Computer Engineering Student</p>

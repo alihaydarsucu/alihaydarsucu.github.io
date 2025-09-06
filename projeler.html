@@ -39,9 +39,9 @@
     <meta name="theme-color" content="#2563eb">
 </head>
 <body>
-    <header>
+    <header role="banner">
         <div class="container">
-            <nav>
+            <nav role="navigation" aria-label="Ana navigasyon">
                 <button class="hamburger-menu" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="mobile-menu">
                     <div class="bar" aria-hidden="true"></div>
                     <div class="bar" aria-hidden="true"></div>
@@ -49,24 +49,24 @@
                     <span class="sr-only">Menüyü Aç</span>
                 </button>
                 <div class="logo">
-                    <img src="Images/Icons/icon.webp" alt="Logo" class="logo-img">
-                    <a href="/hakkimda">Ali Haydar Sucu</a>
+                    <img src="Images/Icons/icon.webp" alt="Ali Haydar Sucu logosu" class="logo-img">
+                    <a href="/hakkimda" aria-label="Ana sayfaya git">Ali Haydar Sucu</a>
                 </div>
-                <div class="nav-links">
-                    <a href="/hakkimda">
-                        <i class="fas fa-user"></i>
+                <div class="nav-links" role="menubar">
+                    <a href="/hakkimda" role="menuitem">
+                        <i class="fas fa-user" aria-hidden="true"></i>
                         <span class="nav-text">Hakkımda</span>
                     </a>
-                    <a href="/yetenekler">
-                        <i class="fas fa-code"></i>
+                    <a href="/yetenekler" role="menuitem">
+                        <i class="fas fa-code" aria-hidden="true"></i>
                         <span class="nav-text">Yetenekler</span>
                     </a>
-                    <a href="/projeler" class="active">
-                        <i class="fas fa-project-diagram"></i>
+                    <a href="/projeler" class="active" role="menuitem" aria-current="page">
+                        <i class="fas fa-project-diagram" aria-hidden="true"></i>
                         <span class="nav-text">Projeler</span>
                     </a>
-                    <a href="/deneyim">
-                        <i class="fas fa-briefcase"></i>
+                    <a href="/deneyim" role="menuitem">
+                        <i class="fas fa-briefcase" aria-hidden="true"></i>
                         <span class="nav-text">Deneyim</span>
                     </a>
                     <div class="language-selector" role="region" aria-label="Dil seçici">
@@ -75,9 +75,10 @@
                             <button class="language-option active" role="radio" aria-checked="true" aria-label="Türkçe">TR</button>
                         </div>
                     </div>
-                    <label class="theme-toggle">
-                        <input type="checkbox">
-                        <span class="theme-slider"></span>
+                    <label class="theme-toggle" aria-label="Karanlık modu değiştir">
+                        <input type="checkbox" aria-label="Karanlık modu değiştir">
+                        <span class="theme-slider" aria-hidden="true"></span>
+                        <span class="sr-only">Karanlık modu değiştir</span>
                     </label>
                 </div>
             </nav>
@@ -136,109 +137,111 @@
         </div>
     </div>
 
-    <main class="container">
-        <section id="projects">
-            <h2 class="section-title">Öne Çıkan Projeler</h2>
-            <div class="projects-container">
-                <div class="project-card">
+    <main class="container" role="main">
+        <section id="projects" role="region" aria-labelledby="projects-heading">
+            <h2 class="section-title" id="projects-heading">Öne Çıkan Projeler</h2>
+            <div class="projects-container" role="list" aria-label="Öne çıkan projeler">
+                <div class="project-card" role="article">
                     <div class="project-image">
-                        <img src="Images/Projects/pusula-usv-website.webp" alt="PUSULA USV Websitesi" loading="lazy">
+                        <img src="Images/Projects/pusula-usv-website.webp" alt="" aria-hidden="true" loading="lazy">
                     </div>
                     <div class="project-content">
                         <h3>PUSULA USV Websitesi</h3>
                         <p>Otonom deniz aracı projemiz ve ekip bilgilerimizi sergileyen web sitesi.</p>
                         <div class="project-link-container">
-                            <a href="https://github.com/alihaydarsucu/pusula.github.io" class="project-link">Projeyi Görüntüle</a>
-                            <a href="https://alihaydarsucu.github.io/pusula.github.io/" class="website" target="_blank">Siteye Git</a>
+                            <a href="https://github.com/alihaydarsucu/pusula.github.io" class="project-link" aria-label="PUSULA USV Website projesini GitHub'da görüntüle">Projeyi Görüntüle</a>
+                            <a href="https://alihaydarsucu.github.io/pusula.github.io/" class="website" target="_blank" aria-label="PUSULA USV Website'i ziyaret et">Siteye Git</a>
                         </div>
                     </div>
                 </div>
-                <div class="project-card">
+                <div class="project-card" role="article">
                     <div class="project-image">
-                        <img src="Images/Projects/SUCU.webp" alt="Sucu - Arch Linux Asistanı" loading="lazy">
+                        <img src="Images/Projects/SUCU.webp" alt="" aria-hidden="true" loading="lazy">
                     </div>
                     <div class="project-content">
                         <h3>Sucu</h3>
                         <p>Yeni Arch Linux kullanıcıları için komut satırı asistanı. Sistem yönetimi, paket işlemleri ve interaktif öğreticiler sunar.</p>
                         <div class="project-link-container">
-                            <a href="https://github.com/alihaydarsucu/sucu" class="project-link">Projeyi Görüntüle</a>
+                            <a href="https://github.com/alihaydarsucu/sucu" class="project-link" aria-label="Sucu projesini GitHub'da görüntüle">Projeyi Görüntüle</a>
                         </div>
                     </div>
                 </div>
-                <div class="project-card">
+                <div class="project-card" role="article">
                     <div class="project-image">
-                        <img src="Images/Projects/aybu-tdgt.webp" alt="AYBÜ TDGT Websitesi" loading="lazy">
+                        <img src="Images/Projects/aybu-tdgt.webp" alt="" aria-hidden="true" loading="lazy">
                     </div>
                     <div class="project-content">
                         <h3>AYBÜ TDGT Websitesi</h3>
                         <p>Ankara Yıldırım Beyazıt Üniversitesi Türk Dünyası Gençlik Topluluğu'nun resmi web sitesi.</p>
                         <div class="project-link-container">
-                            <a href="https://github.com/alihaydarsucu/aybu-tdgt" class="project-link">Projeyi Görüntüle</a>
-                            <a href="https://aybuturkdunyasi.com/" class="website" target="_blank">Siteye Git</a>
+                            <a href="https://github.com/alihaydarsucu/aybu-tdgt" class="project-link" aria-label="AYBÜ TDGT Website projesini GitHub'da görüntüle">Projeyi Görüntüle</a>
+                            <a href="https://aybuturkdunyasi.com/" class="website" target="_blank" aria-label="AYBÜ TDGT Website'i ziyaret et">Siteye Git</a>
                         </div>
                     </div>
                 </div>
-                <div class="project-card">
+                <div class="project-card" role="article">
                     <div class="project-image">
-                        <img src="Images/Projects/pusula-gcs.webp" alt="Pusula Yer Kontrol İstasyonu" loading="lazy">
+                        <img src="Images/Projects/pusula-gcs.webp" alt="" aria-hidden="true" loading="lazy">
                     </div>
                     <div class="project-content">
                         <h3>Pusula YKİ</h3>
                         <p>İnsansız deniz aracı (USV) ile gerçek zamanlı iletişim için özel geliştirilmiş Yer Kontrol İstasyonu yazılımı. Telemetri, görev planlama ve interaktif harita özelliklerine sahiptir.</p>
                         <div class="project-link-container">
-                            <a href="https://github.com/abdullah-aksoy/Pusula-GCS" class="project-link">Projeyi Görüntüle</a>
+                            <a href="https://github.com/abdullah-aksoy/Pusula-GCS" class="project-link" aria-label="Pusula GCS projesini GitHub'da görüntüle">Projeyi Görüntüle</a>
                         </div>
                     </div>
                 </div>
-                <div class="project-card">
+                <div class="project-card" role="article">
                     <div class="project-image">
-                        <img src="Images/Projects/Portfolio.webp" alt="Kişisel Portfolyo" loading="lazy">
+                        <img src="Images/Projects/Portfolio.webp" alt="" aria-hidden="true" loading="lazy">
                     </div>
                     <div class="project-content">
                         <h3>Kişisel Portfolyom</h3>
                         <p>Şu anda görüntülemekte olduğunuz, yeteneklerimi ve projelerimi sergileyen kişisel portfolyo sitem.</p>
                         <div class="project-link-container">
-                            <a href="https://github.com/alihaydarsucu/alihaydarsucu.github.io" class="project-link">Projeyi Görüntüle</a>
-                            <a href="https://alihaydarsucu.github.io" class="website" target="_blank">Siteye Git</a>
+                            <a href="https://github.com/alihaydarsucu/alihaydarsucu.github.io" class="project-link" aria-label="Kişisel Portfolyo projesini GitHub'da görüntüle">Projeyi Görüntüle</a>
+                            <a href="https://alihaydarsucu.github.io" class="website" target="_blank" aria-label="Kişisel Portfolyo Website'i ziyaret et">Siteye Git</a>
                         </div>
                     </div>
                 </div>
-                <div class="project-card">
+                <div class="project-card" role="article">
                     <div class="project-image">
-                        <img src="Images/Projects/justice-jumper.webp" alt="Justice Jumper" loading="lazy">
+                        <img src="Images/Projects/justice-jumper.webp" alt="" aria-hidden="true" loading="lazy">
                     </div>
                     <div class="project-content">
                         <h3>Justice Jumper</h3>
                         <p>Hukuk temalı Flappy Bird tarzında arcade oyunu. Hukuk öğrencisi karakteriyle hukuk kitapları üzerinden atlayıp dava kazanın!</p>
                         <div class="project-link-container">
-                            <a href="https://github.com/alihaydarsucu/justice-jumper" class="project-link">Projeyi Görüntüle</a>
-                            <a href="https://alihaydarsucu.github.io/justice-jumper/" class="website" target="_blank">Siteye Git</a>
+                            <a href="https://github.com/alihaydarsucu/justice-jumper" class="project-link" aria-label="Justice Jumper projesini GitHub'da görüntüle">Projeyi Görüntüle</a>
+                            <a href="https://alihaydarsucu.github.io/justice-jumper/" class="website" target="_blank" aria-label="Justice Jumper oyununu oyna">Siteye Git</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="github-projects">
-            <h2 class="section-title">GitHub Projeleri</h2>
-            <div class="github-filter">
-                <button class="filter-btn active" data-filter="all">Tüm Projeler</button>
-                <button class="filter-btn" data-filter="web">Web Geliştirme</button>
-                <button class="filter-btn" data-filter="embedded">Gömülü Sistemler</button>
-                <button class="filter-btn" data-filter="other">Diğer</button>
+        <section id="github-projects" role="region" aria-labelledby="github-projects-heading">
+            <h2 class="section-title" id="github-projects-heading">GitHub Projeleri</h2>
+            <div class="github-filter" role="search" aria-label="GitHub projelerini filtrele">
+                <div role="radiogroup" aria-label="Projeleri kategoriye göre filtrele">
+                    <button class="filter-btn active" data-filter="all" role="radio" aria-checked="true" aria-label="Tüm projeleri göster">Tüm Projeler</button>
+                    <button class="filter-btn" data-filter="web" role="radio" aria-checked="false" aria-label="Web geliştirme projelerini filtrele">Web Geliştirme</button>
+                    <button class="filter-btn" data-filter="embedded" role="radio" aria-checked="false" aria-label="Gömülü sistem projelerini filtrele">Gömülü Sistemler</button>
+                    <button class="filter-btn" data-filter="other" role="radio" aria-checked="false" aria-label="Diğer projeleri filtrele">Diğer</button>
+                </div>
             </div>
-            <div id="repos" class="projects-container">
+            <div id="repos" class="projects-container" role="list" aria-label="GitHub projeleri">
                 <p style="text-align: center;">GitHub projeleri yükleniyor...</p>
             </div>
         </section>
 
-        <section id="licenses-certifications">
-            <h2 class="section-title">Lisanslar & Sertifikalar</h2>
-            <div class="timeline-container">
-                <div class="timeline-item">
+        <section id="licenses-certifications" role="region" aria-labelledby="licenses-heading">
+            <h2 class="section-title" id="licenses-heading">Lisanslar & Sertifikalar</h2>
+            <div class="timeline-container" role="list" aria-label="Lisanslar ve sertifikalar zaman çizelgesi">
+                <div class="timeline-item" role="listitem">
                     <div class="timeline-card">
                         <div class="timeline-logo">
-                            <img src="Images/Licenses/freeCodeCamp.jpeg" alt="freeCodeCamp Logo">
+                            <img src="Images/Licenses/freeCodeCamp.jpeg" alt="freeCodeCamp logosu">
                         </div>
                         <div class="timeline-content">
                             <div class="timeline-date">Şubat 2024</div>
@@ -248,15 +251,15 @@
                                 <b>Yetenekler:</b> Front-End Geliştirme · HTML · HTML5 · CSS · Web Tasarım
                             </p>
                             <br>
-                            <a href="https://www.freecodecamp.org/certification/alihaydarsucu/responsive-web-design" class="credential-link">Sertifikayı Görüntüle <i class="credential-icon">➚</i></a>
+                            <a href="https://www.freecodecamp.org/certification/alihaydarsucu/responsive-web-design" class="credential-link" aria-label="freeCodeCamp sertifikamı görüntüle">Sertifikayı Görüntüle <i class="credential-icon" aria-hidden="true">➚</i></a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="timeline-item">
+                <div class="timeline-item" role="listitem">
                     <div class="timeline-card">
                         <div class="timeline-logo">
-                            <img src="Images/Licenses/developer_students_community.jpeg" alt="Developer Students Community Logo">
+                            <img src="Images/Licenses/developer_students_community.jpeg" alt="Developer Students Community logosu">
                         </div>
                         <div class="timeline-content">
                             <div class="timeline-date">Aralık 2023</div>
@@ -266,7 +269,7 @@
                                 <b>Yetenekler:</b> Python Programlama Dili · Veri Modelleme · Veri Görselleştirme
                             </p>
                             <br>
-                            <a href="https://credsverse.com/credentials/68cd1cdc-0d63-4095-a93c-3523b0d87402" class="credential-link">Sertifikayı Görüntüle <i class="credential-icon">➚</i></a>
+                            <a href="https://credsverse.com/credentials/68cd1cdc-0d63-4095-a93c-3523b0d87402" class="credential-link" aria-label="Developer Students Community sertifikamı görüntüle">Sertifikayı Görüntüle <i class="credential-icon" aria-hidden="true">➚</i></a>
                         </div>
                     </div>
                 </div>
@@ -274,15 +277,16 @@
         </section>
     </main>
 
-    <footer>
+    <footer role="contentinfo">
         <div class="footer-content">
             <p>&copy; Copyright 2025 - Ali Haydar Sucu</p>
             <p>Bilgisayar Mühendisliği Öğrencisi</p>
         </div>
     </footer>
 
-    <a href="#" class="back-to-top">
-        <i class="fas fa-arrow-up"></i>
+    <a href="#" class="back-to-top" aria-label="Sayfanın üstüne dön">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        <span class="sr-only">Sayfanın üstüne dön</span>
     </a>
 
     <script src="script.js"></script>

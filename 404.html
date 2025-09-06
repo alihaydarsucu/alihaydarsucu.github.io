@@ -130,30 +130,30 @@
     </style>
 </head>
 <body>
-    <header>
+    <header role="banner">
         <!-- Header içeriği buraya -->
         <div class="container">
-            <nav>
+            <nav role="navigation" aria-label="Ana navigasyon">
                 <div class="logo">
-                    <img src="/Images/Icons/icon.webp" alt="Logo" class="logo-img">
-                    <a href="/">Ali Haydar Sucu</a>
+                    <img src="/Images/Icons/icon.webp" alt="Ali Haydar Sucu logosu" class="logo-img">
+                    <a href="/" aria-label="Ana sayfaya dön">Ali Haydar Sucu</a>
                 </div>
             </nav>
         </div>
     </header>
 
-    <main>
-        <div class="error-container">
-            <div class="error-code">404</div>
+    <main role="main">
+        <div class="error-container" role="alert" aria-live="polite">
+            <div class="error-code" aria-label="Hata kodu">404</div>
             <div class="error-message" id="message">Sayfa Bulunamadı</div>
-            <a href="/" class="home-link" id="homeLink">
-                <i class="fas fa-home"></i>
+            <a href="/" class="home-link" id="homeLink" aria-label="Ana sayfaya dönmek için tıklayın">
+                <i class="fas fa-home" aria-hidden="true"></i>
                 <span id="homeText">Ana Sayfaya Dön</span>
             </a>
         </div>
     </main>
 
-    <footer>
+    <footer role="contentinfo">
         <div class="footer-content">
             <p>&copy; Copyright 2025 - Ali Haydar Sucu</p>
         </div>

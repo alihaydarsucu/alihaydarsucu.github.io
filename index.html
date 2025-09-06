@@ -40,9 +40,9 @@
     <meta name="theme-color" content="#2563eb">
 </head>
 <body>
-    <header>
+    <header role="banner">
         <div class="container">
-            <nav>
+            <nav role="navigation" aria-label="Main navigation">
                 <button class="hamburger-menu" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
                     <div class="bar" aria-hidden="true"></div>
                     <div class="bar" aria-hidden="true"></div>
@@ -50,24 +50,24 @@
                     <span class="sr-only">Menu</span>
                 </button>
                 <div class="logo">
-                    <img src="Images/Icons/icon.webp" alt="Logo" class="logo-img">
-                    <a href="/">Ali Haydar Sucu</a>
+                    <img src="Images/Icons/icon.webp" alt="Ali Haydar Sucu logo" class="logo-img">
+                    <a href="/" aria-label="Go to homepage">Ali Haydar Sucu</a>
                 </div>
-                <div class="nav-links">
-                    <a href="/" class="active">
-                        <i class="fas fa-user"></i>
+                <div class="nav-links" role="menubar">
+                    <a href="/" class="active" role="menuitem" aria-current="page">
+                        <i class="fas fa-user" aria-hidden="true"></i>
                         <span class="nav-text">About</span>
                     </a>
-                    <a href="/skills">
-                        <i class="fas fa-code"></i>
+                    <a href="/skills" role="menuitem">
+                        <i class="fas fa-code" aria-hidden="true"></i>
                         <span class="nav-text">Skills</span>
                     </a>
-                    <a href="/projects">
-                        <i class="fas fa-project-diagram"></i>
+                    <a href="/projects" role="menuitem">
+                        <i class="fas fa-project-diagram" aria-hidden="true"></i>
                         <span class="nav-text">Projects</span>
                     </a>
-                    <a href="/experience">
-                        <i class="fas fa-briefcase"></i>
+                    <a href="/experience" role="menuitem">
+                        <i class="fas fa-briefcase" aria-hidden="true"></i>
                         <span class="nav-text">Experience</span>
                     </a>
                     <div class="language-selector" role="region" aria-label="Language selector">
@@ -88,52 +88,61 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu-overlay"></div>
-    <div class="mobile-menu">
+    <div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
         <div class="mobile-menu-header">
             <button class="mobile-menu-close" aria-label="Close menu">
                 <i class="fas fa-times" aria-hidden="true"></i>
                 <span class="sr-only">Close menu</span>
             </button>
         </div>
-        <div class="mobile-nav-links">
-            <a href="/" class="active">
-                <i class="fas fa-user"></i>
-                <span class="nav-text-mobile">About</span>
-            </a>
-            <a href="/skills">
-                <i class="fas fa-code"></i>
-                <span class="nav-text-mobile">Skills</span>
-            </a>
-            <a href="/projects">
-                <i class="fas fa-project-diagram"></i>
-                <span class="nav-text-mobile">Projects</span>
-            </a>
-            <a href="/experience">
-                <i class="fas fa-briefcase"></i>
-                <span class="nav-text-mobile">Experience</span>
-            </a>
-            <div class="mobile-language-selector">
-                <div class="language-selector-toggle">
-                    <div class="language-option active">EN</div>
-                    <div class="language-option">TR</div>
+        <div class="mobile-nav-links" role="list">
+            <div role="listitem">
+                <a href="/" class="active">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">About</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/skills">
+                    <i class="fas fa-code" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Skills</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/projects">
+                    <i class="fas fa-project-diagram" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Projects</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/experience">
+                    <i class="fas fa-briefcase" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Experience</span>
+                </a>
+            </div>
+            <div class="mobile-language-selector" role="region" aria-label="Language selector">
+                <div class="language-selector-toggle" role="radiogroup" aria-label="Select language">
+                    <button class="language-option active" role="radio" aria-checked="true" aria-label="English">EN</button>
+                    <button class="language-option" role="radio" aria-checked="false" aria-label="Türkçe">TR</button>
                 </div>
             </div>
             <div class="mobile-theme-toggle">
-                <label class="theme-toggle">
-                    <input type="checkbox">
-                    <span class="theme-slider"></span>
+                <label class="theme-toggle" aria-label="Toggle dark mode">
+                    <input type="checkbox" aria-label="Toggle dark mode">
+                    <span class="theme-slider" aria-hidden="true"></span>
+                    <span class="sr-only">Toggle dark mode</span>
                 </label>
             </div>
         </div>
     </div>
 
-    <main class="container">
-        <section id="about" class="hero">
+    <main class="container" role="main">
+        <section id="about" class="hero" role="region" aria-labelledby="about-heading">
             <div class="hero-image">
-                <img src="Images/Profile.webp" alt="Ali Haydar Sucu">
+                <img src="Images/Profile.webp" alt="Ali Haydar Sucu profile photo">
             </div>
             <div class="hero-content">
-                <h1>Hello, there!</h1>
+                <h1 id="about-heading">Hello, there!</h1>
                 <p>My name is Ali, I am a sophomore Computer Engineering student at Ankara Yıldırım Beyazıt University.</p>
                 <p>I'm passionate about embedded software development and currently working on embedded systems for unmanned marine vehicles. Beyond embedded systems, 
                     I have a strong interest in Linux, open-source technologies, and algorithmic problem-solving. I also enjoy creative writing, reading, and playing chess.</p>
@@ -141,32 +150,32 @@
             </div>
         </section>
 
-        <section class="resume-download">
-            <a href="Assets/AliHaydarSucu_CV_20250904.pdf" download class="resume-btn" id="cv-download-btn">
-                <i class="fas fa-file-download"></i>&nbsp;&nbsp;&nbsp;Download My CV
+        <section class="resume-download" role="region" aria-label="CV download section">
+            <a href="Assets/AliHaydarSucu_CV_20250904.pdf" download class="resume-btn" id="cv-download-btn" aria-label="Download Ali Haydar Sucu's CV as PDF">
+                <i class="fas fa-file-download" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Download My CV
             </a>
         </section>
 
         <!-- Hero section'dan sonra bu kısmı ekleyin -->
-        <section class="explore-section">
-            <h2 class="section-title-main">Explore My Website</h2>
-                        <div class="explore-grid">
-                <a href="/skills" class="explore-card">
-                    <div class="explore-icon">
+        <section class="explore-section" role="region" aria-labelledby="explore-heading">
+            <h2 class="section-title-main" id="explore-heading">Explore My Website</h2>
+            <div class="explore-grid" role="list">
+                <a href="/skills" class="explore-card" role="listitem" aria-label="Go to Skills page">
+                    <div class="explore-icon" aria-hidden="true">
                         <i class="fas fa-code"></i>
                     </div>
                     <h3>Skills</h3>
                     <p>View my technical skills and capabilities</p>
                 </a>
-                <a href="/projects" class="explore-card">
-                    <div class="explore-icon">
+                <a href="/projects" class="explore-card" role="listitem" aria-label="Go to Projects page">
+                    <div class="explore-icon" aria-hidden="true">
                         <i class="fas fa-project-diagram"></i>
                     </div>
                     <h3>Projects</h3>
                     <p>Discover my projects and certifications</p>
                 </a>
-                <a href="/experience" class="explore-card">
-                    <div class="explore-icon">
+                <a href="/experience" class="explore-card" role="listitem" aria-label="Go to Experience page">
+                    <div class="explore-icon" aria-hidden="true">
                         <i class="fas fa-briefcase"></i>
                     </div>
                     <h3>Experience</h3>
@@ -175,37 +184,37 @@
             </div>
         </section>
 
-        <section id="contact">
-            <h2 class="section-title">Get In Touch</h2>
+        <section id="contact" role="region" aria-labelledby="contact-heading">
+            <h2 class="section-title" id="contact-heading">Get In Touch</h2>
             <div class="contact-container">
                 <div class="contact-info">
                     <h3>Contact Information</h3>
-                    <div class="contact-item">
-                        <div class="contact-icon">
+                    <div class="contact-item" role="group" aria-label="Email address">
+                        <div class="contact-icon" aria-hidden="true">
                             <i class="fas fa-envelope"></i>
                         </div>
                         <div class="contact-text">alihaydarsucu@gmail.com</div>
                     </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
+                    <div class="contact-item" role="group" aria-label="Location information">
+                        <div class="contact-icon" aria-hidden="true">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <div class="contact-text">Ankara, Turkiye</div>
                     </div>
-                    <div class="social-links">
-                        <a href="https://github.com/alihaydarsucu" class="social-link" target="_blank" aria-label="GitHub profile">
+                    <div class="social-links" role="list" aria-label="Social media links">
+                        <a href="https://github.com/alihaydarsucu" class="social-link" target="_blank" role="listitem" aria-label="Visit my GitHub profile">
                             <i class="fab fa-github" aria-hidden="true"></i>
                             <span class="sr-only">GitHub</span>
                         </a>
-                        <a href="https://linkedin.com/in/ali-haydar-sucu" class="social-link" target="_blank" aria-label="LinkedIn profile">
+                        <a href="https://linkedin.com/in/ali-haydar-sucu" class="social-link" target="_blank" role="listitem" aria-label="Visit my LinkedIn profile">
                             <i class="fab fa-linkedin-in" aria-hidden="true"></i>
                             <span class="sr-only">LinkedIn</span>
                         </a>
-                        <a href="mailto:alihaydarsucu@gmail.com" class="social-link" aria-label="Send email">
+                        <a href="mailto:alihaydarsucu@gmail.com" class="social-link" role="listitem" aria-label="Send email">
                             <i class="fas fa-envelope" aria-hidden="true"></i>
                             <span class="sr-only">Email</span>
                         </a>
-                        <a href="https://instagram.com/alihaydarsucu" class="social-link" target="_blank" aria-label="Instagram profile">
+                        <a href="https://instagram.com/alihaydarsucu" class="social-link" target="_blank" role="listitem" aria-label="Visit my Instagram profile">
                             <i class="fab fa-instagram" aria-hidden="true"></i>
                             <span class="sr-only">Instagram</span>
                         </a>
@@ -215,7 +224,7 @@
         </section>
     </main>
 
-    <footer>
+    <footer role="contentinfo">
         <div class="footer-content">
             <p>&copy; Copyright 2025 - Ali Haydar Sucu</p>
             <p>Computer Engineering Student</p>

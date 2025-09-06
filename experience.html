@@ -13,16 +13,16 @@
     <meta property="og:url" content="https://alihaydarsucu.github.io/experience">
     <meta property="og:title" content="Experience & Education | Ali Haydar Sucu">
     <meta property="og:description" content="Explore my professional experience, education, and career journey in computer engineering and software development.">
-    <meta property="og:image" content="https://alihaydarsucu.github.io/Images/og-image.webp">
     <meta property="og:site_name" content="Ali Haydar Sucu">
+    <meta property="og:image" content="https://alihaydarsucu.github.io/Images/og-image.webp">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://alihaydarsucu.github.io/experience">
     <meta property="twitter:title" content="Experience & Education | Ali Haydar Sucu">
     <meta property="twitter:description" content="Explore my professional experience, education, and career journey in computer engineering and software development.">
-    <meta property="twitter:image" content="https://alihaydarsucu.github.io/Images/og-image.webp">
     <meta name="twitter:creator" content="@alihaydarsucu">
+    <meta property="twitter:image" content="https://alihaydarsucu.github.io/Images/og-image.webp">
     
     <!-- Canonical -->
     <link rel="canonical" href="https://alihaydarsucu.github.io/experience" />
@@ -40,9 +40,9 @@
     <base href="/">
 </head>
 <body>
-    <header>
+    <header role="banner">
         <div class="container">
-            <nav>
+            <nav role="navigation" aria-label="Main navigation">
                 <button class="hamburger-menu" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
                     <div class="bar" aria-hidden="true"></div>
                     <div class="bar" aria-hidden="true"></div>
@@ -50,24 +50,24 @@
                     <span class="sr-only">Menu</span>
                 </button>
                 <div class="logo">
-                    <img src="Images/Icons/icon.webp" alt="Logo" class="logo-img">
-                    <a href="/">Ali Haydar Sucu</a>
+                    <img src="Images/Icons/icon.webp" alt="Ali Haydar Sucu logo" class="logo-img">
+                    <a href="/" aria-label="Go to homepage">Ali Haydar Sucu</a>
                 </div>
-                <div class="nav-links">
-                    <a href="/">
-                        <i class="fas fa-user"></i>
+                <div class="nav-links" role="menubar">
+                    <a href="/" role="menuitem">
+                        <i class="fas fa-user" aria-hidden="true"></i>
                         <span class="nav-text">About</span>
                     </a>
-                    <a href="/skills">
-                        <i class="fas fa-code"></i>
+                    <a href="/skills" role="menuitem">
+                        <i class="fas fa-code" aria-hidden="true"></i>
                         <span class="nav-text">Skills</span>
                     </a>
-                    <a href="/projects">
-                        <i class="fas fa-project-diagram"></i>
+                    <a href="/projects" role="menuitem">
+                        <i class="fas fa-project-diagram" aria-hidden="true"></i>
                         <span class="nav-text">Projects</span>
                     </a>
-                    <a href="/experience" class="active">
-                        <i class="fas fa-briefcase"></i>
+                    <a href="/experience" class="active" role="menuitem" aria-current="page">
+                        <i class="fas fa-briefcase" aria-hidden="true"></i>
                         <span class="nav-text">Experience</span>
                     </a>
                     <div class="language-selector" role="region" aria-label="Language selector">
@@ -141,10 +141,10 @@
 
     
 
-    <main class="container">
-        <section id="experience">
-            <h2 class="section-title">Professional Experience</h2>
-            <div class="experience-container" role="list">
+    <main class="container" role="main">
+        <section id="experience" role="region" aria-labelledby="experience-heading">
+            <h2 class="section-title" id="experience-heading">Professional Experience</h2>
+            <div class="experience-container" role="list" aria-label="Professional experience timeline">
                 <div class="experience-card" role="listitem">
                     <div class="experience-logo">
                         <img src="Images/Places/buraitech.webp" alt="" aria-hidden="true">
@@ -227,13 +227,13 @@
             </div>
         </section>
 
-        <section id="education">
-            <h2 class="section-title">Education</h2>
+        <section id="education" role="region" aria-labelledby="education-heading">
+            <h2 class="section-title" id="education-heading">Education</h2>
             <div class="timeline-container" role="list" aria-label="Education timeline">
-                <div class="timeline-item">
+                <div class="timeline-item" role="listitem">
                     <div class="timeline-card">
                         <div class="timeline-logo">
-                            <img src="Images/Places/aybü-logo.webp" alt="AYBÜ Logo" aria-hidden="true">
+                            <img src="Images/Places/aybü-logo.webp" alt="AYBÜ Logo">
                         </div>
                         <div class="timeline-content">
                             <div class="timeline-date">September 2023 - June 2028 (Expected)</div>
@@ -249,10 +249,10 @@
                     </div>
                 </div>
                 
-                <div class="timeline-item">
+                <div class="timeline-item" role="listitem">
                     <div class="timeline-card">
                         <div class="timeline-logo">
-                            <img src="Images/Places/tevfikileriaihl.jpeg" alt="High School Logo">
+                            <img src="Images/Places/tevfikileriaihl.jpeg" alt="Tevfik İleri Anatolian High School Logo">
                         </div>
                         <div class="timeline-content">
                             <div class="timeline-date">September 2019 - June 2023</div>
@@ -267,9 +267,9 @@
             </div>
         </section>
 
-        <section id="volunteering">
-            <h2 class="section-title">Volunteering Works</h2>
-            <div class="experience-container" role="list">
+        <section id="volunteering" role="region" aria-labelledby="volunteering-heading">
+            <h2 class="section-title" id="volunteering-heading">Volunteering Works</h2>
+            <div class="experience-container" role="list" aria-label="Volunteer experience">
                 <div class="experience-card" role="listitem">
                     <div class="experience-logo">
                         <img src="Images/Places/toft.jpeg" alt="Trio of Thought Logo">
@@ -285,7 +285,7 @@
                                     I served as the podcast host, where we discussed new technologies and developments, particularly in AI. 
                                     In addition to hosting, I also contributed as a transcript writer.</li>
                                 <li>You can still access our Spotify account from the link below.
-                                    <br><br> <a href="https://open.spotify.com/show/5e7U7UMTUi8K9n11wK9nmM"><b>Trio of Thought (Spotify Podcast)</b></a>
+                                    <br><br> <a href="https://open.spotify.com/show/5e7U7UMTUi8K9n11wK9nmM" aria-label="Listen to Trio of Thought podcast on Spotify"><b>Trio of Thought (Spotify Podcast)</b></a>
                                 </li>
                             </ul>
                         </div>
@@ -294,7 +294,7 @@
                 
                 <div class="experience-card" role="listitem">
                     <div class="experience-logo">
-                        <img src="Images/Places/blank.webp" alt="Anonymous Logo">
+                        <img src="Images/Places/blank.webp" alt="Civil Society Organizations Logo">
                     </div>
                     <div class="experience-content">
                         <div class="experience-date">March 2020 - July 2023</div>
@@ -311,7 +311,7 @@
                                 <li>Currently, I have more than 10 articles I have written in my writing profession, 
                                     which I am still doing as a hobby. You can reach a website where 
                                     I have blogged a few of my articles with the link I have added below.
-                                    <br><br> <a href="https://tarihikalem.wordpress.com/"> <b>Tarihi Kalem (Blog Website)</b></a></li>
+                                    <br><br> <a href="https://tarihikalem.wordpress.com/" aria-label="Visit Tarihi Kalem blog website"> <b>Tarihi Kalem (Blog Website)</b></a></li>
                             </ul>
                         </div>
                     </div>
@@ -320,7 +320,7 @@
         </section>
     </main>
 
-    <footer>
+    <footer role="contentinfo">
         <div class="footer-content">
             <p>&copy; Copyright 2025 - Ali Haydar Sucu</p>
             <p>Computer Engineering Student</p>

@@ -40,9 +40,9 @@
     <base href="/">
 </head>
 <body>
-    <header>
+    <header role="banner">
         <div class="container">
-            <nav>
+            <nav role="navigation" aria-label="Main navigation">
                 <button class="hamburger-menu" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
                     <div class="bar" aria-hidden="true"></div>
                     <div class="bar" aria-hidden="true"></div>
@@ -50,24 +50,24 @@
                     <span class="sr-only">Menu</span>
                 </button>
                 <div class="logo">
-                    <img src="Images/Icons/icon.webp" alt="Logo" class="logo-img">
-                    <a href="/">Ali Haydar Sucu</a>
+                    <img src="Images/Icons/icon.webp" alt="Ali Haydar Sucu logo" class="logo-img">
+                    <a href="/" aria-label="Go to homepage">Ali Haydar Sucu</a>
                 </div>
-                <div class="nav-links">
-                    <a href="/">
-                        <i class="fas fa-user"></i>
+                <div class="nav-links" role="menubar">
+                    <a href="/" role="menuitem">
+                        <i class="fas fa-user" aria-hidden="true"></i>
                         <span class="nav-text">About</span>
                     </a>
-                    <a href="/skills" class="active">
-                        <i class="fas fa-code"></i>
+                    <a href="/skills" class="active" role="menuitem" aria-current="page">
+                        <i class="fas fa-code" aria-hidden="true"></i>
                         <span class="nav-text">Skills</span>
                     </a>
-                    <a href="/projects">
-                        <i class="fas fa-project-diagram"></i>
+                    <a href="/projects" role="menuitem">
+                        <i class="fas fa-project-diagram" aria-hidden="true"></i>
                         <span class="nav-text">Projects</span>
                     </a>
-                    <a href="/experience">
-                        <i class="fas fa-briefcase"></i>
+                    <a href="/experience" role="menuitem">
+                        <i class="fas fa-briefcase" aria-hidden="true"></i>
                         <span class="nav-text">Experience</span>
                     </a>
                     <div class="language-selector" role="region" aria-label="Language selector">
@@ -88,48 +88,57 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu-overlay"></div>
-    <div class="mobile-menu">
+    <div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
         <div class="mobile-menu-header">
             <button class="mobile-menu-close" aria-label="Close menu">
                 <i class="fas fa-times" aria-hidden="true"></i>
                 <span class="sr-only">Close menu</span>
             </button>
         </div>
-        <div class="mobile-nav-links">
-            <a href="/">
-                <i class="fas fa-user"></i>
-                <span class="nav-text-mobile">About</span>
-            </a>
-            <a href="/skills" class="active">
-                <i class="fas fa-code"></i>
-                <span class="nav-text-mobile">Skills</span>
-            </a>
-            <a href="/projects">
-                <i class="fas fa-project-diagram"></i>
-                <span class="nav-text-mobile">Projects</span>
-            </a>
-            <a href="/experience">
-                <i class="fas fa-briefcase"></i>
-                <span class="nav-text-mobile">Experience</span>
-            </a>
-            <div class="mobile-language-selector">
-                <div class="language-selector-toggle">
-                    <div class="language-option active">EN</div>
-                    <div class="language-option">TR</div>
+        <div class="mobile-nav-links" role="list">
+            <div role="listitem">
+                <a href="/">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">About</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/skills" class="active">
+                    <i class="fas fa-code" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Skills</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/projects">
+                    <i class="fas fa-project-diagram" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Projects</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/experience">
+                    <i class="fas fa-briefcase" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Experience</span>
+                </a>
+            </div>
+            <div class="mobile-language-selector" role="region" aria-label="Language selector">
+                <div class="language-selector-toggle" role="radiogroup" aria-label="Select language">
+                    <button class="language-option active" role="radio" aria-checked="true" aria-label="English">EN</button>
+                    <button class="language-option" role="radio" aria-checked="false" aria-label="Türkçe">TR</button>
                 </div>
             </div>
             <div class="mobile-theme-toggle">
-                <label class="theme-toggle">
-                    <input type="checkbox">
-                    <span class="theme-slider"></span>
+                <label class="theme-toggle" aria-label="Toggle dark mode">
+                    <input type="checkbox" aria-label="Toggle dark mode">
+                    <span class="theme-slider" aria-hidden="true"></span>
+                    <span class="sr-only">Toggle dark mode</span>
                 </label>
             </div>
         </div>
     </div>
 
-    <main class="container">
-        <section id="skills">
-            <h2 class="section-title">My Skills</h2>
+    <main class="container" role="main">
+        <section id="skills" role="region" aria-labelledby="skills-heading">
+            <h2 class="section-title" id="skills-heading">My Skills</h2>
             <div class="skills-container" role="list" aria-label="Technical skills">
                 <!-- Frontend Technologies -->
                 <div class="skill-card" role="listitem">
@@ -190,8 +199,8 @@
             </div>
         </section>
 
-        <section class="github-stats">
-            <h2 class="section-title">GitHub Stats</h2>
+        <section class="github-stats" role="region" aria-labelledby="github-stats-heading">
+            <h2 class="section-title" id="github-stats-heading">GitHub Stats</h2>
             <div class="github-stats-container" role="region" aria-label="GitHub Statistics">
                 <img src="https://github-readme-stats.vercel.app/api?username=alihaydarsucu&show_icons=true&theme=nightowl" alt="GitHub statistics showing commits, pull requests, and other activity" loading="lazy">
                 <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=alihaydarsucu&layout=compact&theme=nightowl" alt="Most used programming languages" loading="lazy">
@@ -207,7 +216,7 @@
         </section>
     </main>
 
-    <footer>
+    <footer role="contentinfo">
         <div class="footer-content">
             <p>&copy; Copyright 2025 - Ali Haydar Sucu</p>
             <p>Computer Engineering Student</p>

@@ -39,9 +39,9 @@
     <meta name="theme-color" content="#2563eb">
 </head>
 <body>
-    <header>
+    <header role="banner">
         <div class="container">
-            <nav>
+            <nav role="navigation" aria-label="Ana navigasyon">
                 <button class="hamburger-menu" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="mobile-menu">
                     <div class="bar" aria-hidden="true"></div>
                     <div class="bar" aria-hidden="true"></div>
@@ -49,24 +49,24 @@
                     <span class="sr-only">Menüyü Aç</span>
                 </button>
                 <div class="logo">
-                    <img src="Images/Icons/icon.webp" alt="Logo" class="logo-img">
-                    <a href="/hakkimda">Ali Haydar Sucu</a>
+                    <img src="Images/Icons/icon.webp" alt="Ali Haydar Sucu logosu" class="logo-img">
+                    <a href="/hakkimda" aria-label="Ana sayfaya git">Ali Haydar Sucu</a>
                 </div>
-                <div class="nav-links">
-                    <a href="/hakkimda">
-                        <i class="fas fa-user"></i>
+                <div class="nav-links" role="menubar">
+                    <a href="/hakkimda" role="menuitem">
+                        <i class="fas fa-user" aria-hidden="true"></i>
                         <span class="nav-text">Hakkımda</span>
                     </a>
-                    <a href="/yetenekler" class="active">
-                        <i class="fas fa-code"></i>
+                    <a href="/yetenekler" class="active" role="menuitem" aria-current="page">
+                        <i class="fas fa-code" aria-hidden="true"></i>
                         <span class="nav-text">Yetenekler</span>
                     </a>
-                    <a href="/projeler">
-                        <i class="fas fa-project-diagram"></i>
+                    <a href="/projeler" role="menuitem">
+                        <i class="fas fa-project-diagram" aria-hidden="true"></i>
                         <span class="nav-text">Projeler</span>
                     </a>
-                    <a href="/deneyim">
-                        <i class="fas fa-briefcase"></i>
+                    <a href="/deneyim" role="menuitem">
+                        <i class="fas fa-briefcase" aria-hidden="true"></i>
                         <span class="nav-text">Deneyim</span>
                     </a>
                     <div class="language-selector" role="region" aria-label="Dil seçici">
@@ -75,9 +75,10 @@
                             <button class="language-option active" role="radio" aria-checked="true" aria-label="Türkçe">TR</button>
                         </div>
                     </div>
-                    <label class="theme-toggle">
-                        <input type="checkbox">
-                        <span class="theme-slider"></span>
+                    <label class="theme-toggle" aria-label="Karanlık modu değiştir">
+                        <input type="checkbox" aria-label="Karanlık modu değiştir">
+                        <span class="theme-slider" aria-hidden="true"></span>
+                        <span class="sr-only">Karanlık modu değiştir</span>
                     </label>
                 </div>
             </nav>
@@ -136,95 +137,96 @@
         </div>
     </div>
 
-    <main class="container">
-        <section id="skills">
-            <h2 class="section-title">Yeteneklerim</h2>
-            <div class="skills-container">
+    <main class="container" role="main">
+        <section id="skills" role="region" aria-labelledby="skills-heading">
+            <h2 class="section-title" id="skills-heading">Yeteneklerim</h2>
+            <div class="skills-container" role="list" aria-label="Teknik yetenekler">
                 <!-- Frontend Technologies -->
-                <div class="skill-card">
-                    <img src="Images/Icons/icons8-html-5.svg" alt="HTML5" loading="lazy">
+                <div class="skill-card" role="listitem">
+                    <img src="Images/Icons/icons8-html-5.svg" alt="" aria-hidden="true" loading="lazy">
                     <h3>HTML5</h3>
                 </div>
-                <div class="skill-card">
-                    <img src="Images/Icons/icons8-css3.svg" alt="CSS3" loading="lazy">
+                <div class="skill-card" role="listitem">
+                    <img src="Images/Icons/icons8-css3.svg" alt="" aria-hidden="true" loading="lazy">
                     <h3>CSS3</h3>
                 </div>
-                <div class="skill-card">
-                    <img src="Images/Icons/icons8-javascript.svg" alt="JavaScript" loading="lazy">
+                <div class="skill-card" role="listitem">
+                    <img src="Images/Icons/icons8-javascript.svg" alt="" aria-hidden="true" loading="lazy">
                     <h3>JavaScript</h3>
                 </div>
                 
                 <!-- Programming Languages -->
-                <div class="skill-card python">
-                    <img src="Images/Icons/python.webp" alt="Python" loading="lazy">
+                <div class="skill-card python" role="listitem">
+                    <img src="Images/Icons/python.webp" alt="" aria-hidden="true" loading="lazy">
                     <h3>Python</h3>
                 </div>
-                <div class="skill-card">
-                    <img src="Images/Icons/java.webp" alt="Java" loading="lazy">
+                <div class="skill-card" role="listitem">
+                    <img src="Images/Icons/java.webp" alt="" aria-hidden="true" loading="lazy">
                     <h3>Java</h3>
                 </div>
-                <div class="skill-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" height="40" alt="Bash" loading="lazy" />
+                <div class="skill-card" role="listitem">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" height="40" alt="" aria-hidden="true" loading="lazy" />
                     <h3>Bash</h3>
                 </div>
                 <!-- Databases & DevOps -->
-                <div class="skill-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mariadb/mariadb-original.svg" alt="MariaDB" loading="lazy">
+                <div class="skill-card" role="listitem">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mariadb/mariadb-original.svg" alt="" aria-hidden="true" loading="lazy">
                     <h3>MariaDB</h3>
                 </div>
-                <div class="skill-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" loading="lazy">
+                <div class="skill-card" role="listitem">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="" aria-hidden="true" loading="lazy">
                     <h3>Docker</h3>
                 </div>
                 
                 <!-- System & Tools -->
-                <div class="skill-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" loading="lazy">
+                <div class="skill-card" role="listitem">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="" aria-hidden="true" loading="lazy">
                     <h3>Linux</h3>
                 </div>
-                <div class="skill-card">
-                    <img src="Images/Icons/icons8-git.svg" alt="Git" loading="lazy">
+                <div class="skill-card" role="listitem">
+                    <img src="Images/Icons/icons8-git.svg" alt="" aria-hidden="true" loading="lazy">
                     <h3>Git</h3>
                 </div>
                 
                 <!-- Robotics & Embedded -->
-                <div class="skill-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ros/ros-original.svg" alt="ROS 2" loading="lazy">
+                <div class="skill-card" role="listitem">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ros/ros-original.svg" alt="" aria-hidden="true" loading="lazy">
                     <h3>ROS 2</h3>
                 </div>
-                <div class="skill-card">
-                    <img src="Images/Icons/qgroundcontrol.webp" alt="QGroundControl" loading="lazy">
+                <div class="skill-card" role="listitem">
+                    <img src="Images/Icons/qgroundcontrol.webp" alt="" aria-hidden="true" loading="lazy">
                     <h3>QGroundControl</h3>
                 </div>
             </div>
         </section>
 
-        <section class="github-stats">
-            <h2 class="section-title">GitHub İstatistikleri</h2>
-            <div class="github-stats-container">
-                <img src="https://github-readme-stats.vercel.app/api?username=alihaydarsucu&show_icons=true&theme=nightowl" alt="GitHub Stats" loading="lazy">
-                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=alihaydarsucu&layout=compact&theme=nightowl" alt="Top Languages" loading="lazy">
+        <section class="github-stats" role="region" aria-labelledby="github-stats-heading">
+            <h2 class="section-title" id="github-stats-heading">GitHub İstatistikleri</h2>
+            <div class="github-stats-container" role="region" aria-label="GitHub istatistikleri">
+                <img src="https://github-readme-stats.vercel.app/api?username=alihaydarsucu&show_icons=true&theme=nightowl" alt="GitHub istatistikleri: commit'ler, pull request'ler ve diğer aktiviteler" loading="lazy">
+                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=alihaydarsucu&layout=compact&theme=nightowl" alt="En çok kullanılan programlama dilleri" loading="lazy">
             </div>
             
              <!-- GitHub Streak Stats -->
-            <div class="github-stats-container">
+            <div class="github-stats-container" role="region" aria-label="GitHub katkı serileri">
                 <img src="https://streak-stats.demolab.com/?user=alihaydarsucu&theme=nightowl" 
-                     alt="GitHub Streak Stats" 
+                     alt="GitHub katkı serisi: mevcut ve en uzun seri" 
                      loading="lazy"
-                     onerror="this.src='https://github-readme-streak-stats.herokuapp.com/?user=alihaydarsucu&theme=nightowl'; this.onerror=function(){this.style.display='none';};">
+                     onerror="this.src='https://github-readme-streak-stats.herokuapp.com/?user=alihaydarsucu&theme=nightowl'; this.onerror=function(){this.style.display='none'};">
             </div>
         </section>
     </main>
 
-    <footer>
+    <footer role="contentinfo">
         <div class="footer-content">
             <p>&copy; Copyright 2025 - Ali Haydar Sucu</p>
             <p>Bilgisayar Mühendisliği Öğrencisi</p>
         </div>
     </footer>
 
-    <a href="#" class="back-to-top">
-        <i class="fas fa-arrow-up"></i>
+    <a href="#" class="back-to-top" aria-label="Sayfanın üstüne dön">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        <span class="sr-only">Sayfanın üstüne dön</span>
     </a>
 
     <script src="script.js"></script>

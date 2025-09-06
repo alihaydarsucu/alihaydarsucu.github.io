@@ -39,9 +39,9 @@
     <meta name="theme-color" content="#2563eb">
 </head>
 <body>
-    <header>
+    <header role="banner">
         <div class="container">
-            <nav>
+            <nav role="navigation" aria-label="Ana navigasyon">
                 <button class="hamburger-menu" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="mobile-menu">
                     <div class="bar" aria-hidden="true"></div>
                     <div class="bar" aria-hidden="true"></div>
@@ -49,24 +49,24 @@
                     <span class="sr-only">Menüyü Aç</span>
                 </button>
                 <div class="logo">
-                    <img src="Images/Icons/icon.webp" alt="Logo" class="logo-img">
-                    <a href="/hakkimda">Ali Haydar Sucu</a>
+                    <img src="Images/Icons/icon.webp" alt="Ali Haydar Sucu logosu" class="logo-img">
+                    <a href="/hakkimda" aria-label="Ana sayfaya git">Ali Haydar Sucu</a>
                 </div>
-                <div class="nav-links">
-                    <a href="/hakkimda">
-                        <i class="fas fa-user"></i>
+                <div class="nav-links" role="menubar">
+                    <a href="/hakkimda" role="menuitem">
+                        <i class="fas fa-user" aria-hidden="true"></i>
                         <span class="nav-text">Hakkımda</span>
                     </a>
-                    <a href="/yetenekler">
-                        <i class="fas fa-code"></i>
+                    <a href="/yetenekler" role="menuitem">
+                        <i class="fas fa-code" aria-hidden="true"></i>
                         <span class="nav-text">Yetenekler</span>
                     </a>
-                    <a href="/projeler">
-                        <i class="fas fa-project-diagram"></i>
+                    <a href="/projeler" role="menuitem">
+                        <i class="fas fa-project-diagram" aria-hidden="true"></i>
                         <span class="nav-text">Projeler</span>
                     </a>
-                    <a href="/deneyim" class="active">
-                        <i class="fas fa-briefcase"></i>
+                    <a href="/deneyim" class="active" role="menuitem" aria-current="page">
+                        <i class="fas fa-briefcase" aria-hidden="true"></i>
                         <span class="nav-text">Deneyim</span>
                     </a>
                     <div class="language-selector" role="region" aria-label="Dil seçici">
@@ -75,9 +75,10 @@
                             <button class="language-option active" role="radio" aria-checked="true" aria-label="Türkçe">TR</button>
                         </div>
                     </div>
-                    <label class="theme-toggle">
-                        <input type="checkbox">
-                        <span class="theme-slider"></span>
+                    <label class="theme-toggle" aria-label="Karanlık modu değiştir">
+                        <input type="checkbox" aria-label="Karanlık modu değiştir">
+                        <span class="theme-slider" aria-hidden="true"></span>
+                        <span class="sr-only">Karanlık modu değiştir</span>
                     </label>
                 </div>
             </nav>
@@ -136,13 +137,13 @@
         </div>
     </div>
 
-    <main class="container">
-        <section id="experience">
-            <h2 class="section-title">Profesyonel Deneyim</h2>
-            <div class="experience-container">
-                <div class="experience-card">
+    <main class="container" role="main">
+        <section id="experience" role="region" aria-labelledby="experience-heading">
+            <h2 class="section-title" id="experience-heading">Profesyonel Deneyim</h2>
+            <div class="experience-container" role="list" aria-label="Profesyonel deneyim zaman çizelgesi">
+                <div class="experience-card" role="listitem">
                     <div class="experience-logo">
-                        <img src="Images/Places/buraitech.webp" alt="BURAI TECH Logo">
+                        <img src="Images/Places/buraitech.webp" alt="BURAI TECH logosu">
                     </div>
                     <div class="experience-content">
                         <div class="experience-date">Mayıs 2025 - Haziran 2025</div>
@@ -158,7 +159,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="experience-card">
+                <div class="experience-card" role="listitem">
                     <div class="experience-logo">
                         <img src="Images/Places/pusulausv.jpeg" alt="PUSULA USV Logo">
                     </div>
@@ -178,7 +179,7 @@
                     </div>
                 </div>
                 
-                <div class="experience-card">
+                <div class="experience-card" role="listitem">
                     <div class="experience-logo">
                         <img src="Images/Places/ogmer.webp" alt="AYBU Ogmer Logo">
                     </div>
@@ -196,7 +197,7 @@
                     </div>
                 </div>
                 
-                <div class="experience-card">
+                <div class="experience-card" role="listitem">
                     <div class="experience-logo">
                         <img src="Images/Places/hezarfen.jpeg" alt="Hezarfen Club Logo">
                     </div>
@@ -216,13 +217,13 @@
             </div>
         </section>
 
-        <section id="education">
-            <h2 class="section-title">Eğitim</h2>
-            <div class="timeline-container">
-                <div class="timeline-item">
+        <section id="education" role="region" aria-labelledby="education-heading">
+            <h2 class="section-title" id="education-heading">Eğitim</h2>
+            <div class="timeline-container" role="list" aria-label="Eğitim geçmişi zaman çizelgesi">
+                <div class="timeline-item" role="listitem">
                     <div class="timeline-card">
                         <div class="timeline-logo">
-                            <img src="Images/Places/aybü-logo.webp" alt="AYBÜ Logo">
+                            <img src="Images/Places/aybü-logo.webp" alt="AYBÜ logosu">
                         </div>
                         <div class="timeline-content">
                             <div class="timeline-date">Eylül 2023 - Haziran 2028 (Beklenen)</div>
@@ -238,10 +239,10 @@
                     </div>
                 </div>
                 
-                <div class="timeline-item">
+                <div class="timeline-item" role="listitem">
                     <div class="timeline-card">
                         <div class="timeline-logo">
-                            <img src="Images/Places/tevfikileriaihl.jpeg" alt="Lise Logosu">
+                            <img src="Images/Places/tevfikileriaihl.jpeg" alt="Tevfik İleri Anadolu Lisesi logosu">
                         </div>
                         <div class="timeline-content">
                             <div class="timeline-date">Eylül 2019 - Haziran 2023</div>
@@ -256,42 +257,42 @@
             </div>
         </section>
 
-        <section id="volunteering">
-            <h2 class="section-title">Gönüllü Çalışmalar</h2>
-            <div class="experience-container">
-                <div class="experience-card">
+        <section id="volunteering" role="region" aria-labelledby="volunteering-heading">
+            <h2 class="section-title" id="volunteering-heading">Gönüllü Çalışmalar</h2>
+            <div class="experience-container" role="list" aria-label="Gönüllü çalışmalar">
+                <div class="experience-card" role="listitem">
                     <div class="experience-logo">
-                        <img src="Images/Places/toft.jpeg" alt="Trio of Thought Logo">
+                        <img src="Images/Places/toft.jpeg" alt="Trio of Thought podcast logosu">
                     </div>
                     <div class="experience-content">
                         <div class="experience-date">Ekim 2023 - Şubat 2024</div>
                         <h3 class="experience-title">Podcast Sunucusu</h3>
                         <p class="experience-subtitle">Trio of Thought, Ankara, Türkiye</p>
                         <div class="experience-details">
-                            <ul>
+                            <ul role="list">
                                 <li>AI teknolojilerine tutkulu bir mühendislik öğrencisi olarak, iki arkadaşımla birlikte 'Trio of Thought' podcast'ini yayınladık. Podcast sunucusu olarak görev yaptım ve yeni teknolojileri, özellikle AI alanındaki gelişmeleri tartıştık. Sunuculuğun yanı sıra transkript yazarlığı da yaptım.</li>
                                 <li>Spotify hesabımıza aşağıdaki linkten ulaşabilirsiniz.
-                                    <br><br> <a href="https://open.spotify.com/show/5e7U7UMTUi8K9n11wK9nmM"><b>Trio of Thought (Spotify Podcast)</b></a>
+                                    <br><br> <a href="https://open.spotify.com/show/5e7U7UMTUi8K9n11wK9nmM" aria-label="Trio of Thought podcast'ini Spotify'da dinle"><b>Trio of Thought (Spotify Podcast)</b></a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 
-                <div class="experience-card">
+                <div class="experience-card" role="listitem">
                     <div class="experience-logo">
-                        <img src="Images/Places/blank.webp" alt="Anonim Logo">
+                        <img src="Images/Places/blank.webp" alt="Sivil toplum kuruluşları genel logosu">
                     </div>
                     <div class="experience-content">
                         <div class="experience-date">Mart 2020 - Temmuz 2023</div>
                         <h3 class="experience-title">Yazar & Editör</h3>
                         <p class="experience-subtitle">Ankara'daki Sivil Toplum Kuruluşları, Türkiye</p>
                         <div class="experience-details">
-                            <ul>
+                            <ul role="list">
                                 <li>Çeşitli okul dergilerinde, bloglarda ve yerel sivil toplum kuruluşlarında yazar olarak çalıştım.</li>
                                 <li>Bir süre sonra yazı becerilerimin etkisiyle blog sitelerinden birinde editör oldum. 8 ayda 50'den fazla makale yayınladık. Bu süreçte yazım ve bağlamsal hataları neredeyse sıfıra indirdim.</li>
                                 <li>Şu anda hobi olarak devam ettiğim yazarlık kariyerimde 10'dan fazla yazım bulunuyor. Yazılarımdan bazılarını paylaştığım bir blog sitesine aşağıdaki linkten ulaşabilirsiniz.
-                                    <br><br> <a href="https://tarihikalem.wordpress.com/"> <b>Tarihi Kalem (Blog Sitesi)</b></a></li>
+                                    <br><br> <a href="https://tarihikalem.wordpress.com/" aria-label="Tarihi Kalem blog sitesini ziyaret et"> <b>Tarihi Kalem (Blog Sitesi)</b></a></li>
                             </ul>
                         </div>
                     </div>
@@ -300,15 +301,16 @@
         </section>
     </main>
 
-    <footer>
+    <footer role="contentinfo">
         <div class="footer-content">
             <p>&copy; Copyright 2025 - Ali Haydar Sucu</p>
             <p>Bilgisayar Mühendisliği Öğrencisi</p>
         </div>
     </footer>
 
-    <a href="#" class="back-to-top">
-        <i class="fas fa-arrow-up"></i>
+    <a href="#" class="back-to-top" aria-label="Sayfanın üstüne dön">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        <span class="sr-only">Sayfanın üstüne dön</span>
     </a>
 
     <script src="script.js"></script>

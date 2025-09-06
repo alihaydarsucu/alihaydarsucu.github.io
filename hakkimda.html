@@ -40,9 +40,9 @@
     <meta name="theme-color" content="#2563eb">
 </head>
 <body>
-    <header>
+    <header role="banner">
         <div class="container">
-            <nav>
+            <nav role="navigation" aria-label="Ana navigasyon">
                 <button class="hamburger-menu" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="mobile-menu">
                     <div class="bar" aria-hidden="true"></div>
                     <div class="bar" aria-hidden="true"></div>
@@ -50,24 +50,24 @@
                     <span class="sr-only">Menüyü Aç</span>
                 </button>
                 <div class="logo">
-                    <img src="Images/Icons/icon.webp" alt="Logo" class="logo-img">
-                    <a href="/hakkimda">Ali Haydar Sucu</a>
+                    <img src="Images/Icons/icon.webp" alt="Ali Haydar Sucu logosu" class="logo-img">
+                    <a href="/hakkimda" aria-label="Ana sayfaya git">Ali Haydar Sucu</a>
                 </div>
-                <div class="nav-links">
-                    <a href="/hakkimda" class="active">
-                        <i class="fas fa-user"></i>
+                <div class="nav-links" role="menubar">
+                    <a href="/hakkimda" class="active" role="menuitem" aria-current="page">
+                        <i class="fas fa-user" aria-hidden="true"></i>
                         <span class="nav-text">Hakkımda</span>
                     </a>
-                    <a href="/yetenekler">
-                        <i class="fas fa-code"></i>
+                    <a href="/yetenekler" role="menuitem">
+                        <i class="fas fa-code" aria-hidden="true"></i>
                         <span class="nav-text">Yetenekler</span>
                     </a>
-                    <a href="/projeler">
-                        <i class="fas fa-project-diagram"></i>
+                    <a href="/projeler" role="menuitem">
+                        <i class="fas fa-project-diagram" aria-hidden="true"></i>
                         <span class="nav-text">Projeler</span>
                     </a>
-                    <a href="/deneyim">
-                        <i class="fas fa-briefcase"></i>
+                    <a href="/deneyim" role="menuitem">
+                        <i class="fas fa-briefcase" aria-hidden="true"></i>
                         <span class="nav-text">Deneyim</span>
                     </a>
                     <div class="language-selector" role="region" aria-label="Dil seçici">
@@ -76,9 +76,10 @@
                             <button class="language-option active" role="radio" aria-checked="true" aria-label="Türkçe">TR</button>
                         </div>
                     </div>
-                    <label class="theme-toggle">
+                    <label class="theme-toggle" aria-label="Karanlık modu değiştir">
                         <input type="checkbox" aria-label="Karanlık modu değiştir">
-                        <span class="theme-slider"></span>
+                        <span class="theme-slider" aria-hidden="true"></span>
+                        <span class="sr-only">Karanlık modu değiştir</span>
                     </label>
                 </div>
             </nav>
@@ -137,81 +138,85 @@
         </div>
     </div>
 
-    <main class="container">
-        <section id="about" class="hero">
+    <main class="container" role="main">
+        <section id="about" class="hero" role="region" aria-labelledby="about-heading">
             <div class="hero-image">
-                <img src="Images/Profile.webp" alt="Ali Haydar Sucu">
+                <img src="Images/Profile.webp" alt="Ali Haydar Sucu profil fotoğrafı">
             </div>
             <div class="hero-content">
-                <h1>Merhaba!</h1>
+                <h1 id="about-heading">Merhaba!</h1>
                 <p>Ben Ali, Ankara Yıldırım Beyazıt Üniversitesi'nde Bilgisayar Mühendisliği ikinci sınıf öğrencisiyim.</p>
                 <p>Gömülü yazılım ve web geliştirme konusuna tutkuluyum ve şu anda insansız deniz araçları için gömülü sistemler üzerinde çalışıyorum. Gömülü sistemlerin yanı sıra Linux, açık kaynak teknolojileri ve algoritmik problem çözme konularına da büyük ilgi duyuyorum. Ayrıca yaratıcı yazarlıktan, kitap okumak ve satranç oynamaktan keyif alıyorum.</p>
                 <p>Python, JavaScript ve gömülü sistem teknolojilerinde deneyimimle, sürekli olarak becerilerimi geliştirmeye ve yeni zorluklarla başa çıkmaya hazır olduğuma inanıyorum.</p>
             </div>
         </section>
 
-        <section class="resume-download">
-            <a href="Assets/AliHaydarSucu_CV_20250904.pdf" download class="resume-btn" id="cv-download-btn">
-                <i class="fas fa-file-download"></i>&nbsp;&nbsp;&nbsp;CV'mi İndir
+        <section class="resume-download" role="region" aria-label="CV indirme bölümü">
+            <a href="Assets/AliHaydarSucu_CV_20250904.pdf" download class="resume-btn" id="cv-download-btn" aria-label="Ali Haydar Sucu'nun CV'sini PDF olarak indir">
+                <i class="fas fa-file-download" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;CV'mi İndir
             </a>
         </section>
 
-        <section class="explore-section">
-            <h2 class="section-title">Web Sitemi Keşfedin</h2>
-            <div class="explore-grid">
-                <a href="/yetenekler" class="explore-card">
-                    <div class="explore-icon">
+        <section class="explore-section" role="region" aria-labelledby="explore-heading">
+            <h2 class="section-title" id="explore-heading">Web Sitemi Keşfedin</h2>
+            <div class="explore-grid" role="list">
+                <a href="/yetenekler" class="explore-card" role="listitem" aria-label="Yetenekler sayfasına git">
+                    <div class="explore-icon" aria-hidden="true">
                         <i class="fas fa-code"></i>
                     </div>
                     <h3>Yetenekler</h3>
                     <p>Teknik becerilerimi görüntüleyin</p>
                 </a>
-                <a href="/projeler" class="explore-card">
-                    <div class="explore-icon">
+                <a href="/projeler" class="explore-card" role="listitem" aria-label="Projeler sayfasına git">
+                    <div class="explore-icon" aria-hidden="true">
                         <i class="fas fa-project-diagram"></i>
                     </div>
                     <h3>Projeler</h3>
                     <p>Projelerimi ve sertifikalarımı keşfedin</p>
                 </a>
-                <a href="/deneyim" class="explore-card">
-                    <div class="explore-icon">
+                <a href="/deneyim" class="explore-card" role="listitem" aria-label="Deneyim sayfasına git">
+                    <div class="explore-icon" aria-hidden="true">
                         <i class="fas fa-briefcase"></i>
                     </div>
                     <h3>Deneyim</h3>
                     <p>Profesyonel geçmişimi inceleyin</p>
-                </a>
+                </div>
             </div>
         </section>
 
-        <section id="contact">
-            <h2 class="section-title">İletişim</h2>
+        <section id="contact" role="region" aria-labelledby="contact-heading">
+            <h2 class="section-title" id="contact-heading">İletişim</h2>
             <div class="contact-container">
                 <div class="contact-info">
                     <h3>İletişim Bilgileri</h3>
-                    <div class="contact-item">
-                        <div class="contact-icon">
+                    <div class="contact-item" role="group" aria-label="E-posta adresi">
+                        <div class="contact-icon" aria-hidden="true">
                             <i class="fas fa-envelope"></i>
                         </div>
                         <div class="contact-text">alihaydarsucu@gmail.com</div>
                     </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
+                    <div class="contact-item" role="group" aria-label="Konum bilgisi">
+                        <div class="contact-icon" aria-hidden="true">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <div class="contact-text">Ankara, Türkiye</div>
                     </div>
-                    <div class="social-links">
-                        <a href="https://github.com/alihaydarsucu" class="social-link" target="_blank">
-                            <i class="fab fa-github"></i>
+                    <div class="social-links" role="list" aria-label="Sosyal medya bağlantıları">
+                        <a href="https://github.com/alihaydarsucu" class="social-link" target="_blank" role="listitem" aria-label="GitHub profilimi ziyaret et">
+                            <i class="fab fa-github" aria-hidden="true"></i>
+                            <span class="sr-only">GitHub</span>
                         </a>
-                        <a href="https://linkedin.com/in/ali-haydar-sucu" class="social-link" target="_blank">
-                            <i class="fab fa-linkedin-in"></i>
+                        <a href="https://linkedin.com/in/ali-haydar-sucu" class="social-link" target="_blank" role="listitem" aria-label="LinkedIn profilimi ziyaret et">
+                            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                            <span class="sr-only">LinkedIn</span>
                         </a>
-                        <a href="mailto:alihaydarsucu@gmail.com" class="social-link">
-                            <i class="fas fa-envelope"></i>
+                        <a href="mailto:alihaydarsucu@gmail.com" class="social-link" role="listitem" aria-label="E-posta gönder">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                            <span class="sr-only">E-posta</span>
                         </a>
-                        <a href="https://instagram.com/alihaydarsucu" class="social-link" target="_blank">
-                            <i class="fab fa-instagram"></i>
+                        <a href="https://instagram.com/alihaydarsucu" class="social-link" target="_blank" role="listitem" aria-label="Instagram profilimi ziyaret et">
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
+                            <span class="sr-only">Instagram</span>
                         </a>
                     </div>
                 </div>
@@ -219,15 +224,16 @@
         </section>
     </main>
 
-    <footer>
+    <footer role="contentinfo">
         <div class="footer-content">
             <p>&copy; Copyright 2025 - Ali Haydar Sucu</p>
             <p>Bilgisayar Mühendisliği Öğrencisi</p>
         </div>
     </footer>
 
-    <a href="#" class="back-to-top">
-        <i class="fas fa-arrow-up"></i>
+    <a href="#" class="back-to-top" aria-label="Sayfanın üstüne dön">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        <span class="sr-only">Sayfanın üstüne dön</span>
     </a>
 
     <script src="script.js"></script>
