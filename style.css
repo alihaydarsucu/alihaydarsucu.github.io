@@ -294,6 +294,10 @@ body.dark-mode .mobile-nav-links a:hover:not(.active) {
     text-align: center;
 }
 
+.mobile-menu-actions {
+    padding: 0 30px;
+}
+
 .mobile-theme-toggle {
     display: flex;
     align-items: center;
@@ -1467,7 +1471,7 @@ footer {
     background: var(--dark-bg);
     color: white;
     padding: 30px 0;
-    margin-top: 100px;
+    margin-top: 10px;
     text-align: center;
 }
 
@@ -1760,7 +1764,7 @@ body.dark-mode .language-option:hover:not(.active) {
     align-items: center;
     padding: 15px 0;
     margin-top: 10px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid var(--border);
 }
 
 .mobile-language-selector i {
@@ -2277,9 +2281,10 @@ body.dark-mode .language-option:hover:not(.active) {
 }
 
 /* Add this rule to explicitly set h1 font-size within sections */
-section h1 {
+.section h1 {
     font-size: 2.5rem;
 }
+
 
 /* Or more specifically for the hero section h1 */
 .hero h1 {
