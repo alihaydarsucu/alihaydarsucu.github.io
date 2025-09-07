@@ -2293,6 +2293,12 @@ body.dark-mode .language-option:hover:not(.active) {
     }
 }
 
+@media screen and (max-width: 360px) {
+    .logo {
+        margin-left: 0px;
+    }
+}
+
 /* Add this rule to explicitly set h1 font-size within sections */
 .section h1 {
     font-size: 2.5rem;
