@@ -958,11 +958,20 @@ body.dark-mode .github-project-meta {
 
 /* GitHub Projects Filter */
 .github-filter {
+    width: 100%;
+    margin: 0 auto 30px;
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
+    padding: 0 15px;
+}
+
+.github-filter [role="radiogroup"] {
+    display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 800px;
 }
 
 .filter-btn {
@@ -2006,6 +2015,10 @@ body.dark-mode .language-option:hover:not(.active) {
 
 /* Tablet and Medium Screens */
 @media screen and (max-width: 992px) {
+    .github-filter [role="radiogroup"] {
+        max-width: 100%;
+    }
+
     .hero {
         flex-direction: column;
         text-align: center;
@@ -2295,4 +2308,16 @@ body.dark-mode .language-option:hover:not(.active) {
     font-size: 2.5rem;
 }
 
+/* Responsive styles for filter buttons on small screens */
+@media screen and (max-width: 400px) {
+    .github-filter [role="radiogroup"] {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+    
+    .filter-btn {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
 
