@@ -295,7 +295,8 @@ document.addEventListener('DOMContentLoaded', function() {
             'CSS': '#563d7c',
             'Java': '#b07219',
             'C++': '#f34b7d',
-            'C': '#555555'
+            'C': '#098b2a96',
+            'Shell': '#89e051',
         };
         return colors[language] || '#858585';
     }
