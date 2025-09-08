@@ -2274,6 +2274,9 @@ body.dark-mode .language-option:hover:not(.active) {
         max-width: 180px;
         height: 180px;
     }
+    .logo {
+        margin-left: 0px;
+    }
 }
 
 @media screen and (max-width: 370px) {
@@ -2293,11 +2296,6 @@ body.dark-mode .language-option:hover:not(.active) {
     }
 }
 
-@media screen and (max-width: 360px) {
-    .logo {
-        margin-left: 0px;
-    }
-}
 
 /* Add this rule to explicitly set h1 font-size within sections */
 .section h1 {
