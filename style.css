@@ -557,22 +557,6 @@ body.dark-mode .resume-btn:hover {
     box-shadow: 0 5px 15px rgba(77, 148, 255, 0.25);
 }
 
-.cv-note {
-    margin-top: 1rem;
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-    font-style: italic;
-}
-
-.cv-note i {
-    margin-right: 0.5rem;
-    color: var(--success);
-}
-
-body.dark-mode .cv-note {
-    color: var(--dark-text-secondary);
-}
-
 /* Section Titles */
 .section-title {
     font-size: 28px;
@@ -670,31 +654,6 @@ body.dark-mode .cv-note {
     line-height: 1.5;
 }
 
-/* Skill categories */
-.skills-category {
-    margin-bottom: 40px;
-}
-
-.skills-category h3 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    color: var(--text-primary);
-    position: relative;
-    display: inline-block;
-    padding-bottom: 8px;
-}
-
-.skills-category h3::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 50px;
-    height: 3px;
-    background: var(--primary);
-    border-radius: 3px;
-}
-
 /* GitHub Stats */
 .github-stats {
     margin: 50px 0;
@@ -713,26 +672,6 @@ body.dark-mode .cv-note {
     height: auto;
     border-radius: 10px;
     height: 200px;
-}
-
-/* GitHub Activity Graph */
-.github-activity-graph {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.github-activity-graph img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.github-activity-graph img:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 /* Projects Section */
@@ -837,24 +776,6 @@ body.dark-mode .cv-note {
     background: var(--accent);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(255, 0, 110, 0.3);
-}
-
-/* Project tags */
-.project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 12px 0;
-}
-
-.project-tag {
-    display: inline-block;
-    background: rgba(58, 134, 255, 0.1);
-    color: var(--primary);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 500;
 }
 
 .project-image {
@@ -1590,15 +1511,6 @@ body.dark-mode .hero-content h1 {
     background-clip: text;
 }
 
-/* GitHub Activity Graph Dark Mode */
-body.dark-mode .github-activity-graph img {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-body.dark-mode .github-activity-graph img:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-}
-
 /* Cards and sections */
 body.dark-mode .skill-card,
 body.dark-mode .project-card,
@@ -1760,13 +1672,6 @@ body.dark-mode .back-to-top:hover {
     cursor: pointer;
     border-radius: 4px;
     transition: all 0.3s;
-}
-
-/* Dark Mode Language Selector */
-body.dark-mode .language-selector-toggle,
-body.dark-mode .mobile-language-selector-toggle {
-    background: var(--dark-surface-elevated);
-    border: 1px solid var(--border);
 }
 
 body.dark-mode .language-option {
@@ -1950,23 +1855,6 @@ body.dark-mode .explore-card p {
     margin-bottom: 0;
 }
 
-.mobile-language-selector-toggle {
-    height: 64px !important;
-    display: flex;
-    background: var(--light-gray);
-    border-radius: 64px;
-    padding: 0;
-    cursor: pointer;
-    margin-left: 15px;
-    border: 1px solid var(--border);
-    transition: all 0.3s ease;
-    width: 160px;
-    align-items: stretch;
-    justify-content: stretch;
-    overflow: hidden;
-    box-sizing: border-box;
-}
-
 .mobile-language-selector .language-option {
     padding: 0;
     border-radius: 64px;
@@ -1995,13 +1883,6 @@ body.dark-mode .explore-card p {
 .mobile-language-selector .language-option:hover:not(.active) {
     color: var(--primary);
     background: rgba(58, 134, 255, 0.1);
-}
-
-/* Dark Mode Language Selector */
-body.dark-mode .language-selector-toggle,
-body.dark-mode .mobile-language-selector-toggle {
-    background: var(--dark-surface-elevated);
-    border: 1px solid var(--border);
 }
 
 body.dark-mode .language-option {
@@ -2078,15 +1959,6 @@ body.dark-mode .language-option:hover:not(.active) {
     .github-stats-container {
         flex-direction: column;
         align-items: center;
-    }
-    
-    .github-activity-graph {
-        margin-top: 15px;
-    }
-    
-    .github-activity-graph img {
-        width: 100%;
-        max-width: 900px;
     }
 }
 
@@ -2166,14 +2038,6 @@ body.dark-mode .language-option:hover:not(.active) {
         }
     }
     
-    .nav-links a, .theme-toggle-container {
-        width: 100%;
-        justify-content: flex-start;
-        padding: 15px 30px;
-        border-radius: 0;
-        margin: 0;
-    }
-    
     .nav-text {
         display: inline;
         margin-left: 15px;
@@ -2181,10 +2045,6 @@ body.dark-mode .language-option:hover:not(.active) {
     
     body.dark-mode .nav-links {
         background-color: var(--surface);
-    }
-    
-    body.menu-open {
-        overflow: hidden;
     }
 
     .logo {
@@ -2198,10 +2058,6 @@ body.dark-mode .language-option:hover:not(.active) {
 
     .timeline-item {
         padding-left: 30px;
-    }
-
-    .theme-toggle-container {
-        padding-left: 30px !important;
     }
 }
 
