@@ -1176,7 +1176,6 @@ a:hover {
     color: var(--primary-dark);
     border-bottom-style: solid;
 }
-
 /* Timeline Section */
 .timeline-container {
     position: relative;
@@ -1322,6 +1321,16 @@ a:hover {
     font-weight: 700;
 }
 
+/* Make subtitle align directionally with timeline card */
+.timeline-item:nth-child(odd) .timeline-subtitle {
+    justify-content: flex-end;
+    text-align: right;
+}
+.timeline-item:nth-child(even) .timeline-subtitle {
+    justify-content: flex-start;
+    text-align: left;
+}
+
 .timeline-subtitle {
     font-size: 1.1rem;
     color: var(--text-secondary);
@@ -1367,6 +1376,14 @@ a:hover {
 
 .credential-link i {
     font-size: 1.1em;
+}
+
+/* Responsive: timeline-subtitle follows card direction on mobile */
+@media (max-width: 768px) {
+    .timeline-item .timeline-subtitle {
+        justify-content: flex-start !important;
+        text-align: left !important;
+    }
 }
 
 /* Responsive Timeline */
