@@ -20,6 +20,7 @@ The website consists of 4 main pages, all fully responsive and available in both
 4. **Projects** (`projects.html`) - Portfolio of selected works
 
 Key Features:
+
 - **Fully Responsive** - Optimized for all device sizes
 - **Dark/Light Mode** - Automatic system preference detection
 - **Bilingual Support** - Seamless English/Turkish toggle
@@ -34,20 +35,22 @@ Key Features:
   <p>Homepage on Desktop</p>
   
   <h3>Mobile Views</h3>
-  <div style="display: flex; justify-content: space-around; flex-wrap: nowrap; gap: 20px; overflow-x: auto; padding: 10px 0;">
-    <div style="flex: 0 0 auto; text-align: center;">
-      <img src="Screenshots/mobile-experience-dark.png" alt="Mobile Experience (Dark Mode) Page" style="width: 200px; height: auto;">
-      <p style="margin: 8px 0 0; font-size: 0.9em;">Experience (Dark Mode)</p>
-    </div>
-    <div style="flex: 0 0 auto; text-align: center;">
-      <img src="Screenshots/mobile-projects-light.png" alt="Mobile Projects (Light Mode) Page" style="width: 200px; height: auto;">
-      <p style="margin: 8px 0 0; font-size: 0.9em;">Projects (Light Mode)</p>
-    </div>
-    <div style="flex: 0 0 auto; text-align: center;">
-      <img src="Screenshots/mobile-skills-dark.png" alt="Mobile Skills (Dark Mode) Page" style="width: 200px; height: auto;">
-      <p style="margin: 8px 0 0; font-size: 0.9em;">Skills (Dark Mode)</p>
-    </div>
-  </div>
+  <table>
+    <tr>
+      <td align="center">
+        <img src="Screenshots/mobile-experience-dark.png" alt="Mobile Experience (Dark Mode) Page" width="200">
+        <p>Experience (Dark Mode)</p>
+      </td>
+      <td align="center">
+        <img src="Screenshots/mobile-projects-light.png" alt="Mobile Projects (Light Mode) Page" width="200">
+        <p>Projects (Light Mode)</p>
+      </td>
+      <td align="center">
+        <img src="Screenshots/mobile-skills-dark.png" alt="Mobile Skills (Dark Mode) Page" width="200">
+        <p>Skills (Dark Mode)</p>
+      </td>
+    </tr>
+  </table>
 </div>
 
 ### Automated CV Generation
@@ -61,6 +64,7 @@ Key Features:
 ## 🛠️ Technology Stack
 
 ### Frontend
+
 - **Core**: HTML5, CSS3, JavaScript (ES6+)
 - **Icons**: Font Awesome 6
 - **Styling**: Custom CSS with Flexbox/Grid
@@ -68,6 +72,7 @@ Key Features:
 - **Accessibility**: ARIA labels, semantic HTML
 
 ### CV Generation System
+
 - **Engine**: LuaLaTeX
 - **Template**: Custom Oxford-style template
 - **Features**: ATS optimization, multilingual support
@@ -96,10 +101,12 @@ Key Features:
 The CV is automatically rebuilt whenever changes are made to files in the `cv/` directory. Here's how it works:
 
 ### Trigger Conditions
+
 - Any push to `main` or `v2` branches that includes changes in the `cv/` directory
 - Manual trigger via GitHub Actions UI
 
 ### Process
+
 1. **Detection**: GitHub Actions detects changes in the `cv/` directory
 2. **Setup**: LaTeX environment is configured on a clean Ubuntu runner
 3. **Compilation**:
@@ -137,18 +144,21 @@ The CV is automatically rebuilt whenever changes are made to files in the `cv/` 
 ## 🌐 Website Features
 
 ### Responsive Design
+
 - **Desktop**: 1200px+
 - **Laptop**: 992px - 1199px
 - **Tablet**: 768px - 991px
 - **Mobile**: 320px - 767px
 
 ### Performance Optimizations
+
 - **Fast Loading**: Optimized assets and lazy loading
 - **SEO Friendly**: Semantic HTML and meta tags
 - **Accessibility**: WCAG 2.1 compliant
 - **PWA Ready**: Offline capabilities
 
 ### Multilingual Support
+
 - English/Turkish language toggle
 - Automatic hreflang tags
 - Language-specific meta descriptions
@@ -156,11 +166,13 @@ The CV is automatically rebuilt whenever changes are made to files in the `cv/` 
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Modern web browser
 - GitHub account (for development)
 - LaTeX distribution (for local CV generation)
 
 ### Local Development
+
 1. Clone the repository:
    ```bash
    git clone https://github.com/alihaydarsucu/alihaydarsucu.github.io.git
@@ -168,6 +180,7 @@ The CV is automatically rebuilt whenever changes are made to files in the `cv/` 
 2. Open `index.html` in your browser
 
 ### Building the CV Locally
+
 1. Install a full LaTeX distribution (e.g., TeX Live)
 2. Navigate to the `cv` directory
 3. Run the following commands to ensure proper compilation:
@@ -184,8 +197,8 @@ The CV is automatically rebuilt whenever changes are made to files in the `cv/` 
 - Email: [alihaydarsucu@gmail.com](mailto:alihaydarsucu@gmail.com)
 - LinkedIn: [ali-haydar-sucu](https://linkedin.com/in/ali-haydar-sucu)
 - Website: [alihaydarsucu.github.io](https://alihaydarsucu.github.io)
----
 
+---
 
 <div align="center">
   Made with ❤️ by Ali Haydar Sucu
