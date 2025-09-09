@@ -1,6 +1,6 @@
 <div align="center">
   <img src="Images/Icons/icon.webp" alt="Logo" width="150">
-  <p style="font-weight: bold; font-size: 30px;">Ali Haydar Sucu</p>
+  <h1>Ali Haydar Sucu</h1>
   <p>Computer Engineering Student</p>
 </div>
 
@@ -34,18 +34,18 @@ Key Features:
   <p>Homepage on Desktop</p>
   
   <h3>Mobile Views</h3>
-  <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
-    <div>
-      <img src="Screenshots/mobile-experience-dark.png" alt="Mobile Experience (Dark Mode) Page" width="200">
-      <p>Experience (Dark Mode) Page</p>
+  <div style="display: flex; justify-content: space-around; flex-wrap: nowrap; gap: 20px; overflow-x: auto; padding: 10px 0;">
+    <div style="flex: 0 0 auto; text-align: center;">
+      <img src="Screenshots/mobile-experience-dark.png" alt="Mobile Experience (Dark Mode) Page" style="width: 200px; height: auto;">
+      <p style="margin: 8px 0 0; font-size: 0.9em;">Experience (Dark Mode)</p>
     </div>
-    <div>
-      <img src="Screenshots/mobile-projects-light.png" alt="Mobile Projects (Light Mode) Page" width="200">
-      <p>Projects (Light Mode) Page</p>
+    <div style="flex: 0 0 auto; text-align: center;">
+      <img src="Screenshots/mobile-projects-light.png" alt="Mobile Projects (Light Mode) Page" style="width: 200px; height: auto;">
+      <p style="margin: 8px 0 0; font-size: 0.9em;">Projects (Light Mode)</p>
     </div>
-    <div>
-      <img src="Screenshots/mobile-skills-dark.png" alt="Mobile Skills (Dark Mode) Page" width="200">
-      <p>Skills (Dark Mode) Page</p>
+    <div style="flex: 0 0 auto; text-align: center;">
+      <img src="Screenshots/mobile-skills-dark.png" alt="Mobile Skills (Dark Mode) Page" style="width: 200px; height: auto;">
+      <p style="margin: 8px 0 0; font-size: 0.9em;">Skills (Dark Mode)</p>
     </div>
   </div>
 </div>
