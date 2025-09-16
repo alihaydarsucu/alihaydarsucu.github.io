@@ -180,18 +180,26 @@ nav {
     width: 80%;
     height: 2px;
     background: var(--primary);
-    animation: fadeIn 0.3s ease-out;
+    animation: scaleWidth 1.5s ease-in-out 2;
+
+}
+
+/* Pulse Glow Animation */
+@keyframes scaleWidth {
+    0%, 100% { width: 80%; }
+    50% { width: 100%; }
 }
 
 /* Dark Mode için Aktif Link Stilleri */
 body.dark-mode .nav-links a.active,
 body.dark-mode .mobile-nav-links a.active {
-    color: var(--dark-accent-orange);
+    color: var(--primary);
 }
 
 body.dark-mode .nav-links a.active::after,
 body.dark-mode .mobile-nav-links a.active::after {
-    background: var(--dark-accent-orange);
+    background: var(--primary);
+    animation: scaleWidth 1.5s ease-in-out 2;
 }
 
 /* Hover Efekti (Aktif olmayan linkler için) */
@@ -681,6 +689,40 @@ body.dark-mode .resume-btn:hover {
     gap: 30px;
 }
 
+/* Portfolio Project Theme-Specific Images */
+.portfolio-project .project-image {
+    position: relative;
+}
+
+.portfolio-project .portfolio-light,
+.portfolio-project .portfolio-dark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease, transform 0.5s ease;
+}
+
+/* Light mode - show light image, hide dark image */
+.portfolio-project .portfolio-light {
+    opacity: 1;
+}
+
+.portfolio-project .portfolio-dark {
+    opacity: 0;
+}
+
+/* Dark mode - hide light image, show dark image */
+body.dark-mode .portfolio-project .portfolio-light {
+    opacity: 0;
+}
+
+body.dark-mode .portfolio-project .portfolio-dark {
+    opacity: 1;
+}
+
 .project-card {
     display: flex;
     flex-direction: column;
@@ -794,6 +836,12 @@ body.dark-mode .resume-btn:hover {
     transform: scale(1.1);
 }
 
+/* Portfolio project hover animation for both images */
+.portfolio-project:hover .portfolio-light,
+.portfolio-project:hover .portfolio-dark {
+    transform: scale(1.1);
+}
+
 /* GitHub Projeleri */
 .github-project-card {
     opacity: 0;
@@ -867,8 +915,13 @@ body.dark-mode .github-project-card {
     border-color: var(--dark-border);
 }
 
+body.dark-mode .github-project-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
 body.dark-mode .github-project-title {
-    color: var(--dark-accent-blue);
+    color: var(--primary);
 }
 
 body.dark-mode .github-project-description,
@@ -1408,9 +1461,10 @@ a:hover {
 }
 
 .social-link:hover {
-    background: var(--primary-dark);
+    background: var(--dark-success);
+    color: white;
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(58, 134, 255, 0.3);
+    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
 }
 
 /* Footer */
@@ -1578,8 +1632,9 @@ body.dark-mode .social-link {
 }
 
 body.dark-mode .social-link:hover {
-    background: var(--primary-dark);
-    box-shadow: 0 5px 15px rgba(77, 148, 255, 0.3);
+    background: var(--dark-success);
+    color: white;
+    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
 }
 
 /* Footer */
@@ -1842,7 +1897,7 @@ body.dark-mode .explore-card p {
 
 .language-option:hover:not(.active) {
     color: var(--primary);
-    background: rgba(58, 134, 255, 0.1);
+    background: var(--dark-surface);
 }
 
 /* Mobile Language Selector */
@@ -1882,7 +1937,7 @@ body.dark-mode .explore-card p {
 
 .mobile-language-selector .language-option:hover:not(.active) {
     color: var(--primary);
-    background: rgba(58, 134, 255, 0.1);
+    background: var(--dark-surface);
 }
 
 body.dark-mode .language-option {
