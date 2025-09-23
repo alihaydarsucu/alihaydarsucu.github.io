@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (selectedLang === 'EN') {
                     // Türkçe'den İngilizce'ye geçiş
-                            if (currentPath.includes('hakkimda') || currentPath === '/hakkimda') {
+                            if (currentPath.includes('tr') || currentPath === '/tr') {
             window.location.href = '/';
         } else if (currentPath.includes('yetenekler') || currentPath === '/yetenekler') {
             window.location.href = '/skills';
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else if (selectedLang === 'TR') {
                     // İngilizce'den Türkçe'ye geçiş
                             if (currentPath.includes('index') || currentPath === '/' || currentPath === '') {
-            window.location.href = '/hakkimda';
+            window.location.href = '/tr';
         } else if (currentPath.includes('skills') || currentPath === '/skills') {
             window.location.href = '/yetenekler';
         } else if (currentPath.includes('projects') || currentPath === '/projects') {
