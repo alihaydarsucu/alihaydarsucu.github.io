@@ -1844,6 +1844,10 @@ body.dark-mode .mobile-language-selector select {
     font-size: 16px;
 }
 
+#explore-heading.section-title::after {
+ display: none;
+}
+
 /* Dark Mode Styles for Explore Section */
 body.dark-mode .explore-card {
     background: var(--dark-card);
