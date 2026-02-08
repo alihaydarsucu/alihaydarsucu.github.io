@@ -52,6 +52,61 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Custom Scrollbar - Minimal Modern Design */
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #c0c0c0 transparent;
+}
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c0c0c0;
+    border-radius: 6px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+    transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a0a0a0;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: #808080;
+    background-clip: content-box;
+}
+
+/* Dark mode scrollbar */
+.dark-mode * {
+    scrollbar-color: #606060 transparent;
+}
+
+.dark-mode ::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.dark-mode ::-webkit-scrollbar-thumb {
+    background: #606060;
+}
+
+.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: #707070;
+}
+
+.dark-mode ::-webkit-scrollbar-thumb:active {
+    background: #808080;
+}
+
 .container {
     width: 90%;
     max-width: 1200px;
