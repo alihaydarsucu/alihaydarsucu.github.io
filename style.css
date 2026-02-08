@@ -2019,6 +2019,11 @@ body.dark-mode .language-option:hover:not(.active) {
         flex-direction: column;
         align-items: center;
     }
+    
+    /* Hide profile details card on mobile - too small to read */
+    .github-stats-container img[src*="profile-details"] {
+        display: none !important;
+    }
 }
 
 /* Mobile Devices */

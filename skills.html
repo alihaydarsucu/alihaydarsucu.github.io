@@ -219,18 +219,27 @@
 
         <section class="github-stats" role="region" aria-labelledby="github-stats-heading">
             <h2 class="section-title" id="github-stats-heading">GitHub Statistics</h2>
+            
+            <!-- GitHub Profile Summary Cards -->
             <div class="github-stats-container" role="region" aria-label="GitHub Statistics">
-                <img src="https://github-readme-stats.vercel.app/api?username=alihaydarsucu&show_icons=true&theme=nightowl&hide_border=true&include_all_commits=true&count_private=true" 
-                     alt="GitHub statistics showing commits, pull requests, and other activity" 
+                <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=alihaydarsucu&theme=nightowl" 
+                     alt="GitHub contribution graph and activity overview" 
+                     loading="lazy"
+                     onerror="this.style.display='none'; console.error('Failed to load GitHub profile summary');">
+            </div>
+            
+            <div class="github-stats-container" role="region" aria-label="GitHub Statistics Details">
+                <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=alihaydarsucu&theme=nightowl" 
+                     alt="GitHub statistics showing total stars, commits, pull requests, and issues" 
                      loading="lazy"
                      onerror="this.style.display='none'; console.error('Failed to load GitHub stats');">
-                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=alihaydarsucu&layout=compact&theme=nightowl&hide_border=true&langs_count=8" 
-                     alt="Most used programming languages" 
+                <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=alihaydarsucu&theme=nightowl" 
+                     alt="Most used programming languages by commit" 
                      loading="lazy"
                      onerror="this.style.display='none'; console.error('Failed to load language stats');">
             </div>
             
-             <!-- GitHub Streak Stats -->
+            <!-- GitHub Streak Stats -->
             <div class="github-stats-container" role="region" aria-label="GitHub Contribution Streak">
                 <img src="https://github-readme-streak-stats.herokuapp.com/?user=alihaydarsucu&theme=nightowl&hide_border=true" 
                      alt="GitHub contribution streak showing current and longest streak" 
@@ -242,7 +251,7 @@
 
     <footer role="contentinfo">
         <div class="footer-content">
-            <p>&copy; Copyright 2025 - Ali Haydar Sucu</p>
+            <p>&copy; Copyright 2026 - Ali Haydar Sucu</p>
             <p>Computer Engineering Student</p>
         </div>
     </footer>

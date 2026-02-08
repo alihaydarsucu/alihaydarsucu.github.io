@@ -2,11 +2,11 @@ name: Generate CV
 
 on:
   push:
-    branches: [main, v2]
+    branches: [main, v2, website-improvements]
     paths:
       - "cv/**" # Sadece cv klasöründeki değişiklikler için tetiklenir
   pull_request:
-    branches: [main]
+    branches: [main, v2]
     paths:
       - "cv/**" # Sadece cv klasöründeki değişiklikler için tetiklenir
   workflow_dispatch: # Manuel tetikleme için
@@ -45,10 +45,17 @@ jobs:
           cp cv/cv.pdf "Assets/AliHaydarSucu_CV_${{ steps.timestamp.outputs.date }}.pdf"
           cp cv/cv.pdf "Assets/AliHaydarSucu_Resume_${{ steps.timestamp.outputs.short_date }}.pdf"
 
+      - name: Update HTML files with new CV link
+        run: |
+          # Update index.html
+          sed -i "s|Assets/AliHaydarSucu_CV_[0-9]\{8\}\.pdf|Assets/AliHaydarSucu_CV_${{ steps.timestamp.outputs.date }}.pdf|g" index.html
+          # Update tr.html
+          sed -i "s|Assets/AliHaydarSucu_CV_[0-9]\{8\}\.pdf|Assets/AliHaydarSucu_CV_${{ steps.timestamp.outputs.date }}.pdf|g" tr.html
+
       - name: Commit and push CV
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add Assets/
+          git add Assets/ index.html tr.html
           git commit -m "Auto-update CV - $(date +'%Y-%m-%d')" || exit 0
           git push
