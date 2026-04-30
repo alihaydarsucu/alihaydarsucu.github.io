@@ -1,174 +1,139 @@
-<div align="center">
-  <img src="Images/Icons/icon.webp" alt="Logo" width="150">
-  <h1>Ali Haydar Sucu</h1>
-  <p>Computer Engineering Student</p>
-</div>
-
-## 🌟 About This Project
-
-This repository contains my personal portfolio website and an automated CV generation system. The website serves as a professional showcase of my skills, projects, and experience, while the CV system ensures my resume is always up-to-date and ATS-optimized.
-
-## 🚀 Key Features
-
-### Website
-
-The website consists of 4 main pages, all fully responsive and available in both English and Turkish:
-
-1. **Home** (`index.html`) - Introduction and quick overview
-2. **Experience** (`experience.html`) - Professional journey and education
-3. **Skills** (`skills.html`) - Technical skills and competencies
-4. **Projects** (`projects.html`) - Portfolio of selected works
-
-Key Features:
-
-- **Fully Responsive** - Optimized for all device sizes
-- **Dark/Light Mode** - Automatic system preference detection
-- **Bilingual Support** - Seamless English/Turkish toggle
-- **Dynamic Content** - Projects automatically pulled from GitHub
-- **Modern UI/UX** - Clean, accessible, and performant design
-
-### Visual Showcase
 
 <div align="center">
-  <h3>Desktop View on Dark Mode</h3>
-  <img src="Screenshots/desktop-home.png" alt="Desktop Homepage" width="90%">
-  <p>Homepage on Desktop</p>
-  
-  <h3>Mobile Views</h3>
-  <table>
-    <tr>
-      <td align="center">
-        <img src="Screenshots/mobile-experience-dark.png" alt="Mobile Experience (Dark Mode) Page" width="200">
-        <p>Experience (Dark Mode)</p>
-      </td>
-      <td align="center">
-        <img src="Screenshots/mobile-projects-light.png" alt="Mobile Projects (Light Mode) Page" width="200">
-        <p>Projects (Light Mode)</p>
-      </td>
-      <td align="center">
-        <img src="Screenshots/mobile-skills-dark.png" alt="Mobile Skills (Dark Mode) Page" width="200">
-        <p>Skills (Dark Mode)</p>
-      </td>
-    </tr>
-  </table>
+   <img src="Images/Icons/icon.webp" alt="Logo" width="120">
+   <h1>Ali Haydar Sucu</h1>
+   <p>Computer Engineering Student | Embedded & AI Enthusiast</p>
 </div>
 
-### Automated CV Generation
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Blog System](#blog-system)
+- [CV Generation](#cv-generation)
+- [Tech & Structure](#tech--structure)
+- [Responsive Design](#responsive-design)
+- [Getting Started](#getting-started)
+- [Contact](#contact)
 
-- **Oxford-style LaTeX CV** - Academic and professional appearance
-- **ATS-optimized Format** - Passes through applicant tracking systems
-- **Automatic Updates** - New CV on every commit
-- **Two-page Support** - No length restrictions
-- **Professional Typography** - Powered by LaTeX
 
-## 🛠️ Technology Stack
+## Project Overview
 
-### Frontend
+This repository contains my personal portfolio and blog website, featuring a fully automated CV generation system and a bilingual, category-based blog. The site is designed for both professional presentation and technical content sharing, with a modern, responsive UI and seamless English/Turkish support.
 
-- **Core**: HTML5, CSS3, JavaScript (ES6+)
-- **Icons**: Font Awesome 6
-- **Styling**: Custom CSS with Flexbox/Grid
-- **Performance**: Lazy loading, image optimization
-- **Accessibility**: ARIA labels, semantic HTML
 
-### CV Generation System
+## Features
 
-- **Engine**: LuaLaTeX
-- **Template**: Custom Oxford-style template
-- **Features**: ATS optimization, multilingual support
-- **Automation**: GitHub Actions workflow
-- **Dependencies**: texlive-latex-extra, texlive-fonts
+- **Bilingual Website**: All content and navigation available in English and Turkish, with instant language switching and clean URLs for both languages.
+- **Responsive Design**: Mobile-first, grid-based layouts, hamburger navigation, and adaptive breakpoints (1200px, 1035px, 768px, 470px, 370px).
+- **Dark/Light Mode**: Automatic system detection and manual toggle, with persistent user preference.
+- **Modern UI/UX**: Accessible, semantic HTML, ARIA labels, and visually appealing design.
+- **Automated CV Generation**: LaTeX-based, ATS-optimized, Oxford-style CV, auto-built and versioned via GitHub Actions.
+- **Dynamic Blog System**: Blog posts are fetched from Substack RSS, parsed, and published with category, subcategory, and language metadata.
+- **Clean URL Routing**: Blog posts accessible via `/posts/slug` (EN) and `/yazilar/slug` (TR), with .htaccess rewrite support.
+- **Social & SEO**: Open Graph, Twitter Card, and SEO meta tags; social links including Chess.com, LinkedIn, GitHub.
 
-## 📁 Project Structure
+---
 
-```
+## Blog System
+
+- **Content Source**: Blog posts are written on Substack and fetched automatically via RSS.
+- **Automated Pipeline**: A GitHub Actions workflow (`update-blog.yml`) fetches the RSS feed hourly, parses posts, and updates `blog-posts.json` only if there are changes (cost-optimized).
+- **Metadata Extraction**: Categories, subcategories, and language are extracted from both hashtags and explicit prefixes (e.g., `category:technical`, `lang:tr`).
+- **Category System**:
+  - Main: Technical, History, Fiction (TR); only Technical (EN)
+  - Subcategories (Technical): Systems, Embedded, AI
+- **Tab Navigation**: Blog pages feature a two-level tab system for category and subcategory filtering, with language-specific tab logic.
+- **Multilingual UI**: All blog UI elements, empty states, and buttons are translated.
+- **Share & Copy**: Blog posts have a share button that copies the clean site URL (not Substack) to clipboard.
+- **RSS/JSON Structure**: `blog-posts.json` contains all post metadata, used for filtering and display.
+
+---
+
+## CV Generation
+
+- **LaTeX Engine**: CV is written in LaTeX (`cv/cv.tex`) and built with LuaLaTeX.
+- **Automation**: GitHub Actions workflow auto-builds and versions the CV on every commit to `cv/`.
+- **ATS-Optimized**: Layout and content are designed for applicant tracking systems.
+- **Downloadable**: Latest CV is always available for download on the site.
+
+---
+
+
+## Tech & Structure
+
+<details>
+<summary>🛠️ Technology Stack & 📁 Project Structure (click to expand)</summary>
+<br>
+<div align="center">
+   <img src="https://skillicons.dev/icons?i=html,css,js,latex,githubactions" alt="Skill Icons" height="40">
+</div>
+
+<br>
+
+**Frontend:** HTML5, CSS3 (Flexbox/Grid), JavaScript (ES6+), Font Awesome 6<br>
+**Automation:** GitHub Actions (blog & CV workflows)<br>
+**Other:** LaTeX (LuaLaTeX), Substack RSS, .htaccess for clean URLs<br>
+**No backend:** All dynamic content is client-side or via GitHub Actions
+
+```text
 .
-├── .github/workflows/
-│   └── generate-cv.yml          # GitHub Actions workflow
-├── Assets/
-│   └── *.pdf                    # Auto-generated CVs
-├── cv/
-│   ├── cv.tex                   # LaTeX CV template
-│   └── README.md                # CV documentation
-├── Images/                      # Images and icons
-├── *.html                       # Web page files
-├── style.css                    # Main stylesheet
-└── script.js                    # JavaScript functions
+├── .github/workflows/         # Blog & CV automation
+│   ├── update-blog.yml        # Blog RSS/JSON
+│   └── generate-cv.yml        # CV generation
+├── Assets/                    # Generated CV PDFs
+├── cv/                        # CV source files (LaTeX)
+├── Images/                    # Icons, screenshots, etc.
+├── *.html                     # Website pages (EN & TR)
+├── style.css                  # Main stylesheet
+├── script.js                  # Main JavaScript (UI, blog, language, etc.)
+├── blog-posts.json            # Blog post data (auto-generated)
+├── blog-rss.xml               # Latest RSS feed (auto-fetched)
+└── convert-rss.js             # RSS→JSON converter (for local/test)
 ```
+</details>
 
-## 🔄 Automated CV Generation
+<details>
+<summary>🖼️ Visual Showcase (click to expand)</summary>
 
-The CV is automatically rebuilt whenever changes are made to files in the `cv/` directory. Here's how it works:
+<div align="center">
+   <h3>Desktop View (Dark Mode)</h3>
+   <img src="Screenshots/desktop-home.png" alt="Desktop Homepage" width="90%">
+   <p>Homepage on Desktop</p>
+   <h3>Mobile Views</h3>
+   <table>
+      <tr>
+         <td align="center">
+            <img src="Screenshots/mobile-experience-dark.png" alt="Mobile Experience (Dark Mode) Page" width="200">
+            <p>Experience (Dark Mode)</p>
+         </td>
+         <td align="center">
+            <img src="Screenshots/mobile-projects-light.png" alt="Mobile Projects (Light Mode) Page" width="200">
+            <p>Projects (Light Mode)</p>
+         </td>
+         <td align="center">
+            <img src="Screenshots/mobile-skills-dark.png" alt="Mobile Skills (Dark Mode) Page" width="200">
+            <p>Skills (Dark Mode)</p>
+         </td>
+      </tr>
+   </table>
+</div>
+</details>
 
-### Trigger Conditions
+## Responsive Design
 
-- Any push to `main` or `v2` branches that includes changes in the `cv/` directory
-- Manual trigger via GitHub Actions UI
+- **Grid Layouts**: Home and blog pages use adaptive grid layouts (3-col, 2-col, 1-col) based on breakpoints.
+- **Hamburger Menu**: Navigation switches to mobile menu below 1035px, with logo left and hamburger right.
+- **Tab System**: Blog uses two-level tabs for category/subcategory filtering, with language-specific logic.
+- **Mobile Optimizations**: Touch targets, font scaling, and single-column layouts for small screens.
 
-### Process
+---
 
-1. **Detection**: GitHub Actions detects changes in the `cv/` directory
-2. **Setup**: LaTeX environment is configured on a clean Ubuntu runner
-3. **Compilation**:
-   - `cv/cv.tex` is compiled twice using LuaLaTeX (for proper cross-references)
-   - Ensures all references and table of contents are correctly generated
-4. **Naming & Storage**:
-   - Two versions of the CV are created:
-     - `AliHaydarSucu_CV_YYYYMMDD.pdf` (e.g., `AliHaydarSucu_CV_20250906.pdf`)
-     - `AliHaydarSucu_Resume_DD.MM.YY.pdf` (e.g., `AliHaydarSucu_Resume_06.09.25.pdf`)
-   - Both versions are saved in the `Assets/` directory
-5. **Repository Update**:
-   - The new CV files are automatically committed to the repository
-   - The website's download link is automatically updated to point to the latest version
-
-## 🖼️ Project Structure
-
-```
-.
-├── .github/workflows/    # GitHub Actions workflows
-│   └── generate-cv.yml   # CV generation automation
-├── Assets/              # Generated CV PDFs
-├── cv/                  # CV source files
-│   ├── cv.tex           # LaTeX CV template
-│   └── README.md        # CV documentation
-├── Images/              # Website assets
-│   ├── Icons/          # Skill icons and favicon
-│   ├── Licenses/       # Certification badges
-│   ├── Places/         # Company/education logos
-│   └── Projects/       # Project screenshots
-├── *.html              # Website pages
-├── script.js           # Website interactivity
-└── style.css           # Website styling
-```
-
-## 🌐 Website Features
-
-### Responsive Design
-
-- **Desktop**: 1200px+
-- **Laptop**: 992px - 1199px
-- **Tablet**: 768px - 991px
-- **Mobile**: 320px - 767px
-
-### Performance Optimizations
-
-- **Fast Loading**: Optimized assets and lazy loading
-- **SEO Friendly**: Semantic HTML and meta tags
-- **Accessibility**: WCAG 2.1 compliant
-- **PWA Ready**: Offline capabilities
-
-### Multilingual Support
-
-- English/Turkish language toggle
-- Automatic hreflang tags
-- Language-specific meta descriptions
-
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
 - Modern web browser
 - GitHub account (for development)
+- Node.js (for local blog RSS parsing)
 - LaTeX distribution (for local CV generation)
 
 ### Local Development
@@ -179,19 +144,29 @@ The CV is automatically rebuilt whenever changes are made to files in the `cv/` 
    ```
 2. Open `index.html` in your browser
 
+### Local Blog Data Update (Optional)
+
+To fetch and parse your Substack blog posts locally:
+
+```bash
+curl -s "https://alihaydarsucu.substack.com/feed" > blog-rss.xml
+npm install xml2js
+node convert-rss.js
+```
+
 ### Building the CV Locally
 
 1. Install a full LaTeX distribution (e.g., TeX Live)
 2. Navigate to the `cv` directory
-3. Run the following commands to ensure proper compilation:
+3. Run:
    ```bash
    lualatex cv.tex
    ```
 4. The compiled PDF will be available as `cv.pdf` in the `cv` directory
 
-> **Note**: The automated workflow handles the timestamped file naming. For local builds, you'll need to manually rename the file if you want to match the production naming convention.
+---
 
-## 📬 Contact
+## Contact
 
 - GitHub: [@alihaydarsucu](https://github.com/alihaydarsucu)
 - Email: [alihaydarsucu@gmail.com](mailto:alihaydarsucu@gmail.com)
@@ -203,3 +178,5 @@ The CV is automatically rebuilt whenever changes are made to files in the `cv/` 
 <div align="center">
   Made with ❤️ by Ali Haydar Sucu
 </div>
+
+
