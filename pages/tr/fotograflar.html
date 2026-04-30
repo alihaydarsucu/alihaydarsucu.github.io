@@ -4,50 +4,155 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Fotoğraflar | Ali Haydar Sucu</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="/style.css">
   <link rel="icon" href="/Images/Icons/icon.webp">
   <base href="/">
   <style>
-    /* minimal gallery styles (same as EN) */
-    .photos-controls{margin:1rem 0}
-    .photo-filters{display:flex;gap:.5rem;flex-wrap:wrap}
-    .filter-btn{padding:.4rem .6rem;border-radius:6px;border:1px solid #ccc;background:#fff;cursor:pointer}
-    .filter-btn.active{background:#111;color:#fff}
-    .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
-    .photo-item{display:block;border:0;padding:0;background:transparent;text-align:left}
-    .photo-item img{width:100%;height:140px;object-fit:cover;border-radius:6px}
-    .photo-title{font-size:.9rem;margin-top:.3rem}
-    .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.85);z-index:999}
-    .lb-content{max-width:90%;max-height:80%;text-align:center}
-    .lb-image{max-width:100%;max-height:70vh;border-radius:6px}
+    .photos-shell{padding-top:1rem;padding-bottom:2rem}
+    .photos-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1.25rem;margin-bottom:1.5rem}
+    .photos-heading-group{max-width:62ch}
+    .photos-header .section-title{margin-bottom:.4rem}
+    .photos-intro{margin:0;color:var(--text-secondary,#5a5a5a)}
+
+    .photo-grid{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start}
+    .photo-filters{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:flex-end;gap:.6rem;align-self:flex-start;padding-top:.35rem}
+    .filter-btn{padding:.55rem .85rem;border-radius:999px;border:1px solid var(--muted,#ccc);background:var(--surface,#fff);cursor:pointer;text-align:left;white-space:nowrap}
+    .filter-btn.active{background:var(--accent,#111);color:#fff;border-color:var(--accent,#111)}
+    .photo-item{display:inline-block;border:0;padding:0;background:transparent;text-align:left;animation:photoFadeUp .28s ease both}
+    /* fixed height, width determined by image aspect ratio */
+    .photo-item img{height:280px;width:auto;object-fit:cover;border-radius:12px;display:block;box-shadow:0 10px 26px rgba(0,0,0,.14)}
+    .photo-title{font-size:.95rem;margin-top:.45rem;color:var(--text-primary,#111)}
+
+    /* Lightbox with smooth scale/opacity animation */
+    .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.85);z-index:999;opacity:0;transition:opacity .22s ease}
+    .lightbox.open{opacity:1}
+    .lb-content{max-width:92%;max-height:84%;text-align:center;transform:scale(.96);transition:transform .25s ease}
+    .lightbox.open .lb-content{transform:scale(1)}
+    .lb-image{max-width:100%;max-height:72vh;border-radius:8px}
     .lb-caption{color:#fff;margin-top:.6rem}
     .lb-prev,.lb-next,.lb-close{position:absolute;background:transparent;color:#fff;border:0;font-size:1.6rem;cursor:pointer}
     .lb-close{top:20px;right:20px}
     .lb-prev{left:20px}
     .lb-next{right:20px}
+    @keyframes photoFadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:900px){
+      .photos-header{flex-direction:column}
+      .photo-filters{justify-content:flex-start;padding-top:0}
+      .photo-grid{order:1}
+      .photo-item img{height:200px}
+    }
   </style>
 </head>
 <body>
-  <header>
+  <header role="banner">
     <div class="container">
       <nav role="navigation" aria-label="Ana navigasyon">
-        <div class="logo"><a href="/">Ali Haydar Sucu</a></div>
-        <div class="nav-links">
-          <a href="/">Hakkımda</a>
-          <a href="/yetenekler">Yetenekler</a>
-          <a href="/projeler">Projeler</a>
-          <a href="/fotograflar" class="active">Fotoğraflar</a>
-          <a href="/deneyim">Deneyim</a>
-          <a href="/yazilar">Blog</a>
+        <button class="hamburger-menu" aria-label="Navigasyon menüsünü aç/kapat" aria-expanded="false" aria-controls="mobile-menu">
+          <div class="bar" aria-hidden="true"></div>
+          <div class="bar" aria-hidden="true"></div>
+          <div class="bar" aria-hidden="true"></div>
+          <span class="sr-only">Menü</span>
+        </button>
+        <div class="logo">
+          <img src="/Images/Icons/icon.webp" alt="Ali Haydar Sucu logo" class="logo-img">
+          <a href="/tr" aria-label="Ana sayfaya git">Ali Haydar Sucu</a>
+        </div>
+        <div class="nav-links" role="menubar">
+          <a href="/tr" role="menuitem">
+            <i class="fas fa-user" aria-hidden="true"></i>
+            <span class="nav-text">Hakkında</span>
+          </a>
+          <a href="/yetenekler" role="menuitem">
+            <i class="fas fa-code" aria-hidden="true"></i>
+            <span class="nav-text">Yetenekler</span>
+          </a>
+          <a href="/projeler" role="menuitem">
+            <i class="fas fa-project-diagram" aria-hidden="true"></i>
+            <span class="nav-text">Projeler</span>
+          </a>
+          <a href="/deneyim" role="menuitem">
+            <i class="fas fa-briefcase" aria-hidden="true"></i>
+            <span class="nav-text">Deneyim</span>
+          </a>
+          <a href="/yazilar" role="menuitem">
+            <i class="fas fa-pencil" aria-hidden="true"></i>
+            <span class="nav-text">Blog</span>
+          </a>
+          <a href="/fotograflar" class="active" role="menuitem" aria-current="page">
+            <i class="fas fa-camera" aria-hidden="true"></i>
+            <span class="nav-text">Fotoğraflar</span>
+          </a>
+          <div class="language-selector" role="region" aria-label="Dil seçici">
+            <div class="language-selector-toggle" role="radiogroup" aria-label="Dil seçin">
+              <button class="language-option" role="radio" aria-checked="false" aria-label="English">EN</button>
+              <button class="language-option active" role="radio" aria-checked="true" aria-label="Türkçe">TR</button>
+            </div>
+          </div>
+          <label class="theme-toggle" aria-label="Karanlık modu değiştir">
+            <input type="checkbox" aria-label="Karanlık modu değiştir">
+            <span class="theme-slider" aria-hidden="true"></span>
+            <span class="sr-only">Karanlık modu değiştir</span>
+          </label>
         </div>
       </nav>
     </div>
   </header>
 
-  <main class="container">
-    <h1>Fotoğraflar</h1>
+  <div class="mobile-menu-overlay"></div>
+  <div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigasyon menüsü">
+    <div class="mobile-menu-header">
+      <button class="mobile-menu-close" aria-label="Menüyü kapat">
+        <i class="fas fa-times" aria-hidden="true"></i>
+        <span class="sr-only">Menüyü kapat</span>
+      </button>
+    </div>
+    <div class="mobile-nav-links" role="list">
+      <div role="listitem"><a href="/tr"><i class="fas fa-user" aria-hidden="true"></i><span class="nav-text-mobile">Hakkında</span></a></div>
+      <div role="listitem"><a href="/yetenekler"><i class="fas fa-code" aria-hidden="true"></i><span class="nav-text-mobile">Yetenekler</span></a></div>
+      <div role="listitem"><a href="/projeler"><i class="fas fa-project-diagram" aria-hidden="true"></i><span class="nav-text-mobile">Projeler</span></a></div>
+      <div role="listitem"><a href="/deneyim"><i class="fas fa-briefcase" aria-hidden="true"></i><span class="nav-text-mobile">Deneyim</span></a></div>
+      <div role="listitem"><a href="/yazilar"><i class="fas fa-pencil" aria-hidden="true"></i><span class="nav-text-mobile">Blog</span></a></div>
+      <div role="listitem"><a href="/fotograflar" class="active"><i class="fas fa-camera" aria-hidden="true"></i><span class="nav-text-mobile">Fotoğraflar</span></a></div>
+    </div>
+    <div class="mobile-menu-actions">
+      <div class="mobile-language-selector" role="region" aria-label="Language selector">
+        <div class="language-selector-toggle" role="radiogroup" aria-label="Select language">
+          <button class="language-option" role="radio" aria-checked="false" aria-label="English">EN</button>
+          <button class="language-option active" role="radio" aria-checked="true" aria-label="Türkçe">TR</button>
+        </div>
+      </div>
+      <div class="mobile-theme-toggle">
+        <label class="theme-toggle" aria-label="Karanlık modu değiştir">
+          <input type="checkbox" aria-label="Karanlık modu değiştir">
+          <span class="theme-slider" aria-hidden="true"></span>
+          <span class="sr-only">Karanlık modu değiştir</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <main class="container photos-shell" role="main">
+    <section class="photos-header" role="region" aria-labelledby="photos-heading">
+      <div class="photos-heading-group">
+        <h1 class="section-title" id="photos-heading">Fotoğraflar</h1>
+        <p class="photos-intro">Kategorilere göre fotoğrafları inceleyin. Bir fotoğrafa tıklayınca daha büyük görünüm, açıklama ve oklarla gezinme açılır.</p>
+      </div>
+    </section>
     <div id="photos-app"></div>
   </main>
+
+  <footer role="contentinfo">
+    <div class="footer-content">
+      <p>&copy; Copyright 2026 - Ali Haydar Sucu</p>
+      <p>Bilgisayar Mühendisliği Öğrencisi</p>
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top" aria-label="Başa dön">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    <span class="sr-only">Başa dön</span>
+  </a>
 
   <script src="/photos.js" defer></script>
   <script src="/script.js" defer></script>
