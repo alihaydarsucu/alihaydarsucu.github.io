@@ -15,6 +15,20 @@ RewriteRule ^yetenekler/?$ yetenekler.html [L]
 RewriteRule ^projeler/?$ projeler.html [L]
 RewriteRule ^deneyim/?$ deneyim.html [L]
 
+# Blog list sayfaları - EN ve TR
+RewriteRule ^posts/?$ blog.html [L]
+RewriteRule ^yazilar/?$ blog-tr.html [L]
+
+# /blog-tr ve varyasyonlarını /yazilar'a yönlendir
+RewriteRule ^blog-tr/?$ yazilar [R=301,L]
+
+# Blog makale sayfaları - slug tabanlı
+# /posts/<slug> -> /article.html?slug=<slug>
+RewriteRule ^posts/([^/]+)/?$ article.html?slug=$1 [L,QSA]
+
+# /yazilar/<slug> -> /article-tr.html?slug=<slug>
+RewriteRule ^yazilar/([^/]+)/?$ article-tr.html?slug=$1 [L,QSA]
+
 # 404 sayfası için
 RewriteRule ^404/?$ 404.html [L]
 
