@@ -8,6 +8,7 @@
 - [Project Overview](#project-overview)
 - [Features](#features)
 - [Blog System](#blog-system)
+- [Photos Gallery](#photos-gallery)
 - [CV Generation](#cv-generation)
 - [Tech & Structure](#tech--structure)
 - [Responsive Design](#responsive-design)
@@ -28,7 +29,8 @@ This repository contains my personal portfolio and blog website, featuring a ful
 - **Modern UI/UX**: Accessible, semantic HTML, ARIA labels, and visually appealing design.
 - **Automated CV Generation**: LaTeX-based, ATS-optimized, Oxford-style CV, auto-built and versioned via GitHub Actions.
 - **Dynamic Blog System**: Blog posts are fetched from Substack RSS, parsed, and published with category, subcategory, and language metadata.
-- **Clean URL Routing**: Blog posts accessible via `/posts/slug` (EN) and `/yazilar/slug` (TR), with .htaccess rewrite support.
+- **Photos Gallery**: Interactive photo gallery with search, category filtering, pagination (10 items/page), lightbox viewer with keyboard navigation, and bilingual support.
+- **Clean URL Routing**: Blog posts accessible via `/posts/slug` (EN) and `/yazilar/slug` (TR); Photos accessible via `/photos` (EN) and `/fotograflar` (TR), with .htaccess rewrite support.
 - **Social & SEO**: Open Graph, Twitter Card, and SEO meta tags; social links including Chess.com, LinkedIn, GitHub.
 
 ---
@@ -45,6 +47,22 @@ This repository contains my personal portfolio and blog website, featuring a ful
 - **Multilingual UI**: All blog UI elements, empty states, and buttons are translated.
 - **Share & Copy**: Blog posts have a share button that copies the clean site URL (not Substack) to clipboard.
 - **RSS/JSON Structure**: `blog-posts.json` contains all post metadata, used for filtering and display.
+
+---
+
+## Photos Gallery
+
+- **Photo Storage**: Photos stored in `/Images/Projects/` and referenced via `/data/photos.json`.
+- **Data Structure**: JSON file contains bilingual metadata (titles, descriptions) with category tags and filenames.
+- **Features**:
+  - **Search**: Real-time search by title, description, or category tag
+  - **Category Filtering**: Filter photos by tags (Flag, Landscape, Cat, Building, etc.) with bilingual labels
+  - **Pagination**: 10 photos per page with next/previous navigation and page number buttons
+  - **Lightbox Viewer**: Fixed-position modal with 80% zoom level, smooth animations, and keyboard navigation (Arrow keys, Escape)
+  - **Scroll Lock**: Page scrolling is disabled when lightbox is open for better UX
+  - **Responsive Grid**: Adaptive layout with 280px tile height on desktop, 200px on mobile
+- **Multilingual UI**: All gallery labels (search, filters, pagination) are translated to English and Turkish
+- **Clean URLs**: Gallery accessible via `/photos` (EN) and `/fotograflar` (TR), with language-specific navigation
 
 ---
 
@@ -81,12 +99,19 @@ This repository contains my personal portfolio and blog website, featuring a ful
 │   └── generate-cv.yml        # CV generation
 ├── Assets/                    # Generated CV PDFs
 ├── cv/                        # CV source files (LaTeX)
-├── Images/                    # Icons, screenshots, etc.
-├── *.html                     # Website pages (EN & TR)
+├── data/                      # Gallery data
+│   └── photos.json            # Photo metadata (bilingual)
+├── Images/                    # Icons, screenshots, projects, etc.
+├── pages/                     # Language-specific pages
+│   ├── en/                    # English pages
+│   └── tr/                    # Turkish pages
+├── *.html                     # Root pages (index, 404, etc.)
 ├── style.css                  # Main stylesheet
-├── script.js                  # Main JavaScript (UI, blog, language, etc.)
+├── script.js                  # Main JavaScript (UI, navigation, language, etc.)
+├── photos.js                  # Photos gallery JavaScript (search, filter, pagination, lightbox)
 ├── blog-posts.json            # Blog post data (auto-generated)
 ├── blog-rss.xml               # Latest RSS feed (auto-fetched)
+├── .htaccess                  # URL rewriting for clean routes
 └── convert-rss.js             # RSS→JSON converter (for local/test)
 ```
 </details>
