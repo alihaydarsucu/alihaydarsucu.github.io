@@ -13,6 +13,16 @@ document.addEventListener('DOMContentLoaded', function() {
         if (document.getElementById('repos')) {
             loadGitHubProjects();
         }
+        
+        // Blog sadece ilgili sayfalarda
+        if (document.getElementById('blog-grid')) {
+            loadBlogPosts();
+        }
+        
+        // Article sadece ilgili sayfalarda
+        if (document.getElementById('article-content')) {
+            loadArticle();
+        }
     }
     
     function setupDarkMode() {
@@ -117,26 +127,36 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (selectedLang === 'EN') {
                     // Türkçe'den İngilizce'ye geçiş
-                            if (currentPath.includes('tr') || currentPath === '/tr') {
-            window.location.href = '/';
-        } else if (currentPath.includes('yetenekler') || currentPath === '/yetenekler') {
-            window.location.href = '/skills';
-        } else if (currentPath.includes('projeler') || currentPath === '/projeler') {
-            window.location.href = '/projects';
-        } else if (currentPath.includes('deneyim') || currentPath === '/deneyim') {
-            window.location.href = '/experience';
-        }
+                    if (currentPath.includes('tr') || currentPath === '/tr') {
+                        window.location.href = '/';
+                    } else if (currentPath.includes('yetenekler') || currentPath === '/yetenekler') {
+                        window.location.href = '/skills';
+                    } else if (currentPath.includes('projeler') || currentPath === '/projeler') {
+                        window.location.href = '/projects';
+                    } else if (currentPath.includes('deneyim') || currentPath === '/deneyim') {
+                        window.location.href = '/experience';
+                    } else if (currentPath.includes('yazilar') || currentPath === '/yazilar') {
+                        window.location.href = '/posts';
+                    } else if (currentPath.includes('blog-tr') || currentPath === '/blog-tr') {
+                        window.location.href = '/blog'; // eski yönlendirme, kaldırılacak
+                    } else if (currentPath.includes('yazilar') || currentPath === '/yazilar') {
+                        window.location.href = '/posts';
+                    }
                 } else if (selectedLang === 'TR') {
                     // İngilizce'den Türkçe'ye geçiş
-                            if (currentPath.includes('index') || currentPath === '/' || currentPath === '') {
-            window.location.href = '/tr';
-        } else if (currentPath.includes('skills') || currentPath === '/skills') {
-            window.location.href = '/yetenekler';
-        } else if (currentPath.includes('projects') || currentPath === '/projects') {
-            window.location.href = '/projeler';
-        } else if (currentPath.includes('experience') || currentPath === '/experience') {
-            window.location.href = '/deneyim';
-        }
+                    if (currentPath.includes('index') || currentPath === '/' || currentPath === '') {
+                        window.location.href = '/tr';
+                    } else if (currentPath.includes('skills') || currentPath === '/skills') {
+                        window.location.href = '/yetenekler';
+                    } else if (currentPath.includes('projects') || currentPath === '/projects') {
+                        window.location.href = '/projeler';
+                    } else if (currentPath.includes('experience') || currentPath === '/experience') {
+                        window.location.href = '/deneyim';
+                    } else if (currentPath.includes('posts') || currentPath === '/posts') {
+                        window.location.href = '/yazilar';
+                    } else if (currentPath.includes('blog') || currentPath === '/blog') {
+                        window.location.href = '/yazilar';
+                    }
                 }
             });
         });
@@ -323,5 +343,746 @@ document.addEventListener('DOMContentLoaded', function() {
                 displayRepos(repos, filter);
             });
         });
+    }
+    
+    // Blog Posts fonksiyonları
+    async function loadBlogPosts() {
+        const blogGrid = document.getElementById('blog-grid');
+        const blogLoading = document.querySelector('.blog-loading');
+        const blogError = document.getElementById('blog-error');
+        
+        try {
+            // Mevcut sayfa dilini belirle - Türkçe ve İngilizce URL'ler
+            const isTurkishBlog = window.location.pathname.includes('yazilar') || window.location.pathname.includes('blog-tr');
+            const isEnglishBlog = window.location.pathname.includes('posts') || window.location.pathname.includes('blog.html');
+            const pageLang = isTurkishBlog ? 'tr' : (isEnglishBlog ? 'en' : 'en');
+            
+            // URL'den kategori parametrelerini al
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category') || 'all';
+            const subcategory = urlParams.get('subcategory') || 'all';
+            
+            // Test için mock data - GitHub Actions ile güncellenen veriyi kullan
+            const useMockData = false; // false yapın gerçek veri için
+            
+            if (useMockData) {
+                // Test verileri
+                const mockPosts = [
+                    {
+                        title: "Arduino ile Gömülü Sistemler Geliştirme",
+                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bu yazıda Arduino kullanarak nasıl gömülü sistemler geliştirebileceğimizi anlatacağım. Microcontroller programming ve embedded systems konularına değineceğiz.",
+                        link: "https://alihaydarsucu.substack.com/p/arduino-ile-gomulu-sistemler",
+                        pubDate: "2025-02-14T10:00:00Z",
+                        slug: "arduino-ile-gomulu-sistemler",
+                        lang: "tr",
+                        category: "technical",
+                        subcategory: "embedded",
+                        categories: ["#technical", "#embedded", "#arduino"]
+                    },
+                    {
+                        title: "Clean Code Kitap İncelemesi: Robert C. Martin",
+                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Software mühendisliğinin temel taşlarından biri olan clean code prensiplerini bu kitap incelemesinde ele alıyorum.",
+                        link: "https://alihaydarsucu.substack.com/p/clean-code-kitap-incelemesi",
+                        pubDate: "2025-02-13T15:30:00Z",
+                        slug: "clean-code-kitap-incelemesi",
+                        lang: "en",
+                        category: "technical",
+                        subcategory: "systems",
+                        categories: ["#engineering", "#book-review", "#software"]
+                    },
+                    {
+                        title: "Teknolojinin İnsan Üzerindeki Etkileri",
+                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Modern teknolojinin toplumsal yapıyı ve insan ilişkilerini nasıl değiştirdiğini felsefi bir perspektiften ele alıyorum.",
+                        link: "https://alihaydarsucu.substack.com/p/teknolojinin-insan-uzerindeki-etkileri",
+                        pubDate: "2025-02-12T20:15:00Z",
+                        slug: "teknolojinin-insan-uzerindeki-etkileri",
+                        lang: null,
+                        category: null,
+                        subcategory: null,
+                        categories: ["#intellectual", "#philosophy", "#technology"]
+                    }
+                ];
+                
+                displayBlogPosts(mockPosts, pageLang, category, subcategory);
+                setupBlogTabs(mockPosts, pageLang);
+                setupBlogSearch(mockPosts, pageLang);
+                return;
+            }
+            
+            // GitHub Actions ile oluşturulan JSON dosyasını çek
+            try {
+                console.log('Loading blog posts from JSON file...');
+                const response = await fetch('./blog-posts.json');
+                const data = await response.json();
+                
+                if (data.status === 'ok' && data.items && data.items.length > 0) {
+                    console.log('Found posts:', data.items.length);
+                    displayBlogPosts(data.items, pageLang, category, subcategory);
+                    setupBlogTabs(data.items, pageLang);
+                    setupBlogSearch(data.items, pageLang);
+                    return;
+                }
+            } catch (jsonError) {
+                console.log('JSON file not found, trying fallback methods...');
+            }
+            
+            // Fallback: CORS-free proxy servisleri dene
+            const proxyUrls = [
+                'https://corsproxy.io/?',
+                'https://api.allorigins.win/raw?url=',
+                'https://thingproxy.free.beeceptor.com/'
+            ];
+            
+            const substackUsername = 'alihaydarsucu';
+            const rssUrl = `https://${substackUsername}.substack.com/feed`;
+            
+            for (const proxy of proxyUrls) {
+                try {
+                    console.log('Trying proxy:', proxy);
+                    const proxyUrl = proxy + encodeURIComponent(rssUrl);
+                    const response = await fetch(proxyUrl);
+                    const data = await response.json();
+                    
+                    if (data.status === 'ok' && data.items && data.items.length > 0) {
+                        console.log('Success with proxy:', proxy, 'Posts:', data.items.length);
+                        displayBlogPosts(data.items, pageLang, category, subcategory);
+                        setupBlogTabs(data.items, pageLang);
+                        setupBlogSearch(data.items, pageLang);
+                        return;
+                    }
+                } catch (error) {
+                    console.log('Proxy failed:', proxy, error);
+                    continue;
+                }
+            }
+            
+            // Son çare: Hata göster
+            showBlogError();
+            
+        } catch (error) {
+            console.error('Blog posts fetch error:', error);
+            showBlogError();
+        } finally {
+            if (blogLoading) {
+                blogLoading.style.display = 'none';
+            }
+        }
+    }
+    
+    function displayBlogPosts(posts, pageLang = 'en', category = 'all', subcategory = 'all') {
+        const blogGrid = document.getElementById('blog-grid');
+        if (!blogGrid) return;
+        
+        // Dil filtrelemesi: lang alanına göre yazıları filtrele
+        let filteredPosts = posts.filter(post => {
+            // Eğer yazının dili belirtilmişse sadece o dil için göster
+            if (post.lang === 'tr') return pageLang === 'tr';
+            if (post.lang === 'en') return pageLang === 'en';
+            // Dil belirtilmemişse her iki sayfada da göster
+            return true;
+        });
+        
+        // Ana kategori filtrelemesi
+        if (category !== 'all') {
+            filteredPosts = filteredPosts.filter(post => post.category === category);
+        }
+        
+        // Alt kategori filtrelemesi (sadece technical kategorisinde)
+        if (category === 'technical' && subcategory !== 'all') {
+            filteredPosts = filteredPosts.filter(post => post.subcategory === subcategory);
+        }
+        
+        // Yazı linkini oluştur (slug varsa clean URL, yoksa eski yöntem)
+        function getArticleLink(post) {
+            if (post.slug) {
+                return pageLang === 'tr' ? `/yazilar/${post.slug}` : `/posts/${post.slug}`;
+            }
+            // Geriye dönük uyumluluk: slug yoksa eski yöntem
+            const baseUrl = pageLang === 'tr' ? '/article-tr.html' : '/article.html';
+            return `${baseUrl}?id=${encodeURIComponent(post.link)}`;
+        }
+        
+        // Kategori etiketini oluştur
+        function getCategoryBadge(post) {
+            if (post.category === 'technical') {
+                const subcatLabel = {
+                    'systems': pageLang === 'tr' ? 'Sistemler' : 'Systems',
+                    'embedded': pageLang === 'tr' ? 'Gömülü' : 'Embedded',
+                    'ai': pageLang === 'tr' ? 'Yapay Zeka' : 'AI'
+                };
+                return post.subcategory ? `${pageLang === 'tr' ? 'Teknik' : 'Technical'} • ${subcatLabel[post.subcategory] || post.subcategory}` : (pageLang === 'tr' ? 'Teknik' : 'Technical');
+            } else if (post.category === 'history') {
+                return pageLang === 'tr' ? 'Tarih' : 'History';
+            } else if (post.category === 'fiction') {
+                return pageLang === 'tr' ? 'Kurgu' : 'Fiction';
+            }
+            return pageLang === 'tr' ? 'Kategorisiz' : 'Uncategorized';
+        }
+        
+        // Eğer filtrelenmiş yazı yoksa boş durum mesajı göster
+        if (filteredPosts.length === 0) {
+            const emptyMessages = {
+                'tr': {
+                    'all': 'Henüz hiç yazı yok.',
+                    'technical': 'Bu kategoride henüz teknik yazı yok.',
+                    'history': 'Bu kategoride henüz tarih yazısı yok.',
+                    'fiction': 'Bu kategoride henüz kurgu yazısı yok.',
+                    'systems': 'Bu alt kategoride henüz yazı yok.',
+                    'embedded': 'Bu alt kategoride henüz yazı yok.',
+                    'ai': 'Bu alt kategoride henüz yazı yok.'
+                },
+                'en': {
+                    'all': 'No posts yet.',
+                    'technical': 'No technical posts in this category yet.',
+                    'history': 'No history posts in this category yet.',
+                    'fiction': 'No fiction posts in this category yet.',
+                    'systems': 'No posts in this subcategory yet.',
+                    'embedded': 'No posts in this subcategory yet.',
+                    'ai': 'No posts in this subcategory yet.'
+                }
+            };
+            
+            const messageKey = subcategory !== 'all' ? subcategory : category;
+            const message = emptyMessages[pageLang][messageKey] || emptyMessages[pageLang]['all'];
+            
+            blogGrid.innerHTML = `
+                <div class="blog-empty-state">
+                    <i class="fas fa-folder-open" aria-hidden="true"></i>
+                    <h3>${pageLang === 'tr' ? 'Henüz Yazı Yok' : 'No Posts Yet'}</h3>
+                    <p>${message}</p>
+                </div>
+            `;
+            return;
+        }
+        
+        blogGrid.innerHTML = filteredPosts.map(post => {
+            const articleUrl = getArticleLink(post);
+            const categoryBadge = getCategoryBadge(post);
+            return `
+            <article class="blog-card" data-category="${post.category || 'uncategorized'}">
+                <div class="blog-card-header">
+                    <div class="blog-meta">
+                        <time datetime="${post.pubDate}" class="blog-date">${formatBlogDate(post.pubDate)}</time>
+                        <span class="blog-category">${categoryBadge}</span>
+                    </div>
+                    <h2 class="blog-title">
+                        <a href="${articleUrl}">
+                            ${post.title}
+                        </a>
+                    </h2>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">${truncateText(stripHtml(post.description), 150)}</p>
+                </div>
+                <div class="blog-footer">
+                    <a href="${articleUrl}" class="blog-read-more">
+                        ${pageLang === 'tr' ? 'Devamını Oku' : 'Read More'} <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                    <button class="blog-share" type="button" aria-label="${pageLang === 'tr' ? 'Makale linkini kopyala' : 'Copy article link'}" data-article-link="${encodeURIComponent(post.link)}">
+                        <i class="fas fa-share-nodes" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </article>
+        `;
+        }).join('');
+
+        document.querySelectorAll('.blog-share').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const articleLink = btn.getAttribute('data-article-link') || '';
+                const decodedLink = decodeURIComponent(articleLink);
+                
+                // Yazının slug'ını bulup clean URL oluştur
+                const article = filteredPosts.find(post => post.link === decodedLink);
+                let urlToCopy = decodedLink; // default: Substack linki
+                
+                if (article && article.slug) {
+                    // Clean URL ile kopy et
+                    const cleanUrl = pageLang === 'tr' ? `/yazilar/${article.slug}` : `/posts/${article.slug}`;
+                    urlToCopy = `${window.location.origin}${cleanUrl}`;
+                } else if (article) {
+                    // Slug yoksa fallback
+                    const baseUrl = pageLang === 'tr' ? '/article-tr.html' : '/article.html';
+                    urlToCopy = `${window.location.origin}${baseUrl}?id=${encodeURIComponent(decodedLink)}`;
+                }
+                
+                try {
+                    await navigator.clipboard.writeText(urlToCopy);
+                    btn.classList.add('copied');
+                    setTimeout(() => btn.classList.remove('copied'), 1200);
+                    showToast(pageLang === 'tr' ? 'Link panoya kopyalandı' : 'Link copied to clipboard');
+                } catch (e) {
+                    // fallback
+                    const tmp = document.createElement('input');
+                    tmp.value = urlToCopy;
+                    document.body.appendChild(tmp);
+                    tmp.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tmp);
+                    btn.classList.add('copied');
+                    setTimeout(() => btn.classList.remove('copied'), 1200);
+                    showToast(pageLang === 'tr' ? 'Link panoya kopyalandı' : 'Link copied to clipboard');
+                }
+            });
+        });
+        
+        // Blog kartlarını animasyonla göster
+        setTimeout(() => {
+            document.querySelectorAll('.blog-card').forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('show');
+                }, index * 100);
+            });
+        }, 100);
+    }
+    
+    function categorizeBlogPost(post) {
+        const title = (post.title || '').toLowerCase();
+        const description = (post.description || '').toLowerCase();
+        const categories = (post.categories || []).join(' ').toLowerCase();
+        
+        const text = `${title} ${description} ${categories}`;
+        
+        // Öncelikle Substack etiketlerini kontrol et
+        if (categories.includes('#technical') || categories.includes('technical')) {
+            return 'technical';
+        }
+        if (categories.includes('#engineering') || categories.includes('engineering')) {
+            return 'engineering';
+        }
+        if (categories.includes('#intellectual') || categories.includes('intellectual')) {
+            return 'intellectual';
+        }
+        
+        // Etiket yoksa otomatik kategorizasyon (fallback)
+        // Teknik yazılar - gömülü sistemler, AI, programlama
+        if (text.includes('embedded') || text.includes('ai') || text.includes('artificial intelligence') || 
+            text.includes('machine learning') || text.includes('programming') || text.includes('code') ||
+            text.includes('gömülü') || text.includes('yapay zeka') || text.includes('programlama') ||
+            text.includes('python') || text.includes('javascript') || text.includes('c++') || text.includes('arduino')) {
+            return 'technical';
+        }
+        
+        // Mühendislikle ilgili kitap incelemeleri
+        if (text.includes('book review') || text.includes('kitap incelemesi') || text.includes('engineering') ||
+            text.includes('mühendislik') || text.includes('software') || text.includes('hardware') ||
+            text.includes('technology') || text.includes('teknoloji')) {
+            return 'engineering';
+        }
+        
+        // Entelektüel içerik
+        return 'intellectual';
+    }
+    
+    function getCategoryLabel(category) {
+        const labels = {
+            'technical': 'Technical',
+            'engineering': 'Engineering',
+            'intellectual': 'Intellectual'
+        };
+        return labels[category] || 'General';
+    }
+    
+    function formatBlogDate(dateString) {
+        const date = new Date(dateString);
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        return date.toLocaleDateString('en-US', options);
+    }
+
+    function stripHtml(html) {
+        const tmp = document.createElement('div');
+        tmp.innerHTML = html;
+        return tmp.textContent || tmp.innerText || '';
+    }
+
+    function sanitizeSubstackHtml(html) {
+        if (!html) return '';
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        const selectorsToRemove = [
+            '.image-link-expand',
+            '.pencraft',
+            'button.restack-image',
+            'button.view-image',
+            'script',
+            'style',
+            'link[rel="stylesheet"]'
+        ];
+
+        selectorsToRemove.forEach(sel => {
+            doc.querySelectorAll(sel).forEach(node => node.remove());
+        });
+
+        // Remove hashtag-only lines (e.g. "#engineering #software") so tags only appear in footer
+        doc.querySelectorAll('p, div, span').forEach(node => {
+            const text = (node.textContent || '').trim();
+            if (!text) return;
+
+            // Only hashtags and whitespace
+            const onlyHashtags = /^(#[\p{L}][\p{L}\p{N}_\-]*\s*)+$/u.test(text);
+            if (onlyHashtags) node.remove();
+        });
+
+        doc.querySelectorAll('a').forEach(a => {
+            a.setAttribute('target', '_blank');
+            a.setAttribute('rel', 'noopener noreferrer');
+        });
+
+        return doc.body ? doc.body.innerHTML : html;
+    }
+
+    function stripHtmlPreservingContent(html) {
+        let content = sanitizeSubstackHtml(html);
+
+        const textarea = document.createElement('textarea');
+        textarea.innerHTML = content;
+        content = textarea.value;
+
+        content = content.replace(/\\n\\s*\\n/g, '</p><p>');
+
+        if (!content.includes('<p>')) {
+            content = '<p>' + content + '</p>';
+        }
+
+        return content;
+    }
+
+    function truncateText(text, maxLength) {
+        if (text.length <= maxLength) return text;
+        return text.substr(0, maxLength).replace(/\s+\S*$/, '') + '...';
+    }
+
+    function showToast(message) {
+        let toast = document.getElementById('toast-notification');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'toast-notification';
+            toast.className = 'toast-notification';
+            toast.setAttribute('role', 'status');
+            toast.setAttribute('aria-live', 'polite');
+            document.body.appendChild(toast);
+        }
+
+        toast.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(showToast._t);
+        showToast._t = setTimeout(() => {
+            toast.classList.remove('show');
+        }, 1800);
+    }
+
+    function setupBlogTabs(posts, pageLang) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentCategory = urlParams.get('category') || 'all';
+        const currentSubcategory = urlParams.get('subcategory') || 'all';
+        
+        // Ana tab konteynerini bul veya oluştur
+        const mainTabsContainer = document.getElementById('blog-main-tabs');
+        const subTabsContainer = document.getElementById('blog-sub-tabs');
+        
+        if (!mainTabsContainer) return;
+        
+        // Ana kategoriler - Türkçe ve İngilizce versiyonda aynı
+        const mainTabs = ['all', 'technical', 'history', 'fiction'];
+        const mainTabLabels = {
+            'en': {
+                'all': 'All',
+                'technical': 'Technical',
+                'history': 'History',
+                'fiction': 'Fiction'
+            },
+            'tr': {
+                'all': 'Tümü',
+                'technical': 'Teknik',
+                'history': 'Tarih',
+                'fiction': 'Kurgu'
+            }
+        };
+        
+        mainTabsContainer.style.display = 'flex';
+        mainTabsContainer.innerHTML = mainTabs.map(tab => `
+            <button 
+                class="tab-btn ${currentCategory === tab ? 'active' : ''}" 
+                data-category="${tab}"
+                aria-pressed="${currentCategory === tab}"
+            >
+                ${mainTabLabels[pageLang][tab]}
+            </button>
+        `).join('');
+        
+        // Alt tab'ları oluştur (sadece Technical seçiliyse)
+        if (subTabsContainer) {
+            if (currentCategory === 'technical') {
+                const subTabs = ['all', 'systems', 'embedded', 'ai'];
+                const subTabLabels = {
+                    'en': {
+                        'all': 'All',
+                        'systems': 'Systems',
+                        'embedded': 'Embedded',
+                        'ai': 'AI'
+                    },
+                    'tr': {
+                        'all': 'Tümü',
+                        'systems': 'Sistemler',
+                        'embedded': 'Gömülü',
+                        'ai': 'Yapay Zeka'
+                    }
+                };
+                
+                subTabsContainer.style.display = 'flex';
+                subTabsContainer.innerHTML = subTabs.map(tab => `
+                    <button 
+                        class="sub-tab-btn ${currentSubcategory === tab ? 'active' : ''}" 
+                        data-subcategory="${tab}"
+                        aria-pressed="${currentSubcategory === tab}"
+                    >
+                        ${subTabLabels[pageLang][tab]}
+                    </button>
+                `).join('');
+                
+                // Alt tab click handler'ları
+                document.querySelectorAll('.sub-tab-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const subcategory = this.getAttribute('data-subcategory');
+                        const newUrl = new URL(window.location);
+                        newUrl.searchParams.set('category', 'technical');
+                        newUrl.searchParams.set('subcategory', subcategory);
+                        window.location.href = newUrl.toString();
+                    });
+                });
+            } else {
+                subTabsContainer.style.display = 'none';
+            }
+        }
+        
+        // Ana tab click handler'ları
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
+                const newUrl = new URL(window.location);
+                if (category === 'all') {
+                    newUrl.searchParams.delete('category');
+                    newUrl.searchParams.delete('subcategory');
+                } else {
+                    newUrl.searchParams.set('category', category);
+                    newUrl.searchParams.delete('subcategory');
+                }
+                window.location.href = newUrl.toString();
+            });
+        });
+    }
+    
+    function setupBlogFilters(posts) {
+        // Eski filter sistemi - geriye dönük uyumluluk için koru
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        if (filterButtons.length === 0) return;
+        
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterButtons.forEach(b => {
+                    b.classList.remove('active');
+                    b.setAttribute('aria-pressed', 'false');
+                });
+                this.classList.add('active');
+                this.setAttribute('aria-pressed', 'true');
+                const filter = this.getAttribute('data-filter');
+                displayBlogPosts(posts, filter);
+            });
+        });
+    }
+    
+    function setupBlogSearch(posts, pageLang) {
+        const searchInput = document.getElementById('blog-search');
+        if (!searchInput) return;
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentCategory = urlParams.get('category') || 'all';
+        const currentSubcategory = urlParams.get('subcategory') || 'all';
+        
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const filteredPosts = posts.filter(post => {
+                const title = (post.title || '').toLowerCase();
+                const description = (post.description || '').toLowerCase();
+                return title.includes(searchTerm) || description.includes(searchTerm);
+            });
+            displayBlogPosts(filteredPosts, pageLang, currentCategory, currentSubcategory);
+        });
+    }
+    
+    function showBlogError() {
+        const blogError = document.getElementById('blog-error');
+        const blogGrid = document.getElementById('blog-grid');
+        if (blogError) blogError.style.display = 'block';
+        if (blogGrid) blogGrid.innerHTML = '';
+    }
+    
+    // Article fonksiyonları
+    async function loadArticle() {
+        const articleLoading = document.getElementById('article-loading');
+        const articleContent = document.getElementById('article-content');
+        const articleError = document.getElementById('article-error');
+        
+        try {
+            // URL'den parametreleri al (slug veya id)
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleSlug = urlParams.get('slug');
+            const articleLink = urlParams.get('id');
+            
+            if (!articleSlug && !articleLink) {
+                showArticleError();
+                return;
+            }
+            
+            // Blog posts JSON'den makaleyi bul
+            const response = await fetch('./blog-posts.json');
+            const data = await response.json();
+            
+            if (data.status !== 'ok' || !data.items) {
+                showArticleError();
+                return;
+            }
+            
+            // Makaleyi bul (slug veya link'e göre)
+            let article;
+            if (articleSlug) {
+                article = data.items.find(post => post.slug === decodeURIComponent(articleSlug));
+            } else if (articleLink) {
+                article = data.items.find(post => post.link === decodeURIComponent(articleLink));
+            }
+            
+            if (!article) {
+                showArticleError();
+                return;
+            }
+            
+            // Makale içeriğini göster
+            displayArticle(article);
+            
+        } catch (error) {
+            console.error('Article load error:', error);
+            showArticleError();
+        } finally {
+            if (articleLoading) {
+                articleLoading.style.display = 'none';
+            }
+        }
+    }
+    
+    function displayArticle(article) {
+        const articleContent = document.getElementById('article-content');
+        if (!articleContent) return;
+        
+        // Meta bilgileri güncelle
+        document.title = `${article.title} | Ali Haydar Sucu`;
+        
+        // Open Graph meta tags'ini güncelle
+        const ogUrl = document.getElementById('og-url');
+        const ogTitle = document.getElementById('og-title');
+        const ogDescription = document.getElementById('og-description');
+        const canonicalUrl = document.getElementById('canonical-url');
+        
+        if (ogUrl) ogUrl.setAttribute('content', article.link);
+        if (ogTitle) ogTitle.setAttribute('content', `${article.title} | Ali Haydar Sucu`);
+        if (ogDescription) ogDescription.setAttribute('content', truncateText(stripHtml(article.description), 160));
+        if (canonicalUrl) canonicalUrl.setAttribute('href', article.link);
+        
+        // Makale içeriğini oluştur
+        const articleDate = document.getElementById('article-date');
+        const articleTitle = document.getElementById('article-title');
+        const articleBody = document.getElementById('article-body');
+        const articleCategory = document.getElementById('article-category');
+        const articleTags = document.getElementById('article-tags');
+        const articleLink = document.getElementById('article-link');
+        const backToBlog = document.getElementById('back-to-blog');
+        const articleCtaLink = document.getElementById('article-cta-link');
+        
+        if (articleDate) {
+            articleDate.textContent = formatBlogDate(article.pubDate);
+            articleDate.setAttribute('datetime', article.pubDate);
+        }
+        
+        if (articleTitle) articleTitle.textContent = article.title;
+        
+        if (articleBody) {
+            // HTML içeriğini temizle ve göster
+            const cleanContent = stripHtmlPreservingContent(article.description);
+            articleBody.innerHTML = cleanContent;
+        }
+        
+        if (articleCategory) {
+            const category = categorizeBlogPost(article);
+            articleCategory.textContent = getCategoryLabel(category);
+            articleCategory.className = `article-category category-${category}`;
+        }
+        
+        if (articleTags && article.categories && article.categories.length > 0) {
+            const tags = article.categories
+                .filter(cat => cat.startsWith('#') && !/^#\d+$/.test(cat))
+                .map(cat => `<span class="article-tag">${cat}</span>`)
+                .join('');
+            articleTags.innerHTML = tags;
+        }
+        
+        if (articleLink) articleLink.href = article.link;
+        if (articleCtaLink) articleCtaLink.href = article.link;
+        
+        if (backToBlog) {
+            backToBlog.onclick = () => {
+                window.location.href = '/blog';
+            };
+        }
+        
+        // Share butonlarını ayarla
+        setupShareButtons(article);
+        
+        // Makaleyi göster
+        articleContent.style.display = 'block';
+        articleContent.classList.add('show');
+    }
+    
+    function showArticleError() {
+        const articleError = document.getElementById('article-error');
+        const articleContent = document.getElementById('article-content');
+        if (articleError) articleError.style.display = 'block';
+        if (articleContent) articleContent.style.display = 'none';
+    }
+    
+    function setupShareButtons(article) {
+        const shareTwitter = document.getElementById('share-twitter');
+        const shareLinkedin = document.getElementById('share-linkedin');
+        const shareCopy = document.getElementById('share-copy');
+        
+        const shareUrl = article.link;
+        const shareTitle = article.title;
+        const shareText = truncateText(stripHtml(article.description), 100);
+        
+        if (shareTwitter) {
+            shareTwitter.onclick = () => {
+                const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareTitle)}&url=${encodeURIComponent(shareUrl)}`;
+                window.open(twitterUrl, '_blank', 'noopener,noreferrer');
+            };
+        }
+        
+        if (shareLinkedin) {
+            shareLinkedin.onclick = () => {
+                const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(shareTitle)}`;
+                window.open(linkedinUrl, '_blank', 'noopener,noreferrer');
+            };
+        }
+        
+        if (shareCopy) {
+            shareCopy.onclick = () => {
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    const originalText = shareCopy.innerHTML;
+                    shareCopy.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i>';
+                    setTimeout(() => {
+                        shareCopy.innerHTML = '<i class="fas fa-link" aria-hidden="true"></i>';
+                    }, 2000);
+                    showToast('Link copied to clipboard');
+                });
+            };
+        }
     }
 });
