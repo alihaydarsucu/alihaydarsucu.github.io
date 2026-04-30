@@ -7,30 +7,32 @@ RewriteRule ^hakkimda/?$ tr [R=301,L]
 # Ana sayfa için
 RewriteRule ^$ index.html [L]
 
-# Diğer sayfalar için
-RewriteRule ^skills/?$ skills.html [L]
-RewriteRule ^projects/?$ projects.html [L]
-RewriteRule ^experience/?$ experience.html [L]
-RewriteRule ^yetenekler/?$ yetenekler.html [L]
-RewriteRule ^projeler/?$ projeler.html [L]
-RewriteRule ^deneyim/?$ deneyim.html [L]
+# Diğer sayfalar için (İngilizce)
+RewriteRule ^skills/?$ pages/en/skills.html [L]
+RewriteRule ^projects/?$ pages/en/projects.html [L]
+RewriteRule ^experience/?$ pages/en/experience.html [L]
+
+# Diğer sayfalar için (Türkçe)
+RewriteRule ^yetenekler/?$ pages/tr/yetenekler.html [L]
+RewriteRule ^projeler/?$ pages/tr/projeler.html [L]
+RewriteRule ^deneyim/?$ pages/tr/deneyim.html [L]
 
 # Blog list sayfaları - EN ve TR
-RewriteRule ^posts/?$ blog.html [L]
-RewriteRule ^yazilar/?$ blog-tr.html [L]
+RewriteRule ^posts/?$ pages/en/blog.html [L]
+RewriteRule ^yazilar/?$ pages/tr/blog.html [L]
 
 # /blog-tr ve varyasyonlarını /yazilar'a yönlendir
 RewriteRule ^blog-tr/?$ yazilar [R=301,L]
 
 # Blog makale sayfaları - slug tabanlı
-# /posts/<slug> -> /article.html?slug=<slug>
-RewriteRule ^posts/([^/]+)/?$ article.html?slug=$1 [L,QSA]
+# /posts/<slug> -> /pages/en/article.html?slug=<slug>
+RewriteRule ^posts/([^/]+)/?$ pages/en/article.html?slug=$1 [L,QSA]
 
-# /yazilar/<slug> -> /article-tr.html?slug=<slug>
-RewriteRule ^yazilar/([^/]+)/?$ article-tr.html?slug=$1 [L,QSA]
+# /yazilar/<slug> -> /pages/tr/article.html?slug=<slug>
+RewriteRule ^yazilar/([^/]+)/?$ pages/tr/article.html?slug=$1 [L,QSA]
 
 # 404 sayfası için
-RewriteRule ^404/?$ 404.html [L]
+RewriteRule ^404/?$ pages/en/404.html [L]
 
 # .html uzantısını gizle (genel kural - en sonda olmalı)
 RewriteCond %{REQUEST_FILENAME} !-d
