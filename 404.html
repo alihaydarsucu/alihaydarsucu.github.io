@@ -32,7 +32,7 @@
     <link rel="alternate" hreflang="en" href="https://alihaydarsucu.github.io/en/404.html" />
     
     <title>Sayfa Bulunamadı | Ali Haydar Sucu</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="/Images/Icons/icon.webp">
     <link rel="apple-touch-icon" href="/Images/Icons/icon.webp">
     <meta name="theme-color" content="#2563eb">
@@ -136,7 +136,7 @@
             <nav role="navigation" aria-label="Ana navigasyon">
                 <div class="logo">
                     <img src="/Images/Icons/icon.webp" alt="Ali Haydar Sucu logosu" class="logo-img">
-                    <a href="/" aria-label="Ana sayfaya dön">Ali Haydar Sucu</a>
+                    <a href="/" id="logoLink" aria-label="Ana sayfaya dön">Ali Haydar Sucu</a>
                 </div>
             </nav>
         </div>
@@ -165,6 +165,7 @@
             const messageEl = document.getElementById('message');
             const homeTextEl = document.getElementById('homeText');
             const homeLinkEl = document.getElementById('homeLink');
+            const logoLinkEl = document.getElementById('logoLink');
             
             // Tarayıcı dilini kontrol et
             const browserLang = navigator.language.substring(0, 2);
@@ -175,11 +176,13 @@
                 homeTextEl.textContent = 'Ana Sayfaya Dön';
                 document.title = 'Sayfa Bulunamadı | Ali Haydar Sucu';
                 homeLinkEl.href = '/tr';
+                logoLinkEl.href = '/tr';
             } else {
                 messageEl.textContent = 'Page Not Found';
                 homeTextEl.textContent = 'Return to Home';
                 document.title = 'Page Not Found | Ali Haydar Sucu';
                 homeLinkEl.href = '/';
+                logoLinkEl.href = '/';
             }
         });
     </script>
