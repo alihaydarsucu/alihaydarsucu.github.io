@@ -265,6 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
     currentLightboxIndex = index;
     syncLightbox(filteredPhotos[currentLightboxIndex]);
     lightbox.style.display = 'flex';
+    document.body.classList.add('lightbox-open');
     requestAnimationFrame(() => lightbox.classList.add('open'));
   }
 
@@ -287,6 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     lightbox.classList.remove('open');
     lightbox.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('lightbox-open');
     closeTimer = setTimeout(() => {
       lightbox.style.display = 'none';
       lbImage.src = '';

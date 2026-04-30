@@ -35,7 +35,8 @@
     .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.85);z-index:999;opacity:0;transition:opacity .22s ease}
     .lightbox.open{opacity:1}
     .lb-content{max-width:92%;max-height:84%;text-align:center;transform:scale(.96);transition:transform .25s ease}
-    .lightbox.open .lb-content{transform:scale(1)}
+    .lightbox.open .lb-content{transform:scale(0.8)}
+    body.lightbox-open{overflow:hidden}
     .lb-image{max-width:100%;max-height:72vh;border-radius:8px}
     .lb-caption{color:#fff;margin-top:.6rem}
     .lb-prev,.lb-next,.lb-close{position:absolute;background:transparent;color:#fff;border:0;font-size:1.6rem;cursor:pointer}
