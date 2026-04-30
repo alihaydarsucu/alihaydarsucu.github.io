@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Fotoğraflar | Ali Haydar Sucu</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="/Images/Icons/icon.webp">
+  <base href="/">
+  <style>
+    /* minimal gallery styles (same as EN) */
+    .photos-controls{margin:1rem 0}
+    .photo-filters{display:flex;gap:.5rem;flex-wrap:wrap}
+    .filter-btn{padding:.4rem .6rem;border-radius:6px;border:1px solid #ccc;background:#fff;cursor:pointer}
+    .filter-btn.active{background:#111;color:#fff}
+    .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+    .photo-item{display:block;border:0;padding:0;background:transparent;text-align:left}
+    .photo-item img{width:100%;height:140px;object-fit:cover;border-radius:6px}
+    .photo-title{font-size:.9rem;margin-top:.3rem}
+    .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.85);z-index:999}
+    .lb-content{max-width:90%;max-height:80%;text-align:center}
+    .lb-image{max-width:100%;max-height:70vh;border-radius:6px}
+    .lb-caption{color:#fff;margin-top:.6rem}
+    .lb-prev,.lb-next,.lb-close{position:absolute;background:transparent;color:#fff;border:0;font-size:1.6rem;cursor:pointer}
+    .lb-close{top:20px;right:20px}
+    .lb-prev{left:20px}
+    .lb-next{right:20px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav role="navigation" aria-label="Ana navigasyon">
+        <div class="logo"><a href="/">Ali Haydar Sucu</a></div>
+        <div class="nav-links">
+          <a href="/">Hakkımda</a>
+          <a href="/yetenekler">Yetenekler</a>
+          <a href="/projeler">Projeler</a>
+          <a href="/fotograflar" class="active">Fotoğraflar</a>
+          <a href="/deneyim">Deneyim</a>
+          <a href="/yazilar">Blog</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Fotoğraflar</h1>
+    <div id="photos-app"></div>
+  </main>
+
+  <script src="/photos.js" defer></script>
+  <script src="/script.js" defer></script>
+</body>
+</html>

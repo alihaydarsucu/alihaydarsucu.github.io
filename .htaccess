@@ -11,11 +11,13 @@ RewriteRule ^$ index.html [L]
 RewriteRule ^skills/?$ pages/en/skills.html [L]
 RewriteRule ^projects/?$ pages/en/projects.html [L]
 RewriteRule ^experience/?$ pages/en/experience.html [L]
+RewriteRule ^photos/?$ pages/en/photos.html [L]
 
 # Diğer sayfalar için (Türkçe)
 RewriteRule ^yetenekler/?$ pages/tr/yetenekler.html [L]
 RewriteRule ^projeler/?$ pages/tr/projeler.html [L]
 RewriteRule ^deneyim/?$ pages/tr/deneyim.html [L]
+RewriteRule ^fotograflar/?$ pages/tr/fotograflar.html [L]
 
 # Blog list sayfaları - EN ve TR
 RewriteRule ^posts/?$ pages/en/blog.html [L]

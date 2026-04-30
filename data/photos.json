@@ -1,0 +1,47 @@
+[
+  {
+    "id": "p-001",
+    "filename": "/Images/Projects/Portfolio-light.webp",
+    "original": "/Images/Projects/Portfolio-light.webp",
+    "title": "Portfolio Preview",
+    "description": "Sample image used as placeholder.",
+    "category": "Manzara",
+    "year": 2024
+  },
+  {
+    "id": "p-002",
+    "filename": "/Images/Projects/SUCU.webp",
+    "original": "/Images/Projects/SUCU.webp",
+    "title": "Logo",
+    "description": "Project logo used for examples.",
+    "category": "Yapı",
+    "year": 2023
+  },
+  {
+    "id": "p-003",
+    "filename": "/Images/Places/hezarfen.jpeg",
+    "original": "/Images/Places/hezarfen.jpeg",
+    "title": "Hezarfen",
+    "description": "Landscape example from Places.",
+    "category": "Manzara",
+    "year": 2022
+  },
+  {
+    "id": "p-004",
+    "filename": "/Images/Projects/DoneIt.webp",
+    "original": "/Images/Projects/DoneIt.webp",
+    "title": "DoneIt",
+    "description": "Project screenshot used as placeholder.",
+    "category": "Bayrak",
+    "year": 2021
+  },
+  {
+    "id": "p-005",
+    "filename": "/Images/Places/tevfikileriaihl.jpeg",
+    "original": "/Images/Places/tevfikileriaihl.jpeg",
+    "title": "City View",
+    "description": "Another landscape/photo sample.",
+    "category": "Kedi",
+    "year": 2020
+  }
+]
