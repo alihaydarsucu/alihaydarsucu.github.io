@@ -9,22 +9,29 @@
   <link rel="icon" href="/Images/Icons/icon.webp">
   <base href="/">
   <style>
-        .photos-shell{padding-top:1rem;padding-bottom:2rem}
-        .photos-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1.25rem;margin-bottom:1.5rem}
-        .photos-heading-group{max-width:62ch}
-        .photos-header .section-title{margin-bottom:.4rem}
-        .photos-intro{margin:0;color:var(--text-secondary,#5a5a5a)}
-
-        .photo-grid{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start}
-        .photo-filters{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:flex-end;gap:.6rem;align-self:flex-start;padding-top:.35rem}
-    .filter-btn{padding:.55rem .85rem;border-radius:999px;border:1px solid var(--muted,#ccc);background:var(--surface,#fff);cursor:pointer;text-align:left;white-space:nowrap}
+    .photos-shell{padding-top:1rem;padding-bottom:2rem}
+    .photos-hero{margin-bottom:1.5rem}
+    .photos-hero .hero-content{max-width:60ch}
+    .photo-toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin:1rem 0 1.5rem}
+    .photo-search{flex:1;min-width:280px;max-width:420px}
+    .photo-search .search-container{position:relative;display:flex;align-items:center;width:100%}
+    .photo-search .search-container i{position:absolute;left:1rem;color:var(--text-secondary);z-index:1}
+    .photo-search input{width:100%;padding:0.75rem 1rem 0.75rem 2.5rem;border:1px solid var(--border);border-radius:8px;background-color:var(--surface);color:var(--text-primary);font-size:0.9rem;transition:all 0.3s ease}
+    .photo-search input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(58,134,255,0.1)}
+    .photo-filters{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:flex-end;gap:.6rem}
+    .filter-btn{display:flex;align-items:center;justify-content:center;padding:.55rem .85rem;border-radius:999px;border:1px solid var(--muted,#ccc);background:var(--surface,#fff);cursor:pointer;white-space:nowrap;transition:all 0.2s ease}
     .filter-btn.active{background:var(--accent,#111);color:#fff;border-color:var(--accent,#111)}
+    .photo-grid{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start}
     .photo-item{display:inline-block;border:0;padding:0;background:transparent;text-align:left;animation:photoFadeUp .28s ease both}
-    /* fixed height, width determined by image aspect ratio */
     .photo-item img{height:280px;width:auto;object-fit:cover;border-radius:12px;display:block;box-shadow:0 10px 26px rgba(0,0,0,.14)}
     .photo-title{font-size:.95rem;margin-top:.45rem;color:var(--text-primary,#111)}
+    .photo-pagination{display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap;margin-top:1.5rem}
+    .photo-page-btn{padding:.5rem .8rem;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text-primary);cursor:pointer;transition:all 0.2s ease;font-size:0.9rem}
+    .photo-page-btn:hover:not(:disabled){border-color:var(--primary);color:var(--primary)}
+    .photo-page-btn:disabled{opacity:.45;cursor:not-allowed}
+    .photo-page-number{padding:.5rem .8rem;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text-primary);font-weight:600;font-size:0.95rem;min-width:2.8rem;text-align:center;display:inline-flex;align-items:center;justify-content:center}
+    .photo-page-number.active{background:var(--accent,#111);color:#fff;border-color:var(--accent,#111)}
 
-    /* Lightbox with smooth scale/opacity animation */
     .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.85);z-index:999;opacity:0;transition:opacity .22s ease}
     .lightbox.open{opacity:1}
     .lb-content{max-width:92%;max-height:84%;text-align:center;transform:scale(.96);transition:transform .25s ease}
@@ -37,8 +44,9 @@
     .lb-next{right:20px}
     @keyframes photoFadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
     @media(max-width:900px){
-            .photos-header{flex-direction:column}
-            .photo-filters{justify-content:flex-start;padding-top:0}
+      .photo-toolbar{flex-direction:column;align-items:stretch}
+      .photo-search{max-width:none}
+      .photo-filters{justify-content:flex-start}
       .photo-grid{order:1}
       .photo-item img{height:200px}
     }
@@ -164,11 +172,11 @@
     </div>
 
   <main class="container photos-shell" role="main">
-    <section class="photos-header" role="region" aria-labelledby="photos-heading">
-            <div class="photos-heading-group">
-                <h1 class="section-title" id="photos-heading">Photos</h1>
-                <p class="photos-intro">Browse photos by category. Open one to view it larger with descriptions and arrow-key navigation.</p>
-            </div>
+    <section class="hero photos-hero" role="region" aria-labelledby="photos-heading">
+      <div class="hero-content">
+        <h1 id="photos-heading">Photos</h1>
+        <p>Browse photos by search, tags, and pages. Open one to view it larger with descriptions and arrow-key navigation.</p>
+      </div>
     </section>
     <div id="photos-app"></div>
   </main>

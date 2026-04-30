@@ -1,185 +1,356 @@
-/* photos.js - simple gallery renderer + lightbox
-   Expects JSON at /data/photos.json
-*/
+/* photos.js - Photos gallery with search, tags, pagination, and lightbox */
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('photos-app');
   if (!container) return;
 
   const isTurkish = document.documentElement.lang.startsWith('tr');
+  const pageSize = 10;
+  const categoryLabels = isTurkish
+    ? {
+        flag: 'Bayrak',
+        landscape: 'Manzara',
+        cat: 'Kedi',
+        building: 'Yapı'
+      }
+    : {
+        flag: 'Flag',
+        landscape: 'Landscape',
+        cat: 'Cat',
+        building: 'Building'
+      };
   const ui = isTurkish
     ? {
-        categoriesLabel: 'Fotoğraf kategorileri',
+        all: 'Hepsi',
+        searchLabel: 'Fotoğraflarda ara',
+        searchPlaceholder: 'Başlık, açıklama veya etiket ara',
+        categoriesLabel: 'Fotoğraf etiketleri',
+        resultsOne: 'fotoğraf bulundu',
+        resultsMany: 'fotoğraf bulundu',
+        emptyState: 'Bu aramaya uygun fotoğraf bulunamadı.',
         close: 'Kapat',
         previous: 'Önceki',
         next: 'Sonraki',
+        previousPage: 'Önceki sayfa',
+        nextPage: 'Sonraki sayfa',
+        pageLabel: 'Sayfa',
         loadError: 'Fotoğraflar yüklenemedi.'
       }
     : {
-        categoriesLabel: 'Photo categories',
+        all: 'All',
+        searchLabel: 'Search photos',
+        searchPlaceholder: 'Search title, description, or tag',
+        categoriesLabel: 'Photo tags',
+        resultsOne: 'photo found',
+        resultsMany: 'photos found',
+        emptyState: 'No photos matched this search.',
         close: 'Close',
         previous: 'Previous',
         next: 'Next',
+        previousPage: 'Previous page',
+        nextPage: 'Next page',
+        pageLabel: 'Page',
         loadError: 'Failed to load photos.'
       };
-  const categories = isTurkish
-    ? [
-        { value: '', label: 'Hepsi' },
-        { value: 'Bayrak', label: 'Bayrak' },
-        { value: 'Manzara', label: 'Manzara' },
-        { value: 'Kedi', label: 'Kedi' },
-        { value: 'Yapı', label: 'Yapı' }
-      ]
-    : [
-        { value: '', label: 'All' },
-        { value: 'Bayrak', label: 'Flag' },
-        { value: 'Manzara', label: 'Landscape' },
-        { value: 'Kedi', label: 'Cat' },
-        { value: 'Yapı', label: 'Building' }
-      ];
+  const categories = [
+    { value: '', label: ui.all },
+    { value: 'flag', label: categoryLabels.flag },
+    { value: 'landscape', label: categoryLabels.landscape },
+    { value: 'cat', label: categoryLabels.cat },
+    { value: 'building', label: categoryLabels.building }
+  ];
 
-  // build UI: section header with horizontal tags aligned to the right
   container.innerHTML = `
-    <div class="photos-header">
-      <div class="photos-heading-group">
-        <h1 class="section-title" id="photos-heading"></h1>
-        <p class="photos-intro"></p>
+    <div class="photo-toolbar">
+      <div class="photo-search">
+        <div class="search-container">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <input id="photo-search-input" type="search" aria-label="${ui.searchLabel}" placeholder="${ui.searchPlaceholder}" autocomplete="off">
+        </div>
       </div>
       <div class="photo-filters" role="tablist" aria-label="${ui.categoriesLabel}"></div>
     </div>
+    <div class="photo-results" id="photo-results" aria-live="polite"></div>
     <div class="photo-grid" id="photo-grid" aria-live="polite"></div>
+    <nav class="photo-pagination" id="photo-pagination" aria-label="${ui.pageLabel}"></nav>
     <div id="lightbox" class="lightbox" aria-hidden="true">
-      <button class="lb-close" aria-label="${ui.close}">✕</button>
-      <button class="lb-prev" aria-label="${ui.previous}">◀</button>
+      <button class="lb-close" type="button" aria-label="${ui.close}">✕</button>
+      <button class="lb-prev" type="button" aria-label="${ui.previous}">◀</button>
       <div class="lb-content">
         <img class="lb-image" alt="" />
         <div class="lb-caption"></div>
       </div>
-      <button class="lb-next" aria-label="${ui.next}">▶</button>
+      <button class="lb-next" type="button" aria-label="${ui.next}">▶</button>
     </div>
   `;
 
+  const searchInput = container.querySelector('#photo-search-input');
   const filtersEl = container.querySelector('.photo-filters');
-  const headingEl = container.querySelector('#photos-heading');
-  const introEl = container.querySelector('.photos-intro');
-  const grid = document.getElementById('photo-grid');
-  const lightbox = document.getElementById('lightbox');
+  const resultsEl = container.querySelector('#photo-results');
+  const grid = container.querySelector('#photo-grid');
+  const pagination = container.querySelector('#photo-pagination');
+  const lightbox = container.querySelector('#lightbox');
   const lbImage = lightbox.querySelector('.lb-image');
   const lbCaption = lightbox.querySelector('.lb-caption');
   const lbClose = lightbox.querySelector('.lb-close');
   const lbPrev = lightbox.querySelector('.lb-prev');
   const lbNext = lightbox.querySelector('.lb-next');
 
-  headingEl.textContent = isTurkish ? 'Fotoğraflar' : 'Photos';
-  introEl.textContent = isTurkish
-    ? 'Kategorilere göre fotoğrafları inceleyin. Bir fotoğrafa tıklayınca daha büyük görünüm, açıklama ve oklarla gezinme açılır.'
-    : 'Browse photos by category. Open one to view it larger with descriptions and arrow-key navigation.';
+  let photos = [];
+  let filteredPhotos = [];
+  let activeCategory = '';
+  let searchTerm = '';
+  let currentPage = 1;
+  let currentLightboxIndex = -1;
+  let closeTimer = null;
 
-  categories.forEach(cat => {
-    const btn = document.createElement('button');
-    btn.className = 'filter-btn';
-    btn.textContent = cat.label;
-    btn.dataset.cat = cat.value;
-    btn.addEventListener('click', () => applyFilter(cat));
-    filtersEl.appendChild(btn);
+  categories.forEach(category => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'filter-btn';
+    button.textContent = category.label;
+    button.dataset.cat = category.value;
+    button.setAttribute('role', 'tab');
+    button.addEventListener('click', () => {
+      activeCategory = category.value;
+      currentPage = 1;
+      closeLightbox();
+      render();
+    });
+    filtersEl.appendChild(button);
   });
 
-  let photos = [];
-  let rendered = []; // currently rendered list after filter
-  let currentIndex = -1; // index within rendered
+  searchInput.addEventListener('input', event => {
+    searchTerm = event.target.value.trim().toLowerCase();
+    currentPage = 1;
+    closeLightbox();
+    render();
+  });
 
   fetch('/data/photos.json')
-    .then(r => r.json())
+    .then(response => response.json())
     .then(data => {
-      photos = data || [];
-      rendered = photos.slice();
-      renderGrid(rendered);
-      // set first filter active (Hepsi)
-      const first = filtersEl.querySelector('.filter-btn');
-      if (first) first.classList.add('active');
+      photos = Array.isArray(data) ? data : [];
+      render();
     })
-    .catch(err => {
+    .catch(error => {
       grid.innerHTML = `<p>${ui.loadError}</p>`;
-      console.error(err);
+      pagination.innerHTML = '';
+      resultsEl.textContent = '';
+      console.error(error);
     });
 
-  function renderGrid(list) {
-    grid.innerHTML = '';
-    list.forEach((p, idx) => {
-      const item = document.createElement('button');
-      item.className = 'photo-item';
-      item.setAttribute('data-index', idx);
-      item.dataset.src = p.filename;
-      // image height fixed via CSS; width auto so aspect ratio controls width
-      item.innerHTML = `<img src="${p.filename}" alt="${escapeHtml(p.title)}" loading="lazy"/><div class="photo-title">${escapeHtml(p.title)}</div>`;
-      item.addEventListener('click', () => openLightbox(idx));
-      grid.appendChild(item);
+  function render() {
+    filteredPhotos = photos.filter(photo => {
+      const categoryKey = getCategoryKey(photo);
+      const text = [
+        getTitle(photo),
+        getDescription(photo),
+        getCategoryLabel(categoryKey)
+      ].join(' ').toLowerCase();
+      const categoryMatch = !activeCategory || categoryKey === activeCategory;
+      const searchMatch = !searchTerm || text.includes(searchTerm);
+      return categoryMatch && searchMatch;
+    });
+
+    const totalPages = Math.max(1, Math.ceil(filteredPhotos.length / pageSize));
+    currentPage = Math.min(currentPage, totalPages);
+    const startIndex = (currentPage - 1) * pageSize;
+    const pageItems = filteredPhotos.slice(startIndex, startIndex + pageSize);
+
+    renderResults(filteredPhotos.length);
+    renderFilters();
+    renderGrid(pageItems, startIndex);
+    renderPagination(totalPages);
+  }
+
+  function renderResults(total) {
+    if (!total) {
+      resultsEl.textContent = ui.emptyState;
+      return;
+    }
+
+    resultsEl.textContent = `${total} ${total === 1 ? ui.resultsOne : ui.resultsMany}`;
+  }
+
+  function renderFilters() {
+    filtersEl.querySelectorAll('.filter-btn').forEach(button => {
+      const isActive = button.dataset.cat === activeCategory;
+      button.classList.toggle('active', isActive);
+      button.setAttribute('aria-selected', String(isActive));
     });
   }
 
-  function applyFilter(cat) {
-    // toggle active
-    filtersEl.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === cat.value));
-    if (cat.value === '') {
-      rendered = photos.slice();
-      renderGrid(rendered);
-    } else {
-      rendered = photos.filter(p => p.category === cat.value);
-      renderGrid(rendered);
+  function renderGrid(list, startIndex) {
+    grid.innerHTML = '';
+
+    if (!list.length) {
+      return;
+    }
+
+    list.forEach((photo, index) => {
+      const globalIndex = startIndex + index;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'photo-item';
+      button.innerHTML = `
+        <img src="${escapeHtml(photo.filename)}" alt="${escapeHtml(getTitle(photo))}" loading="lazy">
+        <div class="photo-title">${escapeHtml(getTitle(photo))}</div>
+      `;
+      button.addEventListener('click', () => openLightbox(globalIndex));
+      grid.appendChild(button);
+    });
+  }
+
+  function renderPagination(totalPages) {
+    pagination.innerHTML = '';
+
+    if (totalPages <= 1) {
+      return;
+    }
+
+    const prevButton = document.createElement('button');
+    prevButton.type = 'button';
+    prevButton.className = 'photo-page-btn';
+    prevButton.textContent = ui.previousPage;
+    prevButton.disabled = currentPage === 1;
+    prevButton.addEventListener('click', () => {
+      if (currentPage === 1) return;
+      currentPage -= 1;
+      closeLightbox();
+      render();
+      scrollToGallery();
+    });
+
+    const info = document.createElement('span');
+    info.className = 'photo-page-number';
+    info.textContent = `${ui.pageLabel} ${currentPage} / ${totalPages}`;
+
+    const nextButton = document.createElement('button');
+    nextButton.type = 'button';
+    nextButton.className = 'photo-page-btn';
+    nextButton.textContent = ui.nextPage;
+    nextButton.disabled = currentPage === totalPages;
+    nextButton.addEventListener('click', () => {
+      if (currentPage === totalPages) return;
+      currentPage += 1;
+      closeLightbox();
+      render();
+      scrollToGallery();
+    });
+
+    pagination.append(prevButton, info, nextButton);
+
+    for (let page = 1; page <= totalPages; page += 1) {
+      const pageButton = document.createElement('button');
+      pageButton.type = 'button';
+      pageButton.className = 'photo-page-number';
+      pageButton.textContent = String(page);
+      pageButton.setAttribute('aria-label', `${ui.pageLabel} ${page}`);
+      if (page === currentPage) {
+        pageButton.classList.add('active');
+        pageButton.disabled = true;
+      }
+      pageButton.addEventListener('click', () => {
+        currentPage = page;
+        closeLightbox();
+        render();
+        scrollToGallery();
+      });
+      pagination.append(pageButton);
     }
   }
 
-  function openLightbox(idx) {
-    if (!rendered || !rendered[idx]) return;
-    currentIndex = idx;
-    showInLightbox(rendered[currentIndex]);
-    // animate lightbox
-    lightbox.classList.remove('open');
-    // force reflow then add
-    void lightbox.offsetWidth;
-    lightbox.classList.add('open');
+  function openLightbox(index) {
+    if (!filteredPhotos[index]) return;
+    currentLightboxIndex = index;
+    syncLightbox(filteredPhotos[currentLightboxIndex]);
+    lightbox.style.display = 'flex';
+    requestAnimationFrame(() => lightbox.classList.add('open'));
   }
 
-  function showInLightbox(photo) {
+  function syncLightbox(photo) {
     if (!photo) return;
+    const title = getTitle(photo);
+    const description = getDescription(photo);
     lbImage.src = photo.original || photo.filename;
-    lbImage.alt = photo.title || '';
-    lbCaption.textContent = photo.description || '';
-    lightbox.style.display = 'flex';
+    lbImage.alt = title;
+    lbCaption.innerHTML = description
+      ? `<div class="lb-title">${escapeHtml(title)}</div><div class="lb-description">${escapeHtml(description)}</div>`
+      : `<div class="lb-title">${escapeHtml(title)}</div>`;
     lightbox.setAttribute('aria-hidden', 'false');
   }
 
   function closeLightbox() {
-    lightbox.style.display = 'none';
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+    lightbox.classList.remove('open');
     lightbox.setAttribute('aria-hidden', 'true');
-    lbImage.src = '';
-    currentIndex = -1;
+    closeTimer = setTimeout(() => {
+      lightbox.style.display = 'none';
+      lbImage.src = '';
+      currentLightboxIndex = -1;
+    }, 220);
   }
 
-  function prev() {
-    if (!rendered || rendered.length === 0) return;
-    currentIndex = (currentIndex - 1 + rendered.length) % rendered.length;
-    showInLightbox(rendered[currentIndex]);
+  function moveLightbox(direction) {
+    if (!filteredPhotos.length) return;
+    if (currentLightboxIndex < 0) return;
+    const nextIndex = (currentLightboxIndex + direction + filteredPhotos.length) % filteredPhotos.length;
+    currentLightboxIndex = nextIndex;
+    syncLightbox(filteredPhotos[currentLightboxIndex]);
   }
 
-  function next() {
-    if (!rendered || rendered.length === 0) return;
-    currentIndex = (currentIndex + 1) % rendered.length;
-    showInLightbox(rendered[currentIndex]);
+  function scrollToGallery() {
+    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   lbClose.addEventListener('click', closeLightbox);
-  lbPrev.addEventListener('click', prev);
-  lbNext.addEventListener('click', next);
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) closeLightbox();
-  });
-  document.addEventListener('keydown', (e) => {
-    if (lightbox.getAttribute('aria-hidden') === 'false') {
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft') prev();
-      if (e.key === 'ArrowRight') next();
+  lbPrev.addEventListener('click', () => moveLightbox(-1));
+  lbNext.addEventListener('click', () => moveLightbox(1));
+  lightbox.addEventListener('click', event => {
+    if (event.target === lightbox) {
+      closeLightbox();
     }
   });
+  document.addEventListener('keydown', event => {
+    if (lightbox.getAttribute('aria-hidden') !== 'false') return;
+    if (event.key === 'Escape') closeLightbox();
+    if (event.key === 'ArrowLeft') moveLightbox(-1);
+    if (event.key === 'ArrowRight') moveLightbox(1);
+  });
 
-  function escapeHtml(s) { return String(s).replace(/[&"'<>]/g, c => ({'&':'&amp;','"':'&quot;',"'":'&#39;','<':'&lt;','>':'&gt;'}[c])); }
+  function getCategoryKey(photo) {
+    return photo.categoryKey || photo.category || '';
+  }
+
+  function getCategoryLabel(key) {
+    if (!key) return '';
+    return categoryLabels[key] || key;
+  }
+
+  function getTitle(photo) {
+    if (isTurkish) {
+      return photo.titleTr || photo.title || photo.titleEn || '';
+    }
+    return photo.titleEn || photo.title || photo.titleTr || '';
+  }
+
+  function getDescription(photo) {
+    if (isTurkish) {
+      return photo.descriptionTr || photo.description || photo.descriptionEn || '';
+    }
+    return photo.descriptionEn || photo.description || photo.descriptionTr || '';
+  }
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&"'<>]/g, character => ({
+      '&': '&amp;',
+      '"': '&quot;',
+      "'": '&#39;',
+      '<': '&lt;',
+      '>': '&gt;'
+    }[character]));
+  }
 });
