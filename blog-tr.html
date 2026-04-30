@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="tr" prefix="og: https://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gömülü sistemler, yapay zeka, kitap incelemeleri ve entelektüel tartışmalar hakkında blog yazılarımı okuyun. Teknoloji ve mühendislik üzerine teknik makaleler ve içgörüler.">
+    <meta name="keywords" content="Ali Haydar Sucu, Blog, Makaleler, Gömülü Sistemler, Yapay Zeka, Kitap İncelemeleri, Teknoloji, Mühendislik, Programlama">
+    <meta name="author" content="Ali Haydar Sucu">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alihaydarsucu.github.io/yazilar">
+    <meta property="og:title" content="Blog | Ali Haydar Sucu">
+    <meta property="og:description" content="Gömülü sistemler, yapay zeka, kitap incelemeleri ve teknoloji içgörüleri hakkında blog yazılarımı okuyun.">
+    <meta property="og:image" content="https://alihaydarsucu.github.io/Images/og-image.webp">
+    <meta property="og:site_name" content="Ali Haydar Sucu">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://alihaydarsucu.github.io/yazilar">
+    <meta property="twitter:title" content="Blog | Ali Haydar Sucu">
+    <meta property="twitter:description" content="Gömülü sistemler, yapay zeka, kitap incelemeleri ve teknoloji içgörüleri hakkında blog yazılarımı okuyun.">
+    <meta property="twitter:image" content="https://alihaydarsucu.github.io/Images/og-image.webp">
+    <meta name="twitter:creator" content="@alihaydarsucu">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://alihaydarsucu.github.io/yazilar" />
+    
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="tr" href="https://alihaydarsucu.github.io/yazilar" />
+    <link rel="alternate" hreflang="en" href="https://alihaydarsucu.github.io/posts" />
+    
+    <title>Blog | Ali Haydar Sucu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="/Images/Icons/icon.webp">
+    <link rel="apple-touch-icon" href="/Images/Icons/icon-192x192.webp">
+    <meta name="theme-color" content="#2563eb">
+</head>
+<body>
+    <header role="banner">
+        <div class="container">
+            <nav role="navigation" aria-label="Ana navigasyon">
+                <button class="hamburger-menu" aria-label="Navigasyon menüsünü aç/kapat" aria-expanded="false" aria-controls="mobile-menu">
+                    <div class="bar" aria-hidden="true"></div>
+                    <div class="bar" aria-hidden="true"></div>
+                    <div class="bar" aria-hidden="true"></div>
+                    <span class="sr-only">Menü</span>
+                </button>
+                <div class="logo">
+                    <img src="Images/Icons/icon.webp" alt="Ali Haydar Sucu logo" class="logo-img">
+                    <a href="/tr" aria-label="Ana sayfaya git">Ali Haydar Sucu</a>
+                </div>
+                <div class="nav-links" role="menubar">
+                    <a href="/tr" role="menuitem">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                        <span class="nav-text">Hakkında</span>
+                    </a>
+                    <a href="/yetenekler" role="menuitem">
+                        <i class="fas fa-code" aria-hidden="true"></i>
+                        <span class="nav-text">Yetenekler</span>
+                    </a>
+                    <a href="/projeler" role="menuitem">
+                        <i class="fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="nav-text">Projeler</span>
+                    </a>
+                    <a href="/deneyim" role="menuitem">
+                        <i class="fas fa-briefcase" aria-hidden="true"></i>
+                        <span class="nav-text">Deneyim</span>
+                    </a>
+                    <a href="/yazilar" class="active" role="menuitem" aria-current="page">
+                        <i class="fas fa-pencil" aria-hidden="true"></i>
+                        <span class="nav-text">Blog</span>
+                    </a>
+                    <div class="language-selector" role="region" aria-label="Dil seçici">
+                        <div class="language-selector-toggle" role="radiogroup" aria-label="Dil seç">
+                            <button class="language-option" role="radio" aria-checked="false" aria-label="English">EN</button>
+                            <button class="language-option active" role="radio" aria-checked="true" aria-label="Türkçe">TR</button>
+                        </div>
+                    </div>
+                    <label class="theme-toggle" aria-label="Karanlık modu değiştir">
+                        <input type="checkbox" aria-label="Karanlık modu değiştir">
+                        <span class="theme-slider" aria-hidden="true"></span>
+                        <span class="sr-only">Karanlık modu değiştir</span>
+                    </label>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay"></div>
+    <div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigasyon menüsü">
+        <div class="mobile-menu-header">
+            <button class="mobile-menu-close" aria-label="Menüyü kapat">
+                <i class="fas fa-times" aria-hidden="true"></i>
+                <span class="sr-only">Menüyü kapat</span>
+            </button>
+        </div>
+        <div class="mobile-nav-links" role="list">
+            <div role="listitem">
+                <a href="/tr">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Hakkında</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/yetenekler">
+                    <i class="fas fa-code" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Yetenekler</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/projeler">
+                    <i class="fas fa-project-diagram" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Projeler</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/deneyim">
+                    <i class="fas fa-briefcase" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Deneyim</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/yazilar" class="active">
+                    <i class="fas fa-pencil" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Blog</span>
+                </a>
+            </div>
+        </div>
+        <div class="mobile-menu-actions">
+            <div class="mobile-language-selector" role="region" aria-label="Dil seçici">
+                <div class="language-selector-toggle" role="radiogroup" aria-label="Dil seç">
+                    <button class="language-option" role="radio" aria-checked="false" aria-label="English">EN</button>
+                    <button class="language-option active" role="radio" aria-checked="true" aria-label="Türkçe">TR</button>
+                </div>
+            </div>
+            <div class="mobile-theme-toggle">
+                <label class="theme-toggle" aria-label="Karanlık modu değiştir">
+                    <input type="checkbox" aria-label="Karanlık modu değiştir">
+                    <span class="theme-slider" aria-hidden="true"></span>
+                    <span class="sr-only">Karanlık modu değiştir</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <main class="container" role="main">
+        <section id="blog-hero" class="hero" role="region" aria-labelledby="blog-heading">
+            <div class="hero-content">
+                <h1 id="blog-heading">Yazılarım</h1>
+                <p>Sistemler, teknik araştırmalar, tarih ve kurgu.</p>
+            </div>
+        </section>
+
+        <section class="blog-controls" role="region" aria-label="Blog kontrolleri">
+            <div class="blog-header">
+                <div class="blog-search">
+                    <div class="search-container">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                        <input type="text" id="blog-search" placeholder="Makaleleri ara..." aria-label="Blog makalelerini ara">
+                    </div>
+                </div>
+                <div class="blog-tabs-container">
+                    <div class="blog-main-tabs" id="blog-main-tabs" role="tablist" aria-label="Ana blog kategorileri">
+                        <!-- Ana tab'lar JavaScript ile doldurulacak -->
+                    </div>
+                    <div class="blog-sub-tabs" id="blog-sub-tabs" role="tablist" aria-label="Teknik alt kategorileri" style="display: none;">
+                        <!-- Alt tab'lar JavaScript ile doldurulacak (sadece Teknik seçiliyse) -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog-posts" class="blog-posts" role="region" aria-labelledby="posts-heading">
+            <h2 class="sr-only" id="posts-heading">Blog Yazıları</h2>
+            <div class="blog-loading" aria-live="polite">
+                <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                <span>Blog yazıları yükleniyor...</span>
+            </div>
+            <div class="blog-grid" id="blog-grid"></div>
+        </section>
+
+        <section class="blog-error" id="blog-error" style="display: none;" role="alert">
+            <div class="error-content">
+                <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                <h3>Blog yazıları yüklenemedi</h3>
+                <p>Lütfen daha sonra tekrar kontrol edin veya <a href="https://substack.com/@alihaydarsucu" target="_blank">Substack profilimi</a> ziyaret edin.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <p>&copy; Telif Hakkı 2026 - Ali Haydar Sucu</p>
+            <p>Bilgisayar Mühendisliği Öğrencisi</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top" aria-label="Üste dön">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        <span class="sr-only">Üste dön</span>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>

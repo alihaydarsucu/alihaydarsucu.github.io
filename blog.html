@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read my blog posts about embedded systems, artificial intelligence, book reviews, and intellectual discussions. Explore technical articles and insights on technology and engineering.">
+    <meta name="keywords" content="Ali Haydar Sucu, Blog, Articles, Embedded Systems, AI, Book Reviews, Technology, Engineering, Programming">
+    <meta name="author" content="Ali Haydar Sucu">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alihaydarsucu.github.io/posts">
+    <meta property="og:title" content="Blog | Ali Haydar Sucu">
+    <meta property="og:description" content="Read my blog posts about embedded systems, AI, book reviews, and technology insights.">
+    <meta property="og:image" content="https://alihaydarsucu.github.io/Images/og-image.webp">
+    <meta property="og:site_name" content="Ali Haydar Sucu">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://alihaydarsucu.github.io/posts">
+    <meta property="twitter:title" content="Blog | Ali Haydar Sucu">
+    <meta property="twitter:description" content="Read my blog posts about embedded systems, AI, book reviews, and technology insights.">
+    <meta property="twitter:image" content="https://alihaydarsucu.github.io/Images/og-image.webp">
+    <meta name="twitter:creator" content="@alihaydarsucu">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://alihaydarsucu.github.io/posts" />
+    
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="en" href="https://alihaydarsucu.github.io/posts" />
+    <link rel="alternate" hreflang="tr" href="https://alihaydarsucu.github.io/yazilar" />
+    
+    <title>Blog | Ali Haydar Sucu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="/Images/Icons/icon.webp">
+    <link rel="apple-touch-icon" href="/Images/Icons/icon-192x192.webp">
+    <meta name="theme-color" content="#2563eb">
+</head>
+<body>
+    <header role="banner">
+        <div class="container">
+            <nav role="navigation" aria-label="Main navigation">
+                <button class="hamburger-menu" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+                    <div class="bar" aria-hidden="true"></div>
+                    <div class="bar" aria-hidden="true"></div>
+                    <div class="bar" aria-hidden="true"></div>
+                    <span class="sr-only">Menu</span>
+                </button>
+                <div class="logo">
+                    <img src="Images/Icons/icon.webp" alt="Ali Haydar Sucu logo" class="logo-img">
+                    <a href="/" aria-label="Go to homepage">Ali Haydar Sucu</a>
+                </div>
+                <div class="nav-links" role="menubar">
+                    <a href="/" role="menuitem">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                        <span class="nav-text">About</span>
+                    </a>
+                    <a href="/skills" role="menuitem">
+                        <i class="fas fa-code" aria-hidden="true"></i>
+                        <span class="nav-text">Skills</span>
+                    </a>
+                    <a href="/projects" role="menuitem">
+                        <i class="fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="nav-text">Projects</span>
+                    </a>
+                    <a href="/experience" role="menuitem">
+                        <i class="fas fa-briefcase" aria-hidden="true"></i>
+                        <span class="nav-text">Experience</span>
+                    </a>
+                    <a href="/posts" class="active" role="menuitem" aria-current="page">
+                        <i class="fas fa-pencil" aria-hidden="true"></i>
+                        <span class="nav-text">Blog</span>
+                    </a>
+                    <div class="language-selector" role="region" aria-label="Language selector">
+                        <div class="language-selector-toggle" role="radiogroup" aria-label="Select language">
+                            <button class="language-option active" role="radio" aria-checked="true" aria-label="English">EN</button>
+                            <button class="language-option" role="radio" aria-checked="false" aria-label="Türkçe">TR</button>
+                        </div>
+                    </div>
+                    <label class="theme-toggle" aria-label="Toggle dark mode">
+                        <input type="checkbox" aria-label="Toggle dark mode">
+                        <span class="theme-slider" aria-hidden="true"></span>
+                        <span class="sr-only">Toggle dark mode</span>
+                    </label>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay"></div>
+    <div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+        <div class="mobile-menu-header">
+            <button class="mobile-menu-close" aria-label="Close menu">
+                <i class="fas fa-times" aria-hidden="true"></i>
+                <span class="sr-only">Close menu</span>
+            </button>
+        </div>
+        <div class="mobile-nav-links" role="list">
+            <div role="listitem">
+                <a href="/">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">About</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/skills">
+                    <i class="fas fa-code" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Skills</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/projects">
+                    <i class="fas fa-project-diagram" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Projects</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/experience">
+                    <i class="fas fa-briefcase" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Experience</span>
+                </a>
+            </div>
+            <div role="listitem">
+                <a href="/posts" class="active">
+                    <i class="fas fa-pencil" aria-hidden="true"></i>
+                    <span class="nav-text-mobile">Blog</span>
+                </a>
+            </div>
+        </div>
+        <div class="mobile-menu-actions">
+            <div class="mobile-language-selector" role="region" aria-label="Language selector">
+                <div class="language-selector-toggle" role="radiogroup" aria-label="Select language">
+                    <button class="language-option active" role="radio" aria-checked="true" aria-label="English">EN</button>
+                    <button class="language-option" role="radio" aria-checked="false" aria-label="Türkçe">TR</button>
+                </div>
+            </div>
+            <div class="mobile-theme-toggle">
+                <label class="theme-toggle" aria-label="Toggle dark mode">
+                    <input type="checkbox" aria-label="Toggle dark mode">
+                    <span class="theme-slider" aria-hidden="true"></span>
+                    <span class="sr-only">Toggle dark mode</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <main class="container" role="main">
+        <section id="blog-hero" class="hero" role="region" aria-labelledby="blog-heading">
+            <div class="hero-content">
+                <h1 id="blog-heading">My Blog</h1>
+                <p>Systems, technical research, history, and fiction.</p>
+            </div>
+        </section>
+
+        <section class="blog-controls" role="region" aria-label="Blog controls">
+            <div class="blog-header">
+                <div class="blog-search">
+                    <div class="search-container">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                        <input type="text" id="blog-search" placeholder="Search articles..." aria-label="Search blog articles">
+                    </div>
+                </div>
+                <div class="blog-tabs-container">
+                    <div class="blog-main-tabs" id="blog-main-tabs" role="tablist" aria-label="Main blog categories">
+                        <!-- Ana tab'lar JavaScript ile doldurulacak -->
+                    </div>
+                    <div class="blog-sub-tabs" id="blog-sub-tabs" role="tablist" aria-label="Technical subcategories" style="display: none;">
+                        <!-- Alt tab'lar JavaScript ile doldurulacak (sadece Technical seçiliyse) -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog-posts" class="blog-posts" role="region" aria-labelledby="posts-heading">
+            <h2 class="sr-only" id="posts-heading">Blog Posts</h2>
+            <div class="blog-loading" aria-live="polite">
+                <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                <span>Loading blog posts...</span>
+            </div>
+            <div class="blog-grid" id="blog-grid"></div>
+        </section>
+
+        <section class="blog-error" id="blog-error" style="display: none;" role="alert">
+            <div class="error-content">
+                <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                <h3>Unable to load blog posts</h3>
+                <p>Please check back later or visit my <a href="https://substack.com/@alihaydarsucu" target="_blank">Substack profile</a> directly.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <p>&copy; Copyright 2026 - Ali Haydar Sucu</p>
+            <p>Computer Engineering Student</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        <span class="sr-only">Back to top</span>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>
