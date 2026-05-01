@@ -295,4 +295,384 @@ document.addEventListener('DOMContentLoaded', () => {
 
   preview.textContent = ui.noFile;
   loadRecentPhotos();
+  setupAdminTabs();
+  setupBlogAdmin();
 });
+
+function setupAdminTabs() {
+  const tabs = document.querySelectorAll('.admin-tab');
+  const photoArea = document.querySelector('.admin-grid');
+  const blogArea = document.getElementById('blog-admin');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab || 'photos';
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      if (target === 'blog') {
+        if (photoArea) photoArea.style.display = 'none';
+        if (blogArea) blogArea.style.display = '';
+      } else {
+        if (photoArea) photoArea.style.display = '';
+        if (blogArea) blogArea.style.display = 'none';
+      }
+    });
+  });
+}
+
+function setupBlogAdmin() {
+  const isTurkish = document.documentElement.lang.startsWith('tr');
+  const ui = isTurkish
+    ? {
+        titleRequired: 'Baslik zorunlu.',
+        contentRequired: 'Yazi icerigi zorunlu.',
+        loadFailed: 'Yazilar yuklenemedi.',
+        saveFailed: 'Kayit basarisiz.',
+        saveSuccess: 'Yazi kaydedildi.',
+        updateSuccess: 'Yazi guncellendi.',
+        deleteSuccess: 'Yazi silindi.',
+        deleteFailed: 'Yazi silinemedi.',
+        confirmDelete: 'Bu yaziyi ve icerik dosyasini silmek istiyor musun?',
+        imageUploadFailed: 'Gorsel yuklenemedi.',
+        imageUploaded: 'Gorsel eklendi.',
+        linkPrompt: 'Eklenecek baglantiyi gir:',
+        noPosts: 'Henuz yazi yok',
+        resetText: 'Yeni yazi moduna gecildi.',
+        editingText: 'Duzenleme modundasin.'
+      }
+    : {
+        titleRequired: 'Title is required.',
+        contentRequired: 'Article content is required.',
+        loadFailed: 'Could not load posts.',
+        saveFailed: 'Save failed.',
+        saveSuccess: 'Post saved.',
+        updateSuccess: 'Post updated.',
+        deleteSuccess: 'Post deleted.',
+        deleteFailed: 'Delete failed.',
+        confirmDelete: 'Delete this post and its content file?',
+        imageUploadFailed: 'Image upload failed.',
+        imageUploaded: 'Image inserted.',
+        linkPrompt: 'Enter link URL:',
+        noPosts: 'No posts yet',
+        resetText: 'Switched to new post mode.',
+        editingText: 'Editing mode is active.'
+      };
+
+  const recentPostsEl = document.getElementById('recent-posts');
+  const addForm = document.getElementById('blog-add-form');
+  const addStatus = document.getElementById('blog-add-status');
+  const editor = document.getElementById('blog-editor');
+  const contentInput = document.getElementById('blog-content-html');
+  const titleInput = document.getElementById('blog-title');
+  const slugInput = document.getElementById('blog-slug');
+  const langInput = document.getElementById('blog-lang');
+  const excerptInput = document.getElementById('blog-desc');
+  const categoryInput = document.getElementById('blog-category');
+  const subcategoryInput = document.getElementById('blog-subcategory');
+  const subcategoryRow = document.getElementById('blog-subcategory-row');
+  const permalinkPreview = document.getElementById('blog-permalink-preview');
+  const imageFileInput = document.getElementById('blog-image-file');
+  const imageUploadButton = document.getElementById('blog-image-upload-btn');
+  const cancelEditButton = document.getElementById('blog-cancel-edit');
+
+  let editingId = '';
+  let slugTouched = false;
+
+  if (recentPostsEl) {
+    loadRecentPosts();
+  }
+
+  if (!addForm || !editor || !contentInput) return;
+
+  addForm.querySelectorAll('[data-editor-command]').forEach(button => {
+    button.addEventListener('click', () => {
+      const command = button.dataset.editorCommand;
+      if (!command) return;
+      editor.focus();
+      document.execCommand(command, false, null);
+      syncEditor();
+    });
+  });
+
+  addForm.querySelector('[data-editor-action="link"]')?.addEventListener('click', () => {
+    const href = window.prompt(ui.linkPrompt, 'https://');
+    if (!href) return;
+    editor.focus();
+    document.execCommand('createLink', false, href.trim());
+    syncEditor();
+  });
+
+  addForm.querySelector('[data-editor-action="clear"]')?.addEventListener('click', () => {
+    editor.innerHTML = '';
+    syncEditor();
+  });
+
+  titleInput?.addEventListener('input', () => {
+    if (!slugTouched) {
+      slugInput.value = slugify(titleInput.value);
+      updatePermalinkPreview();
+    }
+  });
+
+  slugInput?.addEventListener('input', () => {
+    slugTouched = true;
+    slugInput.value = slugify(slugInput.value);
+    updatePermalinkPreview();
+  });
+
+  langInput?.addEventListener('change', updatePermalinkPreview);
+  categoryInput?.addEventListener('change', updateSubcategoryVisibility);
+
+  editor.addEventListener('input', syncEditor);
+  editor.addEventListener('blur', syncEditor);
+
+  imageUploadButton?.addEventListener('click', async () => {
+    const file = imageFileInput?.files?.[0];
+    if (!file) return;
+
+    try {
+      const formData = new FormData();
+      formData.append('image', file);
+      const response = await fetch('/api/admin/blog/upload-image', {
+        method: 'POST',
+        body: formData
+      });
+      const payload = await response.json();
+      if (!response.ok || !payload.ok || !payload.url) {
+        throw new Error(payload.message || ui.imageUploadFailed);
+      }
+
+      editor.focus();
+      document.execCommand('insertImage', false, payload.url);
+      syncEditor();
+      imageFileInput.value = '';
+      setStatus(payload.notice || ui.imageUploaded, 'success');
+    } catch (error) {
+      setStatus(error.message || ui.imageUploadFailed, 'error');
+    }
+  });
+
+  cancelEditButton?.addEventListener('click', () => {
+    resetForm();
+    setStatus(ui.resetText, '');
+  });
+
+  addForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    syncEditor();
+    const form = new FormData(addForm);
+    const contentHtml = contentInput.value.trim();
+    const payload = {
+      title: String(form.get('title') || '').trim(),
+      slug: slugify(String(form.get('slug') || '').trim()),
+      lang: String(form.get('lang') || 'en').trim(),
+      excerpt: String(form.get('description') || '').trim(),
+      description: String(form.get('description') || '').trim(),
+      category: String(form.get('category') || 'technical').trim(),
+      subcategory: String(form.get('subcategory') || '').trim(),
+      contentHtml
+    };
+
+    if (!payload.title) {
+      setStatus(ui.titleRequired, 'error');
+      return;
+    }
+
+    if (!stripHtml(payload.contentHtml)) {
+      setStatus(ui.contentRequired, 'error');
+      return;
+    }
+
+    try {
+      const method = editingId ? 'PUT' : 'POST';
+      const endpoint = editingId
+        ? `/api/admin/blog/${encodeURIComponent(editingId)}`
+        : '/api/admin/blog';
+
+      const res = await fetch(endpoint, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.message || ui.saveFailed);
+
+      setStatus(editingId ? ui.updateSuccess : ui.saveSuccess, 'success');
+      resetForm();
+      await loadRecentPosts();
+    } catch (err) {
+      setStatus(err.message || ui.saveFailed, 'error');
+    }
+  });
+
+  async function loadRecentPosts() {
+    try {
+      const res = await fetch('/api/admin/blog');
+      const payload = await res.json();
+      if (!res.ok || !payload.ok) throw new Error(payload.message || 'Could not load posts.');
+      renderRecentPosts(payload.items || []);
+    } catch (err) {
+      renderRecentPosts([]);
+      setStatus(ui.loadFailed, 'error');
+    }
+  }
+
+  function renderRecentPosts(items) {
+    recentPostsEl.innerHTML = '';
+    if (!items.length) {
+      const li = document.createElement('li');
+      li.className = 'admin-recent-item';
+      li.innerHTML = `
+        <img src="/Images/Icons/icon.webp" alt="">
+        <div>
+          <div class="admin-recent-title">${ui.noPosts}</div>
+          <div class="admin-recent-meta">/data/blog-posts.json</div>
+        </div>
+      `;
+      recentPostsEl.appendChild(li);
+      return;
+    }
+
+    items.forEach(item => {
+      const li = document.createElement('li');
+      li.className = 'admin-recent-item';
+      li.innerHTML = `
+        <img src="/Images/Icons/icon.webp" alt="">
+        <div class="admin-recent-content">
+          <div class="admin-recent-title">${escapeHtml(item.title || 'Untitled')}</div>
+          <div class="admin-recent-meta">${escapeHtml(item.slug || '')} • ${escapeHtml(item.lang || '')} • ${escapeHtml(item.category || '')}</div>
+        </div>
+        <div class="admin-recent-actions">
+          <button class="admin-btn ghost" type="button" data-open-post="${escapeHtml(item.slug || '')}"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></button>
+          <button class="admin-btn ghost" type="button" data-edit-post="${escapeHtml(item.id || '')}"><i class="fas fa-pen" aria-hidden="true"></i></button>
+          <button class="admin-btn ghost" type="button" data-delete-post="${escapeHtml(item.id || '')}"><i class="fas fa-trash" aria-hidden="true"></i></button>
+        </div>
+      `;
+
+      li.querySelector('[data-open-post]')?.addEventListener('click', () => {
+        const href = item.lang === 'tr' ? `/yazilar/${item.slug}` : `/posts/${item.slug}`;
+        window.open(href, '_blank', 'noopener,noreferrer');
+      });
+      li.querySelector('[data-edit-post]')?.addEventListener('click', () => editPost(item));
+      li.querySelector('[data-delete-post]')?.addEventListener('click', () => deletePost(item));
+      recentPostsEl.appendChild(li);
+    });
+  }
+
+  async function editPost(item) {
+    try {
+      editingId = item.id || '';
+      titleInput.value = item.title || '';
+      slugInput.value = item.slug || '';
+      langInput.value = item.lang === 'tr' ? 'tr' : 'en';
+      excerptInput.value = item.excerpt || item.description || '';
+      categoryInput.value = item.category || 'technical';
+      subcategoryInput.value = item.subcategory || 'systems';
+      slugTouched = true;
+      updateSubcategoryVisibility();
+      updatePermalinkPreview();
+
+      let html = item.description || '';
+      if (item.contentPath) {
+        const contentRes = await fetch(item.contentPath, { cache: 'no-store' });
+        if (contentRes.ok) {
+          html = await contentRes.text();
+        }
+      }
+
+      editor.innerHTML = html;
+      syncEditor();
+      setStatus(ui.editingText, '');
+      cancelEditButton.hidden = false;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err) {
+      setStatus(err.message || ui.saveFailed, 'error');
+    }
+  }
+
+  async function deletePost(item) {
+    const confirmed = window.confirm(ui.confirmDelete);
+    if (!confirmed) return;
+    try {
+      const res = await fetch(`/api/admin/blog/${encodeURIComponent(item.id)}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.message || ui.deleteFailed);
+      await loadRecentPosts();
+      if (editingId === item.id) {
+        resetForm();
+      }
+      setStatus(ui.deleteSuccess, 'success');
+    } catch (err) {
+      setStatus(err.message || ui.deleteFailed, 'error');
+    }
+  }
+
+  function syncEditor() {
+    contentInput.value = editor.innerHTML.trim();
+  }
+
+  function updateSubcategoryVisibility() {
+    const selectedCategory = categoryInput.value;
+    if (selectedCategory === 'technical') {
+      subcategoryRow.hidden = false;
+    } else {
+      subcategoryRow.hidden = true;
+      subcategoryInput.value = '';
+    }
+  }
+
+  function updatePermalinkPreview() {
+    const slug = slugify(slugInput.value || titleInput.value || 'post');
+    const lang = langInput.value === 'tr' ? 'tr' : 'en';
+    const pathValue = lang === 'tr' ? `/yazilar/${slug}` : `/posts/${slug}`;
+    if (permalinkPreview) {
+      permalinkPreview.textContent = `${window.location.origin}${pathValue}`;
+    }
+  }
+
+  function resetForm() {
+    editingId = '';
+    slugTouched = false;
+    addForm.reset();
+    categoryInput.value = 'technical';
+    subcategoryInput.value = 'systems';
+    editor.innerHTML = '';
+    contentInput.value = '';
+    cancelEditButton.hidden = true;
+    updateSubcategoryVisibility();
+    updatePermalinkPreview();
+  }
+
+  function setStatus(message, type) {
+    addStatus.textContent = message;
+    addStatus.className = `admin-status${type ? ` ${type}` : ''}`;
+  }
+
+  function slugify(value) {
+    return String(value || '')
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+      .slice(0, 80);
+  }
+
+  function stripHtml(value) {
+    return String(value || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  function escapeHtml(value) {
+    return String(value || '').replace(/[&"'<>]/g, character => ({
+      '&': '&amp;',
+      '"': '&quot;',
+      "'": '&#39;',
+      '<': '&lt;',
+      '>': '&gt;'
+    }[character]));
+  }
+
+  updateSubcategoryVisibility();
+  updatePermalinkPreview();
+}

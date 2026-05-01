@@ -42,6 +42,15 @@
     .admin-recent-title { font-weight: 600; font-size: 0.9rem; }
     .admin-recent-meta { font-size: 0.82rem; color: var(--text-secondary); }
     .admin-warning { margin-top: 0.8rem; padding: 0.7rem 0.8rem; border-radius: 10px; background: rgba(255, 196, 61, 0.15); border: 1px solid rgba(255, 196, 61, 0.45); color: var(--text-primary); font-size: 0.88rem; }
+    .editor-toolbar { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .editor-toolbar button { border: 1px solid var(--border); background: var(--surface); color: var(--text-primary); border-radius: 8px; padding: 0.45rem 0.6rem; cursor: pointer; }
+    .editor-toolbar button:hover { background: rgba(0, 0, 0, 0.04); }
+    .editor-shell { border: 1px solid var(--border); border-radius: 10px; padding: 0.6rem; }
+    .editor-area { min-height: 260px; max-height: 520px; overflow-y: auto; padding: 0.65rem; border-radius: 8px; background: var(--surface); outline: none; }
+    .editor-area:empty::before { content: attr(data-placeholder); color: var(--text-secondary); }
+    .editor-area img { max-width: 100%; height: auto; border-radius: 8px; }
+    .admin-inline-row { display: flex; gap: 0.55rem; align-items: center; flex-wrap: wrap; }
+    .admin-path-preview { font-size: 0.84rem; color: var(--text-secondary); word-break: break-all; }
     aside.admin-card { max-height: 620px; overflow-y: auto; }
     @media (max-width: 980px) {
       .admin-grid { grid-template-columns: 1fr; }
@@ -132,8 +141,8 @@
     </section>
 
     <div class="admin-tabs" role="tablist" aria-label="Admin sections">
-      <button class="admin-tab active" type="button" role="tab" aria-selected="true">Photos</button>
-      <button class="admin-tab disabled" type="button" role="tab" aria-selected="false" aria-disabled="true">Blog (soon)</button>
+      <button class="admin-tab active" type="button" role="tab" aria-selected="true" data-tab="photos">Photos</button>
+      <button class="admin-tab" type="button" role="tab" aria-selected="false" data-tab="blog">Blog</button>
     </div>
 
     <div class="admin-grid">
@@ -204,6 +213,99 @@
         <div id="admin-warning" class="admin-warning" hidden>
           Local API is not reachable. Start local server with: npm run admin
         </div>
+      </aside>
+    </div>
+
+    <div id="blog-admin" class="admin-grid" style="margin-top:1rem; display:none;">
+      <section class="admin-card" aria-labelledby="blog-manage-title">
+        <h2 id="blog-manage-title">Manage Blog Posts</h2>
+        <p class="admin-note">Write and publish locally with rich text, links, and images. Index is stored in <strong>/data/blog-posts.json</strong>; content files are stored in <strong>/data/blog-content</strong>.</p>
+
+        <form id="blog-add-form" class="admin-form" novalidate>
+          <div class="admin-field">
+            <label for="blog-title">Title</label>
+            <input id="blog-title" name="title" type="text" maxlength="200" required>
+          </div>
+          <div class="admin-row">
+            <div class="admin-field">
+              <label for="blog-slug">Slug (clean URL)</label>
+              <input id="blog-slug" name="slug" type="text" maxlength="120" placeholder="my-article-slug">
+            </div>
+            <div class="admin-field">
+              <label for="blog-lang">Language</label>
+              <select id="blog-lang" name="lang">
+                <option value="en">English</option>
+                <option value="tr">Türkçe</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="admin-row">
+            <div class="admin-field">
+              <label for="blog-category">Category</label>
+              <select id="blog-category" name="category">
+                <option value="technical">Technical</option>
+                <option value="history">History</option>
+                <option value="fiction">Fiction</option>
+              </select>
+            </div>
+            <div id="blog-subcategory-row" class="admin-field">
+              <label for="blog-subcategory">Technical subcategory</label>
+              <select id="blog-subcategory" name="subcategory">
+                <option value="systems">Systems</option>
+                <option value="embedded">Embedded</option>
+                <option value="ai">AI</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="admin-field">
+            <label>Permalink preview</label>
+            <div id="blog-permalink-preview" class="admin-path-preview"></div>
+          </div>
+
+          <div class="admin-field">
+            <label for="blog-desc">Short description / excerpt</label>
+            <textarea id="blog-desc" name="description" maxlength="800"></textarea>
+          </div>
+
+          <div class="admin-field">
+            <label>Article content</label>
+            <div class="editor-shell">
+              <div class="editor-toolbar" role="toolbar" aria-label="Editor tools">
+                <button type="button" data-editor-command="bold"><i class="fas fa-bold" aria-hidden="true"></i></button>
+                <button type="button" data-editor-command="italic"><i class="fas fa-italic" aria-hidden="true"></i></button>
+                <button type="button" data-editor-command="insertUnorderedList"><i class="fas fa-list-ul" aria-hidden="true"></i></button>
+                <button type="button" data-editor-command="insertOrderedList"><i class="fas fa-list-ol" aria-hidden="true"></i></button>
+                <button type="button" data-editor-action="link"><i class="fas fa-link" aria-hidden="true"></i></button>
+                <button type="button" data-editor-action="clear"><i class="fas fa-eraser" aria-hidden="true"></i></button>
+              </div>
+              <div id="blog-editor" class="editor-area" contenteditable="true" data-placeholder="Write your article here..."></div>
+            </div>
+            <input id="blog-content-html" name="contentHtml" type="hidden">
+          </div>
+
+          <div class="admin-field">
+            <label for="blog-image-file">Upload image into article</label>
+            <div class="admin-inline-row">
+              <input id="blog-image-file" type="file" accept=".png,.jpg,.jpeg,image/png,image/jpeg">
+              <button id="blog-image-upload-btn" class="admin-btn ghost" type="button">Upload + Insert</button>
+            </div>
+          </div>
+
+          <div class="admin-actions">
+            <button id="blog-add-submit" class="admin-btn primary" type="submit">Save Post</button>
+            <button id="blog-add-reset" class="admin-btn ghost" type="reset">Reset</button>
+            <button id="blog-cancel-edit" class="admin-btn ghost" type="button" hidden>Cancel Edit</button>
+          </div>
+          <p id="blog-add-status" class="admin-status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <aside class="admin-card" aria-labelledby="blog-recent-title">
+        <h2 id="blog-recent-title">Local Blog Posts</h2>
+        <p class="admin-note">Posts listed here come from <strong>/data/blog-posts.json</strong>.</p>
+        <ul id="recent-posts" class="admin-recent-list"></ul>
       </aside>
     </div>
   </main>

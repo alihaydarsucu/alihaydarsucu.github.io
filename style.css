@@ -3326,7 +3326,7 @@ body.dark-mode .blog-empty-state p {
     border-color: var(--primary);
 }
 
-.read-on-substack {
+.read-on-site {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -3340,7 +3340,7 @@ body.dark-mode .blog-empty-state p {
     border-bottom: none;
 }
 
-.read-on-substack:hover {
+.read-on-site:hover {
     background-color: var(--primary-dark);
     color: white;
     border-bottom: none;
@@ -3654,7 +3654,7 @@ body.dark-mode .article-error {
     }
     
     .back-btn,
-    .read-on-substack {
+    .read-on-site {
         justify-content: center;
         padding: 1rem 2rem;
     }
@@ -3724,7 +3724,7 @@ body.dark-mode .article-error {
     }
     
     .back-btn,
-    .read-on-substack {
+    .read-on-site {
         padding: 0.875rem 1.75rem;
         font-size: 0.9rem;
     }

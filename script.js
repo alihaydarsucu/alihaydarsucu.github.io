@@ -355,9 +355,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Blog Posts fonksiyonları
     async function loadBlogPosts() {
-        const blogGrid = document.getElementById('blog-grid');
         const blogLoading = document.querySelector('.blog-loading');
-        const blogError = document.getElementById('blog-error');
         
         try {
             // Mevcut sayfa dilini belirle - Türkçe ve İngilizce URL'ler
@@ -370,101 +368,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const category = urlParams.get('category') || 'all';
             const subcategory = urlParams.get('subcategory') || 'all';
             
-            // Test için mock data - GitHub Actions ile güncellenen veriyi kullan
-            const useMockData = false; // false yapın gerçek veri için
-            
-            if (useMockData) {
-                // Test verileri
-                const mockPosts = [
-                    {
-                        title: "Arduino ile Gömülü Sistemler Geliştirme",
-                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bu yazıda Arduino kullanarak nasıl gömülü sistemler geliştirebileceğimizi anlatacağım. Microcontroller programming ve embedded systems konularına değineceğiz.",
-                        link: "https://alihaydarsucu.substack.com/p/arduino-ile-gomulu-sistemler",
-                        pubDate: "2025-02-14T10:00:00Z",
-                        slug: "arduino-ile-gomulu-sistemler",
-                        lang: "tr",
-                        category: "technical",
-                        subcategory: "embedded",
-                        categories: ["#technical", "#embedded", "#arduino"]
-                    },
-                    {
-                        title: "Clean Code Kitap İncelemesi: Robert C. Martin",
-                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Software mühendisliğinin temel taşlarından biri olan clean code prensiplerini bu kitap incelemesinde ele alıyorum.",
-                        link: "https://alihaydarsucu.substack.com/p/clean-code-kitap-incelemesi",
-                        pubDate: "2025-02-13T15:30:00Z",
-                        slug: "clean-code-kitap-incelemesi",
-                        lang: "en",
-                        category: "technical",
-                        subcategory: "systems",
-                        categories: ["#engineering", "#book-review", "#software"]
-                    },
-                    {
-                        title: "Teknolojinin İnsan Üzerindeki Etkileri",
-                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Modern teknolojinin toplumsal yapıyı ve insan ilişkilerini nasıl değiştirdiğini felsefi bir perspektiften ele alıyorum.",
-                        link: "https://alihaydarsucu.substack.com/p/teknolojinin-insan-uzerindeki-etkileri",
-                        pubDate: "2025-02-12T20:15:00Z",
-                        slug: "teknolojinin-insan-uzerindeki-etkileri",
-                        lang: null,
-                        category: null,
-                        subcategory: null,
-                        categories: ["#intellectual", "#philosophy", "#technology"]
-                    }
-                ];
-                
-                displayBlogPosts(mockPosts, pageLang, category, subcategory);
-                setupBlogTabs(mockPosts, pageLang);
-                setupBlogSearch(mockPosts, pageLang);
-                return;
-            }
-            
-            // GitHub Actions ile oluşturulan JSON dosyasını çek
+            // Lokal blog indeksinden yazıları yükle
             try {
-                console.log('Loading blog posts from JSON file...');
-                const response = await fetch('./blog-posts.json');
+                const response = await fetch('/data/blog-posts.json', { cache: 'no-store' });
                 const data = await response.json();
-                
-                if (data.status === 'ok' && data.items && data.items.length > 0) {
-                    console.log('Found posts:', data.items.length);
+                if (data && data.status === 'ok' && Array.isArray(data.items)) {
                     displayBlogPosts(data.items, pageLang, category, subcategory);
                     setupBlogTabs(data.items, pageLang);
                     setupBlogSearch(data.items, pageLang);
                     return;
                 }
-            } catch (jsonError) {
-                console.log('JSON file not found, trying fallback methods...');
+            } catch (error) {
+                console.error('Could not load local /data/blog-posts.json:', error);
             }
-            
-            // Fallback: CORS-free proxy servisleri dene
-            const proxyUrls = [
-                'https://corsproxy.io/?',
-                'https://api.allorigins.win/raw?url=',
-                'https://thingproxy.free.beeceptor.com/'
-            ];
-            
-            const substackUsername = 'alihaydarsucu';
-            const rssUrl = `https://${substackUsername}.substack.com/feed`;
-            
-            for (const proxy of proxyUrls) {
-                try {
-                    console.log('Trying proxy:', proxy);
-                    const proxyUrl = proxy + encodeURIComponent(rssUrl);
-                    const response = await fetch(proxyUrl);
-                    const data = await response.json();
-                    
-                    if (data.status === 'ok' && data.items && data.items.length > 0) {
-                        console.log('Success with proxy:', proxy, 'Posts:', data.items.length);
-                        displayBlogPosts(data.items, pageLang, category, subcategory);
-                        setupBlogTabs(data.items, pageLang);
-                        setupBlogSearch(data.items, pageLang);
-                        return;
-                    }
-                } catch (error) {
-                    console.log('Proxy failed:', proxy, error);
-                    continue;
-                }
-            }
-            
-            // Son çare: Hata göster
+
+            // If we get here, no posts available
             showBlogError();
             
         } catch (error) {
@@ -500,14 +418,18 @@ document.addEventListener('DOMContentLoaded', function() {
             filteredPosts = filteredPosts.filter(post => post.subcategory === subcategory);
         }
         
-        // Yazı linkini oluştur (slug varsa clean URL, yoksa eski yöntem)
+        // Yazı linkini oluştur
         function getArticleLink(post) {
-            if (post.slug) {
-                return pageLang === 'tr' ? `/yazilar/${post.slug}` : `/posts/${post.slug}`;
+            const slug = (post.slug || '').trim();
+            if (slug) {
+                if (pageLang === 'tr') {
+                    return post.permalinkTr || `/yazilar/${slug}`;
+                }
+                return post.permalinkEn || `/posts/${slug}`;
             }
-            // Geriye dönük uyumluluk: slug yoksa eski yöntem
-            const baseUrl = pageLang === 'tr' ? '/article-tr.html' : '/article.html';
-            return `${baseUrl}?id=${encodeURIComponent(post.link)}`;
+
+            const fallbackBaseUrl = pageLang === 'tr' ? '/pages/tr/article.html' : '/pages/en/article.html';
+            return `${fallbackBaseUrl}?id=${encodeURIComponent(post.id || post.link || '')}`;
         }
         
         // Kategori etiketini oluştur
@@ -580,13 +502,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     </h2>
                 </div>
                 <div class="blog-content">
-                    <p class="blog-excerpt">${truncateText(stripHtml(post.description), 150)}</p>
+                    <p class="blog-excerpt">${truncateText(stripHtml(post.excerpt || post.description || ''), 150)}</p>
                 </div>
                 <div class="blog-footer">
                     <a href="${articleUrl}" class="blog-read-more">
                         ${pageLang === 'tr' ? 'Devamını Oku' : 'Read More'} <i class="fas fa-arrow-right" aria-hidden="true"></i>
                     </a>
-                    <button class="blog-share" type="button" aria-label="${pageLang === 'tr' ? 'Makale linkini kopyala' : 'Copy article link'}" data-article-link="${encodeURIComponent(post.link)}">
+                    <button class="blog-share" type="button" aria-label="${pageLang === 'tr' ? 'Makale linkini kopyala' : 'Copy article link'}" data-article-url="${encodeURIComponent(articleUrl)}">
                         <i class="fas fa-share-nodes" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -596,32 +518,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.querySelectorAll('.blog-share').forEach(btn => {
             btn.addEventListener('click', async () => {
-                const articleLink = btn.getAttribute('data-article-link') || '';
-                const decodedLink = decodeURIComponent(articleLink);
-                
-                // Yazının slug'ını bulup clean URL oluştur
-                const article = filteredPosts.find(post => post.link === decodedLink);
-                let urlToCopy = decodedLink; // default: Substack linki
-                
-                if (article && article.slug) {
-                    // Clean URL ile kopy et
-                    const cleanUrl = pageLang === 'tr' ? `/yazilar/${article.slug}` : `/posts/${article.slug}`;
-                    urlToCopy = `${window.location.origin}${cleanUrl}`;
-                } else if (article) {
-                    // Slug yoksa fallback
-                    const baseUrl = pageLang === 'tr' ? '/article-tr.html' : '/article.html';
-                    urlToCopy = `${window.location.origin}${baseUrl}?id=${encodeURIComponent(decodedLink)}`;
-                }
+                const articleUrl = decodeURIComponent(btn.getAttribute('data-article-url') || '');
+                const normalizedUrl = articleUrl.startsWith('http')
+                    ? articleUrl
+                    : `${window.location.origin}${articleUrl}`;
                 
                 try {
-                    await navigator.clipboard.writeText(urlToCopy);
+                    await navigator.clipboard.writeText(normalizedUrl);
                     btn.classList.add('copied');
                     setTimeout(() => btn.classList.remove('copied'), 1200);
                     showToast(pageLang === 'tr' ? 'Link panoya kopyalandı' : 'Link copied to clipboard');
                 } catch (e) {
                     // fallback
                     const tmp = document.createElement('input');
-                    tmp.value = urlToCopy;
+                    tmp.value = normalizedUrl;
                     document.body.appendChild(tmp);
                     tmp.select();
                     document.execCommand('copy');
@@ -644,48 +554,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function categorizeBlogPost(post) {
-        const title = (post.title || '').toLowerCase();
-        const description = (post.description || '').toLowerCase();
-        const categories = (post.categories || []).join(' ').toLowerCase();
-        
-        const text = `${title} ${description} ${categories}`;
-        
-        // Öncelikle Substack etiketlerini kontrol et
-        if (categories.includes('#technical') || categories.includes('technical')) {
-            return 'technical';
+        const category = (post.category || '').toLowerCase();
+        if (category === 'history' || category === 'fiction' || category === 'technical') {
+            return category;
         }
-        if (categories.includes('#engineering') || categories.includes('engineering')) {
-            return 'engineering';
-        }
-        if (categories.includes('#intellectual') || categories.includes('intellectual')) {
-            return 'intellectual';
-        }
-        
-        // Etiket yoksa otomatik kategorizasyon (fallback)
-        // Teknik yazılar - gömülü sistemler, AI, programlama
-        if (text.includes('embedded') || text.includes('ai') || text.includes('artificial intelligence') || 
-            text.includes('machine learning') || text.includes('programming') || text.includes('code') ||
-            text.includes('gömülü') || text.includes('yapay zeka') || text.includes('programlama') ||
-            text.includes('python') || text.includes('javascript') || text.includes('c++') || text.includes('arduino')) {
-            return 'technical';
-        }
-        
-        // Mühendislikle ilgili kitap incelemeleri
-        if (text.includes('book review') || text.includes('kitap incelemesi') || text.includes('engineering') ||
-            text.includes('mühendislik') || text.includes('software') || text.includes('hardware') ||
-            text.includes('technology') || text.includes('teknoloji')) {
-            return 'engineering';
-        }
-        
-        // Entelektüel içerik
-        return 'intellectual';
+        return 'technical';
     }
     
     function getCategoryLabel(category) {
         const labels = {
             'technical': 'Technical',
-            'engineering': 'Engineering',
-            'intellectual': 'Intellectual'
+            'history': 'History',
+            'fiction': 'Fiction'
         };
         return labels[category] || 'General';
     }
@@ -702,7 +582,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return tmp.textContent || tmp.innerText || '';
     }
 
-    function sanitizeSubstackHtml(html) {
+    function sanitizeExternalHtml(html) {
         if (!html) return '';
 
         const parser = new DOMParser();
@@ -741,7 +621,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function stripHtmlPreservingContent(html) {
-        let content = sanitizeSubstackHtml(html);
+        let content = sanitizeExternalHtml(html);
 
         const textarea = document.createElement('textarea');
         textarea.innerHTML = content;
@@ -929,13 +809,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Article fonksiyonları
     async function loadArticle() {
         const articleLoading = document.getElementById('article-loading');
-        const articleContent = document.getElementById('article-content');
-        const articleError = document.getElementById('article-error');
         
         try {
             // URL'den parametreleri al (slug veya id)
             const urlParams = new URLSearchParams(window.location.search);
-            const articleSlug = urlParams.get('slug');
+            const pathSegments = window.location.pathname.split('/').filter(Boolean);
+            const pathSlug = (pathSegments.length >= 2 && (pathSegments[0] === 'posts' || pathSegments[0] === 'yazilar'))
+                ? decodeURIComponent(pathSegments[1])
+                : '';
+            const articleSlug = pathSlug || urlParams.get('slug');
             const articleLink = urlParams.get('id');
             
             if (!articleSlug && !articleLink) {
@@ -944,7 +826,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Blog posts JSON'den makaleyi bul
-            const response = await fetch('./blog-posts.json');
+            const response = await fetch('/data/blog-posts.json', { cache: 'no-store' });
             const data = await response.json();
             
             if (data.status !== 'ok' || !data.items) {
@@ -957,7 +839,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (articleSlug) {
                 article = data.items.find(post => post.slug === decodeURIComponent(articleSlug));
             } else if (articleLink) {
-                article = data.items.find(post => post.link === decodeURIComponent(articleLink));
+                const decoded = decodeURIComponent(articleLink);
+                article = data.items.find(post => post.id === decoded || post.link === decoded);
             }
             
             if (!article) {
@@ -966,7 +849,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Makale içeriğini göster
-            displayArticle(article);
+            await displayArticle(article);
             
         } catch (error) {
             console.error('Article load error:', error);
@@ -978,9 +861,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    function displayArticle(article) {
+    async function displayArticle(article) {
         const articleContent = document.getElementById('article-content');
         if (!articleContent) return;
+
+        const isTurkish = window.location.pathname.includes('/yazilar') || window.location.pathname.includes('/tr/');
+        const articleUrlPath = isTurkish
+            ? (article.permalinkTr || `/yazilar/${article.slug}`)
+            : (article.permalinkEn || `/posts/${article.slug}`);
+        const articleUrl = `${window.location.origin}${articleUrlPath}`;
+
+        let articleHtml = '';
+        if (article.contentPath) {
+            try {
+                const contentResponse = await fetch(article.contentPath, { cache: 'no-store' });
+                if (contentResponse.ok) {
+                    articleHtml = await contentResponse.text();
+                }
+            } catch (error) {
+                console.error('Article content load error:', error);
+            }
+        }
+        if (!articleHtml) {
+            articleHtml = article.description || '';
+        }
         
         // Meta bilgileri güncelle
         document.title = `${article.title} | Ali Haydar Sucu`;
@@ -991,10 +895,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const ogDescription = document.getElementById('og-description');
         const canonicalUrl = document.getElementById('canonical-url');
         
-        if (ogUrl) ogUrl.setAttribute('content', article.link);
+        if (ogUrl) ogUrl.setAttribute('content', articleUrl);
         if (ogTitle) ogTitle.setAttribute('content', `${article.title} | Ali Haydar Sucu`);
-        if (ogDescription) ogDescription.setAttribute('content', truncateText(stripHtml(article.description), 160));
-        if (canonicalUrl) canonicalUrl.setAttribute('href', article.link);
+        if (ogDescription) ogDescription.setAttribute('content', truncateText(stripHtml(article.excerpt || article.description || ''), 160));
+        if (canonicalUrl) canonicalUrl.setAttribute('href', articleUrl);
         
         // Makale içeriğini oluştur
         const articleDate = document.getElementById('article-date');
@@ -1014,8 +918,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (articleTitle) articleTitle.textContent = article.title;
         
         if (articleBody) {
-            // HTML içeriğini temizle ve göster
-            const cleanContent = stripHtmlPreservingContent(article.description);
+            const cleanContent = stripHtmlPreservingContent(articleHtml);
             articleBody.innerHTML = cleanContent;
         }
         
@@ -1025,25 +928,24 @@ document.addEventListener('DOMContentLoaded', function() {
             articleCategory.className = `article-category category-${category}`;
         }
         
-        if (articleTags && article.categories && article.categories.length > 0) {
-            const tags = article.categories
-                .filter(cat => cat.startsWith('#') && !/^#\d+$/.test(cat))
-                .map(cat => `<span class="article-tag">${cat}</span>`)
-                .join('');
+        if (articleTags) {
+            const tags = [];
+            if (article.category) tags.push(`<span class="article-tag">${article.category}</span>`);
+            if (article.subcategory) tags.push(`<span class="article-tag">${article.subcategory}</span>`);
             articleTags.innerHTML = tags;
         }
         
-        if (articleLink) articleLink.href = article.link;
-        if (articleCtaLink) articleCtaLink.href = article.link;
+        if (articleLink) articleLink.href = articleUrl;
+        if (articleCtaLink) articleCtaLink.href = articleUrl;
         
         if (backToBlog) {
             backToBlog.onclick = () => {
-                window.location.href = '/blog';
+                window.location.href = isTurkish ? '/yazilar' : '/posts';
             };
         }
         
         // Share butonlarını ayarla
-        setupShareButtons(article);
+        setupShareButtons(article, articleUrl);
         
         // Makaleyi göster
         articleContent.style.display = 'block';
@@ -1057,14 +959,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (articleContent) articleContent.style.display = 'none';
     }
     
-    function setupShareButtons(article) {
+    function setupShareButtons(article, articleUrl) {
         const shareTwitter = document.getElementById('share-twitter');
         const shareLinkedin = document.getElementById('share-linkedin');
         const shareCopy = document.getElementById('share-copy');
         
-        const shareUrl = article.link;
+        const shareUrl = articleUrl;
         const shareTitle = article.title;
-        const shareText = truncateText(stripHtml(article.description), 100);
         
         if (shareTwitter) {
             shareTwitter.onclick = () => {

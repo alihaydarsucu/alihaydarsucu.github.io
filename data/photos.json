@@ -73,7 +73,7 @@
     "titleEn": "Windows 98 Hills",
     "titleTr": "Windows 98 Tepeleri",
     "descriptionEn": "A green field stretches beneath a blue sky filled with white clouds, making me remember the iconic Windows wallpaper :D",
-    "descriptionTr": "Masmavi gökyüzünün altında uzanan yeşil bir çayır, meşhur Wİndows duvar kağıdını hatırlatıyor :D",
+    "descriptionTr": "Masmavi gökyüzünün altında uzanan yeşil bir çayır, meşhur Windows duvar kağıdını hatırlatıyor :D",
     "year": 2026
   },
   {
@@ -141,5 +141,16 @@
     "descriptionEn": "A small, cute Wall-E made by the children in the workshop. It turned out really well.",
     "descriptionTr": "Atölyede çocuklar tarafından yapılmış küçük ve sevimli Vol-İ. Çok güzel bir çalışma olmuş.",
     "year": 2024
+  },
+  {
+    "id": "photo-1777633796898",
+    "filename": "/Images/Uploads/Photos/The_Konya_Road.webp",
+    "original": "/Images/Uploads/Photos/The_Konya_Road.webp",
+    "categoryKey": "landscape",
+    "titleEn": "The Konya Road",
+    "titleTr": "Konya Yolu",
+    "descriptionEn": "The traffic on Konya Road in front of ANKAmall, along with the sky and clouds, adds a nice perspective.",
+    "descriptionTr": "ANKAmall'in önünde Konya yolu trafiği, gökyüzü ve bulutlar iyi bir perspektif katıyor.",
+    "year": 2025
   }
 ]
