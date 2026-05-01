@@ -119,5 +119,16 @@
     "descriptionEn": "A beach in Yalova, a quiet morning.",
     "descriptionTr": "Yalova'da bir sahil, sakin bir sabah.",
     "year": 2025
+  },
+  {
+    "id": "photo-1777623795925",
+    "filename": "/Images/Uploads/Photos/Ulus.webp",
+    "original": "/Images/Uploads/Photos/Ulus.webp",
+    "categoryKey": "building",
+    "titleEn": "Ulus",
+    "titleTr": "Ulus",
+    "descriptionEn": "Ulus City Market and Zincirli Mosque, early in the morning.",
+    "descriptionTr": "Ulus Şehir Çarşısı ve Zincirli Camii, sabahın erken saatleri.",
+    "year": 2025
   }
 ]
