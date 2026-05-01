@@ -702,6 +702,19 @@ body.dark-mode .resume-btn:hover {
     box-shadow: 0 5px 15px rgba(77, 148, 255, 0.25);
 }
 
+/* Dark mode read-on-site share button */
+body.dark-mode .read-on-site {
+    background: var(--primary);
+    border-color: var(--primary);
+    box-shadow: 0 3px 10px rgba(77, 148, 255, 0.2);
+}
+
+body.dark-mode .read-on-site:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+    box-shadow: 0 4px 12px rgba(77, 148, 255, 0.3);
+}
+
 /* Section Titles */
 .section-title {
     font-size: 28px;
@@ -3383,13 +3396,15 @@ body.dark-mode .blog-empty-state p {
     text-decoration: none;
     font-weight: 500;
     transition: all 0.3s ease;
-    border-bottom: none;
+    border: 2px solid var(--primary);
+    box-shadow: 0 3px 10px rgba(58, 134, 255, 0.2);
 }
 
 .read-on-site:hover {
     background-color: var(--primary-dark);
     color: white;
-    border-bottom: none;
+    border-color: var(--primary-dark);
+    box-shadow: 0 4px 12px rgba(58, 134, 255, 0.3);
     transform: translateY(-2px);
 }
 
