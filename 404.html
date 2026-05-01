@@ -276,6 +276,18 @@
                 logoLinkEl.href = '/';
             }
         });
+
+        // ✅ 404 Trick for direct clean URL access
+        const path = window.location.pathname;
+        if (path.startsWith('/yazilar/')) {
+            const slug = path.replace('/yazilar/', '');
+            sessionStorage.setItem('redirectSlug', slug);
+            window.location.replace('/article-tr.html?slug=' + encodeURIComponent(slug));
+        } else if (path.startsWith('/posts/')) {
+            const slug = path.replace('/posts/', '');
+            sessionStorage.setItem('redirectSlug', slug);
+            window.location.replace('/article-en.html?slug=' + encodeURIComponent(slug));
+        }
      </script>
  </body>
  </html>

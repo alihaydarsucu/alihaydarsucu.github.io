@@ -1,49 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Client-side router for clean URLs on GitHub Pages
-    handleClientSideRouting();
-    
     // Basit site fonksiyonları
     initializePage();
-    
-    function handleClientSideRouting() {
-        const currentPath = window.location.pathname;
-        const isProduction = window.location.hostname.includes('github.io');
-        
-        // Handle clean URLs for articles on GitHub Pages
-        if (isProduction) {
-            // /yazilar/slug -> article-tr.html?slug=slug
-            if (currentPath.startsWith('/yazilar/')) {
-                const slug = currentPath.replace('/yazilar/', '').replace('/', '');
-                if (slug) {
-                    // Redirect to the actual HTML file with query parameter
-                    window.location.replace(`/article-tr.html?slug=${encodeURIComponent(slug)}`);
-                    return;
-                }
-            }
-            
-            // /posts/slug -> article-en.html?slug=slug
-            if (currentPath.startsWith('/posts/')) {
-                const slug = currentPath.replace('/posts/', '').replace('/', '');
-                if (slug) {
-                    // Redirect to the actual HTML file with query parameter
-                    window.location.replace(`/article-en.html?slug=${encodeURIComponent(slug)}`);
-                    return;
-                }
-            }
-            
-            // /yazilar -> blog-tr.html
-            if (currentPath === '/yazilar') {
-                window.location.replace('/blog-tr.html');
-                return;
-            }
-            
-            // /posts -> blog-en.html
-            if (currentPath === '/posts') {
-                window.location.replace('/blog-en.html');
-                return;
-            }
-        }
-    }
     
     function initializePage() {
         setupDarkMode();
@@ -498,43 +455,20 @@ document.addEventListener('DOMContentLoaded', function() {
             filteredPosts = filteredPosts.filter(post => post.subcategory === subcategory);
         }
         
-        // Clean URL management
-        function updateBrowserUrl(cleanUrl) {
-            if (window.history && window.history.pushState) {
-                window.history.pushState({}, '', cleanUrl);
-            }
-        }
-        
-        function getCleanArticleUrl(post) {
+        // Yazı linkini oluştur - Frontend-only solution for GitHub Pages
+        function getArticleLink(post) {
             const slug = (post.slug || '').trim();
             if (slug) {
-                if (pageLang === 'tr') {
-                    return `/yazilar/${slug}`;
-                }
-                return `/posts/${slug}`;
-            }
-            return null;
-        }
-        
-        function getActualArticleUrl(post) {
-            const slug = (post.slug || '').trim();
-            if (slug) {
+                // For GitHub Pages, use actual HTML files with query parameters
+                // This works on both GitHub Pages and local admin server
                 if (pageLang === 'tr') {
                     return `/article-tr.html?slug=${encodeURIComponent(slug)}`;
                 }
                 return `/article-en.html?slug=${encodeURIComponent(slug)}`;
             }
+
             const fallbackBaseUrl = pageLang === 'tr' ? '/article-tr.html' : '/article-en.html';
             return `${fallbackBaseUrl}?id=${encodeURIComponent(post.id || post.link || '')}`;
-        }
-        
-        // Yazı linkini oluştur - Use clean URLs
-        function getArticleLink(post) {
-            const cleanUrl = getCleanArticleUrl(post);
-            if (cleanUrl) {
-                return cleanUrl;
-            }
-            return getActualArticleUrl(post);
         }
         
         // Kategori etiketini oluştur
@@ -587,25 +521,46 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>${message}</p>
                 </div>
             `;
-
-        // Add click handlers for clean URL navigation
-        document.querySelectorAll('.clean-url-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const actualUrl = this.getAttribute('href');
-                const cleanUrl = this.getAttribute('data-clean-url');
-                
-                // Navigate to the actual page
-                window.location.href = actualUrl;
-            });
-        });
+            return;
+        }
+        
+        blogGrid.innerHTML = filteredPosts.map(post => {
+            const articleUrl = getArticleLink(post);
+            const categoryBadge = getCategoryBadge(post);
+            return `
+            <article class="blog-card" data-category="${post.category || 'uncategorized'}">
+                <div class="blog-card-header">
+                    <div class="blog-meta">
+                        <time datetime="${post.pubDate}" class="blog-date">${formatBlogDate(post.pubDate, pageLang)}</time>
+                        <span class="blog-category">${categoryBadge}</span>
+                    </div>
+                    <h2 class="blog-title">
+                        <a href="${articleUrl}">
+                            ${post.title}
+                        </a>
+                    </h2>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">${truncateText(stripHtml(post.excerpt || post.description || ''), 150)}</p>
+                </div>
+                <div class="blog-footer">
+                    <a href="${articleUrl}" class="blog-read-more">
+                        ${pageLang === 'tr' ? 'Devamını Oku' : 'Read More'} <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                    <button class="blog-share" type="button" aria-label="${pageLang === 'tr' ? 'Makale linkini kopyala' : 'Copy article link'}" data-article-url="${encodeURIComponent(articleUrl)}">
+                        <i class="fas fa-share-nodes" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </article>
+        `;
+        }).join('');
 
         document.querySelectorAll('.blog-share').forEach(btn => {
             btn.addEventListener('click', async () => {
                 const articleUrl = decodeURIComponent(btn.getAttribute('data-article-url') || '');
                 const normalizedUrl = articleUrl.startsWith('http')
                     ? articleUrl
-                    : window.location.origin + articleUrl;
+                    : `${window.location.origin}${articleUrl}`;
                 
                 try {
                     await navigator.clipboard.writeText(normalizedUrl);
@@ -922,13 +877,19 @@ document.addEventListener('DOMContentLoaded', function() {
             // Önce meta tag'den slug'ı al (admin server tarafından enjekte edildi)
             const metaSlug = document.querySelector('meta[name="article-slug"]')?.getAttribute('content');
             
+            // 404 trick'ten gelen slug'ı kontrol et
+            const redirectSlug = sessionStorage.getItem('redirectSlug');
+            if (redirectSlug) {
+                sessionStorage.removeItem('redirectSlug'); // temizle
+            }
+            
             // Eğer meta tag yoksa, URL'den al (fallback)
             const pathSegments = window.location.pathname.split('/').filter(Boolean);
             const pathSlug = (pathSegments.length >= 2 && (pathSegments[0] === 'posts' || pathSegments[0] === 'yazilar'))
                 ? decodeURIComponent(pathSegments[1])
                 : '';
             
-            const articleSlug = metaSlug || pathSlug || urlParams.get('slug');
+            const articleSlug = metaSlug || redirectSlug || pathSlug || urlParams.get('slug');
             const articleLink = urlParams.get('id');
             
             if (!articleSlug && !articleLink) {
@@ -1014,13 +975,19 @@ document.addEventListener('DOMContentLoaded', function() {
         const articleLocale = article.lang === 'tr' ? 'tr' : 'en';
         const labels = getArticleUiLabels(articleLocale);
         const isTurkish = articleLocale === 'tr';
-        const cleanUrlPath = isTurkish
-            ? `/yazilar/${article.slug}`
-            : `/posts/${article.slug}`;
-        const actualUrlPath = isTurkish
+        const articleUrlPath = isTurkish
             ? `/article-tr.html?slug=${encodeURIComponent(article.slug)}`
             : `/article-en.html?slug=${encodeURIComponent(article.slug)}`;
-        const articleUrl = `${window.location.origin}${cleanUrlPath}`;
+        const articleUrl = `${window.location.origin}${articleUrlPath}`;
+
+        // ✅ Clean URL for browser address bar
+        const cleanPath = isTurkish
+            ? `/yazilar/${article.slug}`
+            : `/posts/${article.slug}`;
+        window.history.replaceState({}, '', cleanPath);
+        
+        // ✅ Clean URL for sharing and meta tags
+        const shareUrl = `${window.location.origin}${cleanPath}`;
 
         document.documentElement.lang = articleLocale;
 
@@ -1054,10 +1021,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const ogDescription = document.getElementById('og-description');
         const canonicalUrl = document.getElementById('canonical-url');
         
-        if (ogUrl) ogUrl.setAttribute('content', articleUrl);
+        if (ogUrl) ogUrl.setAttribute('content', shareUrl);
         if (ogTitle) ogTitle.setAttribute('content', `${article.title} | Ali Haydar Sucu`);
         if (ogDescription) ogDescription.setAttribute('content', truncateText(stripHtml(article.excerpt || article.description || ''), 160));
-        if (canonicalUrl) canonicalUrl.setAttribute('href', articleUrl);
+        if (canonicalUrl) canonicalUrl.setAttribute('href', shareUrl);
         
         // Makale içeriğini oluştur
         const articleDate = document.getElementById('article-date');
@@ -1109,10 +1076,10 @@ document.addEventListener('DOMContentLoaded', function() {
             articleLink.onclick = async () => {
                 const copyWithFallback = async () => {
                     try {
-                        await navigator.clipboard.writeText(articleUrl);
+                        await navigator.clipboard.writeText(shareUrl);
                     } catch {
                         const tmp = document.createElement('input');
-                        tmp.value = articleUrl;
+                        tmp.value = shareUrl;
                         document.body.appendChild(tmp);
                         tmp.select();
                         document.execCommand('copy');
@@ -1145,10 +1112,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (shareLinkedin) shareLinkedin.setAttribute('aria-label', labels.shareOnLinkedIn);
         
         // Share butonlarını ayarla
-        setupShareButtons(article, articleUrl, articleLocale);
-        
-        // Update browser URL to clean URL
-        updateBrowserUrl(cleanUrlPath);
+        setupShareButtons(article, shareUrl, articleLocale);
         
         // Makaleyi göster
         articleContent.style.display = 'block';
