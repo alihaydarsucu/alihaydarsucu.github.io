@@ -3,11 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
   <title>Yönetim Paneli | Ali Haydar Sucu</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="/style.css">
   <link rel="icon" href="/Images/Icons/icon.webp">
   <base href="/">
+  <script>
+    (function () {
+      const host = window.location.hostname;
+      const isLocalHost =
+        host === 'localhost' ||
+        host === '127.0.0.1' ||
+        host === '::1' ||
+        /^10\.|^192\.168\.|^172\.(1[6-9]|2\d|3[0-1])\./.test(host);
+
+      if (!isLocalHost) {
+        window.location.replace('/pages/en/404.html');
+      }
+    })();
+  </script>
   <style>
     .admin-shell { padding-top: 1rem; padding-bottom: 2rem; }
     .admin-hero { margin-bottom: 1.2rem; }

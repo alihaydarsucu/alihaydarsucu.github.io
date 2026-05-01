@@ -425,7 +425,7 @@ app.use((error, _req, res, _next) => {
   return res.status(500).json({ ok: false, message: error.message || 'Unexpected error.' });
 });
 
-const server = app.listen(port, () => {
+const server = app.listen(port, '127.0.0.1', () => {
   console.log(`Admin server is running at http://localhost:${port}`);
   console.log('Use /admin (EN) or /yonetim (TR) for panel access.');
   openAdminPanel(port);
