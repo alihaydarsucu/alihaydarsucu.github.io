@@ -17,9 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
         promptTitleTr: 'Türkçe başlık',
         promptDescEn: 'İngilizce açıklama',
         promptDescTr: 'Türkçe açıklama',
-        promptCategory: 'Kategori (flag, landscape, cat, building)',
+        promptCategory: 'Kategori (flag, landscape, cat, building, other)',
         promptYear: 'Yıl',
-        invalidCategory: 'Geçersiz kategori. Sadece flag, landscape, cat, building olabilir.',
+        invalidCategory: 'Geçersiz kategori. Sadece flag, landscape, cat, building, other olabilir.',
         deleteConfirm: 'Bu fotoğrafı silmek istiyor musun? Dosya proje dizininden de kaldırılacak.',
         deleteSuccess: 'Fotoğraf silindi.',
         deleteFailed: 'Silme işlemi başarısız.',
@@ -40,9 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
         promptTitleTr: 'Turkish title',
         promptDescEn: 'English description',
         promptDescTr: 'Turkish description',
-        promptCategory: 'Category (flag, landscape, cat, building)',
+        promptCategory: 'Category (flag, landscape, cat, building, other)',
         promptYear: 'Year',
-        invalidCategory: 'Invalid category. Use one of: flag, landscape, cat, building.',
+        invalidCategory: 'Invalid category. Use one of: flag, landscape, cat, building, other.',
         deleteConfirm: 'Do you want to delete this photo? The file will also be removed from the project directory.',
         deleteSuccess: 'Photo deleted.',
         deleteFailed: 'Delete failed.',
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const submit = document.getElementById('upload-submit');
   const recentList = document.getElementById('recent-photos');
   const warning = document.getElementById('admin-warning');
-  const allowedCategories = new Set(['flag', 'landscape', 'cat', 'building']);
+  const allowedCategories = new Set(['flag', 'landscape', 'cat', 'building', 'other']);
 
   fileInput.addEventListener('change', () => {
     const file = fileInput.files?.[0];
