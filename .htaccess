@@ -15,6 +15,7 @@ RewriteRule ^photos/?$ pages/en/photos.html [L]
 RewriteRule ^admin/?$ pages/en/admin.html [L]
 
 # Diğer sayfalar için (Türkçe)
+RewriteRule ^tr/?$ pages/tr/index.html [L]
 RewriteRule ^yetenekler/?$ pages/tr/yetenekler.html [L]
 RewriteRule ^projeler/?$ pages/tr/projeler.html [L]
 RewriteRule ^deneyim/?$ pages/tr/deneyim.html [L]
@@ -36,7 +37,8 @@ RewriteRule ^posts/([^/]+)/?$ pages/en/article.html?slug=$1 [L,QSA]
 RewriteRule ^yazilar/([^/]+)/?$ pages/tr/article.html?slug=$1 [L,QSA]
 
 # 404 sayfası için
-RewriteRule ^404/?$ pages/en/404.html [L]
+ErrorDocument 404 /404.html
+RewriteRule ^404/?$ 404.html [L]
 
 # .html uzantısını gizle (genel kural - en sonda olmalı)
 RewriteCond %{REQUEST_FILENAME} !-d
