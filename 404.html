@@ -55,10 +55,46 @@
             padding: 2rem;
         }
         
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--surface);
+            z-index: 9999;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        
         .error-container {
             max-width: 600px;
             width: 100%;
             margin: 0 auto;
+            display: none; /* Hidden initially */
         }
         
         .error-code {
@@ -124,13 +160,27 @@
             box-shadow: 0 8px 25px rgba(255, 158, 61, 0.4);
         }
         
+        body.dark-mode .loading-container {
+            background: var(--dark-surface);
+        }
+        
+        body.dark-mode .loading-text {
+            color: var(--dark-text-secondary);
+        }
+        
         footer {
             margin-top: auto;
+            display: none; /* Hidden initially */
         }
     </style>
 </head>
  <body>
-     <header role="banner">
+     <div class="loading-container" id="loadingContainer">
+         <div class="spinner"></div>
+         <p class="loading-text" id="loadingText">Loading...</p>
+     </div>
+
+     <header role="banner" style="display: none;">
          <!-- Header içeriği buraya -->
          <div class="container">
              <nav role="navigation" aria-label="Ana navigasyon">
@@ -142,7 +192,7 @@
          </div>
      </header>
 
-    <main role="main">
+    <main role="main" style="display: none;">
         <div class="error-container" role="alert" aria-live="polite">
             <div class="error-code" aria-label="Hata kodu">404</div>
             <div class="error-message" id="message">Sayfa Bulunamadı</div>
@@ -160,146 +210,107 @@
     </footer>
 
      <script>
-        // Basit dil algılama ve yönlendirme
-        document.addEventListener('DOMContentLoaded', function() {
-            const messageEl = document.getElementById('message');
-            const homeTextEl = document.getElementById('homeText');
-            const homeLinkEl = document.getElementById('homeLink');
-            const logoLinkEl = document.getElementById('logoLink');
+        // ✅ 404 Trick for direct clean URL access - Execute immediately
+        (function() {
+            const path = window.location.pathname;
+            const loadingContainer = document.getElementById('loadingContainer');
+            const loadingText = document.getElementById('loadingText');
+            
+            // Blog page routing - /posts -> blog-en.html, /yazilar -> blog-tr.html
+            if (path === '/posts' || path === '/posts/') {
+                // Store the intended clean URL and redirect immediately
+                sessionStorage.setItem('intendedBlogUrl', '/posts');
+                window.location.replace('/blog-en.html');
+                return;
+            } else if (path === '/yazilar' || path === '/yazilar/') {
+                // Store the intended clean URL and redirect immediately
+                sessionStorage.setItem('intendedBlogUrl', '/yazilar');
+                window.location.replace('/blog-tr.html');
+                return;
+            } else if (path.startsWith('/yazilar/')) {
+                // Article routing - /yazilar/<slug> -> article-tr.html?slug=<slug>
+                const slug = path.replace('/yazilar/', '');
+                sessionStorage.setItem('redirectSlug', slug);
+                window.location.replace('/article-tr.html?slug=' + encodeURIComponent(slug));
+                return;
+            } else if (path.startsWith('/posts/')) {
+                // Article routing - /posts/<slug> -> article-en.html?slug=<slug>
+                const slug = path.replace('/posts/', '');
+                sessionStorage.setItem('redirectSlug', slug);
+                window.location.replace('/article-en.html?slug=' + encodeURIComponent(slug));
+                return;
+            }
+            
+            // If no redirect, show the 404 page
+            setTimeout(() => {
+                loadingContainer.style.display = 'none';
+                document.querySelector('header').style.display = 'block';
+                document.querySelector('main').style.display = 'block';
+                document.querySelector('footer').style.display = 'block';
+                
+                const messageEl = document.getElementById('message');
+                const homeTextEl = document.getElementById('homeText');
+                const homeLinkEl = document.getElementById('homeLink');
+                const logoLinkEl = document.getElementById('logoLink');
 
-            const normalizePath = (p) => {
-                if (!p) return '/';
-                const withoutTrailing = p.length > 1 ? p.replace(/\/+$/, '') : p;
-                return withoutTrailing || '/';
-            };
+                const normalizePath = (p) => {
+                    if (!p) return '/';
+                    const withoutTrailing = p.length > 1 ? p.replace(/\/+$/, '') : p;
+                    return withoutTrailing || '/';
+                };
 
-            const currentPath = normalizePath(window.location.pathname);
-            const segments = currentPath.split('/').filter(Boolean);
+                const currentPath = normalizePath(window.location.pathname);
+                const segments = currentPath.split('/').filter(Boolean);
 
-            const redirectTo = (targetUrl) => {
-                window.location.replace(targetUrl);
-            };
+                const referrer = document.referrer || '';
+                const referrerPath = (() => {
+                    try {
+                        return normalizePath(new URL(referrer).pathname);
+                    } catch (e) {
+                        return '';
+                    }
+                })();
 
-            // GitHub Pages clean URL fallback routing
-            if (currentPath === '/tr') {
-                return redirectTo('/tr.html');
-            }
-            if (currentPath === '/skills') {
-                return redirectTo('/skills.html');
-            }
-            if (currentPath === '/yetenekler') {
-                return redirectTo('/yetenekler.html');
-            }
-            if (currentPath === '/projects') {
-                return redirectTo('/projects.html');
-            }
-            if (currentPath === '/projeler') {
-                return redirectTo('/projeler.html');
-            }
-            if (currentPath === '/experience') {
-                return redirectTo('/experience.html');
-            }
-            if (currentPath === '/deneyim') {
-                return redirectTo('/deneyim.html');
-            }
-            if (currentPath === '/photos') {
-                return redirectTo('/photos.html');
-            }
-            if (currentPath === '/fotograflar') {
-                return redirectTo('/fotograflar.html');
-            }
-            if (currentPath === '/posts') {
-                return redirectTo('/blog-en.html');
-            }
-            if (currentPath === '/yazilar') {
-                return redirectTo('/blog-tr.html');
-            }
-            if (currentPath === '/admin') {
-                return redirectTo('/admin.html');
-            }
-            if (currentPath === '/yonetim') {
-                return redirectTo('/yonetim.html');
-            }
+                const referrerLooksTurkish =
+                    referrerPath === '/tr' ||
+                    referrerPath.endsWith('/tr.html') ||
+                    referrerPath.startsWith('/yazilar') ||
+                    referrerPath.startsWith('/yetenekler') ||
+                    referrerPath.startsWith('/projeler') ||
+                    referrerPath.startsWith('/deneyim') ||
+                    referrerPath.startsWith('/fotograflar') ||
+                    referrerPath.startsWith('/yonetim');
 
-            if (segments.length >= 2 && segments[0] === 'posts') {
-                const slug = segments.slice(1).join('/');
-                return redirectTo(`/article-en.html?slug=${encodeURIComponent(slug)}`);
-            }
-            if (segments.length >= 2 && segments[0] === 'yazilar') {
-                const slug = segments.slice(1).join('/');
-                return redirectTo(`/article-tr.html?slug=${encodeURIComponent(slug)}`);
-            }
+                const referrerLooksEnglish =
+                    referrerPath === '/' ||
+                    referrerPath.endsWith('/index.html') ||
+                    referrerPath.startsWith('/posts') ||
+                    referrerPath.startsWith('/skills') ||
+                    referrerPath.startsWith('/projects') ||
+                    referrerPath.startsWith('/experience') ||
+                    referrerPath.startsWith('/photos') ||
+                    referrerPath.startsWith('/admin');
 
-            const referrer = document.referrer || '';
-            const referrerPath = (() => {
-                try {
-                    return normalizePath(new URL(referrer).pathname);
-                } catch (e) {
-                    return '';
+                const browserLang = (navigator.language || 'en').substring(0, 2);
+                const isTurkish = referrerLooksTurkish ? true : (referrerLooksEnglish ? false : (browserLang === 'tr'));
+
+                if (isTurkish) {
+                    messageEl.textContent = 'Sayfa Bulunamadı';
+                    homeTextEl.textContent = 'Ana Sayfaya Dön';
+                    document.title = 'Sayfa Bulunamadı | Ali Haydar Sucu';
+                    homeLinkEl.href = '/tr';
+                    logoLinkEl.href = '/tr';
+                    loadingText.textContent = 'Yükleniyor...';
+                } else {
+                    messageEl.textContent = 'Page Not Found';
+                    homeTextEl.textContent = 'Return to Home';
+                    document.title = 'Page Not Found | Ali Haydar Sucu';
+                    homeLinkEl.href = '/';
+                    logoLinkEl.href = '/';
+                    loadingText.textContent = 'Loading...';
                 }
-            })();
-
-            const referrerLooksTurkish =
-                referrerPath === '/tr' ||
-                referrerPath.endsWith('/tr.html') ||
-                referrerPath.startsWith('/yazilar') ||
-                referrerPath.startsWith('/yetenekler') ||
-                referrerPath.startsWith('/projeler') ||
-                referrerPath.startsWith('/deneyim') ||
-                referrerPath.startsWith('/fotograflar') ||
-                referrerPath.startsWith('/yonetim');
-
-            const referrerLooksEnglish =
-                referrerPath === '/' ||
-                referrerPath.endsWith('/index.html') ||
-                referrerPath.startsWith('/posts') ||
-                referrerPath.startsWith('/skills') ||
-                referrerPath.startsWith('/projects') ||
-                referrerPath.startsWith('/experience') ||
-                referrerPath.startsWith('/photos') ||
-                referrerPath.startsWith('/admin');
-
-            const browserLang = (navigator.language || 'en').substring(0, 2);
-            const isTurkish = referrerLooksTurkish ? true : (referrerLooksEnglish ? false : (browserLang === 'tr'));
-
-            if (isTurkish) {
-                messageEl.textContent = 'Sayfa Bulunamadı';
-                homeTextEl.textContent = 'Ana Sayfaya Dön';
-                document.title = 'Sayfa Bulunamadı | Ali Haydar Sucu';
-                homeLinkEl.href = '/tr';
-                logoLinkEl.href = '/tr';
-            } else {
-                messageEl.textContent = 'Page Not Found';
-                homeTextEl.textContent = 'Return to Home';
-                document.title = 'Page Not Found | Ali Haydar Sucu';
-                homeLinkEl.href = '/';
-                logoLinkEl.href = '/';
-            }
-        });
-
-        // ✅ 404 Trick for direct clean URL access
-        const path = window.location.pathname;
-        
-        // Blog page routing - /posts -> blog-en.html, /yazilar -> blog-tr.html
-        if (path === '/posts' || path === '/posts/') {
-            // Store the intended clean URL and redirect
-            sessionStorage.setItem('intendedBlogUrl', '/posts');
-            window.location.replace('/blog-en.html');
-        } else if (path === '/yazilar' || path === '/yazilar/') {
-            // Store the intended clean URL and redirect
-            sessionStorage.setItem('intendedBlogUrl', '/yazilar');
-            window.location.replace('/blog-tr.html');
-        } else if (path.startsWith('/yazilar/')) {
-            // Article routing - /yazilar/<slug> -> article-tr.html?slug=<slug>
-            const slug = path.replace('/yazilar/', '');
-            sessionStorage.setItem('redirectSlug', slug);
-            window.location.replace('/article-tr.html?slug=' + encodeURIComponent(slug));
-        } else if (path.startsWith('/posts/')) {
-            // Article routing - /posts/<slug> -> article-en.html?slug=<slug>
-            const slug = path.replace('/posts/', '');
-            sessionStorage.setItem('redirectSlug', slug);
-            window.location.replace('/article-en.html?slug=' + encodeURIComponent(slug));
-        }
+            }, 100); // Small delay to ensure loading state is visible
+        })();
      </script>
  </body>
  </html>
