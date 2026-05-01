@@ -2,6 +2,18 @@
     .presentation-container {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .explore-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .explore-card:nth-child(4) {
+        grid-column: auto;
+    }
+
+    .explore-card:nth-child(5) {
+        grid-column: auto;
+    }
 }
 @media (max-width: 1035px) {
     nav {
