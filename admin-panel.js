@@ -10,6 +10,16 @@ document.addEventListener('DOMContentLoaded', () => {
         uploadInProgress: 'Yükleniyor ve optimize ediliyor...',
         uploadSuccess: 'Fotoğraf başarıyla yüklendi.',
         uploadFailed: 'Yükleme başarısız.',
+        editButton: 'Düzenle',
+        editSuccess: 'Fotoğraf bilgileri güncellendi.',
+        editFailed: 'Düzenleme başarısız.',
+        promptTitleEn: 'İngilizce başlık',
+        promptTitleTr: 'Türkçe başlık',
+        promptDescEn: 'İngilizce açıklama',
+        promptDescTr: 'Türkçe açıklama',
+        promptCategory: 'Kategori (flag, landscape, cat, building)',
+        promptYear: 'Yıl',
+        invalidCategory: 'Geçersiz kategori. Sadece flag, landscape, cat, building olabilir.',
         deleteConfirm: 'Bu fotoğrafı silmek istiyor musun? Dosya proje dizininden de kaldırılacak.',
         deleteSuccess: 'Fotoğraf silindi.',
         deleteFailed: 'Silme işlemi başarısız.',
@@ -23,6 +33,16 @@ document.addEventListener('DOMContentLoaded', () => {
         uploadInProgress: 'Uploading and optimizing...',
         uploadSuccess: 'Photo uploaded successfully.',
         uploadFailed: 'Upload failed.',
+        editButton: 'Edit',
+        editSuccess: 'Photo metadata updated.',
+        editFailed: 'Edit failed.',
+        promptTitleEn: 'English title',
+        promptTitleTr: 'Turkish title',
+        promptDescEn: 'English description',
+        promptDescTr: 'Turkish description',
+        promptCategory: 'Category (flag, landscape, cat, building)',
+        promptYear: 'Year',
+        invalidCategory: 'Invalid category. Use one of: flag, landscape, cat, building.',
         deleteConfirm: 'Do you want to delete this photo? The file will also be removed from the project directory.',
         deleteSuccess: 'Photo deleted.',
         deleteFailed: 'Delete failed.',
@@ -38,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const submit = document.getElementById('upload-submit');
   const recentList = document.getElementById('recent-photos');
   const warning = document.getElementById('admin-warning');
+  const allowedCategories = new Set(['flag', 'landscape', 'cat', 'building']);
 
   fileInput.addEventListener('change', () => {
     const file = fileInput.files?.[0];
@@ -148,14 +169,78 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="admin-recent-meta">${escapeHtml(item.categoryKey || '')} • ${escapeHtml(String(item.year || ''))}</div>
         </div>
         <div class="admin-recent-actions">
+          <button class="admin-btn ghost" type="button" data-edit-photo="${escapeHtml(item.id || '')}">
+            <i class="fas fa-pen" aria-hidden="true"></i> ${ui.editButton}
+          </button>
           <button class="admin-btn ghost" type="button" data-delete-photo="${escapeHtml(item.id || '')}">
             <i class="fas fa-trash" aria-hidden="true"></i> ${isTurkish ? 'Sil' : 'Delete'}
           </button>
         </div>
       `;
+      li.querySelector('[data-edit-photo]')?.addEventListener('click', () => editPhoto(item));
       li.querySelector('[data-delete-photo]')?.addEventListener('click', () => deletePhoto(item));
       recentList.appendChild(li);
     });
+  }
+
+  async function editPhoto(item) {
+    const titleEn = window.prompt(ui.promptTitleEn, item.titleEn || '');
+    if (titleEn === null) return;
+
+    const titleTr = window.prompt(ui.promptTitleTr, item.titleTr || '');
+    if (titleTr === null) return;
+
+    const descriptionEn = window.prompt(ui.promptDescEn, item.descriptionEn || '');
+    if (descriptionEn === null) return;
+
+    const descriptionTr = window.prompt(ui.promptDescTr, item.descriptionTr || '');
+    if (descriptionTr === null) return;
+
+    const categoryInput = window.prompt(ui.promptCategory, item.categoryKey || '');
+    if (categoryInput === null) return;
+
+    const categoryKey = String(categoryInput).trim().toLowerCase();
+    if (!allowedCategories.has(categoryKey)) {
+      setStatus(ui.invalidCategory, 'error');
+      return;
+    }
+
+    const yearInput = window.prompt(ui.promptYear, String(item.year || ''));
+    if (yearInput === null) return;
+
+    const year = Number.parseInt(yearInput, 10) || item.year || new Date().getFullYear();
+
+    try {
+      submit.disabled = true;
+      const response = await fetch(`/api/admin/photos/${encodeURIComponent(item.id)}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          titleEn: String(titleEn).trim(),
+          titleTr: String(titleTr).trim(),
+          descriptionEn: String(descriptionEn).trim(),
+          descriptionTr: String(descriptionTr).trim(),
+          categoryKey,
+          year
+        })
+      });
+
+      const payload = await response.json();
+      if (!response.ok || !payload.ok) {
+        throw new Error(payload.message || ui.editFailed);
+      }
+
+      setStatus(ui.editSuccess, 'success');
+      await loadRecentPhotos();
+    } catch (error) {
+      setStatus(error.message || ui.editFailed, 'error');
+      warning.hidden = false;
+      warning.textContent = ui.warning;
+    } finally {
+      submit.disabled = false;
+    }
   }
 
   async function deletePhoto(item) {

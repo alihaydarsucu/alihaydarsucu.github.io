@@ -12,6 +12,7 @@ const photosJsonPath = path.join(rootDir, 'data', 'photos.json');
 const uploadDir = path.join(rootDir, 'Images', 'Uploads', 'Photos');
 const maxOutputBytes = 2 * 1024 * 1024;
 const maxInputBytes = 25 * 1024 * 1024;
+const allowedCategories = new Set(['flag', 'landscape', 'cat', 'building']);
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -31,6 +32,55 @@ app.get('/api/admin/photos', async (req, res) => {
     const items = await readPhotos();
     const recent = [...items].reverse().slice(0, limit);
     res.json({ ok: true, items: recent });
+  } catch (error) {
+    res.status(500).json({ ok: false, message: error.message });
+  }
+});
+
+app.put('/api/admin/photos/:id', async (req, res) => {
+  try {
+    const photoId = cleanText(req.params.id);
+    if (!photoId) {
+      return res.status(400).json({ ok: false, message: 'Photo id is required.' });
+    }
+
+    const titleEn = cleanText(req.body.titleEn);
+    const titleTr = cleanText(req.body.titleTr);
+    const descriptionEn = cleanText(req.body.descriptionEn);
+    const descriptionTr = cleanText(req.body.descriptionTr);
+    const categoryKey = cleanText(req.body.categoryKey).toLowerCase();
+    const year = Number.parseInt(req.body.year, 10) || new Date().getFullYear();
+
+    if (!titleEn || !titleTr) {
+      return res.status(400).json({ ok: false, message: 'Both Turkish and English titles are required.' });
+    }
+
+    if (!allowedCategories.has(categoryKey)) {
+      return res.status(400).json({ ok: false, message: 'Invalid category key.' });
+    }
+
+    const photos = await readPhotos();
+    const photoIndex = photos.findIndex(photo => photo.id === photoId);
+
+    if (photoIndex === -1) {
+      return res.status(404).json({ ok: false, message: 'Photo not found.' });
+    }
+
+    const current = photos[photoIndex];
+    const updated = {
+      ...current,
+      titleEn,
+      titleTr,
+      descriptionEn,
+      descriptionTr,
+      categoryKey,
+      year
+    };
+
+    photos[photoIndex] = updated;
+    await fs.writeFile(photosJsonPath, `${JSON.stringify(photos, null, 2)}\n`, 'utf8');
+
+    res.json({ ok: true, item: updated });
   } catch (error) {
     res.status(500).json({ ok: false, message: error.message });
   }
@@ -91,7 +141,6 @@ app.post('/api/admin/photos/upload', upload.single('photo'), async (req, res) =>
       return res.status(400).json({ ok: false, message: 'Both Turkish and English titles are required.' });
     }
 
-    const allowedCategories = new Set(['flag', 'landscape', 'cat', 'building']);
     if (!allowedCategories.has(categoryKey)) {
       return res.status(400).json({ ok: false, message: 'Invalid category key.' });
     }
