@@ -12,7 +12,7 @@ const photosJsonPath = path.join(rootDir, 'data', 'photos.json');
 const uploadDir = path.join(rootDir, 'Images', 'Uploads', 'Photos');
 const maxOutputBytes = 2 * 1024 * 1024;
 const maxInputBytes = 25 * 1024 * 1024;
-const allowedCategories = new Set(['flag', 'landscape', 'cat', 'building']);
+const allowedCategories = new Set(['flag', 'landscape', 'cat', 'building', 'other']);
 
 const upload = multer({
   storage: multer.memoryStorage(),

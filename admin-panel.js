@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function loadRecentPhotos() {
     try {
-      const response = await fetch('/api/admin/photos?limit=8');
+      const response = await fetch('/api/admin/photos?limit=999');
       const payload = await response.json();
 
       if (!response.ok || !payload.ok) {

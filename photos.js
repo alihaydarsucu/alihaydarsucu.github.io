@@ -10,13 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
         flag: 'Bayrak',
         landscape: 'Manzara',
         cat: 'Kedi',
-        building: 'Yapı'
+        building: 'Yapı',
+        other: 'Diğer'
       }
     : {
         flag: 'Flag',
         landscape: 'Landscape',
         cat: 'Cat',
-        building: 'Building'
+        building: 'Building',
+        other: 'Other'
       };
   const ui = isTurkish
     ? {
@@ -316,7 +318,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function moveLightbox(direction) {
     if (!filteredPhotos.length) return;
     if (currentLightboxIndex < 0) return;
-    const nextIndex = (currentLightboxIndex + direction + filteredPhotos.length) % filteredPhotos.length;
+    const nextIndex = currentLightboxIndex + direction;
+    if (nextIndex < 0 || nextIndex >= filteredPhotos.length) return;
     currentLightboxIndex = nextIndex;
     syncLightbox(filteredPhotos[currentLightboxIndex]);
   }
