@@ -212,7 +212,7 @@ nav {
 }
 
 body.dark-mode .logo-img {
-    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.28)) drop-shadow(0 0 6px rgba(58, 134, 255, 0.18));
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.38)) drop-shadow(0 0 9px rgba(58, 134, 255, 0.28));
 }
 
 .logo a {
