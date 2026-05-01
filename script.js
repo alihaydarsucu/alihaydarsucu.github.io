@@ -139,10 +139,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         window.location.href = '/photos';
                     } else if (currentPath.includes('yonetim') || currentPath === '/yonetim') {
                         window.location.href = '/admin';
-                    } else if (currentPath.includes('yazilar') || currentPath === '/yazilar') {
-                        window.location.href = '/blog-en.html';
-                    } else if (currentPath.includes('blog-tr') || currentPath === '/blog-tr') {
-                        window.location.href = '/blog-en.html';
+                    } else if (currentPath === '/yazilar' || currentPath === '/yazilar/' || currentPath.includes('blog-tr')) {
+                        window.location.href = '/posts';
                     } else if (currentPath.startsWith('/yazilar/')) {
                         // Türkçe makale sayfasından İngilizce makale sayfasına
                         const slug = currentPath.replace('/yazilar/', '').replace('/', '');
@@ -162,10 +160,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         window.location.href = '/fotograflar';
                     } else if (currentPath.includes('admin') || currentPath === '/admin') {
                         window.location.href = '/yonetim';
-                    } else if (currentPath.includes('posts') || currentPath === '/posts') {
-                        window.location.href = '/blog-tr.html';
-                    } else if (currentPath.includes('blog') || currentPath === '/blog') {
-                        window.location.href = '/blog-tr.html';
+                    } else if (currentPath === '/posts' || currentPath === '/posts/' || currentPath.includes('blog')) {
+                        window.location.href = '/yazilar';
                     } else if (currentPath.startsWith('/posts/')) {
                         // İngilizce makale sayfasından Türkçe makale sayfasına
                         const slug = currentPath.replace('/posts/', '').replace('/', '');
@@ -400,10 +396,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (data && data.status === 'ok' && Array.isArray(data.items)) {
                         // ✅ Update URL to clean format for blog pages
                         const currentPath = window.location.pathname;
-                        const cleanBlogPath = pageLang === 'tr' ? '/yazilar' : '/posts';
+                        
+                        // Check if there's an intended blog URL from 404 redirect
+                        const intendedBlogUrl = sessionStorage.getItem('intendedBlogUrl');
+                        sessionStorage.removeItem('intendedBlogUrl'); // Clean up
+                        
+                        const cleanBlogPath = intendedBlogUrl || (pageLang === 'tr' ? '/yazilar' : '/posts');
                         const cleanBlogUrl = `${window.location.origin}${cleanBlogPath}`;
                         
+                        console.log('Blog URL Debug:', { currentPath, cleanBlogPath, intendedBlogUrl, pageLang });
+                        
                         if (currentPath !== cleanBlogPath) {
+                            console.log('Updating URL to clean format:', cleanBlogPath);
                             window.history.replaceState({}, '', cleanBlogPath);
                         }
                         

@@ -282,8 +282,12 @@
         
         // Blog page routing - /posts -> blog-en.html, /yazilar -> blog-tr.html
         if (path === '/posts' || path === '/posts/') {
+            // Store the intended clean URL and redirect
+            sessionStorage.setItem('intendedBlogUrl', '/posts');
             window.location.replace('/blog-en.html');
         } else if (path === '/yazilar' || path === '/yazilar/') {
+            // Store the intended clean URL and redirect
+            sessionStorage.setItem('intendedBlogUrl', '/yazilar');
             window.location.replace('/blog-tr.html');
         } else if (path.startsWith('/yazilar/')) {
             // Article routing - /yazilar/<slug> -> article-tr.html?slug=<slug>
