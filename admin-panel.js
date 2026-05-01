@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
         uploadInProgress: 'Yükleniyor ve optimize ediliyor...',
         uploadSuccess: 'Fotoğraf başarıyla yüklendi.',
         uploadFailed: 'Yükleme başarısız.',
+        deleteConfirm: 'Bu fotoğrafı silmek istiyor musun? Dosya proje dizininden de kaldırılacak.',
+        deleteSuccess: 'Fotoğraf silindi.',
+        deleteFailed: 'Silme işlemi başarısız.',
         fetchFailed: 'Fotoğraf listesi alınamadı.',
         invalidType: 'Sadece PNG/JPG/JPEG dosyaları yüklenebilir.',
         warning: 'Lokal API devre dışı. Terminalde "npm run admin" çalıştır ve sayfayı yenile.'
@@ -20,6 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
         uploadInProgress: 'Uploading and optimizing...',
         uploadSuccess: 'Photo uploaded successfully.',
         uploadFailed: 'Upload failed.',
+        deleteConfirm: 'Do you want to delete this photo? The file will also be removed from the project directory.',
+        deleteSuccess: 'Photo deleted.',
+        deleteFailed: 'Delete failed.',
         fetchFailed: 'Could not fetch recent photos.',
         invalidType: 'Only PNG/JPG/JPEG files are allowed.',
         warning: 'Local API is unavailable. Run "npm run admin" in terminal and refresh.'
@@ -81,6 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       setStatus(ui.uploadSuccess, 'success');
+      if (payload.notice) {
+        warning.hidden = false;
+        warning.textContent = payload.notice;
+      } else {
+        warning.hidden = true;
+      }
       form.reset();
       await loadRecentPhotos();
     } catch (error) {
@@ -131,13 +143,47 @@ document.addEventListener('DOMContentLoaded', () => {
       li.className = 'admin-recent-item';
       li.innerHTML = `
         <img src="${escapeHtml(item.filename || '')}" alt="${escapeHtml(item.titleEn || item.titleTr || '')}">
-        <div>
+        <div class="admin-recent-content">
           <div class="admin-recent-title">${escapeHtml(item.titleEn || item.titleTr || 'Untitled')}</div>
           <div class="admin-recent-meta">${escapeHtml(item.categoryKey || '')} • ${escapeHtml(String(item.year || ''))}</div>
         </div>
+        <div class="admin-recent-actions">
+          <button class="admin-btn ghost" type="button" data-delete-photo="${escapeHtml(item.id || '')}">
+            <i class="fas fa-trash" aria-hidden="true"></i> ${isTurkish ? 'Sil' : 'Delete'}
+          </button>
+        </div>
       `;
+      li.querySelector('[data-delete-photo]')?.addEventListener('click', () => deletePhoto(item));
       recentList.appendChild(li);
     });
+  }
+
+  async function deletePhoto(item) {
+    const confirmed = window.confirm(ui.deleteConfirm);
+    if (!confirmed) return;
+
+    try {
+      setStatus('', '');
+      submit.disabled = true;
+
+      const response = await fetch(`/api/admin/photos/${encodeURIComponent(item.id)}`, {
+        method: 'DELETE'
+      });
+      const payload = await response.json();
+
+      if (!response.ok || !payload.ok) {
+        throw new Error(payload.message || ui.deleteFailed);
+      }
+
+      setStatus(ui.deleteSuccess, 'success');
+      await loadRecentPhotos();
+    } catch (error) {
+      setStatus(error.message || ui.deleteFailed, 'error');
+      warning.hidden = false;
+      warning.textContent = ui.warning;
+    } finally {
+      submit.disabled = false;
+    }
   }
 
   function setStatus(message, type) {
