@@ -865,11 +865,17 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             // URL'den parametreleri al (slug veya id)
             const urlParams = new URLSearchParams(window.location.search);
+            
+            // Önce meta tag'den slug'ı al (admin server tarafından enjekte edildi)
+            const metaSlug = document.querySelector('meta[name="article-slug"]')?.getAttribute('content');
+            
+            // Eğer meta tag yoksa, URL'den al (fallback)
             const pathSegments = window.location.pathname.split('/').filter(Boolean);
             const pathSlug = (pathSegments.length >= 2 && (pathSegments[0] === 'posts' || pathSegments[0] === 'yazilar'))
                 ? decodeURIComponent(pathSegments[1])
                 : '';
-            const articleSlug = pathSlug || urlParams.get('slug');
+            
+            const articleSlug = metaSlug || pathSlug || urlParams.get('slug');
             const articleLink = urlParams.get('id');
             
             if (!articleSlug && !articleLink) {

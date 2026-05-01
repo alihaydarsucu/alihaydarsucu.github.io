@@ -44,12 +44,44 @@ app.get('/yazilar', (_req, res) => {
   res.sendFile(path.join(rootDir, 'blog-tr.html'));
 });
 
-app.get('/posts/:slug', (_req, res) => {
-  res.sendFile(path.join(rootDir, 'article-en.html'));
+app.get('/posts/:slug', (req, res) => {
+  const articlePath = path.join(rootDir, 'article-en.html');
+  
+  // Read the HTML file and inject the slug parameter
+  fs.readFile(articlePath, 'utf8')
+    .then(html => {
+      // Inject the slug as a meta tag that JavaScript can read
+      const modifiedHtml = html.replace(
+        '<head>',
+        `<head>
+    <meta name="article-slug" content="${req.params.slug}">`
+      );
+      res.send(modifiedHtml);
+    })
+    .catch(error => {
+      console.error('Error serving article:', error);
+      res.status(500).send('Server error');
+    });
 });
 
-app.get('/yazilar/:slug', (_req, res) => {
-  res.sendFile(path.join(rootDir, 'article-tr.html'));
+app.get('/yazilar/:slug', (req, res) => {
+  const articlePath = path.join(rootDir, 'article-tr.html');
+  
+  // Read the HTML file and inject the slug parameter
+  fs.readFile(articlePath, 'utf8')
+    .then(html => {
+      // Inject the slug as a meta tag that JavaScript can read
+      const modifiedHtml = html.replace(
+        '<head>',
+        `<head>
+    <meta name="article-slug" content="${req.params.slug}">`
+      );
+      res.send(modifiedHtml);
+    })
+    .catch(error => {
+      console.error('Error serving article:', error);
+      res.status(500).send('Server error');
+    });
 });
 
 app.get('/api/admin/health', (_req, res) => {
