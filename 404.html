@@ -129,18 +129,18 @@
         }
     </style>
 </head>
-<body>
-    <header role="banner">
-        <!-- Header içeriği buraya -->
-        <div class="container">
-            <nav role="navigation" aria-label="Ana navigasyon">
-                <div class="logo">
-                    <img src="/Images/Icons/icon.webp" alt="Ali Haydar Sucu logosu" class="logo-img">
-                    <a href="/" id="logoLink" aria-label="Ana sayfaya dön">Ali Haydar Sucu</a>
-                </div>
-            </nav>
-        </div>
-    </header>
+ <body>
+     <header role="banner">
+         <!-- Header içeriği buraya -->
+         <div class="container">
+             <nav role="navigation" aria-label="Ana navigasyon">
+                 <div class="logo">
+                     <img src="/Images/Icons/icon.webp" alt="Ali Haydar Sucu logosu" class="logo-img">
+                     <a href="/" id="logoLink" aria-label="Ana sayfaya dön">Ali Haydar Sucu</a>
+                 </div>
+             </nav>
+         </div>
+     </header>
 
     <main role="main">
         <div class="error-container" role="alert" aria-live="polite">
@@ -159,18 +159,109 @@
         </div>
     </footer>
 
-    <script>
+     <script>
         // Basit dil algılama ve yönlendirme
         document.addEventListener('DOMContentLoaded', function() {
             const messageEl = document.getElementById('message');
             const homeTextEl = document.getElementById('homeText');
             const homeLinkEl = document.getElementById('homeLink');
             const logoLinkEl = document.getElementById('logoLink');
-            
-            // Tarayıcı dilini kontrol et
-            const browserLang = navigator.language.substring(0, 2);
-            const isTurkish = browserLang === 'tr';
-            
+
+            const normalizePath = (p) => {
+                if (!p) return '/';
+                const withoutTrailing = p.length > 1 ? p.replace(/\/+$/, '') : p;
+                return withoutTrailing || '/';
+            };
+
+            const currentPath = normalizePath(window.location.pathname);
+            const segments = currentPath.split('/').filter(Boolean);
+
+            const redirectTo = (targetUrl) => {
+                window.location.replace(targetUrl);
+            };
+
+            // GitHub Pages clean URL fallback routing
+            if (currentPath === '/tr') {
+                return redirectTo('/tr.html');
+            }
+            if (currentPath === '/skills') {
+                return redirectTo('/skills.html');
+            }
+            if (currentPath === '/yetenekler') {
+                return redirectTo('/yetenekler.html');
+            }
+            if (currentPath === '/projects') {
+                return redirectTo('/projects.html');
+            }
+            if (currentPath === '/projeler') {
+                return redirectTo('/projeler.html');
+            }
+            if (currentPath === '/experience') {
+                return redirectTo('/experience.html');
+            }
+            if (currentPath === '/deneyim') {
+                return redirectTo('/deneyim.html');
+            }
+            if (currentPath === '/photos') {
+                return redirectTo('/photos.html');
+            }
+            if (currentPath === '/fotograflar') {
+                return redirectTo('/fotograflar.html');
+            }
+            if (currentPath === '/posts') {
+                return redirectTo('/blog-en.html');
+            }
+            if (currentPath === '/yazilar') {
+                return redirectTo('/blog-tr.html');
+            }
+            if (currentPath === '/admin') {
+                return redirectTo('/admin.html');
+            }
+            if (currentPath === '/yonetim') {
+                return redirectTo('/yonetim.html');
+            }
+
+            if (segments.length >= 2 && segments[0] === 'posts') {
+                const slug = segments.slice(1).join('/');
+                return redirectTo(`/article-en.html?slug=${encodeURIComponent(slug)}`);
+            }
+            if (segments.length >= 2 && segments[0] === 'yazilar') {
+                const slug = segments.slice(1).join('/');
+                return redirectTo(`/article-tr.html?slug=${encodeURIComponent(slug)}`);
+            }
+
+            const referrer = document.referrer || '';
+            const referrerPath = (() => {
+                try {
+                    return normalizePath(new URL(referrer).pathname);
+                } catch (e) {
+                    return '';
+                }
+            })();
+
+            const referrerLooksTurkish =
+                referrerPath === '/tr' ||
+                referrerPath.endsWith('/tr.html') ||
+                referrerPath.startsWith('/yazilar') ||
+                referrerPath.startsWith('/yetenekler') ||
+                referrerPath.startsWith('/projeler') ||
+                referrerPath.startsWith('/deneyim') ||
+                referrerPath.startsWith('/fotograflar') ||
+                referrerPath.startsWith('/yonetim');
+
+            const referrerLooksEnglish =
+                referrerPath === '/' ||
+                referrerPath.endsWith('/index.html') ||
+                referrerPath.startsWith('/posts') ||
+                referrerPath.startsWith('/skills') ||
+                referrerPath.startsWith('/projects') ||
+                referrerPath.startsWith('/experience') ||
+                referrerPath.startsWith('/photos') ||
+                referrerPath.startsWith('/admin');
+
+            const browserLang = (navigator.language || 'en').substring(0, 2);
+            const isTurkish = referrerLooksTurkish ? true : (referrerLooksEnglish ? false : (browserLang === 'tr'));
+
             if (isTurkish) {
                 messageEl.textContent = 'Sayfa Bulunamadı';
                 homeTextEl.textContent = 'Ana Sayfaya Dön';
@@ -185,6 +276,6 @@
                 logoLinkEl.href = '/';
             }
         });
-    </script>
-</body>
-</html>
+     </script>
+ </body>
+ </html>
