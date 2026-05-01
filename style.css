@@ -3243,12 +3243,12 @@ body.dark-mode .blog-empty-state p {
     }
     
     .blog-title a {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         font-weight: 600;
     }
     
     .blog-excerpt {
-        font-size: 1.2rem;
+        font-size: 1rem;
         line-height: 1.6;
     }
     
@@ -3748,7 +3748,7 @@ body.dark-mode .article-error {
     }
     
     .article-body {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         line-height: 1.7;
     }
     
