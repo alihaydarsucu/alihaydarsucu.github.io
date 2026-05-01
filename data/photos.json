@@ -1,16 +1,5 @@
 [
   {
-    "id": "photo-1777599456005",
-    "filename": "/Images/Uploads/Photos/1777599456002-img-20260427-152703-edit-123392541963501-jpg.webp",
-    "original": "/Images/Uploads/Photos/1777599456002-img-20260427-152703-edit-123392541963501-jpg.webp",
-    "categoryKey": "flag",
-    "titleEn": "Traffic Light with the Crescent and Star",
-    "titleTr": "Ay Yıldızlı Trafik Işığı",
-    "descriptionEn": "A red traffic light displaying the Turkish crescent and star symbol. The sign below reads \"“Ankara Metropolitan Municipality.”",
-    "descriptionTr": "Kırmızı ışıkta Türk bayrağı ay-yıldız sembolü gösteren bir trafik ışığı. Alt kısmında \"Ankara Büyükşehir Belediyesi\" yazıyor.",
-    "year": 2026
-  },
-  {
     "id": "photo-1777600636011",
     "filename": "/Images/Uploads/Photos/Flag_on_a_Taxi_Stand.webp",
     "original": "/Images/Uploads/Photos/Flag_on_a_Taxi_Stand.webp",
@@ -19,6 +8,39 @@
     "titleTr": "Taksi Durağındaki Bayrak",
     "descriptionEn": "A Turkish flag hangs on a window of a light-colored wooden taxi stand, surrounded by green plants and foliage.",
     "descriptionTr": "Açık renkli ahşap bir taksi durağının penceresine asılmış Türk bayrağı.",
+    "year": 2026
+  },
+  {
+    "id": "photo-1777600755708",
+    "filename": "/Images/Uploads/Photos/Traffic_Light_with_the_Crescent_and_Star.webp",
+    "original": "/Images/Uploads/Photos/Traffic_Light_with_the_Crescent_and_Star.webp",
+    "categoryKey": "flag",
+    "titleEn": "Traffic Light with the Crescent and Star",
+    "titleTr": "Ay Yıldızlı Trafik Işığı",
+    "descriptionEn": "A red traffic light displaying the Turkish crescent and star symbol. The sign below reads \"“Ankara Metropolitan Municipa",
+    "descriptionTr": "Kırmızı ışıkta  ay yıldız sembolünü gösteren bir trafik ışığı. Alt kısmında \"Ankara Büyükşehir Belediyesi\" yazıyor.",
+    "year": 2026
+  },
+  {
+    "id": "photo-1777600963381",
+    "filename": "/Images/Uploads/Photos/Minbar_with_Turkish_Flag.webp",
+    "original": "/Images/Uploads/Photos/Minbar_with_Turkish_Flag.webp",
+    "categoryKey": "flag",
+    "titleEn": "Minbar with Turkish Flag",
+    "titleTr": "Minberdeki Bayrak",
+    "descriptionEn": "A wooden mosque pulpit decorated with the Turkish flag. Located at the Sarıkadı Mosque in Hamamönü.",
+    "descriptionTr": "Türk bayrağıyla süslenmiş ahşap bir cami minberi. Hamamönü'nde Sarıkadı Camii'nde.",
+    "year": 2026
+  },
+  {
+    "id": "photo-1777601295161",
+    "filename": "/Images/Uploads/Photos/Thoughtful_Cat.webp",
+    "original": "/Images/Uploads/Photos/Thoughtful_Cat.webp",
+    "categoryKey": "cat",
+    "titleEn": "Thoughtful Cat",
+    "titleTr": "Düşünceli Kedi",
+    "descriptionEn": "A tabby cat I photographed in Dikmen Valley. Not only is it very beautiful, but it also struck a lovely pose.",
+    "descriptionTr": "Dikmen Vadisi'nde fotoğraflamış olduğum tekir kedi. Hem kendisi çok güzel hem de güzel poz vermişti.",
     "year": 2026
   }
 ]
