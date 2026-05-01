@@ -29,27 +29,27 @@ app.use(express.static(rootDir));
 app.use(express.json());
 
 app.get('/admin', (_req, res) => {
-  res.sendFile(path.join(rootDir, 'pages', 'en', 'admin.html'));
+  res.sendFile(path.join(rootDir, 'admin.html'));
 });
 
 app.get('/yonetim', (_req, res) => {
-  res.sendFile(path.join(rootDir, 'pages', 'tr', 'yonetim.html'));
+  res.sendFile(path.join(rootDir, 'yonetim.html'));
 });
 
 app.get('/posts', (_req, res) => {
-  res.sendFile(path.join(rootDir, 'pages', 'en', 'blog.html'));
+  res.sendFile(path.join(rootDir, 'blog-en.html'));
 });
 
 app.get('/yazilar', (_req, res) => {
-  res.sendFile(path.join(rootDir, 'pages', 'tr', 'blog.html'));
+  res.sendFile(path.join(rootDir, 'blog-tr.html'));
 });
 
 app.get('/posts/:slug', (_req, res) => {
-  res.sendFile(path.join(rootDir, 'pages', 'en', 'article.html'));
+  res.sendFile(path.join(rootDir, 'article-en.html'));
 });
 
 app.get('/yazilar/:slug', (_req, res) => {
-  res.sendFile(path.join(rootDir, 'pages', 'tr', 'article.html'));
+  res.sendFile(path.join(rootDir, 'article-tr.html'));
 });
 
 app.get('/api/admin/health', (_req, res) => {

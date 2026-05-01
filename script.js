@@ -356,6 +356,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Blog Posts fonksiyonları
     async function loadBlogPosts() {
         const blogLoading = document.querySelector('.blog-loading');
+        const blogError = document.getElementById('blog-error');
+        
+        // Hide error initially
+        if (blogError) blogError.style.display = 'none';
         
         try {
             // Mevcut sayfa dilini belirle - Türkçe ve İngilizce URL'ler
@@ -368,21 +372,46 @@ document.addEventListener('DOMContentLoaded', function() {
             const category = urlParams.get('category') || 'all';
             const subcategory = urlParams.get('subcategory') || 'all';
             
-            // Lokal blog indeksinden yazıları yükle
-            try {
-                const response = await fetch('/data/blog-posts.json', { cache: 'no-store' });
-                const data = await response.json();
-                if (data && data.status === 'ok' && Array.isArray(data.items)) {
-                    displayBlogPosts(data.items, pageLang, category, subcategory);
-                    setupBlogTabs(data.items, pageLang);
-                    setupBlogSearch(data.items, pageLang);
-                    return;
+            // Retry logic for fetching blog posts
+            let retries = 3;
+            let delay = 500;
+            
+            while (retries > 0) {
+                try {
+                    const response = await fetch('/data/blog-posts.json', { 
+                        cache: 'no-store',
+                        headers: {
+                            'Cache-Control': 'no-cache',
+                            'Pragma': 'no-cache'
+                        }
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    
+                    const data = await response.json();
+                    if (data && data.status === 'ok' && Array.isArray(data.items)) {
+                        displayBlogPosts(data.items, pageLang, category, subcategory);
+                        setupBlogTabs(data.items, pageLang);
+                        setupBlogSearch(data.items, pageLang);
+                        return; // Success, exit the function
+                    }
+                    
+                    break; // Invalid data format, don't retry
+                } catch (error) {
+                    console.error(`Blog fetch attempt ${4 - retries} failed:`, error);
+                    retries--;
+                    
+                    if (retries > 0) {
+                        // Wait before retry with exponential backoff
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        delay *= 2;
+                    }
                 }
-            } catch (error) {
-                console.error('Could not load local /data/blog-posts.json:', error);
             }
 
-            // If we get here, no posts available
+            // If we get here, all retries failed
             showBlogError();
             
         } catch (error) {
@@ -848,9 +877,44 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Blog posts JSON'den makaleyi bul
-            const response = await fetch('/data/blog-posts.json', { cache: 'no-store' });
-            const data = await response.json();
+            // Blog posts JSON'den makaleyi bul - with retry logic
+            let retries = 3;
+            let delay = 500;
+            let data;
+            
+            while (retries > 0) {
+                try {
+                    const response = await fetch('/data/blog-posts.json', { 
+                        cache: 'no-store',
+                        headers: {
+                            'Cache-Control': 'no-cache',
+                            'Pragma': 'no-cache'
+                        }
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    
+                    data = await response.json();
+                    if (data && data.status === 'ok' && Array.isArray(data.items)) {
+                        break; // Success, exit retry loop
+                    }
+                    
+                    break; // Invalid data format, don't retry
+                } catch (error) {
+                    console.error(`Article data fetch attempt ${4 - retries} failed:`, error);
+                    retries--;
+                    
+                    if (retries > 0) {
+                        // Wait before retry with exponential backoff
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        delay *= 2;
+                    } else {
+                        throw error; // Re-throw the last error
+                    }
+                }
+            }
             
             if (data.status !== 'ok' || !data.items) {
                 showArticleError();
