@@ -324,21 +324,21 @@ function setupBlogAdmin() {
   const isTurkish = document.documentElement.lang.startsWith('tr');
   const ui = isTurkish
     ? {
-        titleRequired: 'Baslik zorunlu.',
-        contentRequired: 'Yazi icerigi zorunlu.',
-        loadFailed: 'Yazilar yuklenemedi.',
-        saveFailed: 'Kayit basarisiz.',
-        saveSuccess: 'Yazi kaydedildi.',
-        updateSuccess: 'Yazi guncellendi.',
-        deleteSuccess: 'Yazi silindi.',
-        deleteFailed: 'Yazi silinemedi.',
-        confirmDelete: 'Bu yaziyi ve icerik dosyasini silmek istiyor musun?',
-        imageUploadFailed: 'Gorsel yuklenemedi.',
-        imageUploaded: 'Gorsel eklendi.',
-        linkPrompt: 'Eklenecek baglantiyi gir:',
-        noPosts: 'Henuz yazi yok',
-        resetText: 'Yeni yazi moduna gecildi.',
-        editingText: 'Duzenleme modundasin.'
+        titleRequired: 'Başlık zorunlu.',
+        contentRequired: 'Yazı içeriği zorunlu.',
+        loadFailed: 'Yazılar yüklenemedi.',
+        saveFailed: 'Kayıt başarısız.',
+        saveSuccess: 'Yazı kaydedildi.',
+        updateSuccess: 'Yazı güncellendi.',
+        deleteSuccess: 'Yazı silindi.',
+        deleteFailed: 'Yazı silinemedi.',
+        confirmDelete: 'Bu yazıyı ve içerik dosyasını silmek istiyor musun?',
+        imageUploadFailed: 'Görsel yüklenemedi.',
+        imageUploaded: 'Görsel eklendi.',
+        linkPrompt: 'Eklenecek bağlantıyı gir:',
+        noPosts: 'Henüz yazı yok',
+        resetText: 'Yeni yazı moduna geçildi.',
+        editingText: 'Düzenleme modundasın.'
       }
     : {
         titleRequired: 'Title is required.',
@@ -377,6 +377,7 @@ function setupBlogAdmin() {
 
   let editingId = '';
   let slugTouched = false;
+  let savedSelectionRange = null;
 
   if (recentPostsEl) {
     loadRecentPosts();
@@ -425,6 +426,17 @@ function setupBlogAdmin() {
 
   editor.addEventListener('input', syncEditor);
   editor.addEventListener('blur', syncEditor);
+  editor.addEventListener('keyup', saveSelectionRange);
+  editor.addEventListener('mouseup', saveSelectionRange);
+  editor.addEventListener('focus', saveSelectionRange);
+  document.addEventListener('selectionchange', () => {
+    if (document.activeElement === editor || editor.contains(document.activeElement)) {
+      saveSelectionRange();
+    }
+  });
+
+  imageFileInput?.addEventListener('change', saveSelectionRange);
+  imageUploadButton?.addEventListener('mousedown', saveSelectionRange);
 
   imageUploadButton?.addEventListener('click', async () => {
     const file = imageFileInput?.files?.[0];
@@ -442,8 +454,7 @@ function setupBlogAdmin() {
         throw new Error(payload.message || ui.imageUploadFailed);
       }
 
-      editor.focus();
-      document.execCommand('insertImage', false, payload.url);
+      insertImageAtCursor(payload.url);
       syncEditor();
       imageFileInput.value = '';
       setStatus(payload.notice || ui.imageUploaded, 'success');
@@ -610,6 +621,51 @@ function setupBlogAdmin() {
 
   function syncEditor() {
     contentInput.value = editor.innerHTML.trim();
+  }
+
+  function saveSelectionRange() {
+    const selection = window.getSelection();
+    if (!selection || !selection.rangeCount) return;
+
+    const range = selection.getRangeAt(0);
+    const container = range.commonAncestorContainer;
+    if (!editor.contains(container)) return;
+
+    savedSelectionRange = range.cloneRange();
+  }
+
+  function restoreSelectionRange() {
+    const selection = window.getSelection();
+    if (!selection || !savedSelectionRange) return false;
+
+    selection.removeAllRanges();
+    selection.addRange(savedSelectionRange);
+    return true;
+  }
+
+  function insertImageAtCursor(url) {
+    const imageUrl = String(url || '').trim();
+    if (!imageUrl) return;
+
+    const selectionRestored = restoreSelectionRange();
+    const selection = window.getSelection();
+    const range = selection && selection.rangeCount ? selection.getRangeAt(0) : null;
+
+    if (!selectionRestored || !range || !editor.contains(range.commonAncestorContainer)) {
+      editor.insertAdjacentHTML('beforeend', `<img src="${escapeHtml(imageUrl)}" alt="">`);
+      return;
+    }
+
+    range.deleteContents();
+    const image = document.createElement('img');
+    image.src = imageUrl;
+    image.alt = '';
+    range.insertNode(image);
+    range.setStartAfter(image);
+    range.collapse(true);
+    selection.removeAllRanges();
+    selection.addRange(range);
+    saveSelectionRange();
   }
 
   function updateSubcategoryVisibility() {

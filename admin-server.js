@@ -3,6 +3,7 @@ const multer = require('multer');
 const sharp = require('sharp');
 const fs = require('fs/promises');
 const path = require('path');
+const { spawn } = require('child_process');
 
 const app = express();
 const port = Number(process.env.ADMIN_PORT || 8787);
@@ -422,10 +423,40 @@ app.use((error, _req, res, _next) => {
   return res.status(500).json({ ok: false, message: error.message || 'Unexpected error.' });
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Admin server is running at http://localhost:${port}`);
   console.log('Use /admin (EN) or /yonetim (TR) for panel access.');
+  openAdminPanel(port);
 });
+
+server.on('error', error => {
+  if (error?.code === 'EADDRINUSE') {
+    console.log(`Port ${port} is already in use. Opening the existing admin panel...`);
+    openAdminPanel(port);
+    return;
+  }
+
+  console.error(error);
+  process.exit(1);
+});
+
+function openAdminPanel(currentPort) {
+  const url = `http://localhost:${currentPort}/admin`;
+
+  try {
+    if (process.platform === 'win32') {
+      const child = spawn('cmd', ['/c', 'start', '', url], { detached: true, stdio: 'ignore', shell: false });
+      child.unref();
+      return;
+    }
+
+    const command = process.platform === 'darwin' ? 'open' : 'xdg-open';
+    const child = spawn(command, [url], { detached: true, stdio: 'ignore' });
+    child.unref();
+  } catch {
+    console.log(`Open ${url} in your browser.`);
+  }
+}
 
 async function readPhotos() {
   try {

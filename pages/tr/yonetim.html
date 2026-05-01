@@ -219,7 +219,7 @@
     <div id="blog-admin" class="admin-grid" style="margin-top:1rem; display:none;">
       <section class="admin-card" aria-labelledby="blog-manage-title">
         <h2 id="blog-manage-title">Blog Yazılarını Yönet</h2>
-        <p class="admin-note">Yazıyı zengin metin, link ve görsellerle lokal yazıp yayımla. Indeks <strong>/data/blog-posts.json</strong>, icerik dosyalari <strong>/data/blog-content</strong> icinde saklanir.</p>
+        <p class="admin-note">Yazıyı zengin metin, link ve görsellerle lokal olarak yazıp yayımla. İndeks <strong>/data/blog-posts.json</strong>, içerik dosyaları <strong>/data/blog-content</strong> içinde saklanır.</p>
 
         <form id="blog-add-form" class="admin-form" novalidate>
           <div class="admin-field">
@@ -260,7 +260,7 @@
           </div>
 
           <div class="admin-field">
-            <label>Kalici baglanti onizleme</label>
+            <label>Kalıcı bağlantı önizleme</label>
             <div id="blog-permalink-preview" class="admin-path-preview"></div>
           </div>
 
@@ -270,7 +270,7 @@
           </div>
 
           <div class="admin-field">
-            <label>Yazi icerigi</label>
+            <label>Yazı içeriği</label>
             <div class="editor-shell">
               <div class="editor-toolbar" role="toolbar" aria-label="Editor araclari">
                 <button type="button" data-editor-command="bold"><i class="fas fa-bold" aria-hidden="true"></i></button>
@@ -280,23 +280,23 @@
                 <button type="button" data-editor-action="link"><i class="fas fa-link" aria-hidden="true"></i></button>
                 <button type="button" data-editor-action="clear"><i class="fas fa-eraser" aria-hidden="true"></i></button>
               </div>
-              <div id="blog-editor" class="editor-area" contenteditable="true" data-placeholder="Yazini buraya yaz..."></div>
+              <div id="blog-editor" class="editor-area" contenteditable="true" data-placeholder="Yazını buraya yaz..."></div>
             </div>
             <input id="blog-content-html" name="contentHtml" type="hidden">
           </div>
 
           <div class="admin-field">
-            <label for="blog-image-file">Yaziya gorsel yukle</label>
+            <label for="blog-image-file">Yazıya görsel yükle</label>
             <div class="admin-inline-row">
               <input id="blog-image-file" type="file" accept=".png,.jpg,.jpeg,image/png,image/jpeg">
-              <button id="blog-image-upload-btn" class="admin-btn ghost" type="button">Yukle + Ekle</button>
+              <button id="blog-image-upload-btn" class="admin-btn ghost" type="button">Yükle + Ekle</button>
             </div>
           </div>
 
           <div class="admin-actions">
-            <button id="blog-add-submit" class="admin-btn primary" type="submit">Yaziyi Kaydet</button>
+            <button id="blog-add-submit" class="admin-btn primary" type="submit">Yazıyı Kaydet</button>
             <button id="blog-add-reset" class="admin-btn ghost" type="reset">Sıfırla</button>
-            <button id="blog-cancel-edit" class="admin-btn ghost" type="button" hidden>Duzenlemeyi Iptal Et</button>
+            <button id="blog-cancel-edit" class="admin-btn ghost" type="button" hidden>Düzenlemeyi İptal Et</button>
           </div>
           <p id="blog-add-status" class="admin-status" aria-live="polite"></p>
         </form>

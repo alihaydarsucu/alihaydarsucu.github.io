@@ -1,4 +1,21 @@
 {
   "status": "ok",
-  "items": []
+  "items": [
+    {
+      "id": "post-1777645267055",
+      "title": "Bir İmparatorluğun Doğuşu: Ertuğrul Gazi’nin Hayatı ve Osman Bey’in Yükselişi",
+      "slug": "bir-imparatorlugun-dogusu",
+      "category": "history",
+      "subcategory": "",
+      "description": "Ertuğrul Gazi’nin hayatı, Osman Gazi’nin Bizans’la mücadelesi, fetihleri ve Osmanlı Devleti’nin temellerinin atılması. 1280 – 1324 yıllarında gerçekleşen Osmanlı’nın tüm savaşları.",
+      "excerpt": "Ertuğrul Gazi’nin hayatı, Osman Gazi’nin Bizans’la mücadelesi, fetihleri ve Osmanlı Devleti’nin temellerinin atılması. 1280 – 1324 yıllarında gerçekleşen Osmanlı’nın tüm savaşları.",
+      "lang": "tr",
+      "permalinkEn": "/posts/bir-imparatorlugun-dogusu",
+      "permalinkTr": "/yazilar/bir-imparatorlugun-dogusu",
+      "link": "/yazilar/bir-imparatorlugun-dogusu",
+      "contentPath": "/data/blog-content/bir-imparatorlugun-dogusu.html",
+      "pubDate": "2026-05-01T14:21:07.055Z",
+      "updatedAt": "2026-05-01T14:21:07.055Z"
+    }
+  ]
 }
