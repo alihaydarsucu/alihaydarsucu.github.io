@@ -8,33 +8,33 @@ RewriteRule ^hakkimda/?$ tr [R=301,L]
 RewriteRule ^$ index.html [L]
 
 # Diğer sayfalar için (İngilizce)
-RewriteRule ^skills/?$ pages/en/skills.html [L]
-RewriteRule ^projects/?$ pages/en/projects.html [L]
-RewriteRule ^experience/?$ pages/en/experience.html [L]
-RewriteRule ^photos/?$ pages/en/photos.html [L]
-RewriteRule ^admin/?$ pages/en/admin.html [L]
+RewriteRule ^skills/?$ skills.html [L]
+RewriteRule ^projects/?$ projects.html [L]
+RewriteRule ^experience/?$ experience.html [L]
+RewriteRule ^photos/?$ photos.html [L]
+RewriteRule ^admin/?$ admin.html [L]
 
 # Diğer sayfalar için (Türkçe)
-RewriteRule ^tr/?$ pages/tr/index.html [L]
-RewriteRule ^yetenekler/?$ pages/tr/yetenekler.html [L]
-RewriteRule ^projeler/?$ pages/tr/projeler.html [L]
-RewriteRule ^deneyim/?$ pages/tr/deneyim.html [L]
-RewriteRule ^fotograflar/?$ pages/tr/fotograflar.html [L]
-RewriteRule ^yonetim/?$ pages/tr/yonetim.html [L]
+RewriteRule ^tr/?$ index.html [L]
+RewriteRule ^yetenekler/?$ yetenekler.html [L]
+RewriteRule ^projeler/?$ projeler.html [L]
+RewriteRule ^deneyim/?$ deneyim.html [L]
+RewriteRule ^fotograflar/?$ fotograflar.html [L]
+RewriteRule ^yonetim/?$ yonetim.html [L]
 
 # Blog list sayfaları - EN ve TR
-RewriteRule ^posts/?$ pages/en/blog.html [L]
-RewriteRule ^yazilar/?$ pages/tr/blog.html [L]
+RewriteRule ^posts/?$ blog-en.html [L]
+RewriteRule ^yazilar/?$ blog-tr.html [L]
 
 # /blog-tr ve varyasyonlarını /yazilar'a yönlendir
 RewriteRule ^blog-tr/?$ yazilar [R=301,L]
 
 # Blog makale sayfaları - slug tabanlı
-# /posts/<slug> -> /pages/en/article.html?slug=<slug>
-RewriteRule ^posts/([^/]+)/?$ pages/en/article.html?slug=$1 [L,QSA]
+# /posts/<slug> -> /article-en.html?slug=<slug>
+RewriteRule ^posts/([^/]+)/?$ article-en.html?slug=$1 [L,QSA]
 
-# /yazilar/<slug> -> /pages/tr/article.html?slug=<slug>
-RewriteRule ^yazilar/([^/]+)/?$ pages/tr/article.html?slug=$1 [L,QSA]
+# /yazilar/<slug> -> /article-tr.html?slug=<slug>
+RewriteRule ^yazilar/([^/]+)/?$ article-tr.html?slug=$1 [L,QSA]
 
 # 404 sayfası için
 ErrorDocument 404 /404.html

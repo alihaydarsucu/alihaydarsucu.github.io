@@ -360,7 +360,7 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             // Mevcut sayfa dilini belirle - Türkçe ve İngilizce URL'ler
             const isTurkishBlog = window.location.pathname.includes('yazilar') || window.location.pathname.includes('blog-tr');
-            const isEnglishBlog = window.location.pathname.includes('posts') || window.location.pathname.includes('blog.html');
+            const isEnglishBlog = window.location.pathname.includes('posts') || window.location.pathname.includes('blog-en');
             const pageLang = isTurkishBlog ? 'tr' : (isEnglishBlog ? 'en' : 'en');
             
             // URL'den kategori parametrelerini al
@@ -430,7 +430,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return post.permalinkEn || `/posts/${slug}`;
             }
 
-            const fallbackBaseUrl = pageLang === 'tr' ? '/pages/tr/article.html' : '/pages/en/article.html';
+            const fallbackBaseUrl = pageLang === 'tr' ? '/article-tr.html' : '/article-en.html';
             return `${fallbackBaseUrl}?id=${encodeURIComponent(post.id || post.link || '')}`;
         }
         
