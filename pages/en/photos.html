@@ -50,11 +50,13 @@
         @media(max-width:900px){
             .photo-toolbar{flex-direction:column;align-items:stretch}
             .photo-search{max-width:none}
-            .photo-filters{justify-content:flex-start}
+                .photo-filters{justify-content:center;align-items:center}
+                .photo-filters .filter-btn{width:100%;max-width:240px;justify-content:center;text-align:center}
             .photo-grid{order:1}
                 .photo-item img{height:255px}
             }
             @media(min-width:500px) and (max-width:550px){
+                .photo-filters{justify-content:center}
                 .photo-filters .filter-btn{padding:.42rem .65rem;font-size:.76rem;line-height:1.1}
             }
             @media(max-width:400px){
