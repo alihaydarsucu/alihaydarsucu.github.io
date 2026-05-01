@@ -227,10 +227,15 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    // Main pagination controls (previous, page info, next)
+    const mainControls = document.createElement('div');
+    mainControls.className = 'photo-pagination-main';
+
     const prevButton = document.createElement('button');
     prevButton.type = 'button';
     prevButton.className = 'photo-page-btn';
-    prevButton.textContent = ui.previousPage;
+    prevButton.innerHTML = '<i class="fas fa-chevron-left" aria-hidden="true"></i>';
+    prevButton.setAttribute('aria-label', ui.previousPage);
     prevButton.disabled = currentPage === 1;
     prevButton.addEventListener('click', () => {
       if (currentPage === 1) return;
@@ -247,7 +252,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextButton = document.createElement('button');
     nextButton.type = 'button';
     nextButton.className = 'photo-page-btn';
-    nextButton.textContent = ui.nextPage;
+    nextButton.innerHTML = '<i class="fas fa-chevron-right" aria-hidden="true"></i>';
+    nextButton.setAttribute('aria-label', ui.nextPage);
     nextButton.disabled = currentPage === totalPages;
     nextButton.addEventListener('click', () => {
       if (currentPage === totalPages) return;
@@ -257,25 +263,34 @@ document.addEventListener('DOMContentLoaded', () => {
       scrollToGallery();
     });
 
-    pagination.append(prevButton, info, nextButton);
+    mainControls.append(prevButton, info, nextButton);
+    pagination.appendChild(mainControls);
 
-    for (let page = 1; page <= totalPages; page += 1) {
-      const pageButton = document.createElement('button');
-      pageButton.type = 'button';
-      pageButton.className = 'photo-page-number';
-      pageButton.textContent = String(page);
-      pageButton.setAttribute('aria-label', `${ui.pageLabel} ${page}`);
-      if (page === currentPage) {
-        pageButton.classList.add('active');
-        pageButton.disabled = true;
+    // Individual page selectors
+    if (totalPages > 1) {
+      const pageSelectors = document.createElement('div');
+      pageSelectors.className = 'photo-pagination-selectors';
+
+      for (let page = 1; page <= totalPages; page += 1) {
+        const pageButton = document.createElement('button');
+        pageButton.type = 'button';
+        pageButton.className = 'photo-page-number';
+        pageButton.textContent = String(page);
+        pageButton.setAttribute('aria-label', `${ui.pageLabel} ${page}`);
+        if (page === currentPage) {
+          pageButton.classList.add('active');
+          pageButton.disabled = true;
+        }
+        pageButton.addEventListener('click', () => {
+          currentPage = page;
+          closeLightbox();
+          render();
+          scrollToGallery();
+        });
+        pageSelectors.appendChild(pageButton);
       }
-      pageButton.addEventListener('click', () => {
-        currentPage = page;
-        closeLightbox();
-        render();
-        scrollToGallery();
-      });
-      pagination.append(pageButton);
+      
+      pagination.appendChild(pageSelectors);
     }
   }
 
@@ -378,4 +393,48 @@ document.addEventListener('DOMContentLoaded', () => {
       '>': '&gt;'
     }[character]));
   }
+
+  // Swipe gesture functionality for lightbox
+  let touchStartX = 0;
+  let touchEndX = 0;
+  let touchStartY = 0;
+  let touchEndY = 0;
+
+  function handleTouchStart(event) {
+    touchStartX = event.touches[0].clientX;
+    touchStartY = event.touches[0].clientY;
+  }
+
+  function handleTouchMove(event) {
+    // Prevent scrolling when swiping in lightbox
+    if (lightbox.getAttribute('aria-hidden') !== 'false') return;
+    event.preventDefault();
+    touchEndX = event.touches[0].clientX;
+    touchEndY = event.touches[0].clientY;
+  }
+
+  function handleTouchEnd() {
+    if (lightbox.getAttribute('aria-hidden') !== 'false') return;
+    
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+    const minSwipeDistance = 50;
+    const maxVerticalDistance = 100;
+
+    // Check if it's a horizontal swipe and not too much vertical movement
+    if (Math.abs(deltaX) > minSwipeDistance && Math.abs(deltaY) < maxVerticalDistance) {
+      if (deltaX > 0) {
+        // Swipe right - previous image
+        moveLightbox(-1);
+      } else {
+        // Swipe left - next image
+        moveLightbox(1);
+      }
+    }
+  }
+
+  // Add touch event listeners to lightbox
+  lightbox.addEventListener('touchstart', handleTouchStart, { passive: true });
+  lightbox.addEventListener('touchmove', handleTouchMove, { passive: false });
+  lightbox.addEventListener('touchend', handleTouchEnd, { passive: true });
 });

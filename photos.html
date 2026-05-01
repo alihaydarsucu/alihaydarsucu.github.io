@@ -26,11 +26,13 @@
     .photo-grid{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start}
     .photo-item{display:inline-block;border:0;padding:0;background:transparent;text-align:left;animation:photoFadeUp .28s ease both}
     .photo-item img{height:320px;width:auto;object-fit:cover;border-radius:12px;display:block;box-shadow:0 10px 26px rgba(0,0,0,.14)}
-    .photo-pagination{display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap;margin-top:1.5rem}
+    .photo-pagination{display:flex;flex-direction:column;align-items:center;gap:1rem;margin-top:1.5rem}
+    .photo-pagination-main{display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap}
+    .photo-pagination-selectors{display:flex;align-items:center;justify-content:center;gap:.4rem;flex-wrap:wrap;max-width:100%;overflow-x:auto;padding:0.5rem 0}
     .photo-page-btn{padding:.5rem .8rem;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text-primary);cursor:pointer;transition:all 0.2s ease;font-size:0.9rem}
     .photo-page-btn:hover:not(:disabled){border-color:var(--primary);color:var(--primary)}
     .photo-page-btn:disabled{opacity:.45;cursor:not-allowed}
-    .photo-page-number{padding:.5rem .8rem;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text-primary);font-weight:600;font-size:0.95rem;min-width:2.8rem;text-align:center;display:inline-flex;align-items:center;justify-content:center}
+    .photo-page-number{padding:.4rem .6rem;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text-primary);font-weight:600;font-size:0.85rem;min-width:2.2rem;text-align:center;display:inline-flex;align-items:center;justify-content:center}
     .photo-page-number.active{background:var(--accent,#111);color:#fff;border-color:var(--accent,#111)}
 
     .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.85);z-index:999;opacity:0;transition:opacity .22s ease}
@@ -68,6 +70,10 @@
             }
             @media(max-width:400px){
                 .photo-item img{height:260px}
+                .photo-pagination-main{gap:0.3rem}
+                .photo-page-btn{padding:0.4rem 0.6rem;font-size:0.8rem}
+                .photo-page-number{padding:0.3rem 0.5rem;font-size:0.75rem;min-width:1.8rem}
+                .photo-pagination-selectors{gap:0.3rem}
         }
   </style>
 </head>

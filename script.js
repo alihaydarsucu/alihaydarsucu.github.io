@@ -471,20 +471,19 @@ document.addEventListener('DOMContentLoaded', function() {
             filteredPosts = filteredPosts.filter(post => post.subcategory === subcategory);
         }
         
-        // Yazı linkini oluştur - Frontend-only solution for GitHub Pages
+        // Yazı linkini oluştur - Clean URLs for sharing
         function getArticleLink(post) {
             const slug = (post.slug || '').trim();
             if (slug) {
-                // For GitHub Pages, use actual HTML files with query parameters
-                // This works on both GitHub Pages and local admin server
+                // Use clean URLs for sharing
                 if (pageLang === 'tr') {
-                    return `/article-tr.html?slug=${encodeURIComponent(slug)}`;
+                    return `/yazilar/${encodeURIComponent(slug)}`;
                 }
-                return `/article-en.html?slug=${encodeURIComponent(slug)}`;
+                return `/posts/${encodeURIComponent(slug)}`;
             }
 
-            const fallbackBaseUrl = pageLang === 'tr' ? '/article-tr.html' : '/article-en.html';
-            return `${fallbackBaseUrl}?id=${encodeURIComponent(post.id || post.link || '')}`;
+            const fallbackBaseUrl = pageLang === 'tr' ? '/yazilar' : '/posts';
+            return `${fallbackBaseUrl}/${encodeURIComponent(post.id || post.link || '')}`;
         }
         
         // Kategori etiketini oluştur

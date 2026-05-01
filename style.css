@@ -3243,11 +3243,17 @@ body.dark-mode .blog-empty-state p {
     }
     
     .blog-title a {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+    
+    .blog-excerpt {
+        font-size: 1rem;
+        line-height: 1.6;
     }
     
     .blog-card {
-        padding: 1rem;
+        padding: 1.25rem;
     }
 }
 
@@ -3738,7 +3744,12 @@ body.dark-mode .article-error {
     }
     
     .article-title {
-        font-size: clamp(1.5rem, 1.8rem, 2.1rem);
+        font-size: clamp(1.6rem, 1.9rem, 2.2rem);
+    }
+    
+    .article-body {
+        font-size: 1.1rem;
+        line-height: 1.7;
     }
     
     .article-actions {
