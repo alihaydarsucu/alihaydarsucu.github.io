@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch('/data/photos.json')
     .then(response => response.json())
     .then(data => {
-      photos = Array.isArray(data) ? data : [];
+      photos = Array.isArray(data) ? [...data].reverse() : [];
       render();
     })
     .catch(error => {
