@@ -2030,7 +2030,7 @@ body.dark-mode .mobile-language-selector select {
 
 .explore-grid {
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(6, 1fr);
     gap: 30px;
     margin-top: 40px;
 }
@@ -2047,12 +2047,15 @@ body.dark-mode .mobile-language-selector select {
     grid-column: span 2;
 }
 
-.explore-card:nth-child(4) {
-    grid-column: 2 / span 2;
-}
+/* Desktop: 4th and 5th cards centered on bottom row - only on screens > 768px */
+@media (min-width: 769px) {
+    .explore-card:nth-child(4) {
+        grid-column: 2 / span 2;
+    }
 
-.explore-card:nth-child(5) {
-    grid-column: 4 / span 2;
+    .explore-card:nth-child(5) {
+        grid-column: 4 / span 2;
+    }
 }
 
 .explore-card:hover {
@@ -2301,12 +2304,43 @@ body.dark-mode .language-option:hover:not(.active) {
         grid-template-columns: 1fr;
     }
 
-    .explore-card:nth-child(4) {
-        grid-column: auto;
+    /* Explore section mobile adjustments */
+    .explore-section {
+        padding: 40px 15px;
     }
-
-    .explore-card:nth-child(5) {
-        grid-column: auto;
+    
+    .explore-grid {
+        gap: 20px;
+        margin-top: 30px;
+    }
+    
+    .explore-card {
+        padding: 25px 20px;
+        border-radius: 8px;
+    }
+    
+    /* Force blog and photos cards to stack on mobile - higher specificity */
+    .explore-grid .explore-card:nth-child(4),
+    .explore-grid .explore-card:nth-child(5) {
+        grid-column: 1 / -1 !important;
+        grid-row: auto !important;
+    }
+    
+    .explore-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 15px;
+        font-size: 24px;
+    }
+    
+    .explore-card h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+    
+    .explore-card p {
+        font-size: 14px;
+        line-height: 1.4;
     }
     
     .hamburger-menu {
