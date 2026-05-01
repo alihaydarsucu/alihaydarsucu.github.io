@@ -84,6 +84,33 @@ app.get('/yazilar/:slug', (req, res) => {
     });
 });
 
+// URL rewriting redirects to match .htaccess rules
+app.get('/article-tr.html', (req, res) => {
+  const slug = req.query.slug;
+  if (slug) {
+    res.redirect(301, `/yazilar/${slug}`);
+  } else {
+    res.redirect(301, '/yazilar');
+  }
+});
+
+app.get('/article-en.html', (req, res) => {
+  const slug = req.query.slug;
+  if (slug) {
+    res.redirect(301, `/posts/${slug}`);
+  } else {
+    res.redirect(301, '/posts');
+  }
+});
+
+app.get('/blog-tr.html', (_req, res) => {
+  res.redirect(301, '/yazilar');
+});
+
+app.get('/blog-en.html', (_req, res) => {
+  res.redirect(301, '/posts');
+});
+
 app.get('/api/admin/health', (_req, res) => {
   res.json({ ok: true });
 });

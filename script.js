@@ -142,9 +142,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else if (currentPath.includes('yazilar') || currentPath === '/yazilar') {
                         window.location.href = '/posts';
                     } else if (currentPath.includes('blog-tr') || currentPath === '/blog-tr') {
-                        window.location.href = '/blog'; // eski yönlendirme, kaldırılacak
-                    } else if (currentPath.includes('yazilar') || currentPath === '/yazilar') {
                         window.location.href = '/posts';
+                    } else if (currentPath.startsWith('/yazilar/')) {
+                        // Türkçe makale sayfasından İngilizce makale sayfasına
+                        const slug = currentPath.replace('/yazilar/', '').replace('/', '');
+                        window.location.href = `/posts/${slug}`;
                     }
                 } else if (selectedLang === 'TR') {
                     // İngilizce'den Türkçe'ye geçiş
@@ -164,6 +166,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         window.location.href = '/yazilar';
                     } else if (currentPath.includes('blog') || currentPath === '/blog') {
                         window.location.href = '/yazilar';
+                    } else if (currentPath.startsWith('/posts/')) {
+                        // İngilizce makale sayfasından Türkçe makale sayfasına
+                        const slug = currentPath.replace('/posts/', '').replace('/', '');
+                        window.location.href = `/yazilar/${slug}`;
                     }
                 }
             });
