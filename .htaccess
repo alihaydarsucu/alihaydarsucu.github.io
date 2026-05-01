@@ -26,10 +26,10 @@ RewriteRule ^yonetim/?$ yonetim.html [L]
 RewriteRule ^posts/?$ blog-en.html [L]
 RewriteRule ^yazilar/?$ blog-tr.html [L]
 
-# /blog-tr ve varyasyonlarını /yazilar'a yönlendir
-RewriteRule ^blog-tr/?$ yazilar [R=301,L]
+# /blog-tr ve varyasyonlarını /blog-tr.html'e yönlendir
+RewriteRule ^blog-tr/?$ blog-tr.html [R=301,L]
 
-# Blog makale sayfaları - slug tabanlı
+# Blog makale sayfaları - slug tabanlı (Clean URLs with fallback)
 # /posts/<slug> -> /article-en.html?slug=<slug>
 RewriteRule ^posts/([^/]+)/?$ article-en.html?slug=$1 [L,QSA]
 

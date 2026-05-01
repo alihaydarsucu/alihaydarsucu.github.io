@@ -1,6 +1,49 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Client-side router for clean URLs on GitHub Pages
+    handleClientSideRouting();
+    
     // Basit site fonksiyonları
     initializePage();
+    
+    function handleClientSideRouting() {
+        const currentPath = window.location.pathname;
+        const isProduction = window.location.hostname.includes('github.io');
+        
+        // Handle clean URLs for articles on GitHub Pages
+        if (isProduction) {
+            // /yazilar/slug -> article-tr.html?slug=slug
+            if (currentPath.startsWith('/yazilar/')) {
+                const slug = currentPath.replace('/yazilar/', '').replace('/', '');
+                if (slug) {
+                    // Redirect to the actual HTML file with query parameter
+                    window.location.replace(`/article-tr.html?slug=${encodeURIComponent(slug)}`);
+                    return;
+                }
+            }
+            
+            // /posts/slug -> article-en.html?slug=slug
+            if (currentPath.startsWith('/posts/')) {
+                const slug = currentPath.replace('/posts/', '').replace('/', '');
+                if (slug) {
+                    // Redirect to the actual HTML file with query parameter
+                    window.location.replace(`/article-en.html?slug=${encodeURIComponent(slug)}`);
+                    return;
+                }
+            }
+            
+            // /yazilar -> blog-tr.html
+            if (currentPath === '/yazilar') {
+                window.location.replace('/blog-tr.html');
+                return;
+            }
+            
+            // /posts -> blog-en.html
+            if (currentPath === '/posts') {
+                window.location.replace('/blog-en.html');
+                return;
+            }
+        }
+    }
     
     function initializePage() {
         setupDarkMode();
@@ -140,13 +183,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else if (currentPath.includes('yonetim') || currentPath === '/yonetim') {
                         window.location.href = '/admin';
                     } else if (currentPath.includes('yazilar') || currentPath === '/yazilar') {
-                        window.location.href = '/posts';
+                        window.location.href = '/blog-en.html';
                     } else if (currentPath.includes('blog-tr') || currentPath === '/blog-tr') {
-                        window.location.href = '/posts';
+                        window.location.href = '/blog-en.html';
                     } else if (currentPath.startsWith('/yazilar/')) {
                         // Türkçe makale sayfasından İngilizce makale sayfasına
                         const slug = currentPath.replace('/yazilar/', '').replace('/', '');
-                        window.location.href = `/posts/${slug}`;
+                        window.location.href = `/article-en.html?slug=${encodeURIComponent(slug)}`;
                     }
                 } else if (selectedLang === 'TR') {
                     // İngilizce'den Türkçe'ye geçiş
@@ -163,13 +206,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else if (currentPath.includes('admin') || currentPath === '/admin') {
                         window.location.href = '/yonetim';
                     } else if (currentPath.includes('posts') || currentPath === '/posts') {
-                        window.location.href = '/yazilar';
+                        window.location.href = '/blog-tr.html';
                     } else if (currentPath.includes('blog') || currentPath === '/blog') {
-                        window.location.href = '/yazilar';
+                        window.location.href = '/blog-tr.html';
                     } else if (currentPath.startsWith('/posts/')) {
                         // İngilizce makale sayfasından Türkçe makale sayfasına
                         const slug = currentPath.replace('/posts/', '').replace('/', '');
-                        window.location.href = `/yazilar/${slug}`;
+                        window.location.href = `/article-tr.html?slug=${encodeURIComponent(slug)}`;
                     }
                 }
             });
@@ -455,18 +498,43 @@ document.addEventListener('DOMContentLoaded', function() {
             filteredPosts = filteredPosts.filter(post => post.subcategory === subcategory);
         }
         
-        // Yazı linkini oluştur
-        function getArticleLink(post) {
+        // Clean URL management
+        function updateBrowserUrl(cleanUrl) {
+            if (window.history && window.history.pushState) {
+                window.history.pushState({}, '', cleanUrl);
+            }
+        }
+        
+        function getCleanArticleUrl(post) {
             const slug = (post.slug || '').trim();
             if (slug) {
                 if (pageLang === 'tr') {
-                    return post.permalinkTr || `/yazilar/${slug}`;
+                    return `/yazilar/${slug}`;
                 }
-                return post.permalinkEn || `/posts/${slug}`;
+                return `/posts/${slug}`;
             }
-
+            return null;
+        }
+        
+        function getActualArticleUrl(post) {
+            const slug = (post.slug || '').trim();
+            if (slug) {
+                if (pageLang === 'tr') {
+                    return `/article-tr.html?slug=${encodeURIComponent(slug)}`;
+                }
+                return `/article-en.html?slug=${encodeURIComponent(slug)}`;
+            }
             const fallbackBaseUrl = pageLang === 'tr' ? '/article-tr.html' : '/article-en.html';
             return `${fallbackBaseUrl}?id=${encodeURIComponent(post.id || post.link || '')}`;
+        }
+        
+        // Yazı linkini oluştur - Use clean URLs
+        function getArticleLink(post) {
+            const cleanUrl = getCleanArticleUrl(post);
+            if (cleanUrl) {
+                return cleanUrl;
+            }
+            return getActualArticleUrl(post);
         }
         
         // Kategori etiketini oluştur
@@ -519,46 +587,25 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>${message}</p>
                 </div>
             `;
-            return;
-        }
-        
-        blogGrid.innerHTML = filteredPosts.map(post => {
-            const articleUrl = getArticleLink(post);
-            const categoryBadge = getCategoryBadge(post);
-            return `
-            <article class="blog-card" data-category="${post.category || 'uncategorized'}">
-                <div class="blog-card-header">
-                    <div class="blog-meta">
-                        <time datetime="${post.pubDate}" class="blog-date">${formatBlogDate(post.pubDate, pageLang)}</time>
-                        <span class="blog-category">${categoryBadge}</span>
-                    </div>
-                    <h2 class="blog-title">
-                        <a href="${articleUrl}">
-                            ${post.title}
-                        </a>
-                    </h2>
-                </div>
-                <div class="blog-content">
-                    <p class="blog-excerpt">${truncateText(stripHtml(post.excerpt || post.description || ''), 150)}</p>
-                </div>
-                <div class="blog-footer">
-                    <a href="${articleUrl}" class="blog-read-more">
-                        ${pageLang === 'tr' ? 'Devamını Oku' : 'Read More'} <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                    </a>
-                    <button class="blog-share" type="button" aria-label="${pageLang === 'tr' ? 'Makale linkini kopyala' : 'Copy article link'}" data-article-url="${encodeURIComponent(articleUrl)}">
-                        <i class="fas fa-share-nodes" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </article>
-        `;
-        }).join('');
+
+        // Add click handlers for clean URL navigation
+        document.querySelectorAll('.clean-url-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const actualUrl = this.getAttribute('href');
+                const cleanUrl = this.getAttribute('data-clean-url');
+                
+                // Navigate to the actual page
+                window.location.href = actualUrl;
+            });
+        });
 
         document.querySelectorAll('.blog-share').forEach(btn => {
             btn.addEventListener('click', async () => {
                 const articleUrl = decodeURIComponent(btn.getAttribute('data-article-url') || '');
                 const normalizedUrl = articleUrl.startsWith('http')
                     ? articleUrl
-                    : `${window.location.origin}${articleUrl}`;
+                    : window.location.origin + articleUrl;
                 
                 try {
                     await navigator.clipboard.writeText(normalizedUrl);
@@ -967,10 +1014,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const articleLocale = article.lang === 'tr' ? 'tr' : 'en';
         const labels = getArticleUiLabels(articleLocale);
         const isTurkish = articleLocale === 'tr';
-        const articleUrlPath = isTurkish
-            ? (article.permalinkTr || `/yazilar/${article.slug}`)
-            : (article.permalinkEn || `/posts/${article.slug}`);
-        const articleUrl = `${window.location.origin}${articleUrlPath}`;
+        const cleanUrlPath = isTurkish
+            ? `/yazilar/${article.slug}`
+            : `/posts/${article.slug}`;
+        const actualUrlPath = isTurkish
+            ? `/article-tr.html?slug=${encodeURIComponent(article.slug)}`
+            : `/article-en.html?slug=${encodeURIComponent(article.slug)}`;
+        const articleUrl = `${window.location.origin}${cleanUrlPath}`;
 
         document.documentElement.lang = articleLocale;
 
@@ -1083,7 +1133,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (backToBlog) {
             backToBlog.innerHTML = `<i class="fas fa-arrow-left" aria-hidden="true"></i>${labels.backToBlog}`;
             backToBlog.onclick = () => {
-                window.location.href = isTurkish ? '/yazilar' : '/posts';
+                window.location.href = isTurkish ? '/blog-tr.html' : '/blog-en.html';
             };
         }
 
@@ -1096,6 +1146,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Share butonlarını ayarla
         setupShareButtons(article, articleUrl, articleLocale);
+        
+        // Update browser URL to clean URL
+        updateBrowserUrl(cleanUrlPath);
         
         // Makaleyi göster
         articleContent.style.display = 'block';
@@ -1115,8 +1168,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (errorText) {
             errorText.innerHTML = isTurkish
-                ? 'İstenen makale yüklenemedi. Lütfen <a href="/yazilar">blog’a dönün</a> ve tekrar deneyin.'
-                : 'The requested article could not be loaded. Please <a href="/posts">return to the blog</a> and try again.';
+                ? 'İstenen makale yüklenemedi. Lütfen <a href="/blog-tr.html">blog\'a dönün</a> ve tekrar deneyin.'
+                : 'The requested article could not be loaded. Please <a href="/blog-en.html">return to the blog</a> and try again.';
         }
 
         if (articleError) articleError.style.display = 'block';
