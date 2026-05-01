@@ -808,10 +808,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.querySelectorAll('.sub-tab-btn').forEach(btn => {
                     btn.addEventListener('click', function() {
                         const subcategory = this.getAttribute('data-subcategory');
-                        const newUrl = new URL(window.location);
-                        newUrl.searchParams.set('category', 'technical');
-                        newUrl.searchParams.set('subcategory', subcategory);
-                        window.location.href = newUrl.toString();
+                        const isTurkishBlog = window.location.pathname.includes('yazilar') || window.location.pathname.includes('blog-tr');
+                        const basePath = isTurkishBlog ? '/yazilar' : '/posts';
+                        
+                        window.location.href = `${basePath}?category=technical&subcategory=${subcategory}`;
                     });
                 });
             } else {
@@ -823,15 +823,14 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const category = this.getAttribute('data-category');
-                const newUrl = new URL(window.location);
+                const isTurkishBlog = window.location.pathname.includes('yazilar') || window.location.pathname.includes('blog-tr');
+                const basePath = isTurkishBlog ? '/yazilar' : '/posts';
+                
                 if (category === 'all') {
-                    newUrl.searchParams.delete('category');
-                    newUrl.searchParams.delete('subcategory');
+                    window.location.href = basePath;
                 } else {
-                    newUrl.searchParams.set('category', category);
-                    newUrl.searchParams.delete('subcategory');
+                    window.location.href = `${basePath}?category=${category}`;
                 }
-                window.location.href = newUrl.toString();
             });
         });
     }
