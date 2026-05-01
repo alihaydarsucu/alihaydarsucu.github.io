@@ -27,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
         resultsOne: 'fotoğraf bulundu',
         resultsMany: 'fotoğraf bulundu',
         emptyState: 'Bu aramaya uygun fotoğraf bulunamadı.',
+        noPhotosYet: 'Henüz fotoğraf eklenmedi.',
+        noPhotosHint: 'Yeni görselleri yönetim panelinden yükleyebilirsin.',
         close: 'Kapat',
         previous: 'Önceki',
         next: 'Sonraki',
@@ -43,6 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
         resultsOne: 'photo found',
         resultsMany: 'photos found',
         emptyState: 'No photos matched this search.',
+        noPhotosYet: 'No photos have been uploaded yet.',
+        noPhotosHint: 'You can add new photos from the admin panel.',
         close: 'Close',
         previous: 'Previous',
         next: 'Next',
@@ -164,6 +168,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderResults(total) {
+    if (photos.length === 0) {
+      resultsEl.textContent = ui.noPhotosYet;
+      return;
+    }
+
     if (!total) {
       resultsEl.textContent = ui.emptyState;
       return;
@@ -184,6 +193,15 @@ document.addEventListener('DOMContentLoaded', () => {
     grid.innerHTML = '';
 
     if (!list.length) {
+      if (photos.length === 0) {
+        grid.innerHTML = `
+          <div class="photo-empty-state" role="status">
+            <i class="fas fa-camera-retro" aria-hidden="true"></i>
+            <p>${escapeHtml(ui.noPhotosYet)}</p>
+            <small>${escapeHtml(ui.noPhotosHint)}</small>
+          </div>
+        `;
+      }
       return;
     }
 
@@ -194,7 +212,6 @@ document.addEventListener('DOMContentLoaded', () => {
       button.className = 'photo-item';
       button.innerHTML = `
         <img src="${escapeHtml(photo.filename)}" alt="${escapeHtml(getTitle(photo))}" loading="lazy">
-        <div class="photo-title">${escapeHtml(getTitle(photo))}</div>
       `;
       button.addEventListener('click', () => openLightbox(globalIndex));
       grid.appendChild(button);

@@ -21,10 +21,11 @@
     .photo-filters{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:flex-end;gap:.6rem}
     .filter-btn{display:flex;align-items:center;justify-content:center;padding:.55rem .85rem;border-radius:999px;border:1px solid var(--muted,#ccc);background:var(--surface,#fff);cursor:pointer;white-space:nowrap;transition:all 0.2s ease}
     .filter-btn.active{background:var(--accent,#111);color:#fff;border-color:var(--accent,#111)}
+    .photo-results{display:inline-flex;align-items:center;gap:.45rem;padding:.42rem .72rem;border:1px solid var(--border);border-radius:999px;background:var(--surface);color:var(--text-secondary);font-size:.88rem;letter-spacing:.01em;margin:0 0 .95rem}
+    .photo-results::before{content:"\f03e";font-family:"Font Awesome 6 Free";font-weight:900;color:var(--primary);font-size:.84rem}
     .photo-grid{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start}
     .photo-item{display:inline-block;border:0;padding:0;background:transparent;text-align:left;animation:photoFadeUp .28s ease both}
     .photo-item img{height:280px;width:auto;object-fit:cover;border-radius:12px;display:block;box-shadow:0 10px 26px rgba(0,0,0,.14)}
-    .photo-title{font-size:.95rem;margin-top:.45rem;color:var(--text-primary,#111)}
     .photo-pagination{display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap;margin-top:1.5rem}
     .photo-page-btn{padding:.5rem .8rem;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text-primary);cursor:pointer;transition:all 0.2s ease;font-size:0.9rem}
     .photo-page-btn:hover:not(:disabled){border-color:var(--primary);color:var(--primary)}
@@ -39,6 +40,8 @@
     body.lightbox-open{overflow:hidden}
     .lb-image{max-width:100%;max-height:72vh;border-radius:8px}
     .lb-caption{color:#fff;margin-top:.6rem}
+    .lb-title{font-weight:700;font-size:1.05rem;line-height:1.35}
+    .lb-description{margin-top:.25rem;color:rgba(255,255,255,.9)}
     .lb-prev,.lb-next,.lb-close{position:absolute;background:transparent;color:#fff;border:0;font-size:1.6rem;cursor:pointer}
     .lb-close{top:20px;right:20px}
     .lb-prev{left:20px}

@@ -2670,6 +2670,34 @@ body.dark-mode .language-option:hover:not(.active) {
     border-color: var(--accent, #4a90e2);
 }
 
+.photo-empty-state {
+    width: 100%;
+    padding: 2rem 1.25rem;
+    border: 1px dashed var(--border);
+    border-radius: 14px;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(58, 134, 255, 0.04), rgba(58, 134, 255, 0.01));
+    color: var(--text-secondary);
+}
+
+.photo-empty-state i {
+    font-size: 1.6rem;
+    color: var(--primary);
+    margin-bottom: 0.7rem;
+}
+
+.photo-empty-state p {
+    margin: 0;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.photo-empty-state small {
+    display: block;
+    margin-top: 0.35rem;
+    color: var(--text-secondary);
+}
+
 /* Blog Tabs - Yeni kategori sistemi */
 .blog-tabs-container {
     display: flex;

@@ -1,5 +1,11 @@
 {
+  "scripts": {
+    "admin": "node admin-server.js"
+  },
   "dependencies": {
+    "express": "^4.21.2",
+    "multer": "^2.0.0",
+    "sharp": "^0.33.5",
     "xml2js": "^0.6.2"
   }
 }

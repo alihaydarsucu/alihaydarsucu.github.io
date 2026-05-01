@@ -135,6 +135,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         window.location.href = '/projects';
                     } else if (currentPath.includes('deneyim') || currentPath === '/deneyim') {
                         window.location.href = '/experience';
+                    } else if (currentPath.includes('fotograflar') || currentPath === '/fotograflar') {
+                        window.location.href = '/photos';
+                    } else if (currentPath.includes('yonetim') || currentPath === '/yonetim') {
+                        window.location.href = '/admin';
                     } else if (currentPath.includes('yazilar') || currentPath === '/yazilar') {
                         window.location.href = '/posts';
                     } else if (currentPath.includes('blog-tr') || currentPath === '/blog-tr') {
@@ -152,6 +156,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         window.location.href = '/projeler';
                     } else if (currentPath.includes('experience') || currentPath === '/experience') {
                         window.location.href = '/deneyim';
+                    } else if (currentPath.includes('photos') || currentPath === '/photos') {
+                        window.location.href = '/fotograflar';
+                    } else if (currentPath.includes('admin') || currentPath === '/admin') {
+                        window.location.href = '/yonetim';
                     } else if (currentPath.includes('posts') || currentPath === '/posts') {
                         window.location.href = '/yazilar';
                     } else if (currentPath.includes('blog') || currentPath === '/blog') {
