@@ -400,7 +400,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!blogGrid) return;
         
         // Dil filtrelemesi: lang alanına göre yazıları filtrele
-        let filteredPosts = posts.filter(post => {
+        let filteredPosts = [...posts]
+            .sort((left, right) => new Date(right.pubDate || 0) - new Date(left.pubDate || 0))
+            .filter(post => {
             // Eğer yazının dili belirtilmişse sadece o dil için göster
             if (post.lang === 'tr') return pageLang === 'tr';
             if (post.lang === 'en') return pageLang === 'en';
@@ -492,7 +494,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <article class="blog-card" data-category="${post.category || 'uncategorized'}">
                 <div class="blog-card-header">
                     <div class="blog-meta">
-                        <time datetime="${post.pubDate}" class="blog-date">${formatBlogDate(post.pubDate)}</time>
+                        <time datetime="${post.pubDate}" class="blog-date">${formatBlogDate(post.pubDate, pageLang)}</time>
                         <span class="blog-category">${categoryBadge}</span>
                     </div>
                     <h2 class="blog-title">
@@ -561,19 +563,40 @@ document.addEventListener('DOMContentLoaded', function() {
         return 'technical';
     }
     
-    function getCategoryLabel(category) {
-        const labels = {
-            'technical': 'Technical',
-            'history': 'History',
-            'fiction': 'Fiction'
-        };
+    function getCategoryLabel(category, locale = 'en') {
+        const labels = locale === 'tr'
+            ? {
+                technical: 'Teknik',
+                history: 'Tarih',
+                fiction: 'Kurgu'
+            }
+            : {
+                technical: 'Technical',
+                history: 'History',
+                fiction: 'Fiction'
+            };
         return labels[category] || 'General';
     }
+
+    function getSubcategoryLabel(subcategory, locale = 'en') {
+        const labels = locale === 'tr'
+            ? {
+                systems: 'Sistemler',
+                embedded: 'Gömülü',
+                ai: 'Yapay Zeka'
+            }
+            : {
+                systems: 'Systems',
+                embedded: 'Embedded',
+                ai: 'AI'
+            };
+        return labels[subcategory] || subcategory;
+    }
     
-    function formatBlogDate(dateString) {
+    function formatBlogDate(dateString, locale = 'en') {
         const date = new Date(dateString);
         const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        return date.toLocaleDateString('en-US', options);
+        return date.toLocaleDateString(locale === 'tr' ? 'tr-TR' : 'en-US', options);
     }
 
     function stripHtml(html) {
@@ -865,11 +888,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const articleContent = document.getElementById('article-content');
         if (!articleContent) return;
 
-        const isTurkish = window.location.pathname.includes('/yazilar') || window.location.pathname.includes('/tr/');
+        const articleLocale = article.lang === 'tr' ? 'tr' : 'en';
+        const labels = getArticleUiLabels(articleLocale);
+        const isTurkish = articleLocale === 'tr';
         const articleUrlPath = isTurkish
             ? (article.permalinkTr || `/yazilar/${article.slug}`)
             : (article.permalinkEn || `/posts/${article.slug}`);
         const articleUrl = `${window.location.origin}${articleUrlPath}`;
+
+        document.documentElement.lang = articleLocale;
 
         let articleHtml = '';
         if (article.contentPath) {
@@ -884,6 +911,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         if (!articleHtml) {
             articleHtml = article.description || '';
+        }
+
+        const articleLoading = document.getElementById('article-loading');
+        const articleLoadingText = articleLoading?.querySelector('span');
+        if (articleLoadingText) {
+            articleLoadingText.textContent = labels.loadingArticle;
         }
         
         // Meta bilgileri güncelle
@@ -908,10 +941,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const articleTags = document.getElementById('article-tags');
         const articleLink = document.getElementById('article-link');
         const backToBlog = document.getElementById('back-to-blog');
-        const articleCtaLink = document.getElementById('article-cta-link');
+        const articleCtaTitle = document.querySelector('.article-cta-title');
+        const articleCtaText = document.querySelector('.article-cta-text');
+        const articleShareLabel = document.querySelector('.article-share > span');
+        const shareCopy = document.getElementById('share-copy');
+        const shareTwitter = document.getElementById('share-twitter');
+        const shareLinkedin = document.getElementById('share-linkedin');
         
         if (articleDate) {
-            articleDate.textContent = formatBlogDate(article.pubDate);
+            articleDate.textContent = formatBlogDate(article.pubDate, articleLocale);
             articleDate.setAttribute('datetime', article.pubDate);
         }
         
@@ -924,28 +962,41 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (articleCategory) {
             const category = categorizeBlogPost(article);
-            articleCategory.textContent = getCategoryLabel(category);
+            articleCategory.textContent = getCategoryLabel(category, articleLocale);
             articleCategory.className = `article-category category-${category}`;
         }
         
         if (articleTags) {
             const tags = [];
-            if (article.category) tags.push(`<span class="article-tag">${article.category}</span>`);
-            if (article.subcategory) tags.push(`<span class="article-tag">${article.subcategory}</span>`);
+            const category = categorizeBlogPost(article);
+            tags.push(`<span class="article-tag">${getCategoryLabel(category, articleLocale)}</span>`);
+            if (article.subcategory) tags.push(`<span class="article-tag">${getSubcategoryLabel(article.subcategory, articleLocale)}</span>`);
             articleTags.innerHTML = tags;
         }
         
-        if (articleLink) articleLink.href = articleUrl;
-        if (articleCtaLink) articleCtaLink.href = articleUrl;
+        if (articleLink) {
+            articleLink.href = articleUrl;
+            articleLink.classList.add('article-share-cta');
+            articleLink.setAttribute('aria-label', labels.permalinkButton);
+            articleLink.innerHTML = `<i class="fas fa-share-nodes" aria-hidden="true"></i>${labels.permalinkButton}`;
+        }
         
         if (backToBlog) {
+            backToBlog.innerHTML = `<i class="fas fa-arrow-left" aria-hidden="true"></i>${labels.backToBlog}`;
             backToBlog.onclick = () => {
                 window.location.href = isTurkish ? '/yazilar' : '/posts';
             };
         }
+
+        if (articleCtaTitle) articleCtaTitle.textContent = labels.ctaTitle;
+        if (articleCtaText) articleCtaText.textContent = labels.ctaText;
+        if (articleShareLabel) articleShareLabel.textContent = labels.shareLabel;
+        if (shareCopy) shareCopy.setAttribute('aria-label', labels.copyLink);
+        if (shareTwitter) shareTwitter.setAttribute('aria-label', labels.shareOnX);
+        if (shareLinkedin) shareLinkedin.setAttribute('aria-label', labels.shareOnLinkedIn);
         
         // Share butonlarını ayarla
-        setupShareButtons(article, articleUrl);
+        setupShareButtons(article, articleUrl, articleLocale);
         
         // Makaleyi göster
         articleContent.style.display = 'block';
@@ -955,14 +1006,29 @@ document.addEventListener('DOMContentLoaded', function() {
     function showArticleError() {
         const articleError = document.getElementById('article-error');
         const articleContent = document.getElementById('article-content');
+        const isTurkish = document.documentElement.lang === 'tr' || window.location.pathname.includes('/yazilar');
+        const errorTitle = articleError?.querySelector('h3');
+        const errorText = articleError?.querySelector('p');
+
+        if (errorTitle) {
+            errorTitle.textContent = isTurkish ? 'Makale bulunamadı' : 'Article not found';
+        }
+
+        if (errorText) {
+            errorText.innerHTML = isTurkish
+                ? 'İstenen makale yüklenemedi. Lütfen <a href="/yazilar">blog’a dönün</a> ve tekrar deneyin.'
+                : 'The requested article could not be loaded. Please <a href="/posts">return to the blog</a> and try again.';
+        }
+
         if (articleError) articleError.style.display = 'block';
         if (articleContent) articleContent.style.display = 'none';
     }
     
-    function setupShareButtons(article, articleUrl) {
+    function setupShareButtons(article, articleUrl, locale = 'en') {
         const shareTwitter = document.getElementById('share-twitter');
         const shareLinkedin = document.getElementById('share-linkedin');
         const shareCopy = document.getElementById('share-copy');
+        const labels = getArticleUiLabels(locale);
         
         const shareUrl = articleUrl;
         const shareTitle = article.title;
@@ -983,15 +1049,57 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (shareCopy) {
             shareCopy.onclick = () => {
-                navigator.clipboard.writeText(shareUrl).then(() => {
-                    const originalText = shareCopy.innerHTML;
+                const copyWithFallback = async () => {
+                    try {
+                        await navigator.clipboard.writeText(shareUrl);
+                    } catch {
+                        const tmp = document.createElement('input');
+                        tmp.value = shareUrl;
+                        document.body.appendChild(tmp);
+                        tmp.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(tmp);
+                    }
+
                     shareCopy.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i>';
                     setTimeout(() => {
                         shareCopy.innerHTML = '<i class="fas fa-link" aria-hidden="true"></i>';
                     }, 2000);
-                    showToast('Link copied to clipboard');
-                });
+                    showToast(labels.copySuccess);
+                };
+
+                copyWithFallback();
             };
         }
+    }
+
+    function getArticleUiLabels(locale) {
+        if (locale === 'tr') {
+            return {
+                loadingArticle: 'Makale yükleniyor...',
+                backToBlog: 'Blog’a Dön',
+                permalinkButton: 'Bu Yazıyı Paylaş',
+                ctaTitle: 'Bu yazıyı sevdiklerinizle paylaşabilirsiniz.',
+                ctaText: 'Bu yazıyı sevdiklerinizle paylaşabilirsiniz.',
+                shareLabel: 'Bu yazıyı paylaşın:',
+                copyLink: 'Bağlantıyı kopyala',
+                copySuccess: 'Bağlantı panoya kopyalandı',
+                shareOnX: 'X’te paylaş',
+                shareOnLinkedIn: 'LinkedIn’de paylaş'
+            };
+        }
+
+        return {
+            loadingArticle: 'Loading article...',
+            backToBlog: 'Back to Blog',
+            permalinkButton: 'Share This Article',
+            ctaTitle: 'You can share this article with your friends.',
+            ctaText: 'You can share this article with your friends.',
+            shareLabel: 'Share this article:',
+            copyLink: 'Copy link',
+            copySuccess: 'Link copied to clipboard',
+            shareOnX: 'Share on X',
+            shareOnLinkedIn: 'Share on LinkedIn'
+        };
     }
 });

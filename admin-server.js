@@ -85,6 +85,8 @@ app.post('/api/admin/blog', async (req, res) => {
     const contentHtml = cleanHtml(req.body.contentHtml);
     const category = normalizeBlogCategory(req.body.category);
     const subcategory = normalizeBlogSubcategory(req.body.subcategory, category);
+    const now = new Date().toISOString();
+    const pubDate = normalizeBlogDate(req.body.pubDate, now);
 
     if (!title) {
       return res.status(400).json({ ok: false, message: 'Title is required.' });
@@ -98,7 +100,6 @@ app.post('/api/admin/blog', async (req, res) => {
     const items = Array.isArray(parsed.items) ? parsed.items : [];
     const requestedSlug = cleanText(req.body.slug) || title;
     const slug = ensureUniqueBlogSlug(items, requestedSlug);
-    const now = new Date().toISOString();
     const excerpt = excerptInput || extractExcerptFromHtml(contentHtml);
     const contentPath = `/data/blog-content/${slug}.html`;
 
@@ -115,7 +116,7 @@ app.post('/api/admin/blog', async (req, res) => {
       permalinkTr: `/yazilar/${slug}`,
       link: lang === 'tr' ? `/yazilar/${slug}` : `/posts/${slug}`,
       contentPath,
-      pubDate: now,
+      pubDate,
       updatedAt: now
     };
 
@@ -151,6 +152,7 @@ app.put('/api/admin/blog/:id', async (req, res) => {
     const nextContentPath = `/data/blog-content/${updatedSlug}.html`;
     const contentHtml = typeof req.body.contentHtml === 'string' ? cleanHtml(req.body.contentHtml) : null;
     const now = new Date().toISOString();
+    const nextPubDate = normalizeBlogDate(req.body.pubDate, current.pubDate);
 
     await fs.mkdir(blogContentDir, { recursive: true });
 
@@ -186,7 +188,7 @@ app.put('/api/admin/blog/:id', async (req, res) => {
       permalinkTr: `/yazilar/${updatedSlug}`,
       link: updatedLang === 'tr' ? `/yazilar/${updatedSlug}` : `/posts/${updatedSlug}`,
       contentPath: nextContentPath,
-      pubDate: req.body.pubDate || current.pubDate,
+      pubDate: nextPubDate,
       updatedAt: now
     };
 
@@ -658,6 +660,20 @@ function normalizeBlogSubcategory(value, category) {
 
 function cleanHtml(value) {
   return String(value || '').trim();
+}
+
+function normalizeBlogDate(value, fallback) {
+  const candidate = cleanText(value);
+  if (!candidate) {
+    return fallback;
+  }
+
+  const parsed = new Date(candidate);
+  if (Number.isNaN(parsed.getTime())) {
+    return fallback;
+  }
+
+  return parsed.toISOString();
 }
 
 function stripTags(value) {

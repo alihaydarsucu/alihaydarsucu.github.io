@@ -367,6 +367,7 @@ function setupBlogAdmin() {
   const slugInput = document.getElementById('blog-slug');
   const langInput = document.getElementById('blog-lang');
   const excerptInput = document.getElementById('blog-desc');
+  const pubDateInput = document.getElementById('blog-pub-date');
   const categoryInput = document.getElementById('blog-category');
   const subcategoryInput = document.getElementById('blog-subcategory');
   const subcategoryRow = document.getElementById('blog-subcategory-row');
@@ -378,6 +379,10 @@ function setupBlogAdmin() {
   let editingId = '';
   let slugTouched = false;
   let savedSelectionRange = null;
+
+  if (pubDateInput) {
+    pubDateInput.value = toLocalDateTime(new Date().toISOString());
+  }
 
   if (recentPostsEl) {
     loadRecentPosts();
@@ -482,6 +487,7 @@ function setupBlogAdmin() {
       description: String(form.get('description') || '').trim(),
       category: String(form.get('category') || 'technical').trim(),
       subcategory: String(form.get('subcategory') || '').trim(),
+      pubDate: toIsoDateTime(pubDateInput?.value || ''),
       contentHtml
     };
 
@@ -578,6 +584,9 @@ function setupBlogAdmin() {
       slugInput.value = item.slug || '';
       langInput.value = item.lang === 'tr' ? 'tr' : 'en';
       excerptInput.value = item.excerpt || item.description || '';
+      if (pubDateInput) {
+        pubDateInput.value = toLocalDateTime(item.pubDate);
+      }
       categoryInput.value = item.category || 'technical';
       subcategoryInput.value = item.subcategory || 'systems';
       slugTouched = true;
@@ -693,6 +702,9 @@ function setupBlogAdmin() {
     addForm.reset();
     categoryInput.value = 'technical';
     subcategoryInput.value = 'systems';
+    if (pubDateInput) {
+      pubDateInput.value = toLocalDateTime(new Date().toISOString());
+    }
     editor.innerHTML = '';
     contentInput.value = '';
     cancelEditButton.hidden = true;
@@ -727,6 +739,26 @@ function setupBlogAdmin() {
       '<': '&lt;',
       '>': '&gt;'
     }[character]));
+  }
+
+  function toLocalDateTime(value) {
+    if (!value) return '';
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return '';
+
+    const offset = date.getTimezoneOffset();
+    const localDate = new Date(date.getTime() - offset * 60000);
+    return localDate.toISOString().slice(0, 16);
+  }
+
+  function toIsoDateTime(value) {
+    const input = String(value || '').trim();
+    if (!input) return '';
+
+    const date = new Date(input);
+    if (Number.isNaN(date.getTime())) return '';
+
+    return date.toISOString();
   }
 
   updateSubcategoryVisibility();
