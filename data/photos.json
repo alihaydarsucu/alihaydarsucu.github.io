@@ -40,7 +40,84 @@
     "titleEn": "Thoughtful Cat",
     "titleTr": "Düşünceli Kedi",
     "descriptionEn": "A tabby cat I photographed in Dikmen Valley. Not only is it very beautiful, but it also struck a lovely pose.",
-    "descriptionTr": "Dikmen Vadisi'nde fotoğraflamış olduğum tekir kedi. Hem kendisi çok güzel hem de güzel poz vermişti.",
+    "descriptionTr": "Dikmen Vadisi'nde fotoğraflamış olduğum tekir kedi. Hem kendisi çok güzel, hem de güzel poz vermişti.",
     "year": 2026
+  },
+  {
+    "id": "photo-1777601714373",
+    "filename": "/Images/Uploads/Photos/Photogenic_Friend.webp",
+    "original": "/Images/Uploads/Photos/Photogenic_Friend.webp",
+    "categoryKey": "cat",
+    "titleEn": "Photogenic Friend",
+    "titleTr": "Fotojenik Arkadaş",
+    "descriptionEn": "Another shot of the cat in Dikmen Valley. It’s wagging its tail, too :)",
+    "descriptionTr": "Dikmen Vadisi'ndeki kedinin bir başka pozu. Kuyruğunu da sallıyor :)",
+    "year": 2026
+  },
+  {
+    "id": "photo-1777601855336",
+    "filename": "/Images/Uploads/Photos/Campfire.webp",
+    "original": "/Images/Uploads/Photos/Campfire.webp",
+    "categoryKey": "landscape",
+    "titleEn": "Campfire",
+    "titleTr": "Kamp Ateşi",
+    "descriptionEn": "A snapshot from the evening at the GSB Camp in Kırşehir. The campfire and the students gathered around it.",
+    "descriptionTr": "Kırşehir'deki GSB Kampı'nın akşamından bir kare. Kamp ateşi ve çevresindeki öğrenciler.",
+    "year": 2026
+  },
+  {
+    "id": "photo-1777602043667",
+    "filename": "/Images/Uploads/Photos/Windows_98_Hills.webp",
+    "original": "/Images/Uploads/Photos/Windows_98_Hills.webp",
+    "categoryKey": "landscape",
+    "titleEn": "Windows 98 Hills",
+    "titleTr": "Windows 98 Tepeleri",
+    "descriptionEn": "A green field stretches beneath a blue sky filled with white clouds, making me remember the iconic Windows wallpaper :D",
+    "descriptionTr": "Masmavi gökyüzünün altında uzanan yeşil bir çayır, meşhur Wİndows duvar kağıdını hatırlatıyor :D",
+    "year": 2026
+  },
+  {
+    "id": "photo-1777602152001",
+    "filename": "/Images/Uploads/Photos/A_Cat_at_the_Building_Entrance.webp",
+    "original": "/Images/Uploads/Photos/A_Cat_at_the_Building_Entrance.webp",
+    "categoryKey": "cat",
+    "titleEn": "A Cat at the Building Entrance",
+    "titleTr": "Bina Girişinde Sokak Kedisi",
+    "descriptionEn": "A stray cat is sitting on the cobblestones, looking straight at the camera.",
+    "descriptionTr": "Sokak kedisi, arnavut kaldırımı üzerinde oturup doğrudan kameraya bakıyor.",
+    "year": 2026
+  },
+  {
+    "id": "photo-1777602300604",
+    "filename": "/Images/Uploads/Photos/Orange_Cat_in_the_Evening.webp",
+    "original": "/Images/Uploads/Photos/Orange_Cat_in_the_Evening.webp",
+    "categoryKey": "cat",
+    "titleEn": "Orange Cat in the Evening",
+    "titleTr": "Turuncu Kedi",
+    "descriptionEn": "A fluffy orange cat is resting on a stone ledge at night. Hamamönü.",
+    "descriptionTr": "Tüylü turuncu kedi, gece taş bir kenarda dinleniyor. Hamamönü.",
+    "year": 2026
+  },
+  {
+    "id": "photo-1777623049399",
+    "filename": "/Images/Uploads/Photos/Inside_the_Kocatepe_Mosque.webp",
+    "original": "/Images/Uploads/Photos/Inside_the_Kocatepe_Mosque.webp",
+    "categoryKey": "building",
+    "titleEn": "Inside the Kocatepe Mosque",
+    "titleTr": "Kocatepe Camii'nden",
+    "descriptionEn": "The mosque's large spherical chandelier is in the frame",
+    "descriptionTr": "Camii'nin büyük küresel avizesi kadrajda.",
+    "year": 2025
+  },
+  {
+    "id": "photo-1777623219697",
+    "filename": "/Images/Uploads/Photos/Sea_of_Marmara.webp",
+    "original": "/Images/Uploads/Photos/Sea_of_Marmara.webp",
+    "categoryKey": "landscape",
+    "titleEn": "Sea of Marmara",
+    "titleTr": "Marmara Denizi",
+    "descriptionEn": "A beach in Yalova, a quiet morning.",
+    "descriptionTr": "Yalova'da bir sahil, sakin bir sabah.",
+    "year": 2025
   }
 ]
