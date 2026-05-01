@@ -3363,12 +3363,18 @@ body.dark-mode .blog-empty-state p {
     margin-bottom: 2rem;
     font-size: clamp(1rem, 1.05rem, 1.15rem);
     font-weight: 400;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 .article-body p {
     margin-bottom: 1.75rem;
     text-align: left;
     max-width: none;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 .article-body img,
@@ -3410,6 +3416,23 @@ body.dark-mode .blog-empty-state p {
     max-width: 100%;
     width: 100%;
     height: auto;
+}
+
+.blog-title a,
+.blog-excerpt,
+.editor-area,
+.editor-area p,
+.editor-area li,
+.editor-area blockquote,
+.editor-area h1,
+.editor-area h2,
+.editor-area h3,
+.editor-area h4,
+.editor-area h5,
+.editor-area h6 {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 .article-body p:last-child {
