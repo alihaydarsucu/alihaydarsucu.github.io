@@ -298,6 +298,9 @@ document.addEventListener('DOMContentLoaded', () => {
       ? `<div class="lb-title">${escapeHtml(title)}</div><div class="lb-description">${escapeHtml(description)}</div>`
       : `<div class="lb-title">${escapeHtml(title)}</div>`;
     lightbox.setAttribute('aria-hidden', 'false');
+    // Show/hide navigation buttons based on position
+    lbPrev.hidden = currentLightboxIndex === 0;
+    lbNext.hidden = currentLightboxIndex === filteredPhotos.length - 1;
   }
 
   function closeLightbox() {
