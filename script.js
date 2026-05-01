@@ -1045,10 +1045,33 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if (articleLink) {
-            articleLink.href = articleUrl;
             articleLink.classList.add('article-share-cta');
             articleLink.setAttribute('aria-label', labels.permalinkButton);
             articleLink.innerHTML = `<i class="fas fa-share-nodes" aria-hidden="true"></i>${labels.permalinkButton}`;
+            
+            // Add click handler to copy URL to clipboard
+            articleLink.onclick = async () => {
+                const copyWithFallback = async () => {
+                    try {
+                        await navigator.clipboard.writeText(articleUrl);
+                    } catch {
+                        const tmp = document.createElement('input');
+                        tmp.value = articleUrl;
+                        document.body.appendChild(tmp);
+                        tmp.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(tmp);
+                    }
+
+                    articleLink.innerHTML = `<i class="fas fa-check" aria-hidden="true"></i> ${articleLocale === 'tr' ? 'Kopyalandı!' : 'Copied!'}`;
+                    setTimeout(() => {
+                        articleLink.innerHTML = `<i class="fas fa-share-nodes" aria-hidden="true"></i>${labels.permalinkButton}`;
+                    }, 2000);
+                    showToast(labels.copySuccess);
+                };
+
+                copyWithFallback();
+            };
         }
         
         if (backToBlog) {
