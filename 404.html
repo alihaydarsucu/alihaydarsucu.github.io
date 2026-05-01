@@ -279,11 +279,19 @@
 
         // ✅ 404 Trick for direct clean URL access
         const path = window.location.pathname;
-        if (path.startsWith('/yazilar/')) {
+        
+        // Blog page routing - /posts -> blog-en.html, /yazilar -> blog-tr.html
+        if (path === '/posts' || path === '/posts/') {
+            window.location.replace('/blog-en.html');
+        } else if (path === '/yazilar' || path === '/yazilar/') {
+            window.location.replace('/blog-tr.html');
+        } else if (path.startsWith('/yazilar/')) {
+            // Article routing - /yazilar/<slug> -> article-tr.html?slug=<slug>
             const slug = path.replace('/yazilar/', '');
             sessionStorage.setItem('redirectSlug', slug);
             window.location.replace('/article-tr.html?slug=' + encodeURIComponent(slug));
         } else if (path.startsWith('/posts/')) {
+            // Article routing - /posts/<slug> -> article-en.html?slug=<slug>
             const slug = path.replace('/posts/', '');
             sessionStorage.setItem('redirectSlug', slug);
             window.location.replace('/article-en.html?slug=' + encodeURIComponent(slug));

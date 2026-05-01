@@ -398,6 +398,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     const data = await response.json();
                     if (data && data.status === 'ok' && Array.isArray(data.items)) {
+                        // ✅ Update URL to clean format for blog pages
+                        const currentPath = window.location.pathname;
+                        const cleanBlogPath = pageLang === 'tr' ? '/yazilar' : '/posts';
+                        const cleanBlogUrl = `${window.location.origin}${cleanBlogPath}`;
+                        
+                        if (currentPath !== cleanBlogPath) {
+                            window.history.replaceState({}, '', cleanBlogPath);
+                        }
+                        
+                        // ✅ Update meta tags for clean URLs
+                        updateBlogMetaTags(cleanBlogUrl, pageLang);
+                        
                         displayBlogPosts(data.items, pageLang, category, subcategory);
                         setupBlogTabs(data.items, pageLang);
                         setupBlogSearch(data.items, pageLang);
@@ -857,6 +869,21 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             displayBlogPosts(filteredPosts, pageLang, currentCategory, currentSubcategory);
         });
+    }
+    
+    function updateBlogMetaTags(cleanBlogUrl, pageLang) {
+        // Update Open Graph meta tags
+        const ogUrl = document.getElementById('og-url');
+        const twitterUrl = document.querySelector('meta[property="twitter:url"]');
+        const canonicalUrl = document.getElementById('canonical-url');
+        
+        if (ogUrl) ogUrl.setAttribute('content', cleanBlogUrl);
+        if (twitterUrl) twitterUrl.setAttribute('content', cleanBlogUrl);
+        if (canonicalUrl) canonicalUrl.setAttribute('href', cleanBlogUrl);
+        
+        // Update document title if needed
+        const blogTitle = pageLang === 'tr' ? 'Blog | Ali Haydar Sucu' : 'Blog | Ali Haydar Sucu';
+        document.title = blogTitle;
     }
     
     function showBlogError() {
