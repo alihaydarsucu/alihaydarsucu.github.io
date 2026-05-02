@@ -1,6 +1,6 @@
 
 <div align="center">
-   <img src="Images/Icons/icon.webp" alt="Logo" width="120">
+   <img src="Images/Icons/icon.svg" alt="Logo" width="120">
    <h1>Ali Haydar Sucu</h1>
    <p>Computer Engineering Student | Embedded & AI Enthusiast</p>
 </div>

@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const empty = document.createElement('li');
       empty.className = 'admin-recent-item';
       empty.innerHTML = `
-        <img src="/Images/Icons/icon.webp" alt="">
+        <img src="/Images/Icons/icon.svg" alt="">
         <div>
           <div class="admin-recent-title">${ui.noFile}</div>
           <div class="admin-recent-meta">/data/photos.json</div>
@@ -541,7 +541,7 @@ function setupBlogAdmin() {
       const li = document.createElement('li');
       li.className = 'admin-recent-item';
       li.innerHTML = `
-        <img src="/Images/Icons/icon.webp" alt="">
+        <img src="/Images/Icons/icon.svg" alt="">
         <div>
           <div class="admin-recent-title">${ui.noPosts}</div>
           <div class="admin-recent-meta">/data/blog-posts.json</div>
@@ -555,7 +555,7 @@ function setupBlogAdmin() {
       const li = document.createElement('li');
       li.className = 'admin-recent-item';
       li.innerHTML = `
-        <img src="/Images/Icons/icon.webp" alt="">
+        <img src="/Images/Icons/icon.svg" alt="">
         <div class="admin-recent-content">
           <div class="admin-recent-title">${escapeHtml(item.title || 'Untitled')}</div>
           <div class="admin-recent-meta">${escapeHtml(item.slug || '')} • ${escapeHtml(item.lang || '')} • ${escapeHtml(item.category || '')}</div>
