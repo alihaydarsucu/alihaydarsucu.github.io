@@ -3710,7 +3710,7 @@ body.dark-mode .article-error {
     .article-content {
         margin: 1rem auto;
         padding: 2rem 1.5rem 0 1.5rem;
-        max-width: 90%;
+        max-width: 95%;
     }
     
     .article-header {
@@ -3779,7 +3779,7 @@ body.dark-mode .article-error {
     .article-content {
         margin: 0.5rem auto;
         padding: 1.5rem 1rem 0 1rem;
-        max-width: 95%;
+        max-width: 98%;
     }
     
     .article-header {
