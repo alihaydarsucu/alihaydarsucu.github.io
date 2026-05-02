@@ -1,4 +1,4 @@
-@media (max-width: 1035px) and (min-width: 769px) {
+@media (max-width: 1080px) and (min-width: 769px) {
     .presentation-container {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -15,7 +15,7 @@
         grid-column: auto;
     }
 }
-@media (max-width: 1035px) {
+@media (max-width: 1080px) {
     nav {
         justify-content: space-between;
         flex-direction: row;
