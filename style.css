@@ -214,6 +214,33 @@ nav {
     gap: 10px;
 }
 
+/* Responsive Logo Optimization */
+@media (max-width: 350px) {
+    .logo a {
+        display: none !important;
+    }
+    .logo img {
+        cursor: pointer !important;
+        transition: transform 0.2s ease !important;
+    }
+    .logo img:hover {
+        transform: scale(1.05) !important;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1400px) {
+    .logo a {
+        display: none !important;
+    }
+    .logo img {
+        cursor: pointer !important;
+        transition: transform 0.2s ease !important;
+    }
+    .logo img:hover {
+        transform: scale(1.05) !important;
+    }
+}
+
 .logo-img {
     width: 40px;
     height: 40px;

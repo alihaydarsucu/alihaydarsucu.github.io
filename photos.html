@@ -74,7 +74,17 @@
                 .photo-page-btn{padding:0.4rem 0.6rem;font-size:0.8rem}
                 .photo-page-number{padding:0.3rem 0.5rem;font-size:0.75rem;min-width:1.8rem}
                 .photo-pagination-selectors{gap:0.3rem}
-        }
+            }
+            @media(max-width:350px){
+                .logo a{display:none}
+                .logo img{cursor:pointer;transition:transform 0.2s ease}
+                .logo img:hover{transform:scale(1.05)}
+            }
+            @media(min-width:1200px) and (max-width:1400px){
+                .logo a{display:none}
+                .logo img{cursor:pointer;transition:transform 0.2s ease}
+                .logo img:hover{transform:scale(1.05)}
+            }
   </style>
 </head>
 <body>
@@ -88,7 +98,7 @@
                     <span class="sr-only">Menu</span>
                 </button>
                 <div class="logo">
-                    <img src="/Images/Icons/icon.webp" alt="Ali Haydar Sucu logo" class="logo-img">
+                    <img src="/Images/Icons/icon.webp" alt="Ali Haydar Sucu logo" class="logo-img" onclick="window.location.href='/'">
                     <a href="/" aria-label="Go to homepage">Ali Haydar Sucu</a>
                 </div>
                 <div class="nav-links" role="menubar">
