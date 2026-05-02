@@ -218,14 +218,16 @@
             
             // Blog page routing - /posts -> blog-en.html, /yazilar -> blog-tr.html
             if (path === '/posts' || path === '/posts/') {
-                // Store the intended clean URL and redirect immediately
-                sessionStorage.setItem('intendedBlogUrl', '/posts');
-                window.location.replace('/blog-en.html');
+                // Handle blog filtering with parameters - /posts?category=technical
+                const fullUrl = window.location.href;
+                sessionStorage.setItem('intendedBlogUrl', fullUrl);
+                window.location.replace('/blog-en.html' + window.location.search);
                 return;
             } else if (path === '/yazilar' || path === '/yazilar/') {
-                // Store the intended clean URL and redirect immediately
-                sessionStorage.setItem('intendedBlogUrl', '/yazilar');
-                window.location.replace('/blog-tr.html');
+                // Handle blog filtering with parameters - /yazilar?category=technical
+                const fullUrl = window.location.href;
+                sessionStorage.setItem('intendedBlogUrl', fullUrl);
+                window.location.replace('/blog-tr.html' + window.location.search);
                 return;
             } else if (path.startsWith('/yazilar/')) {
                 // Article routing - /yazilar/<slug> -> article-tr.html?slug=<slug>

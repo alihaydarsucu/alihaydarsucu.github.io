@@ -3744,11 +3744,11 @@ body.dark-mode .article-error {
     }
     
     .article-title {
-        font-size: clamp(1.8rem, 2.1rem, 2.4rem);
+        font-size: clamp(2rem, 2.3rem, 2.6rem);
     }
     
     .article-body {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         line-height: 1.7;
     }
     
