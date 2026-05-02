@@ -1030,7 +1030,6 @@ body.dark-mode .portfolio-project .portfolio-dark {
     font-size: 16px;
     font-weight: 600;
     color: var(--blue);
-    margin-left: 8px;
 }
 
 .github-project-description {
@@ -2145,6 +2144,7 @@ body.dark-mode .explore-card p {
 
 .language-option {
     padding: 8px 18px;
+    border: 1px solid var(--border-color);
     border-radius: 25px;
     font-size: 15px;
     font-weight: 500;
@@ -2159,12 +2159,14 @@ body.dark-mode .explore-card p {
 .language-option.active {
     background: var(--primary);
     color: white;
+    border-color: var(--primary);
     box-shadow: 0 2px 8px rgba(58, 134, 255, 0.3);
 }
 
 .language-option:hover:not(.active) {
     color: var(--primary);
     background: var(--dark-surface);
+    border-color: var(--primary);
 }
 
 /* Mobile Language Selector */
@@ -2179,32 +2181,30 @@ body.dark-mode .explore-card p {
 
 .mobile-language-selector .language-option {
     padding: 0;
+    border: 1px solid var(--border-color);
     border-radius: 64px;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 500;
     transition: all 0.3s ease;
     color: var(--text-secondary);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    flex: 1;
-    text-align: center;
-    box-sizing: border-box;
-    margin: 0;
     min-width: 70px;
 }
 
 .mobile-language-selector .language-option.active {
     background: var(--primary);
     color: white;
+    border-color: var(--primary);
     box-shadow: 0 2px 8px rgba(58, 134, 255, 0.3);
 }
 
 .mobile-language-selector .language-option:hover:not(.active) {
     color: var(--primary);
     background: var(--dark-surface);
+    border-color: var(--primary);
 }
 
 body.dark-mode .language-option {
@@ -2264,14 +2264,6 @@ body.dark-mode .language-option:hover:not(.active) {
         left: 20px;
     }
     
-    .timeline-item {
-        width: 100%;
-        padding-left: 50px;
-    }
-    
-    .timeline-item:nth-child(even) {
-        left: 0;
-    }
     
     .timeline-item:nth-child(odd)::after,
     .timeline-item:nth-child(even)::after {
@@ -2422,13 +2414,6 @@ body.dark-mode .language-option:hover:not(.active) {
         z-index: 10;
     }
 
-    .timeline-container::before {
-        left: 10px;
-    }
-
-    .timeline-item {
-        padding-left: 30px;
-    }
 }
 
 /* Small Mobile Devices */

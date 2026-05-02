@@ -337,10 +337,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const diffTime = Math.abs(now - date);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         
-        if (diffDays === 1) return '1 gün önce';
-        if (diffDays < 30) return `${diffDays} gün önce`;
-        if (diffDays < 365) return `${Math.floor(diffDays / 30)} ay önce`;
-        return `${Math.floor(diffDays / 365)} yıl önce`;
+        // Get current language from HTML lang attribute or URL
+        const isTurkish = document.documentElement.lang === 'tr' || window.location.pathname.includes('/projeler') || window.location.pathname.includes('/deneyim');
+        
+        if (isTurkish) {
+            if (diffDays === 1) return '1 gün önce';
+            if (diffDays < 30) return `${diffDays} gün önce`;
+            if (diffDays < 365) return `${Math.floor(diffDays / 30)} ay önce`;
+            return `${Math.floor(diffDays / 365)} yıl önce`;
+        } else {
+            if (diffDays === 1) return '1 day ago';
+            if (diffDays < 30) return `${diffDays} days ago`;
+            if (diffDays < 365) return `${Math.floor(diffDays / 30)} month${Math.floor(diffDays / 30) > 1 ? 's' : ''} ago`;
+            return `${Math.floor(diffDays / 365)} year${Math.floor(diffDays / 365) > 1 ? 's' : ''} ago`;
+        }
     }
 
     function setupFilterButtons(repos) {
