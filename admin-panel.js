@@ -535,13 +535,66 @@ function setupBlogAdmin() {
     }
   }
 
+  function getTransparentPlaceholderImage() {
+    // 1x1 transparent GIF to preserve layout without showing the site logo
+    return 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+  }
+
+  function isBlockedThumbnailSrc(src) {
+    const value = String(src || '').trim().toLowerCase();
+    if (!value) return true;
+    // Never use the site logo as a thumbnail
+    if (value.includes('/images/icons/icon.svg') || value.endsWith('/icon.svg')) return true;
+    return false;
+  }
+
+  function extractFirstContentImageSrc(html) {
+    const rawHtml = String(html || '').trim();
+    if (!rawHtml) return '';
+
+    try {
+      const doc = new DOMParser().parseFromString(rawHtml, 'text/html');
+      const images = Array.from(doc.querySelectorAll('img'));
+      for (const img of images) {
+        const src = img.getAttribute('src') || '';
+        if (!isBlockedThumbnailSrc(src)) return src;
+      }
+    } catch (_) {
+      // ignore parsing errors and fall back to no thumbnail
+    }
+
+    return '';
+  }
+
+  async function resolvePostThumbnailSrc(item) {
+    // Prefer content file for the most accurate “top image”
+    if (item && item.contentPath) {
+      try {
+        const res = await fetch(item.contentPath, { cache: 'no-store' });
+        if (res.ok) {
+          const html = await res.text();
+          const src = extractFirstContentImageSrc(html);
+          if (src) return src;
+        }
+      } catch (_) {
+        // ignore
+      }
+    }
+
+    // Fallback: try any inline html fields if present
+    const fallbackSrc = extractFirstContentImageSrc(item?.contentHtml || item?.html || '');
+    if (fallbackSrc) return fallbackSrc;
+
+    return '';
+  }
+
   function renderRecentPosts(items) {
     recentPostsEl.innerHTML = '';
     if (!items.length) {
       const li = document.createElement('li');
       li.className = 'admin-recent-item';
       li.innerHTML = `
-        <img src="/Images/Icons/icon.svg" alt="">
+        <img src="${getTransparentPlaceholderImage()}" alt="">
         <div>
           <div class="admin-recent-title">${ui.noPosts}</div>
           <div class="admin-recent-meta">/data/blog-posts.json</div>
@@ -555,7 +608,7 @@ function setupBlogAdmin() {
       const li = document.createElement('li');
       li.className = 'admin-recent-item';
       li.innerHTML = `
-        <img src="/Images/Icons/icon.svg" alt="">
+        <img data-blog-thumb="1" src="${getTransparentPlaceholderImage()}" alt="">
         <div class="admin-recent-content">
           <div class="admin-recent-title">${escapeHtml(item.title || 'Untitled')}</div>
           <div class="admin-recent-meta">${escapeHtml(item.slug || '')} • ${escapeHtml(item.lang || '')} • ${escapeHtml(item.category || '')}</div>
@@ -566,6 +619,15 @@ function setupBlogAdmin() {
           <button class="admin-btn ghost" type="button" data-delete-post="${escapeHtml(item.id || '')}"><i class="fas fa-trash" aria-hidden="true"></i></button>
         </div>
       `;
+
+      // Load and set thumbnail from the top image in article content
+      const thumbEl = li.querySelector('img[data-blog-thumb="1"]');
+      if (thumbEl) {
+        resolvePostThumbnailSrc(item).then(src => {
+          if (!src || isBlockedThumbnailSrc(src)) return;
+          thumbEl.src = src;
+        });
+      }
 
       li.querySelector('[data-open-post]')?.addEventListener('click', () => {
         const href = item.lang === 'tr' ? `/yazilar/${item.slug}` : `/posts/${item.slug}`;
