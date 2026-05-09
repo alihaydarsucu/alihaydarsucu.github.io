@@ -253,13 +253,17 @@ document.addEventListener('DOMContentLoaded', function() {
     function displayRepos(repos, filter = 'all') {
         const reposContainer = document.getElementById('repos');
         const filteredRepos = repos.filter(repo => {
-            if (filter === 'all') return !repo.fork;
+            if (!repo || repo.fork) return false;
+            if (isExcludedRepo(repo)) return false;
+
+            if (filter === 'all') return true;
+
             const categories = categorizeRepo(repo);
             // Çoklu kategori desteği
             if (categories.includes(',')) {
-                return !repo.fork && categories.split(',').includes(filter);
+                return categories.split(',').includes(filter);
             }
-            return !repo.fork && categories === filter;
+            return categories === filter;
         });
 
         reposContainer.innerHTML = filteredRepos.map(repo => `
@@ -296,6 +300,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const specialProjects = {
             'pusula.github.io': 'web,embedded',
             'pusula-gcs': 'embedded',
+            'aybuturkdunyasi.com': 'web',
             // Gelecekte eklenecek özel projeler buraya eklenebilir
         };
         
@@ -315,6 +320,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         return 'other';
+    }
+
+    function isExcludedRepo(repo) {
+        const repoName = (repo.name || '').toLowerCase();
+        const ownerLogin = (repo.owner && repo.owner.login ? repo.owner.login : '').toLowerCase();
+
+        // Exclude GitHub profile/config repos from project cards
+        // - profile readme repo usually matches the username
+        if (ownerLogin && repoName === ownerLogin) return true;
+
+        // Common non-project repos
+        if (repoName === '.github') return true;
+
+        return false;
     }
 
     function getLanguageColor(language) {
