@@ -2371,13 +2371,8 @@ body.dark-mode .language-option:hover:not(.active) {
     .explore-card {
         padding: 25px 20px;
         border-radius: 8px;
-    }
-    
-    /* Force blog and photos cards to stack on mobile - higher specificity */
-    .explore-grid .explore-card:nth-child(4),
-    .explore-grid .explore-card:nth-child(5) {
-        grid-column: 1 / -1 !important;
-        grid-row: auto !important;
+        grid-column: 1 / -1;
+        width: 100%;
     }
     
     .explore-icon {
