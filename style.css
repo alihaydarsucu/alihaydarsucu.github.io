@@ -323,6 +323,7 @@ body.dark-mode .logo-img {
     transition: all 0.3s ease;
     padding: 8px 12px;
     border-radius: 8px;
+    border-bottom: none;
 }
 
 /* Aktif Navigasyon Link Stilleri */
@@ -458,6 +459,7 @@ body.dark-mode .mobile-nav-links a:hover:not(.active) {
     text-decoration: none;
     color: var(--text-primary);
     transition: all 0.3s ease;
+    border-bottom: none;
 }
 
 .mobile-nav-links a i {
@@ -474,10 +476,10 @@ body.dark-mode .mobile-nav-links a:hover:not(.active) {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding: 10px 0;
+    padding: 6px 0;
     cursor: pointer;
     color: var(--text-primary);
-    margin-top: 15px;
+    margin-top: 6px;
 }
 
 /* Mobile Theme Toggle - Bigger Size */
@@ -2200,8 +2202,8 @@ body.dark-mode .explore-card p {
 .mobile-language-selector {
     display: flex;
     align-items: center;
-    padding: 15px 0;
-    margin-top: 10px;
+    padding: 12px 0 8px;
+    margin-top: 8px;
     border-top: 1px solid var(--border);
     margin-bottom: 0;
 }
