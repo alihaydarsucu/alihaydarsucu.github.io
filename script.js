@@ -23,6 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (document.getElementById('article-content')) {
             loadArticle();
         }
+
+        // Check blog posts availability and hide links if empty
+        checkBlogVisibility();
     }
     
     function setupDarkMode() {
@@ -1275,5 +1278,43 @@ document.addEventListener('DOMContentLoaded', function() {
             shareOnX: 'Share on X',
             shareOnLinkedIn: 'Share on LinkedIn'
         };
+    }
+
+    async function checkBlogVisibility() {
+        try {
+            const response = await fetch('/data/blog-posts.json', { cache: 'no-store' });
+            if (!response.ok) return;
+            const data = await response.json();
+            
+            if (data && data.status === 'ok' && Array.isArray(data.items)) {
+                // Determine current language
+                const isTurkish = document.documentElement.lang === 'tr' || window.location.pathname.startsWith('/tr') || window.location.pathname.includes('/projeler') || window.location.pathname.includes('/deneyim') || window.location.pathname.includes('yazilar');
+                const currentLang = isTurkish ? 'tr' : 'en';
+                
+                // Check if there are posts for the current language
+                const hasPosts = data.items.some(post => !post.lang || post.lang === currentLang);
+                
+                if (!hasPosts) {
+                    // Hide blog links in navbar
+                    const blogLinks = document.querySelectorAll('a[href="/posts"], a[href="/yazilar"], .explore-card[href="/posts"], .explore-card[href="/yazilar"]');
+                    blogLinks.forEach(link => {
+                        // Check if it's inside mobile nav listitem div
+                        if (link.parentElement && link.parentElement.getAttribute('role') === 'listitem' && link.parentElement.parentElement && link.parentElement.parentElement.classList.contains('mobile-nav-links')) {
+                            link.parentElement.style.display = 'none';
+                        } else {
+                            link.style.display = 'none';
+                        }
+                    });
+                    
+                    // Add class to explore-grid to adjust layout for centered photos
+                    const exploreGrid = document.querySelector('.explore-grid');
+                    if (exploreGrid) {
+                        exploreGrid.classList.add('no-blog');
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('Error checking blog visibility:', error);
+        }
     }
 });

@@ -194,12 +194,25 @@ body {
 
 /* Header Styles */
 header {
-    background-color: var(--surface);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+    box-shadow: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.1);
     position: sticky;
     top: 0;
     z-index: 100;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 1080px) {
+    header {
+        background-color: var(--surface);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-bottom: none;
+    }
 }
 
 nav {
@@ -1830,9 +1843,17 @@ body.dark-mode {
 
 /* Dark mode specific overrides */
 body.dark-mode header {
-    background-color: var(--surface);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
-    border-bottom: 1px solid var(--border);
+    background-color: transparent;
+    box-shadow: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 1080px) {
+    body.dark-mode header {
+        background-color: var(--surface);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+        border-bottom: 1px solid var(--border);
+    }
 }
 
 body.dark-mode .hero {
@@ -2110,6 +2131,11 @@ body.dark-mode .mobile-language-selector select {
 
     .explore-card:nth-child(5) {
         grid-column: 4 / span 2;
+    }
+
+    /* When blog is hidden, center the 5th card (Photos) */
+    .explore-grid.no-blog .explore-card:nth-child(5) {
+        grid-column: 3 / span 2;
     }
 }
 
