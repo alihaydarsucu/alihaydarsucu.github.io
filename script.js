@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setupBackToTop();
         setupLanguageSwitcher();
         setupCVDownload();
+        setupExperienceReadMoreButtons();
         
         // GitHub Projects sadece ilgili sayfalarda
         if (document.getElementById('repos')) {
@@ -180,6 +181,99 @@ document.addEventListener('DOMContentLoaded', function() {
         if (cvBtn) {
             updateCVLink();
         }
+    }
+
+    function setupExperienceReadMoreButtons() {
+        const isTurkish = document.documentElement.lang === 'tr' || window.location.pathname.includes('/deneyim');
+
+        const sections = [
+            { selector: '#experience .experience-container', interval: 2, scope: isTurkish ? 'deneyim' : 'experience' },
+            { selector: '#volunteering .experience-container', interval: 2, scope: isTurkish ? 'gönüllü öğeleri' : 'volunteer items' }
+        ];
+
+        sections.forEach(({ selector, interval, scope }) => {
+            const container = document.querySelector(selector);
+            if (!container) return;
+
+            const cards = Array.from(container.children).filter(child => child.classList && child.classList.contains('experience-card'));
+            if (cards.length <= interval) return;
+
+            container.querySelectorAll('.experience-more-btn, .experience-preview-card').forEach(node => node.remove());
+            cards.forEach(card => {
+                card.classList.remove('is-hidden-experience');
+                card.classList.remove('is-preview-experience');
+            });
+
+            const createPreviewCard = (sourceCard) => {
+                const previewCard = sourceCard.cloneNode(true);
+                previewCard.classList.add('experience-preview-card');
+                previewCard.setAttribute('aria-hidden', 'true');
+                previewCard.querySelectorAll('a, button').forEach(el => el.remove());
+                previewCard.querySelectorAll('input, select, textarea').forEach(el => el.remove());
+                previewCard.querySelectorAll('.experience-details ul').forEach(list => {
+                    list.innerHTML = '';
+                });
+                return previewCard;
+            };
+
+            const attachGroup = (startIndex) => {
+                const groupCards = cards.slice(startIndex, startIndex + interval);
+                const nextStart = startIndex + interval;
+                const hasMore = nextStart < cards.length;
+                const nextCard = hasMore ? cards[nextStart] : null;
+                const remainingCount = cards.length - nextStart;
+                const teaserCount = Math.min(interval, remainingCount);
+
+                groupCards.forEach(card => {
+                    card.classList.remove('is-hidden-experience');
+                    card.classList.remove('is-preview-experience');
+                });
+
+                if (!hasMore) return;
+
+                const anchorCard = groupCards[groupCards.length - 1];
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'experience-more-btn';
+                button.setAttribute('aria-label', isTurkish ? `${teaserCount} ${scope} daha göster` : `Show ${teaserCount} more ${scope}`);
+                button.innerHTML = isTurkish
+                    ? `${teaserCount} öğe daha göster <i class="fas fa-chevron-down" aria-hidden="true"></i>`
+                    : `Show ${teaserCount} more <i class="fas fa-chevron-down" aria-hidden="true"></i>`;
+                button.addEventListener('click', () => {
+                    const preview = button.nextElementSibling;
+                    if (preview && preview.classList.contains('experience-preview-card')) {
+                        preview.remove();
+                    }
+                    button.remove();
+                    cards.slice(nextStart, nextStart + interval).forEach(card => {
+                        card.classList.remove('is-hidden-experience');
+                    });
+                    attachGroup(nextStart);
+                });
+
+                const previewCard = nextCard ? createPreviewCard(nextCard) : null;
+                if (previewCard) {
+                    nextCard.classList.add('is-hidden-experience');
+                    anchorCard.insertAdjacentElement('afterend', button);
+                    button.insertAdjacentElement('afterend', previewCard);
+                    cards.slice(nextStart, nextStart + interval).forEach(card => {
+                        if (card !== nextCard) {
+                            card.classList.add('is-hidden-experience');
+                        }
+                    });
+                } else {
+                    anchorCard.insertAdjacentElement('afterend', button);
+                }
+            };
+
+            cards.forEach((card, index) => {
+                if (index >= interval) {
+                    card.classList.add('is-hidden-experience');
+                }
+            });
+
+            attachGroup(0);
+        });
     }
 
     function updateCVLink() {
