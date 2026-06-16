@@ -127,6 +127,11 @@ body.dark-mode .blog-share:hover {
     scroll-behavior: smooth;
 }
 
+html,
+body {
+    overflow-x: hidden;
+}
+
 body {
     background-color: var(--background);
     color: var(--text-primary);
@@ -1028,12 +1033,14 @@ body.dark-mode .skill-badge.ogreniyor {
     gap: 10px;
     margin-bottom: 24px;
     flex-wrap: wrap;
+    max-width: 100%;
 }
 
 .skill-legend {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
+    min-width: 0;
 }
 
 .skill-legend-item {
@@ -1068,6 +1075,7 @@ body.dark-mode .skill-badge.ogreniyor {
     display: inline-flex;
     align-items: center;
     margin-top: 1px;
+    flex: 0 0 auto;
 }
 
 .skill-legend-help-button {
@@ -1104,8 +1112,9 @@ body.dark-mode .skill-badge.ogreniyor {
     left: 50%;
     top: calc(100% + 10px);
     transform: translateX(-50%) translateY(-4px);
-    min-width: 240px;
-    max-width: 280px;
+    width: max-content;
+    min-width: 220px;
+    max-width: min(280px, calc(100vw - 32px));
     padding: 10px 12px;
     border-radius: 12px;
     border: 1px solid var(--border);
@@ -1156,6 +1165,33 @@ body.dark-mode .skill-legend-help-button:hover,
 body.dark-mode .skill-legend-help-button:focus-visible {
     background: rgba(77, 148, 255, 0.12);
     color: var(--primary);
+}
+
+@media (max-width: 768px) {
+    .skill-legend-wrap {
+        justify-content: flex-start;
+    }
+
+    .skill-legend-help {
+        margin-left: auto;
+    }
+
+    .skill-legend-tooltip {
+        left: auto;
+        right: 0;
+        transform: translateY(-4px);
+    }
+
+    .skill-legend-tooltip::before {
+        left: auto;
+        right: 10px;
+        transform: rotate(45deg);
+    }
+
+    .skill-legend-help:hover .skill-legend-tooltip,
+    .skill-legend-help:focus-within .skill-legend-tooltip {
+        transform: translateY(0);
+    }
 }
 
 @media (hover: none) and (pointer: coarse) {
