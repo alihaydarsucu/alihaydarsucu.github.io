@@ -1022,10 +1022,17 @@ body.dark-mode .skill-badge.ogreniyor {
 }
 
 /* Skill Legend */
+.skill-legend-wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
 .skill-legend {
     display: flex;
     gap: 20px;
-    margin-bottom: 24px;
     flex-wrap: wrap;
 }
 
@@ -1054,6 +1061,101 @@ body.dark-mode .skill-badge.ogreniyor {
 
 .skill-legend-dot.ogreniyor {
     background: #d29922;
+}
+
+.skill-legend-help {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 1px;
+}
+
+.skill-legend-help-button {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--text-secondary);
+    padding: 0;
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: help;
+    border-radius: 999px;
+    transition: color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.skill-legend-help-button i {
+    font-size: 17px;
+    line-height: 1;
+}
+
+.skill-legend-help-button:hover,
+.skill-legend-help-button:focus-visible {
+    color: var(--primary);
+    background: rgba(58, 134, 255, 0.08);
+    transform: translateY(-1px);
+    outline: none;
+}
+
+.skill-legend-tooltip {
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 10px);
+    transform: translateX(-50%) translateY(-4px);
+    min-width: 240px;
+    max-width: 280px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    line-height: 1.45;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    z-index: 10;
+}
+
+.skill-legend-tooltip::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    transform: translateX(-50%) rotate(45deg);
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+}
+
+.skill-legend-help:hover .skill-legend-tooltip,
+.skill-legend-help:focus-within .skill-legend-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+body.dark-mode .skill-legend-tooltip {
+    background: #1a1f2b;
+    border-color: var(--border);
+    color: var(--text-primary);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.28);
+}
+
+body.dark-mode .skill-legend-tooltip::before {
+    background: #1a1f2b;
+}
+
+body.dark-mode .skill-legend-help-button:hover,
+body.dark-mode .skill-legend-help-button:focus-visible {
+    background: rgba(77, 148, 255, 0.12);
+    color: var(--primary);
 }
 
 /* GitHub Stats */

@@ -163,10 +163,20 @@
             <h2 class="section-title" id="skills-heading">My Skills</h2>
 
             <!-- Legend -->
-            <div class="skill-legend" aria-label="Skill status legend">
-                <div class="skill-legend-item"><span class="skill-legend-dot aktif"></span> Active</div>
-                <div class="skill-legend-item"><span class="skill-legend-dot deneyim"></span> Experience</div>
-                <div class="skill-legend-item"><span class="skill-legend-dot ogreniyor"></span> Learning</div>
+            <div class="skill-legend-wrap">
+                <div class="skill-legend" aria-label="Skill status legend">
+                    <div class="skill-legend-item"><span class="skill-legend-dot aktif"></span> Active</div>
+                    <div class="skill-legend-item"><span class="skill-legend-dot deneyim"></span> Experience</div>
+                    <div class="skill-legend-item"><span class="skill-legend-dot ogreniyor"></span> Learning</div>
+                </div>
+                <div class="skill-legend-help">
+                    <button class="skill-legend-help-button" type="button" aria-describedby="skills-legend-tooltip" aria-label="What do the status labels mean?">
+                        <i class="fas fa-circle-info" aria-hidden="true"></i>
+                    </button>
+                    <div class="skill-legend-tooltip" id="skills-legend-tooltip" role="tooltip">
+                        Active means used regularly, Experience means used in real projects, Learning means currently being learned.
+                    </div>
+                </div>
             </div>
 
             <div class="skills-category-container">
@@ -176,7 +186,7 @@
                         <div class="skills-category-icon skills-icon-embedded">
                             <i class="fas fa-microchip" aria-hidden="true"></i>
                         </div>
-                        <h3 class="skills-category-title">Embedded systems</h3>
+                        <h3 class="skills-category-title">Embedded Systems</h3>
                     </div>
                     <div class="skills-container" role="list">
                         <div class="skill-card" role="listitem">
@@ -214,26 +224,16 @@
                             <h3>CMake</h3>
                             <span class="skill-badge deneyim">Experience</span>
                         </div>
-                        <div class="skill-card" role="listitem">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="" aria-hidden="true" loading="lazy">
-                            <h3>Docker</h3>
-                            <span class="skill-badge deneyim">Experience</span>
-                        </div>
-                        <div class="skill-card" role="listitem">
-                            <img src="/Images/Icons/java.svg" alt="" aria-hidden="true" loading="lazy">
-                            <h3>Java</h3>
-                            <span class="skill-badge deneyim">Experience</span>
-                        </div>
                     </div>
                 </div>
 
-                <!-- Autonomous / ROS -->
+                <!-- Autonomous Systems -->
                 <div class="skills-category-card">
                     <div class="skills-category-header">
                         <div class="skills-category-icon skills-icon-autonomous">
                             <i class="fas fa-robot" aria-hidden="true"></i>
                         </div>
-                        <h3 class="skills-category-title">Autonomous / ROS</h3>
+                        <h3 class="skills-category-title">Autonomous Systems</h3>
                     </div>
                     <div class="skills-container" role="list">
                         <div class="skill-card" role="listitem">
@@ -311,6 +311,11 @@
                         <div class="skill-card" role="listitem">
                             <img src="/Images/Icons/qt.svg" alt="" aria-hidden="true" loading="lazy">
                             <h3>Qt</h3>
+                            <span class="skill-badge deneyim">Experience</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="" aria-hidden="true" loading="lazy">
+                            <h3>Docker</h3>
                             <span class="skill-badge deneyim">Experience</span>
                         </div>
                         <div class="skill-card" role="listitem">

@@ -162,10 +162,20 @@
             <h2 class="section-title" id="skills-heading">Yeteneklerim</h2>
 
             <!-- Legend -->
-            <div class="skill-legend" aria-label="Yetenek durum açıklaması">
-                <div class="skill-legend-item"><span class="skill-legend-dot aktif"></span> Aktif</div>
-                <div class="skill-legend-item"><span class="skill-legend-dot deneyim"></span> Deneyim</div>
-                <div class="skill-legend-item"><span class="skill-legend-dot ogreniyor"></span> Öğreniyor</div>
+            <div class="skill-legend-wrap">
+                <div class="skill-legend" aria-label="Yetenek durum açıklaması">
+                    <div class="skill-legend-item"><span class="skill-legend-dot aktif"></span> Aktif</div>
+                    <div class="skill-legend-item"><span class="skill-legend-dot deneyim"></span> Deneyim</div>
+                    <div class="skill-legend-item"><span class="skill-legend-dot ogreniyor"></span> Öğreniyor</div>
+                </div>
+                <div class="skill-legend-help">
+                    <button class="skill-legend-help-button" type="button" aria-describedby="skills-legend-tooltip-tr" aria-label="Durum etiketleri ne anlama geliyor?">
+                        <i class="fas fa-circle-info" aria-hidden="true"></i>
+                    </button>
+                    <div class="skill-legend-tooltip" id="skills-legend-tooltip-tr" role="tooltip">
+                        Aktif, düzenli kullandığım; Deneyim, proje tecrübem olan; Öğreniyor ise şu anda geliştirdiğim yetenek anlamına geliyor.
+                    </div>
+                </div>
             </div>
 
             <div class="skills-category-container">
@@ -213,26 +223,16 @@
                             <h3>CMake</h3>
                             <span class="skill-badge deneyim">Deneyim</span>
                         </div>
-                        <div class="skill-card" role="listitem">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="" aria-hidden="true" loading="lazy">
-                            <h3>Docker</h3>
-                            <span class="skill-badge deneyim">Deneyim</span>
-                        </div>
-                        <div class="skill-card" role="listitem">
-                            <img src="/Images/Icons/java.svg" alt="" aria-hidden="true" loading="lazy">
-                            <h3>Java</h3>
-                            <span class="skill-badge deneyim">Deneyim</span>
-                        </div>
                     </div>
                 </div>
 
-                <!-- Otonom / ROS -->
+                <!-- Otonom Sistemler -->
                 <div class="skills-category-card">
                     <div class="skills-category-header">
                         <div class="skills-category-icon skills-icon-autonomous">
                             <i class="fas fa-robot" aria-hidden="true"></i>
                         </div>
-                        <h3 class="skills-category-title">Otonom / ROS</h3>
+                        <h3 class="skills-category-title">Otonom Sistemler</h3>
                     </div>
                     <div class="skills-container" role="list">
                         <div class="skill-card" role="listitem">
@@ -310,6 +310,11 @@
                         <div class="skill-card" role="listitem">
                             <img src="/Images/Icons/qt.svg" alt="" aria-hidden="true" loading="lazy">
                             <h3>Qt</h3>
+                            <span class="skill-badge deneyim">Deneyim</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="" aria-hidden="true" loading="lazy">
+                            <h3>Docker</h3>
                             <span class="skill-badge deneyim">Deneyim</span>
                         </div>
                         <div class="skill-card" role="listitem">
