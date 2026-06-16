@@ -301,9 +301,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Özel projeler - hard coded kategoriler
         const specialProjects = {
-            'pusula.github.io': 'web,embedded',
-            'pusula-gcs': 'embedded',
+            'pusula-gcs': 'systems',
+            'burai-tech': 'systems',
+            'githubpuller': 'tools',
+            'sucu': 'tools',
+            'focuspath': 'tools',
+            'customization': 'tools',
             'aybuturkdunyasi.com': 'web',
+            'alihaydarsucu.github.io': 'web',
             // Gelecekte eklenecek özel projeler buraya eklenebilir
         };
         
@@ -313,13 +318,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Genel kategorizasyon kuralları
-        if (name.includes('web') || name.includes('site') || language.includes('html') || language.includes('css') || language.includes('javascript')) {
+        if (name.includes('web') || name.includes('site') || name.includes('github.io') || language.includes('html') || language.includes('css') || language.includes('javascript')) {
             return 'web';
         }
-        
-        if (name.includes('embedded') || name.includes('arduino') || description.includes('embedded') || 
+
+        if (name.includes('puller') || name.includes('tool') || name.includes('desktop') || name.includes('focus') || name.includes('cli') || name.includes('custom') || description.includes('gtk4') || description.includes('libadwaita') || description.includes('qt') || description.includes('linux')) {
+            return 'tools';
+        }
+
+        if (name.includes('llm') || name.includes('ai') || name.includes('agent') || description.includes('llm') || description.includes('ollama') || description.includes('langchain') || description.includes('pyside6') || description.includes('vosk') || name.includes('embedded') || name.includes('arduino') || description.includes('embedded') ||
             language.includes('c++') || language.includes('c') || language.includes('shell') || language.includes('makefile')) {
-            return 'embedded';
+            return 'systems';
         }
         
         return 'other';
@@ -349,6 +358,8 @@ document.addEventListener('DOMContentLoaded', function() {
             'C++': '#f34b7d',
             'C': '#098b2a96',
             'Shell': '#89e051',
+            'TypeScript': '#3178c6',
+            'GLSL': '#569fcc'
         };
         return colors[language] || '#858585';
     }
@@ -545,7 +556,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     'fiction': 'Bu kategoride henüz kurgu yazısı yok.',
                     'systems': 'Bu alt kategoride henüz yazı yok.',
                     'embedded': 'Bu alt kategoride henüz yazı yok.',
-                    'ai': 'Bu alt kategoride henüz yazı yok.'
+                    'autonomous': 'Bu alt kategoride henüz yazı yok.',
+                    'ai': 'Bu alt kategoride henüz yazı yok.',
+                    'web': 'Bu alt kategoride henüz yazı yok.'
                 },
                 'en': {
                     'all': 'No posts yet.',
@@ -554,7 +567,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     'fiction': 'No fiction posts in this category yet.',
                     'systems': 'No posts in this subcategory yet.',
                     'embedded': 'No posts in this subcategory yet.',
-                    'ai': 'No posts in this subcategory yet.'
+                    'autonomous': 'No posts in this subcategory yet.',
+                    'ai': 'No posts in this subcategory yet.',
+                    'web': 'No posts in this subcategory yet.'
                 }
             };
             
