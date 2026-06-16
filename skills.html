@@ -161,78 +161,164 @@
     <main class="container" role="main">
         <section id="skills" role="region" aria-labelledby="skills-heading">
             <h2 class="section-title" id="skills-heading">My Skills</h2>
-            <div class="skills-container" role="list" aria-label="Technical skills">
-               
-                
-                <!-- Programming Languages -->
-                <div class="skill-card" role="listitem">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/C_Logo.png" alt="" aria-hidden="true" loading="lazy">
-                    <h3>C</h3>
+
+            <!-- Legend -->
+            <div class="skill-legend" aria-label="Skill status legend">
+                <div class="skill-legend-item"><span class="skill-legend-dot aktif"></span> Active</div>
+                <div class="skill-legend-item"><span class="skill-legend-dot deneyim"></span> Experience</div>
+                <div class="skill-legend-item"><span class="skill-legend-dot ogreniyor"></span> Learning</div>
+            </div>
+
+            <div class="skills-category-container">
+                <!-- Embedded systems -->
+                <div class="skills-category-card">
+                    <div class="skills-category-header">
+                        <div class="skills-category-icon skills-icon-embedded">
+                            <i class="fas fa-microchip" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="skills-category-title">Embedded systems</h3>
+                    </div>
+                    <div class="skills-container" role="list">
+                        <div class="skill-card" role="listitem">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/C_Logo.png" alt="" aria-hidden="true" loading="lazy">
+                            <h3>C</h3>
+                            <span class="skill-badge aktif">Active</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="" aria-hidden="true" loading="lazy">
+                            <h3>C++</h3>
+                            <span class="skill-badge aktif">Active</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <img src="/Images/Icons/ST_logo.png" alt="" aria-hidden="true" loading="lazy">
+                            <h3>STM32</h3>
+                            <span class="skill-badge aktif">Active</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" height="40" alt="" aria-hidden="true" loading="lazy" />
+                            <h3>Bash</h3>
+                            <span class="skill-badge aktif">Active</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="" aria-hidden="true" loading="lazy">
+                            <h3>Linux</h3>
+                            <span class="skill-badge aktif">Active</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <img src="/Images/Icons/icons8-git.svg" alt="" aria-hidden="true" loading="lazy">
+                            <h3>Git</h3>
+                            <span class="skill-badge aktif">Active</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cmake/cmake-original.svg" alt="" aria-hidden="true" loading="lazy">
+                            <h3>CMake</h3>
+                            <span class="skill-badge deneyim">Experience</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="" aria-hidden="true" loading="lazy">
+                            <h3>Docker</h3>
+                            <span class="skill-badge deneyim">Experience</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <img src="/Images/Icons/java.svg" alt="" aria-hidden="true" loading="lazy">
+                            <h3>Java</h3>
+                            <span class="skill-badge deneyim">Experience</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="skill-card" role="listitem">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="" aria-hidden="true" loading="lazy">
-                    <h3>C++</h3>
+
+                <!-- Autonomous / ROS -->
+                <div class="skills-category-card">
+                    <div class="skills-category-header">
+                        <div class="skills-category-icon skills-icon-autonomous">
+                            <i class="fas fa-robot" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="skills-category-title">Autonomous / ROS</h3>
+                    </div>
+                    <div class="skills-container" role="list">
+                        <div class="skill-card" role="listitem">
+                            <img src="/Images/Icons/ros.png" alt="" aria-hidden="true" loading="lazy">
+                            <h3>ROS 2</h3>
+                            <span class="skill-badge aktif">Active</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <img src="/Images/Icons/nav2_logo.png" alt="" aria-hidden="true" loading="lazy">
+                            <h3>Nav2</h3>
+                            <span class="skill-badge ogreniyor">Learning</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <img src="/Images/Icons/opencv.svg" alt="" aria-hidden="true" loading="lazy">
+                            <h3>OpenCV</h3>
+                            <span class="skill-badge deneyim">Experience</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <img src="/Images/Icons/mavlink.png" alt="" aria-hidden="true" loading="lazy">
+                            <h3>MAVLink</h3>
+                            <span class="skill-badge deneyim">Experience</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <img src="/Images/Icons/gazebo.png" alt="" aria-hidden="true" loading="lazy">
+                            <h3>Gazebo</h3>
+                            <span class="skill-badge deneyim">Experience</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <img src="/Images/Icons/ardu_logo_dark.png" alt="" aria-hidden="true" loading="lazy">
+                            <h3>ArduPilot</h3>
+                            <span class="skill-badge deneyim">Experience</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
+                            <h3>SLAM</h3>
+                            <span class="skill-badge ogreniyor">Learning</span>
+                        </div>
+                    </div>
                 </div>
-                 <!-- Robotics & Embedded -->
-                <div class="skill-card" role="listitem">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/embeddedc/embeddedc-original.svg" alt="" aria-hidden="true" loading="lazy">
-                    <h3>STM32</h3>
-                </div>
-                <div class="skill-card" role="listitem">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ros/ros-original.svg" alt="" aria-hidden="true" loading="lazy">
-                    <h3>ROS</h3>
-                </div>
-                <div class="skill-card python" role="listitem">
-                    <img src="/Images/Icons/python.svg" alt="" aria-hidden="true" loading="lazy">
-                    <h3>Python</h3>
-                </div>
-                <div class="skill-card" role="listitem">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" height="40" alt="" aria-hidden="true" loading="lazy" />
-                    <h3>Bash</h3>
-                </div>
-                <div class="skill-card" role="listitem">
-                    <img src="/Images/Icons/java.svg" alt="" aria-hidden="true" loading="lazy">
-                    <h3>Java</h3>
-                </div>
-                
-                <!-- System & Tools -->
-                <div class="skill-card" role="listitem">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="" aria-hidden="true" loading="lazy">
-                    <h3>Linux</h3>
-                </div>
-                <div class="skill-card" role="listitem">
-                    <img src="/Images/Icons/icons8-git.svg" alt="" aria-hidden="true" loading="lazy">
-                    <h3>Git</h3>
-                </div>
-                
-                <!-- AI & Machine Learning -->
-                <div class="skill-card" role="listitem">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="" aria-hidden="true" loading="lazy">
-                    <h3>PyTorch</h3>
-                </div>
-                <div class="skill-card" role="listitem">
-                    <img src="https://avatars.githubusercontent.com/u/151674099?s=200&v=4" alt="" aria-hidden="true" loading="lazy">
-                    <h3>Ollama</h3>
-                </div>
-                
-                <!-- Databases & DevOps -->
-                <div class="skill-card" role="listitem">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="" aria-hidden="true" loading="lazy">
-                    <h3>Docker</h3>
-                </div>
-                
-                <!-- Frontend Technologies -->
-                <div class="skill-card" role="listitem">
-                    <img src="/Images/Icons/icons8-html-5.svg" alt="" aria-hidden="true" loading="lazy">
-                    <h3>HTML5</h3>
-                </div>
-                <div class="skill-card" role="listitem">
-                    <img src="/Images/Icons/icons8-css3.svg" alt="" aria-hidden="true" loading="lazy">
-                    <h3>CSS3</h3>
-                </div>
-                <div class="skill-card" role="listitem">
-                    <img src="/Images/Icons/icons8-javascript.svg" alt="" aria-hidden="true" loading="lazy">
-                    <h3>JavaScript</h3>
+
+                <!-- AI & Inference -->
+                <div class="skills-category-card">
+                    <div class="skills-category-header">
+                        <div class="skills-category-icon skills-icon-ai">
+                            <i class="fas fa-brain" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="skills-category-title">AI & Inference</h3>
+                    </div>
+                    <div class="skills-container" role="list">
+                        <div class="skill-card python" role="listitem">
+                            <img src="/Images/Icons/python.svg" alt="" aria-hidden="true" loading="lazy">
+                            <h3>Python</h3>
+                            <span class="skill-badge aktif">Active</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="" aria-hidden="true" loading="lazy">
+                            <h3>PyTorch</h3>
+                            <span class="skill-badge deneyim">Experience</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <img src="https://avatars.githubusercontent.com/u/151674099?s=200&v=4" alt="" aria-hidden="true" loading="lazy">
+                            <h3>Ollama</h3>
+                            <span class="skill-badge aktif">Active</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <img src="/Images/Icons/symbol-logo-langchain.png" alt="" aria-hidden="true" loading="lazy">
+                            <h3>LangChain</h3>
+                            <span class="skill-badge aktif">Active</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <img src="/Images/Icons/meta.webp" alt="" aria-hidden="true" loading="lazy">
+                            <h3>FAISS</h3>
+                            <span class="skill-badge aktif">Active</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <img src="/Images/Icons/qt.svg" alt="" aria-hidden="true" loading="lazy">
+                            <h3>Qt</h3>
+                            <span class="skill-badge deneyim">Experience</span>
+                        </div>
+                        <div class="skill-card" role="listitem">
+                            <i class="fas fa-microphone-lines" aria-hidden="true"></i>
+                            <h3>STT / TTS</h3>
+                            <span class="skill-badge deneyim">Experience</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
