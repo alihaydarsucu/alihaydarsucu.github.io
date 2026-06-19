@@ -146,7 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
   function render() {
-    filteredPhotos = photos.filter(photo => {
+    const balancedPhotos = balanceByCategory(photos);
+    filteredPhotos = balancedPhotos.filter(photo => {
       const categoryKey = getCategoryKey(photo);
       const text = [
         getTitle(photo),
@@ -167,6 +168,64 @@ document.addEventListener('DOMContentLoaded', () => {
     renderFilters();
     renderGrid(pageItems, startIndex);
     renderPagination(totalPages);
+  }
+
+  function balanceByCategory(list) {
+    const buckets = new Map();
+    const categoryOrder = ['flag', 'landscape', 'cat', 'building', 'other'];
+
+    list.forEach(photo => {
+      const categoryKey = getCategoryKey(photo) || 'other';
+      if (!buckets.has(categoryKey)) {
+        buckets.set(categoryKey, []);
+      }
+      buckets.get(categoryKey).push(photo);
+    });
+
+    const orderedCategories = [
+      ...categoryOrder.filter(categoryKey => buckets.has(categoryKey)),
+      ...Array.from(buckets.keys()).filter(categoryKey => !categoryOrder.includes(categoryKey))
+    ];
+
+    const schedule = orderedCategories.map(categoryKey => ({
+      categoryKey,
+      bucket: buckets.get(categoryKey) || [],
+      weight: (buckets.get(categoryKey) || []).length,
+      currentWeight: 0
+    })).filter(entry => entry.weight > 0);
+
+    const totalWeight = schedule.reduce((sum, entry) => sum + entry.weight, 0);
+    const balanced = [];
+
+    while (balanced.length < list.length) {
+      let chosen = null;
+
+      for (const entry of schedule) {
+        if (!entry.bucket.length) {
+          continue;
+        }
+
+        entry.currentWeight += entry.weight;
+
+        if (
+          !chosen ||
+          entry.currentWeight > chosen.currentWeight ||
+          (entry.currentWeight === chosen.currentWeight &&
+            orderedCategories.indexOf(entry.categoryKey) < orderedCategories.indexOf(chosen.categoryKey))
+        ) {
+          chosen = entry;
+        }
+      }
+
+      if (!chosen) {
+        break;
+      }
+
+      chosen.currentWeight -= totalWeight;
+      balanced.push(chosen.bucket.shift());
+    }
+
+    return balanced;
   }
 
   function renderResults(total) {

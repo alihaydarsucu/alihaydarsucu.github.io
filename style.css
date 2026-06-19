@@ -127,9 +127,12 @@ body.dark-mode .blog-share:hover {
     scroll-behavior: smooth;
 }
 
-html,
-body {
+html {
     overflow-x: hidden;
+}
+
+body {
+    overflow-x: visible;
 }
 
 body {
@@ -211,7 +214,7 @@ header {
     border-bottom: 1px solid rgba(128, 128, 128, 0.1);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 300;
     transition: all 0.3s ease;
 }
 
@@ -2391,7 +2394,7 @@ footer {
     background: var(--dark-bg);
     color: white;
     padding: 30px 0;
-    margin-top: 10px;
+    margin-top: 24px;
     text-align: center;
 }
 
