@@ -70,10 +70,6 @@
                         <i class="fas fa-briefcase" aria-hidden="true"></i>
                         <span class="nav-text">Experience</span>
                     </a>
-                    <a href="/posts" role="menuitem">
-                        <i class="fas fa-pencil" aria-hidden="true"></i>
-                        <span class="nav-text">Blog</span>
-                    </a>
                     <a href="/photos" role="menuitem">
                         <i class="fas fa-camera" aria-hidden="true"></i>
                         <span class="nav-text">Photos</span>
@@ -129,12 +125,6 @@
                 </a>
             </div>
             <div role="listitem">
-                <a href="/posts">
-                    <i class="fas fa-pencil" aria-hidden="true"></i>
-                    <span class="nav-text-mobile">Blog</span>
-                </a>
-            </div>
-            <div role="listitem">
                 <a href="/photos">
                     <i class="fas fa-camera" aria-hidden="true"></i>
                     <span class="nav-text-mobile">Photos</span>
@@ -166,10 +156,45 @@
             <div class="experience-container" role="list" aria-label="Professional experience timeline">
                 <div class="experience-card" role="listitem">
                     <div class="experience-logo">
-                        <img src="/Images/Places/buraitech.webp" alt="" aria-hidden="true">
+                        <img src="/Images/Places/t3-logo.png" alt="" aria-hidden="true" onerror="this.src='/Images/Places/blank.webp'">
                     </div>
                     <div class="experience-content">
-                        <div class="experience-date">Jun 2025 - Present</div>
+                        <div class="experience-date">Jul 2026 - Aug 2026</div>
+                        <h3 class="experience-title">Embedded Software Intern</h3>
+                        <p class="experience-subtitle">T3 Gemstone (Baykar • T3 Foundation), Istanbul, Turkey</p>
+                        <div class="experience-details">
+                            <ul role="list">
+                                <li>Developed and integrated ROS 2 Humble software for the Bumin unmanned ground vehicle on the T3 Gemstone O1 board, including LiDAR, RF2O odometry, SLAM Toolbox, IMU, motor encoder, GPIO and PWM-based motor-control components.</li>
+                                <li>Built and tested an autonomous indoor room-mapping pipeline in Gazebo/RViz and Docker.</li>
+                                <li>Participated in pre-packaging QA of nearly 500 Gemstone O1 boards in a five-person team; used TTL, multimeter, oscilloscope and continuity testing to isolate USB, connector and board-level faults.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="experience-card" role="listitem">
+                    <div class="experience-logo">
+                        <img src="/Images/Places/terranova-logo.png" alt="" aria-hidden="true" onerror="this.src='/Images/Places/blank.webp'">
+                    </div>
+                    <div class="experience-content">
+                        <div class="experience-date">Feb 2026 - Present</div>
+                        <h3 class="experience-title">Embedded Software Developer</h3>
+                        <p class="experience-subtitle">Terranova UGV, Ankara, Turkey</p>
+                        <div class="experience-details">
+                            <ul role="list">
+                                <li>Created custom Gazebo simulation worlds, establishing repeatable environments for autonomous rover testing.</li>
+                                <li>Developed a browser-based ground-control station with live vehicle markers and telemetry/control interfaces.</li>
+                                <li>Implementing ROS 2 nodes for IMU, LiDAR, ultrasonic and GPS sensors for a six-wheel platform.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="experience-card" role="listitem">
+                    <div class="experience-logo">
+                        <img src="/Images/Places/ogmer.webp" alt="AYBU OGMER logo" aria-hidden="true">
+                    </div>
+                    <div class="experience-content">
+                        <div class="experience-date">May 2025 - Present</div>
                         <h3 class="experience-title">AI Developer</h3>
                         <p class="experience-subtitle">Part-time student in AYBU ÖĞMER, Ankara, Turkey</p>
                         <div class="experience-details">
@@ -200,27 +225,7 @@
                     </div>
                 </div>
                 
-                <div class="experience-card" role="listitem">
-                    <div class="experience-logo">
-                        <img src="/Images/Places/ogmer.webp" alt="" aria-hidden="true">
-                    </div>
-                    <div class="experience-content">
-                        <div class="experience-date">August 2024 - May 2025</div>
-                        <h3 class="experience-title">Bootcamp Tutor & Student Mentor</h3>
-                        <p class="experience-subtitle">Ankara Yıldırım Beyazıt University, Ankara, Turkiye</p>
-                        <div class="experience-details">
-                            <ul role="list">
-                                <li>Led a summer bootcamp aimed at introducing college students to front-end web development, 
-                                    with a focus on HTML, CSS, and the foundations of how the web works. Fostered a supportive 
-                                    and engaging environment to help beginners build confidence and create simple, functional websites.</li>
-                                <li>Represented my university at many international conferences, 
-                                    showcasing our initiatives at the Learning and Teaching Center. </li>
-                                <li>Provided technological support and mentorship to engineering freshmen, assisting them under the 
-                                    "Meet Your Student Tech Staff" program, helping them navigate academic and technical challenges.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <!-- Moved Bootcamp to volunteering -->
                 
                 <div class="experience-card" role="listitem">
                     <div class="experience-logo">
@@ -257,10 +262,10 @@
                             <h3 class="timeline-title">Bachelor of Science, Computer Engineering</h3>
                             <p class="timeline-subtitle">Ankara Yıldırım Beyazıt University, Ankara, Turkiye</p>
                             <p class="timeline-details">
-                                Current GPA: <b>3.36/4.00</b> 
+                                Current GPA: <b>3.12/4.00</b> 
                             </p>
                             <p class="timeline-details">
-                                Activities and societies: AYBÜ Hezarfen Student Club & Developer Students Community & IEEE Student Branch - AYBU
+                                Activities and societies: AYBÜ Hezarfen Student Club & Developer Students Community
                             </p>
                         </div>
                     </div>
@@ -287,6 +292,22 @@
         <section id="volunteering" role="region" aria-labelledby="volunteering-heading">
             <h2 class="section-title" id="volunteering-heading">Volunteering Works</h2>
             <div class="experience-container" role="list" aria-label="Volunteer experience">
+                <div class="experience-card" role="listitem">
+                    <div class="experience-logo">
+                        <img src="/Images/Places/ogmer.webp" alt="" aria-hidden="true">
+                    </div>
+                    <div class="experience-content">
+                        <div class="experience-date">August 2024 - May 2025</div>
+                        <h3 class="experience-title">Bootcamp Tutor & Student Mentor</h3>
+                        <p class="experience-subtitle">AYBU, Ankara, Turkiye</p>
+                        <div class="experience-details">
+                            <ul role="list">
+                                <li>Led a summer bootcamp aimed at introducing college students to front-end web development.</li>
+                                <li>Represented my university at many international conferences.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 <div class="experience-card" role="listitem">
                     <div class="experience-logo">
                         <img src="/Images/Places/mimce.png" alt="MİMCE Mühendisler Derneği Logo">
@@ -318,12 +339,9 @@
                         <p class="experience-subtitle">Trio of Thought, Ankara, Turkiye</p>
                         <div class="experience-details">
                             <ul role="list">
-                                <li>As an engineering student with a passion for AI technologies, 
-                                    I co-published the 'Trio of Thought' podcast with my two colleagues. 
-                                    I served as the podcast host, where we discussed new technologies and developments, particularly in AI. 
-                                    In addition to hosting, I also contributed as a transcript writer.</li>
-                                <li>You can still access our Spotify account from the link below.
-                                    <br><br> <a href="https://open.spotify.com/show/5e7U7UMTUi8K9n11wK9nmM" aria-label="Listen to Trio of Thought podcast on Spotify"><b>Trio of Thought (Spotify Podcast)</b></a>
+                                <li>Co-hosted the 'Trio of Thought' podcast discussing AI technologies.</li>
+                                <li>
+                                    <a href="https://open.spotify.com/show/5e7U7UMTUi8K9n11wK9nmM" aria-label="Listen to Trio of Thought podcast on Spotify"><b>Trio of Thought (Spotify Podcast)</b></a>
                                 </li>
                             </ul>
                         </div>
@@ -340,16 +358,7 @@
                         <p class="experience-subtitle">Civil Society Organizations in Ankara, Turkiye</p>
                         <div class="experience-details">
                             <ul role="list">
-                                <li>I worked as a writer in several school magazines, 
-                                    blogs and local civil society organizations.</li>
-                                <li>After doing it for a while, with influence of  my writing skills, 
-                                    I became an editor on one of the blog websites. We published more than 
-                                    50 articles in 8 months. During this process, I have reduced writing and 
-                                    contextual errors to almost zero.</li>
-                                <li>Currently, I have more than 10 articles I have written in my writing profession, 
-                                    which I am still doing as a hobby. You can reach a website where 
-                                    I have blogged a few of my articles with the link I have added below.
-                                    <br><br> <a href="https://tarihikalem.wordpress.com/" aria-label="Visit Tarihi Kalem blog website"> <b>Tarihi Kalem (Blog Website)</b></a></li>
+                                <li>Writer and editor for school magazines, blogs, and local civil society organizations.</li>
                             </ul>
                         </div>
                     </div>
