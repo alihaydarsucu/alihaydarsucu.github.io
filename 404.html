@@ -216,33 +216,6 @@
             const loadingContainer = document.getElementById('loadingContainer');
             const loadingText = document.getElementById('loadingText');
             
-            // Blog page routing - /posts -> blog-en.html, /yazilar -> blog-tr.html
-            if (path === '/posts' || path === '/posts/') {
-                // Handle blog filtering with parameters - /posts?category=technical
-                const fullUrl = window.location.href;
-                sessionStorage.setItem('intendedBlogUrl', fullUrl);
-                window.location.replace('/blog-en.html' + window.location.search);
-                return;
-            } else if (path === '/yazilar' || path === '/yazilar/') {
-                // Handle blog filtering with parameters - /yazilar?category=technical
-                const fullUrl = window.location.href;
-                sessionStorage.setItem('intendedBlogUrl', fullUrl);
-                window.location.replace('/blog-tr.html' + window.location.search);
-                return;
-            } else if (path.startsWith('/yazilar/')) {
-                // Article routing - /yazilar/<slug> -> article-tr.html?slug=<slug>
-                const slug = path.replace('/yazilar/', '');
-                sessionStorage.setItem('redirectSlug', slug);
-                window.location.replace('/article-tr.html?slug=' + encodeURIComponent(slug));
-                return;
-            } else if (path.startsWith('/posts/')) {
-                // Article routing - /posts/<slug> -> article-en.html?slug=<slug>
-                const slug = path.replace('/posts/', '');
-                sessionStorage.setItem('redirectSlug', slug);
-                window.location.replace('/article-en.html?slug=' + encodeURIComponent(slug));
-                return;
-            }
-            
             // If no redirect, show the 404 page
             setTimeout(() => {
                 loadingContainer.style.display = 'none';

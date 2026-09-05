@@ -23,18 +23,17 @@ RewriteRule ^fotograflar/?$ fotograflar.html [L]
 RewriteRule ^yonetim/?$ yonetim.html [L]
 
 # Blog list sayfaları - EN ve TR
-RewriteRule ^posts/?$ blog-en.html [L]
-RewriteRule ^yazilar/?$ blog-tr.html [L]
+ 
 
 # /blog-tr ve varyasyonlarını /blog-tr.html'e yönlendir
-RewriteRule ^blog-tr/?$ blog-tr.html [R=301,L]
+ 
 
 # Blog makale sayfaları - slug tabanlı (Clean URLs with fallback)
 # /posts/<slug> -> /article-en.html?slug=<slug>
-RewriteRule ^posts/([^/]+)/?$ article-en.html?slug=$1 [L,QSA]
+ 
 
 # /yazilar/<slug> -> /article-tr.html?slug=<slug>
-RewriteRule ^yazilar/([^/]+)/?$ article-tr.html?slug=$1 [L,QSA]
+ 
 
 # 404 sayfası için
 ErrorDocument 404 /404.html
