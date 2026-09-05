@@ -2815,17 +2815,16 @@ body.dark-mode .mobile-language-selector select {
 
 /* Desktop: 4th and 5th cards centered on bottom row - only on screens > 768px */
 @media (min-width: 769px) {
+    .explore-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .explore-card {
+        grid-column: auto;
+    }
+
     .explore-card:nth-child(4) {
-        grid-column: 2 / span 2;
-    }
-
-    .explore-card:nth-child(5) {
-        grid-column: 4 / span 2;
-    }
-
-    /* When blog is hidden, center the 5th card (Photos) */
-    .explore-grid.no-blog .explore-card:nth-child(5) {
-        grid-column: 3 / span 2;
+        grid-column: auto;
     }
 }
 
