@@ -1,235 +1,249 @@
-%-------------------------
-% CV Template - Oxford Style for ATS Compatibility
-% Author: Ali Haydar Sucu
-% License: MIT
-%-------------------------
+\def\allcvflag{}
+\documentclass[10pt,letterpaper]{article}
 
-\documentclass[letterpaper,11pt]{article}
-
-\usepackage{latexsym}
-\usepackage[empty]{fullpage}
-\usepackage{titlesec}
-\usepackage[usenames,dvipsnames]{color}
-\usepackage{verbatim}
-\usepackage{enumitem}
-\usepackage[hidelinks]{hyperref}
-\usepackage{fancyhdr}
-\usepackage[english]{babel}
-\usepackage{tabularx}
-\usepackage{fontawesome5}
-\usepackage{multicol}
-\usepackage{geometry}
-\usepackage{xcolor}
-
-% Font setup for better ATS compatibility and Turkish characters
-\usepackage[utf8]{inputenc}
+\usepackage[margin=0.52in]{geometry}
 \usepackage[T1]{fontenc}
-\usepackage[default]{lato}
+\usepackage[utf8]{inputenc}
+\usepackage[scaled=0.95]{helvet}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{microtype}
+\usepackage{needspace}
 
-% Page setup
-\geometry{left=0.7in,right=0.7in,top=0.7in,bottom=0.7in}
+\newif\ifrocketexperience
+\rocketexperiencetrue
+\ifdefined\norocket\rocketexperiencefalse\fi
+\newif\ifmiddlemimce
+\middlemimcefalse
+\ifdefined\middlemimceflag\middlemimcetrue\fi
+\newif\ifallcv
+\allcvfalse
+\ifdefined\allcvflag\allcvtrue\fi
 
-\pagestyle{fancy}
-\fancyhf{}
-\fancyfoot{}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
+\definecolor{navy}{HTML}{0B315B}
+\hypersetup{colorlinks=true,urlcolor=navy,linkcolor=navy}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\renewcommand{\familydefault}{\sfdefault}
+\setlist[itemize]{leftmargin=1.25em,itemsep=1pt,topsep=2pt,parsep=0pt}
+\ifallcv\addtolength{\textheight}{0.42in}\fi
+\titleformat{\section}{\large\bfseries\color{navy}}{}{0pt}{}[\vspace{2pt}\titlerule]
+\titlespacing*{\section}{0pt}{9pt}{5pt}
 
-% Color definitions
-\definecolor{oxfordblue}{RGB}{0,33,71}
-\definecolor{darkgray}{RGB}{64,64,64}
-
-% Section formatting
-\titleformat{\section}{
-  \vspace{-4pt}\scshape\raggedright\large\color{oxfordblue}
-}{}{0em}{}[\color{oxfordblue}\titlerule \vspace{-5pt}]
-
-% Custom commands
-\newcommand{\resumeItem}[1]{
-  \item\small{
-    {#1 \vspace{-2pt}}
-  }
-}
-
-\newcommand{\resumeSubheading}[4]{
-  \vspace{-2pt}\item
-    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
-      \textbf{#1} & #2 \\
-      \textit{\small#3} & \textit{\small #4} \\
-    \end{tabular*}\vspace{-7pt}
-}
-
-\newcommand{\resumeSubSubheading}[2]{
-    \item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
-      \textit{\small#1} & \textit{\small #2} \\
-    \end{tabular*}\vspace{-7pt}
-}
-
-\newcommand{\resumeProjectHeading}[2]{
-    \item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
-      \small#1 & #2 \\
-    \end{tabular*}\vspace{-7pt}
-}
-
-\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
-
-\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
-
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
-\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
-\newcommand{\resumeItemListStart}{\begin{itemize}}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
-
-%-------------------------------------------
-%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\entry}[4]{%
+  \begin{tabularx}{\textwidth}{@{}Xr@{}}
+    \textbf{#1} & \textcolor{navy}{#2}\\
+    \textit{#3} & \textit{#4}
+  \end{tabularx}\vspace{1pt}}
 
 \begin{document}
 
-%----------HEADING----------
 \begin{center}
-    \textbf{\Huge Ali Haydar Sucu} \\ \vspace{1pt}
-    \small \href{mailto:alihaydarsucu@gmail.com}{\faEnvelope\ alihaydarsucu@gmail.com} $|$ 
-    \href{https://linkedin.com/in/ali-haydar-sucu}{\faLinkedin\ linkedin.com/in/ali-haydar-sucu} \\
-    \href{https://github.com/alihaydarsucu}{\faGithub\ github.com/alihaydarsucu} $|$
-    \href{https://alihaydarsucu.github.io}{\faGlobe\ alihaydarsucu.github.io} \\
-    \small \faMapMarker\ Ankara, Turkey
+  {\LARGE\bfseries Ali Haydar Sucu}\\[3pt]
+  \small
+  \href{mailto:alihaydarsucu@gmail.com}{alihaydarsucu@gmail.com} $\mid$
+  \href{https://linkedin.com/in/ali-haydar-sucu}{linkedin.com/in/ali-haydar-sucu}\\
+  \href{https://github.com/alihaydarsucu}{github.com/alihaydarsucu} $\mid$
+  \href{https://alihaydarsucu.github.io/}{alihaydarsucu.github.io} $\mid$ Ankara, Türkiye
 \end{center}
 
-%-----------EDUCATION-----------
+\Needspace{5\baselineskip}
 \section{Education}
-  \resumeSubHeadingListStart
-    \resumeSubheading
-      {Ankara Yıldırım Beyazıt University}{Ankara, Turkey}
-      {Bachelor of Science in Computer Engineering}{Sep 2023 -- Jun 2028 (Expected)}
-      \resumeItemListStart
-          \resumeItem{Current GPA: 3.13/4.00}
-        \resumeItem{Activities: AYBU Hezarfen Student Club, AYBU Turkish World Youth Club}
-      \resumeItemListEnd
-      
-    \resumeSubheading
-      {Tevfik İleri Anatolian High School}{Ankara, Turkey}
-      {High School Diploma (Graduated with 96.43/100)}{Sep 2019 -- Jun 2023}
-  \resumeSubHeadingListEnd
+\entry{Ankara Yıldırım Beyazıt University}{Ankara, Türkiye}
+      {B.Sc. in Computer Engineering}{Sep 2023 - Jun 2028 (Expected)}
+\begin{itemize}
+  \item Current GPA: 3.12/4.00
+  \ifdefined\norocket
+    \item Activities: AYBÜ Hezarfen Student Club, Developer Students Community
+  \else
+    \item Activities: AYBÜ Hezarfen Student Club, Developer Students Community, IEEE Student Branch
+  \fi
+\end{itemize}
 
-%-----------EXPERIENCE-----------
+\Needspace{7\baselineskip}
 \section{Professional Experience}
-  \resumeSubHeadingListStart
+\entry{T3 Gemstone (Baykar $\bullet$ T3 Foundation)}{Istanbul, Türkiye}
+      {Embedded Software Intern}{Jul - Aug 2026}
+\begin{itemize}
+  \item Developed and integrated ROS 2 Humble software for the Bumin unmanned ground vehicle on the T3 Gemstone O1 board, including LiDAR, RF2O odometry, SLAM Toolbox, IMU, motor encoder, GPIO and PWM-based motor-control components.
+  \item Built and tested an autonomous indoor room-mapping pipeline in Gazebo/RViz and Docker, adapting frontier-driven exploration to the existing navigation stack for later real-hardware deployment.
+  \item Participated in pre-packaging QA of nearly 500 Gemstone O1 boards in a five-person team; used TTL, multimeter, oscilloscope and continuity testing to isolate USB, connector and board-level faults.
+  \item Contributed to hardware/software integration, technical documentation and the ChibiOS + ArduPilot porting roadmap for the Cortex-R5 real-time core.
+\end{itemize}
+\vspace{2pt}
 
-    \resumeSubheading
-      {AI Developer | Part-Time Student}{Jun 2025 -- Present}
-      {AYBU ÖĞMER}{Ankara, Turkey}
-      \resumeItemListStart
-        \resumeItem{Led development of an intelligent document-interactive AI assistant program (with RAG) using Llama 4 LLM with web interface published for university-wide access}
-        \resumeItem{Implemented core features: document processing (PDF, DOCX, TXT), question answering, text summarization, and Turkish speech-to-text/text-to-speech capabilities}
-        \resumeItem{Designed system architecture with real-time audio streaming and document embedding for knowledge retrieval}
-      \resumeItemListEnd
-    \resumeSubheading
-      {Embedded Software Developer}{Oct 2024 -- Aug 2025}
-      {PUSULA USV}{Ankara, Turkey}
-      \resumeItemListStart
-        \resumeItem{Developed and optimized autonomous navigation and control algorithms for embedded systems on NVIDIA Jetson platform using Python.}
-        \resumeItem{Engineered systemd services and real-time system integration for launching multi-threaded ROS 2 nodes handling sensor data streams (Lidar, ZED Camera) and autonomous control.}
-        \resumeItem{Integrated and debugged multiple embedded sensors: A2M12 Lidar sensor fusion, ZED 2 stereo camera processing, Pixhawk flight controller motor commands, and GPS.}
-        \resumeItem{Collaborated with Electronics team on hardware-software co-design, conducting extensive real-world testing, debugging sensor communication protocols, and optimizing system performance}
-      \resumeItemListEnd
-      \vspace{\baselineskip}
-    \resumeSubheading
-      {Avionics \& Embedded Systems Team Member}{Sep 2023 -- Jun 2024}
-      {AYBU HEZARFEN Club | Gökçen Rocket Project}{Ankara, Turkey}
-      \resumeItemListStart
-        \resumeItem{Conducted detailed sensor research and selection for rocket avionics systems.}
-        \resumeItem{Contributed to embedded flight control board design and development.}
-        \resumeItem{Performed embedded system integration and testing of avionics hardware components, serial communication debugging, and sensor calibration}
-        \resumeItem{Developed system specifications documentation and conducted initial flight avionics validation for Teknofest's rocket competition}
-      \resumeItemListEnd
+\entry{AYBÜ ÖĞMER}{Ankara, Türkiye}
+      {AI Developer | Part-time Student}{May 2025 - Jun 2026}
+\begin{itemize}
+  \item Led development of the BuraiTech - Ayaz Project, an intelligent document-interactive AI agent using the Llama 4 LLM and a web interface deployed for university-wide access.
+  \item Assigned development tasks, conducted prompt engineering and designed a modular architecture; optimized inference with caching strategies and embedding reuse.
+  \item Designed the system architecture for real-time audio streaming and document embedding, enabling retrieval-grounded question answering, summarization and paraphrasing.
+  \item Deployed the assistant on a public-facing kiosk at AYBÜ ÖĞMER's Milli İrade Campus location, where students can query programs and services through a student-facing chat interface.
+\end{itemize}
+\vspace{2pt}
 
-  \resumeSubHeadingListEnd
-%-----------PROJECTS-----------
-\section{Featured Projects}
-    \resumeSubHeadingListStart
-      \resumeProjectHeading
-          {\textbf{FocusPath - Focus Tracking \& Analysis} $|$ \emph{C++, Qt 5/6, X11 APIs, SVG Rendering, Linux}}{2025}
-          \resumeItemListStart
-            \resumeItem{GitHub: \href{https://github.com/alihaydarsucu/FocusPath}{github.com/alihaydarsucu/FocusPath}}
-            \resumeItem{Developed low-level system monitoring application capturing X11 window events at 200ms intervals for focus tracking and distraction analysis on Linux desktop}
-            \resumeItem{Engineered real-time window tracking system using direct X11 APIs, JSONL event logging, and advanced system integration for behavioral analytics}
-            \resumeItem{Implemented SVG chart generation pipeline rendering usage statistics, timeline visualizations, and attention metrics for productivity analysis}
-          \resumeItemListEnd
-\pagebreak
-      \resumeProjectHeading
-          {\textbf{STM32F103RB Embedded Systems} $|$ \emph{C/C++, STM32CubeIDE, HAL, ARM Architecture}}{2024 -- 2025}
-          \resumeItemListStart
-            \resumeItem{GitHub: \href{https://github.com/alihaydarsucu/STM32-Learning}{github.com/alihaydarsucu/STM32-Learning}}
-            \resumeItem{Embedded systems coursework on NUCLEO-F103RB MCU platform covering peripherals: GPIO configuration, UART serial communication (115200 baud), PWM generation, timer operations, and HAL library utilization}
-            \resumeItem{Developed low-level register-level programming skills and STM32 microcontroller architecture understanding through hands-on firmware development}
-          \resumeItemListEnd
-
-      \resumeProjectHeading
-          {\textbf{Pusula Ground Control Station} $|$ \emph{Python, FastAPI, Real-Time Telemetry, System Integration}}{Jul -- Aug 2025}
-          \resumeItemListStart
-            \resumeItem{GitHub: \href{https://github.com/abdullah-aksoy/Pusula-GCS}{github.com/abdullah-aksoy/Pusula-GCS}}
-            \resumeItem{Designed and developed embedded-friendly GCS software for autonomous USV platform with real-time telemetry processing at high update rates}
-            \resumeItem{Implemented command-and-control interface for embedded system operations including ARM/DISARM commands, mode switching, algorithm control, and real-time vehicle state monitoring}
-            \resumeItem{Integrated mission planning with geographic data processing and live tracking visualization of autonomous vehicle operations}
-          \resumeItemListEnd
-
-      \resumeProjectHeading
-          {\textbf{Personal Portfolio With CV Generation} $|$ \emph{LaTeX, GitHub Actions, CI/CD, System Automation}}{2024}
-          \resumeItemListStart
-            \resumeItem{GitHub: \href{https://github.com/alihaydarsucu/alihaydarsucu.github.io}{github.com/alihaydarsucu/alihaydarsucu.github.io}}
-            \resumeItem{Engineered automated CV generation pipeline using LaTeX and GitHub Actions for continuous ATS-compatible document generation}
-            \resumeItem{Designed system automation workflow demonstrating CI/CD understanding and proficiency with build automation tools}
-          \resumeItemListEnd
-    \resumeSubHeadingListEnd
-
-%-----------TECHNICAL SKILLS-----------
-\section{Technical Skills}
- \begin{itemize}[leftmargin=0.15in, label={}]
-    \small{\item{
-     \textbf{Languages}{: C/C++, Python, Bash/Shell, Java, JavaScript} \\
-     \textbf{Embedded Systems}{: STM32, ARM Architecture, ROS 2, Jetson, Sensor Integration} \\
-     \textbf{Tools}{: Git, Linux, Docker, STM32CubeIDE, ST-LINK Debugger} \\
-     \textbf{Languages}{: Turkish (Native), English (Professional)}
-    }}
- \end{itemize}
-
-%-----------CERTIFICATIONS-----------
-\section{Certifications \& Achievements}
-    \resumeSubHeadingListStart
-
-      \resumeSubheading
-        {Teknofest Success Certificate}{Nov 2025}
-        {Teknofest}{}
-        \resumeItemListStart
-          \resumeItem{\href{https://drdogrulama.sanayi.gov.tr/tr/verify/99224018259565/}{Ranked 10th among 284 teams in Mavi Vatan competition}}
-        \resumeItemListEnd
-
-      \resumeSubheading
-        {Career Module Certificate}{July 2025}
-        {MSMB - Mimar Sinan Mühendisler Birliği}{}
-        \resumeItemListStart
-          \resumeItem{\href{https://drdogrulama.sanayi.gov.tr/tr/verify/85667319451130/}{Professional career module certification}}
-        \resumeItemListEnd
-
-      \resumeSubheading
-        {Data Science Bootcamp Certification}{Dec 2023}
-        {Google Developer Students Community}{}
-        \resumeItemListStart
-          \resumeItem{\href{https://credsverse.com/credentials/68cd1cdc-0d63-4095-a93c-3523b0d87402}{Completed intensive bootcamp covering Python programming and data processing with Pandas, NumPy, and Matplotlib}}
-        \resumeItemListEnd
-    \resumeSubHeadingListEnd
-
-%-----------ACADEMIC PRESENTATIONS-----------
-\section{Academic Presentations}
-  \begin{itemize}[leftmargin=0.15in]
-    \resumeItem{Colak, A., Karaaslan, H., Sen, M., et al. (including Sucu, A. H.). \textit{Bootcamps: Language as a Tool to Develop Global Competencies}. Paper presented at the 6th FLE Joint Conference Unity in Diversity, THK University, Ankara, Turkiye, 30 May 2025.}
-    \resumeItem{Karaaslan, H., Colak, A., Durna, S., et al. (including Sucu, A. H.). \textit{Language as a Tool: A Challenge-Based Summer Bootcamp Model with Scrum Scaffolding to Develop Global Competencies}. Poster presented at the International Challenge-Based Learning Conference, Eindhoven University of Technology, Eindhoven, Netherlands, 7--8 Apr 2025. \href{https://drive.google.com/file/d/1aIyyUj2jCt_AV4FdKyyWwu2HCNPCXPrK/view?usp=sharing}{Slides}}
-    \resumeItem{Colak, A., Karaaslan, H., Korkmaz, I., et al. (including Sucu, A. H.). \textit{Fostering Autonomy through CLIL-Infused Bootcamps and Scrum Scaffolding}. Pre-recorded presentation at the 13th Lab Session on CLIL and Learner Autonomy, Research Institute for Learner Autonomy Education, Kanda University of International Studies, Chiba, Japan, 29 Nov 2024. \href{https://youtu.be/JN9JIbH03Z4}{Video}}
-    \resumeItem{Karaaslan, H., Colak, A., Korkmaz, I., et al. (including Sucu, A. H.). \textit{Language as a Tool: A Summer Bootcamp Model to Build Global Competencies}. Paper presented at the 6th International English for Specific Purposes Conference, Middle East Technical University, Turkiye, 2 Nov 2024.}
-    \resumeItem{Kurt, A., Karaaslan, H., Demir, M. H., et al. (including Sucu, A. H.). \textit{Sharpen Your Arguments: Fallacy Fighters Workshop}. Paper presented at the 5th FLE Joint Conference Unity in Diversity, Ankara Yildirim Beyazit University, Ankara, Turkiye, 7 Jun 2024. \href{https://docs.google.com/presentation/d/1bCmbBnWGfCbO6yDtkYhVDqD09csj8xSNyeTOhXTFaCg/edit?usp=sharing}{Slides}}
-    \resumeItem{Colak, A., Karaaslan, H., Kose, E., et al. (including Sucu, A. H.). \textit{Beyond Self: E-Portfolios and Ecological L2 Motivation}. Paper presented at the 5th FLE Joint Conference Unity in Diversity, Ankara Yildirim Beyazit University, Ankara, Turkiye, 7 Jun 2024.}
+\ifallcv
+  \Needspace{7\baselineskip}
+  \entry{Ankara Yıldırım Beyazıt University}{Ankara, Türkiye}
+        {Bootcamp Tutor \& Student Mentor}{Aug 2024 - May 2025}
+  \begin{itemize}
+    \item Led a summer bootcamp introducing university students to front-end web development with HTML and CSS, supporting participants as they built functional websites.
+    \item Provided technical support and mentorship to engineering freshmen through the ``Meet Your Student Tech Staff'' program.
+    \item Represented the university at international conferences and supported the Learning and Teaching Center's technology-focused activities.
   \end{itemize}
+  \vspace{2pt}
+\fi
+
+\Needspace{7\baselineskip}
+\section{Engineering Projects}
+\entry{Autonomous Unmanned Ground Vehicle}{Ankara, Türkiye}
+      {Terranova UGV - Embedded Software Developer}{2026 - Present}
+\begin{itemize}
+  \item Created two custom Gazebo simulation worlds, establishing repeatable environments for autonomous rover testing.
+  \item Developed a browser-based ground-control station with live vehicle markers, sensor cards and telemetry/control interfaces; tested the integration with a standard Gazebo rover.
+  \item Implemented ROS 2 nodes for IMU, LiDAR, ultrasonic and GPS sensors, and contributed to the system architecture, technical reports and integration planning for the six-wheel rocker-bogie, skid-steering platform.
+\end{itemize}
+
+\entry{Autonomous Unmanned Sea Vehicle}{Ankara, Türkiye}
+      {Göksu USV - PUSULA Team, Embedded Software Developer}{Oct 2024 - Aug 2025}
+\begin{itemize}
+  \item Developed autonomous navigation and control software on NVIDIA Jetson using Python and ROS 2, integrating LiDAR, ZED 2 stereo camera, Pixhawk and GPS data streams.
+  \item Engineered systemd services and real-time node integration; collaborated with the electronics team on hardware/software co-design, field testing and sensor communication debugging.
+  \item Reached the finals and placed 10th among 284 teams in Teknofest's Mavi Vatan competition with the PUSULA USV team.
+\end{itemize}
+\vspace{2pt}
+
+\ifrocketexperience
+  \Needspace{7\baselineskip}
+  \entry{Rocket Avionics and Embedded Systems}{Ankara, Türkiye}
+        {Gökçen Rocket Project - AYBÜ HEZARFEN Club, Avionics Team Member}{Sep 2023 - Jun 2024}
+  \begin{itemize}
+    \item Researched and evaluated suitable sensors for the rocket avionics system.
+    \item Contributed to flight-control board development and assisted with sensor and component integration.
+    \item Performed initial avionics-system testing with the team and documented the system for Teknofest.
+  \end{itemize}
+\fi
+
+\ifmiddlemimce
+  \Needspace{7\baselineskip}
+  \section{Volunteering}
+  \entry{MİMCE Mühendisler Derneği}{Ankara, Türkiye}
+        {Secretary \& Member, University Council}{Sep 2025 - Present}
+  \begin{itemize}
+    \item Led Secretariat operations, managing formal communication with academic units and university council representatives.
+    \item Planned and coordinated engineering-focused events and student development activities with the council team.
+    \item Established structured record-keeping and follow-up processes to preserve continuity across council decisions.
+    \item \href{https://mimce.org/}{mimce.org}
+  \end{itemize}
+\fi
+
+\Needspace{15\baselineskip}
+\section{Selected Software Projects}
+\Needspace{9\baselineskip}
+\entry{Autonomous Room Mapping with a Mobile Robot}{2026}
+      {Bumin UGV - T3 Gemstone Internship Project $\mid$ ROS 2, Nav2, Gazebo, Python/C++}{}
+\small\href{https://github.com/alihaydarsucu/t3gemstone-bumin-ika}{GitHub: github.com/alihaydarsucu/t3gemstone-bumin-ika}
+\begin{itemize}
+  \item Built a modular autonomous exploration stack that detects frontier regions, ranks candidate goals by utility and tracks frontier state across exploration cycles.
+  \item Integrated the exploration loop with Nav2 planning, SLAM Toolbox and a browser-based GCS for live monitoring and teleoperation.
+  \item Maintained a shared launch and deployment workflow across Dockerised Gazebo simulation and T3 Gemstone O1 hardware, enabling simulation-to-hardware validation.
+\end{itemize}
+\vspace{2pt}
+
+\Needspace{7\baselineskip}
+\entry{Local Retrieval-Augmented AI Assistant}{2026}
+      {Burai - document AI, FAISS, local LLM inference, Python}{}
+\small\href{https://github.com/alihaydarsucu/burai-tech-ayaz}{GitHub: github.com/alihaydarsucu/burai-tech-ayaz}
+\begin{itemize}
+  \item Developed a privacy-oriented assistant for institutional documents with PDF, DOCX and TXT processing, FAISS-based retrieval and local Ollama inference.
+  \item Implemented retrieval-grounded question answering, summarization and paraphrasing through a modular pipeline designed for local deployment.
+\end{itemize}
+\vspace{2pt}
+
+\Needspace{8\baselineskip}
+\entry{STM32F103RB Embedded Systems Practice}{2024 - 2025}
+      {STM32CubeIDE, C, HAL, ARM Cortex-M3, FreeRTOS}{}
+\small\href{https://github.com/alihaydarsucu/stm32f103-practices}{GitHub: github.com/alihaydarsucu/stm32f103-practices}
+\begin{itemize}
+  \item Implemented and tested firmware on the NUCLEO-F103RB covering GPIO, UART, PWM, ADC, EXTI, I2C and FreeRTOS using STM32 HAL.
+  \item Practiced peripheral configuration, timer-based control, interrupt-driven firmware and RTOS task design through independently testable examples.
+  \item Used STM32CubeIDE and ST-LINK-based debugging to build, flash and validate embedded applications on the ARM Cortex-M3 platform.
+\end{itemize}
+\vspace{2pt}
+
+\Needspace{6\baselineskip}
+\entry{Personal Portfolio and Automated CV System}{2024 - Present}
+      {LaTeX, GitHub Actions, HTML/CSS, CI/CD}{}
+\small\href{https://github.com/alihaydarsucu/alihaydarsucu.github.io}{GitHub: github.com/alihaydarsucu/alihaydarsucu.github.io}
+\begin{itemize}
+  \item Built a portfolio with automated CV generation and GitHub project synchronization workflows, demonstrating reproducible document builds and deployment automation.
+\end{itemize}
+
+\ifallcv
+  \Needspace{8\baselineskip}
+  \entry{Focus and Activity Tracking for Linux}{2025}
+        {FocusPath - C++, Qt, X11, SVG, Linux}{}
+  \small\href{https://github.com/alihaydarsucu/FocusPath}{GitHub: github.com/alihaydarsucu/FocusPath}
+  \begin{itemize}
+    \item Built a low-level Linux desktop application that captures X11 window events and logs activity as JSONL for focus and distraction analysis.
+    \item Generated SVG timelines, pie charts and usage reports from recorded desktop activity.
+  \end{itemize}
+  \vspace{2pt}
+
+  \Needspace{7\baselineskip}
+  \entry{Batch GitHub Repository Puller}{2025}
+        {GitHubPuller - Python, GTK4, libadwaita, Linux}{}
+  \small\href{https://github.com/alihaydarsucu/GitHubPuller}{GitHub: github.com/alihaydarsucu/GitHubPuller}
+  \begin{itemize}
+    \item Developed a native Linux desktop utility for batch-cloning and updating multiple GitHub repositories from one interface.
+    \item Built the desktop UI with GTK4 and libadwaita, focusing on clear repository selection and repeatable update workflows.
+  \end{itemize}
+\fi
+
+\Needspace{8\baselineskip}
+\section{Technical Skills}
+\textbf{Programming:} C/C++, Python, Bash/Shell, JavaScript, Java \\
+\textbf{Robotics:} ROS 2, Nav2, SLAM Toolbox, Gazebo, Docker, sensor integration, autonomous navigation \\
+\textbf{Embedded:} STM32, ARM architecture, GPIO/UART/PWM, RTOS concepts, ChibiOS, NuttX, Jetson \\
+\textbf{Tools:} Linux, Git, GitHub Actions, STM32CubeIDE, ST-LINK, FastAPI \\
+\textbf{Languages:} Turkish (Native), English (Professional)
+
+\Needspace{7\baselineskip}
+\section{Certifications \& Achievements}
+\entry{Teknofest Success Certificate}{Nov 2025}{Teknofest}{Ranked 10th among 284 teams in the Mavi Vatan competition}
+\entry{Career Module Certificate}{Jul 2025}{MSMB - Mimar Sinan Mühendisler Birliği}{Professional career module}
+\entry{Data Science Bootcamp Certification}{Dec 2023}{Google Developer Students Community}{Python, NumPy, Pandas and Matplotlib}
+
+\ifmiddlemimce\else
+  \Needspace{5\baselineskip}
+  \section{Volunteering}
+  \entry{MİMCE Mühendisler Derneği}{Ankara, Türkiye}
+        {Secretary \& Member, University Council}{Sep 2025 - Present}
+  \begin{itemize}
+    \item Led Secretariat operations, managing formal communication with academic units and university council representatives.
+    \item Planned and coordinated engineering-focused events and student development activities with the council team.
+    \item Established structured record-keeping and follow-up processes to preserve continuity across council decisions.
+    \item \href{https://mimce.org/}{mimce.org}
+  \end{itemize}
+\fi
+
+\ifallcv
+  \Needspace{5\baselineskip}
+  \section{Research \& Presentations}
+  \entry{Language as a Tool: Challenge-Based Summer Bootcamp Model}{International / Türkiye}
+        {Co-author and Presenter}{2024 - 2025}
+  \begin{itemize}
+    \item ``Language as a Tool: A Challenge-Based Summer Bootcamp Model with Scrum Scaffolding to Develop Global Competencies'' - poster presented at the International Challenge-Based Learning Conference, Eindhoven University of Technology, Netherlands, Apr 2025.
+    \item ``Bootcamps: Language as a Tool to Develop Global Competencies'' - paper presented at the 6th FLE Joint Conference Unity in Diversity, Ankara, Türkiye, May 2025.
+    \item ``Language as a Tool: A Summer Bootcamp Model to Build Global Competencies'' - paper presented at the 6th International English for Specific Purposes Conference, METU, Türkiye, Nov 2024.
+    \item ``Fostering Autonomy through CLIL-Infused Bootcamps and Scrum Scaffolding'' - pre-recorded presentation at the 13th Lab Session on CLIL and Learner Autonomy, Kanda University of International Studies, Japan, Nov 2024.
+    \item ``Sharpen Your Arguments: Fallacy Fighters Workshop'' - paper presented at the 5th FLE Joint Conference Unity in Diversity, AYBÜ, Ankara, Türkiye, Jun 2024.
+    \item ``Beyond Self: E-Portfolios and Ecological L2 Motivation'' - paper presented at the 5th FLE Joint Conference Unity in Diversity, AYBÜ, Ankara, Türkiye, Jun 2024.
+  \end{itemize}
+\fi
 
 \end{document}
