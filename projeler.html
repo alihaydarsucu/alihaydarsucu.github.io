@@ -69,10 +69,6 @@
                         <i class="fas fa-briefcase" aria-hidden="true"></i>
                         <span class="nav-text">Deneyim</span>
                     </a>
-                    <a href="/yazilar" role="menuitem">
-                        <i class="fas fa-pencil" aria-hidden="true"></i>
-                        <span class="nav-text">Blog</span>
-                    </a>
                     <a href="/fotograflar" role="menuitem">
                         <i class="fas fa-camera" aria-hidden="true"></i>
                         <span class="nav-text">Fotoğraflar</span>
@@ -128,12 +124,6 @@
                 </a>
             </div>
             <div role="listitem">
-                <a href="/yazilar">
-                    <i class="fas fa-pencil" aria-hidden="true"></i>
-                    <span class="nav-text-mobile">Blog</span>
-                </a>
-            </div>
-            <div role="listitem">
                 <a href="/fotograflar">
                     <i class="fas fa-camera" aria-hidden="true"></i>
                     <span class="nav-text-mobile">Fotoğraflar</span>
@@ -162,8 +152,15 @@
             <h2 class="section-title" id="projects-heading">Öne Çıkan Projeler</h2>
             <div class="projects-container" role="list" aria-label="Öne çıkan projeler">
                 <div class="project-card" role="article">
-                    <div class="project-image">
-                        <img src="/Images/Projects/pusula-gcs.webp" alt="" aria-hidden="true" loading="lazy">
+                    <div class="project-gallery" data-project-gallery tabindex="0" aria-label="Pusula YKİ görselleri">
+                        <div class="project-gallery-slides">
+                            <img class="project-gallery-slide is-active" src="/Images/Projects/pusula-gcs.webp" alt="Pusula YKİ ana ekranı" loading="lazy">
+                            <img class="project-gallery-slide" src="/Images/Projects/pusula-vehicle.webp" alt="Pusula insansız deniz aracı" loading="lazy">
+                            <img class="project-gallery-slide" src="/Images/Projects/pusula-flowchart.webp" alt="Pusula görev akış şeması" loading="lazy">
+                        </div>
+                        <button class="project-gallery-control project-gallery-prev" type="button" aria-label="Önceki görsel"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+                        <button class="project-gallery-control project-gallery-next" type="button" aria-label="Sonraki görsel"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+                        <span class="project-gallery-counter" aria-live="polite">1 / 3</span>
                     </div>
                     <div class="project-content">
                         <h3>Pusula YKİ</h3>
@@ -174,8 +171,15 @@
                     </div>
                 </div>
                 <div class="project-card" role="article">
-                    <div class="project-image">
-                        <img src="/Images/Projects/ayaz_buraitech.webp" alt="" aria-hidden="true" loading="lazy">
+                    <div class="project-gallery" data-project-gallery tabindex="0" aria-label="Ayaz Kurum İçi AI Asistanı görselleri">
+                        <div class="project-gallery-slides">
+                            <img class="project-gallery-slide is-active" src="/Images/Projects/ayaz_buraitech.webp" alt="Ayaz Kurum İçi AI Asistanı" loading="lazy">
+                            <img class="project-gallery-slide" src="/Images/Projects/ayaz-live-deployment.webp" alt="Ayaz canlı dağıtım ekranı" loading="lazy">
+                            <img class="project-gallery-slide" src="/Images/Projects/ayaz-admin-panel.webp" alt="Ayaz yönetim paneli" loading="lazy">
+                        </div>
+                        <button class="project-gallery-control project-gallery-prev" type="button" aria-label="Önceki görsel"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+                        <button class="project-gallery-control project-gallery-next" type="button" aria-label="Sonraki görsel"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+                        <span class="project-gallery-counter" aria-live="polite">1 / 3</span>
                     </div>
                     <div class="project-content">
                         <h3>Ayaz: Kurum İçi AI Asistanı</h3>
@@ -183,6 +187,58 @@
                         <div class="project-link-container">
                             <a href="https://github.com/alihaydarsucu/burai-tech" class="project-link" aria-label="Ayaz demo kodlarını GitHub'da görüntüle">Demo Kodları</a>
                             <a href="https://drive.google.com/file/d/18F6ZYXro4CjBK_BpPsd40cKsMGG-8af_/view?usp=sharing" class="website" target="_blank" rel="noopener noreferrer" aria-label="Ayaz demo videosunu izle">Video</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" role="article">
+                    <div class="project-gallery" data-project-gallery tabindex="0" aria-label="Otonom İç Mekan Haritalama görselleri">
+                        <div class="project-gallery-slides">
+                            <img class="project-gallery-slide is-active" src="/Images/Projects/autonomous-mapping-ugv.webp" alt="Otonom haritalama aracının görseli" loading="lazy">
+                            <img class="project-gallery-slide" src="/Images/Projects/mapping-simulation.webp" alt="Otonom haritalama simülasyonu" loading="lazy">
+                            <img class="project-gallery-slide" src="/Images/Projects/mapping-vehicle.webp" alt="Otonom haritalama aracı" loading="lazy">
+                        </div>
+                        <button class="project-gallery-control project-gallery-prev" type="button" aria-label="Önceki görsel"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+                        <button class="project-gallery-control project-gallery-next" type="button" aria-label="Sonraki görsel"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+                        <span class="project-gallery-counter" aria-live="polite">1 / 3</span>
+                    </div>
+                    <div class="project-content">
+                        <h3>Otonom İç Mekan Haritalama</h3>
+                        <p>T3 Gemstone iç mekan haritalama projesi. Gerçek zamanlı iç mekan haritalama ve navigasyon için ROS 2 ve SLAM kullanan otonom bir İKA.</p>
+                        <div class="project-link-container">
+                            <a href="https://github.com/alihaydarsucu/t3gemstone-bumin-ika" class="project-link" aria-label="Otonom İç Mekan Haritalama projesini GitHub'da görüntüle">Projeyi Görüntüle</a>
+                            <a href="https://youtube.com/watch?v=YOUR_VIDEO_ID" target="_blank" rel="noopener noreferrer" class="website" aria-label="Otonom İç Mekan Haritalama demo videosunu izle">Video</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" role="article">
+                    <div class="project-gallery" data-project-gallery tabindex="0" aria-label="Terranova İKA görselleri">
+                        <div class="project-gallery-slides">
+                            <img class="project-gallery-slide is-active" src="/Images/Projects/terranova-simulation-1.webp" alt="Terranova simülasyonu birinci görünüm" loading="lazy">
+                            <img class="project-gallery-slide" src="/Images/Projects/terranova-simulation-2.webp" alt="Terranova simülasyonu ikinci görünüm" loading="lazy">
+                            <img class="project-gallery-slide" src="/Images/Projects/terranova-ugv-model.webp" alt="Terranova İKA modeli" loading="lazy">
+                        </div>
+                        <button class="project-gallery-control project-gallery-prev" type="button" aria-label="Önceki görsel"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+                        <button class="project-gallery-control project-gallery-next" type="button" aria-label="Sonraki görsel"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+                        <span class="project-gallery-counter" aria-live="polite">1 / 3</span>
+                    </div>
+                    <div class="project-content">
+                        <h3>Terranova İKA</h3>
+                        <p>YOLOv8 görüntü işleme ve sensör füzyonu ile çevresini gerçek zamanlı anlamlandıran, SLAM Toolbox ile haritalayan, Behavior Tree ve Nav2 ile karar veren otonom bir İKA.</p>
+                        <div class="project-link-container">
+                            <a href="https://terranova.fly.dev/" class="website terranova-website" target="_blank" aria-label="Terranova İKA web sitesini ziyaret et">Siteye Git</a>
+                            <a href="https://youtube.com/watch?v=YOUR_VIDEO_ID" target="_blank" rel="noopener noreferrer" class="website" aria-label="Terranova İKA demo videosunu izle">Video</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" role="article">
+                    <div class="project-image">
+                        <img src="/Images/Projects/stm32f103-practices.png" alt="" aria-hidden="true" loading="lazy" onerror="this.src='/Images/Projects/blank.webp'">
+                    </div>
+                    <div class="project-content">
+                        <h3>STM32F103 Uygulamaları</h3>
+                        <p>STM32F103 mikrodenetleyici kullanılarak geliştirilmiş bare-metal ve RTOS tabanlı gömülü yazılım pratik projeleri.</p>
+                        <div class="project-link-container">
+                            <a href="https://github.com/alihaydarsucu/stm32f103-practice" class="project-link" aria-label="STM32F103 Uygulamaları projesini GitHub'da görüntüle">Projeyi Görüntüle</a>
                         </div>
                     </div>
                 </div>
@@ -195,43 +251,6 @@
                         <p>Linux/X11 için Qt tabanlı odak takip uygulaması. Planlanan ve gerçekleşen uygulama kullanımını karşılaştırarak verimliliği ölçer. Pencere değişikliklerini kaydeder, dikkat dağılımlarını tespit eder ve SVG analitik raporları üretir.</p>
                         <div class="project-link-container">
                             <a href="https://github.com/alihaydarsucu/FocusPath" class="project-link" aria-label="FocusPath projesini GitHub'da görüntüle">Projeyi Görüntüle</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card" role="article">
-                    <div class="project-image">
-                        <img src="/Images/Projects/sucu.webp" alt="" aria-hidden="true" loading="lazy">
-                    </div>
-                    <div class="project-content">
-                        <h3>Sucu</h3>
-                        <p>Yeni Arch Linux kullanıcıları için komut satırı asistanı. Sistem yönetimi, paket işlemleri ve interaktif öğreticiler sunar.</p>
-                        <div class="project-link-container">
-                            <a href="https://github.com/alihaydarsucu/sucu" class="project-link" aria-label="Sucu projesini GitHub'da görüntüle">Projeyi Görüntüle</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card" role="article">
-                    <div class="project-image">
-                        <img src="/Images/Projects/githubpuller.webp" alt="" aria-hidden="true" loading="lazy">
-                    </div>
-                    <div class="project-content">
-                        <h3>GitHubPuller</h3>
-                        <p>Birden fazla GitHub deposunu tek yerden klonlayan, güncelleyen ve yöneten GTK4 ile libadwaita tabanlı bir araç.</p>
-                        <div class="project-link-container">
-                            <a href="https://github.com/alihaydarsucu/GitHubPuller" class="project-link" aria-label="GitHubPuller projesini GitHub'da görüntüle">Projeyi Görüntüle</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card" role="article">
-                    <div class="project-image">
-                        <img src="/Images/Projects/aybu-tdgt.webp" alt="" aria-hidden="true" loading="lazy">
-                    </div>
-                    <div class="project-content">
-                        <h3>aybuturkdunyasi.com</h3>
-                        <p>Ankara Yıldırım Beyazıt Üniversitesi Türk Dünyası Gençlik Topluluğu'nun resmi web sitesi.</p>
-                        <div class="project-link-container">
-                            <a href="https://github.com/alihaydarsucu/aybuturkdunyasi.com" class="project-link" aria-label="aybuturkdunyasi.com projesini GitHub'da görüntüle">Projeyi Görüntüle</a>
-                            <a href="https://aybuturkdunyasi.com/" class="website" target="_blank" aria-label="aybuturkdunyasi.com'u ziyaret et">Siteye Git</a>
                         </div>
                     </div>
                 </div>

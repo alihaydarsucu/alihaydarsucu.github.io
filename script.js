@@ -9,24 +9,13 @@ document.addEventListener('DOMContentLoaded', function() {
         setupLanguageSwitcher();
         setupCVDownload();
         setupExperienceReadMoreButtons();
+        setupProjectGalleries();
         
         // GitHub Projects sadece ilgili sayfalarda
         if (document.getElementById('repos')) {
             loadGitHubProjects();
         }
         
-        // Blog sadece ilgili sayfalarda
-        if (document.getElementById('blog-grid')) {
-            loadBlogPosts();
-        }
-        
-        // Article sadece ilgili sayfalarda
-        if (document.getElementById('article-content')) {
-            loadArticle();
-        }
-
-        // Check blog posts availability and hide links if empty
-        checkBlogVisibility();
     }
     
     function setupDarkMode() {
@@ -276,6 +265,71 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    function setupProjectGalleries() {
+        document.querySelectorAll('[data-project-gallery]').forEach(gallery => {
+            const slides = Array.from(gallery.querySelectorAll('.project-gallery-slide'));
+            const previous = gallery.querySelector('.project-gallery-prev');
+            const next = gallery.querySelector('.project-gallery-next');
+            const counter = gallery.querySelector('.project-gallery-counter');
+            const track = gallery.querySelector('.project-gallery-slides');
+            if (slides.length < 2) return;
+
+            let currentIndex = 0;
+            let returnTimer = null;
+
+            const showSlide = (index, direction = null) => {
+                currentIndex = (index + slides.length) % slides.length;
+                slides.forEach((slide, slideIndex) => {
+                    const active = slideIndex === currentIndex;
+                    slide.classList.toggle('is-active', active);
+                    slide.setAttribute('aria-hidden', String(!active));
+                });
+                if (track) track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                if (counter) counter.textContent = `${currentIndex + 1} / ${slides.length}`;
+            };
+
+            const clearReturnTimer = () => {
+                if (returnTimer) {
+                    window.clearTimeout(returnTimer);
+                    returnTimer = null;
+                }
+            };
+
+            const scheduleReturnToMain = () => {
+                clearReturnTimer();
+                returnTimer = window.setTimeout(() => {
+                    returnTimer = null;
+                    if (!gallery.matches(':hover')) showSlide(0);
+                }, 3000);
+            };
+
+            previous?.addEventListener('click', () => {
+                showSlide(currentIndex - 1, 'previous');
+                scheduleReturnToMain();
+            });
+            next?.addEventListener('click', () => {
+                showSlide(currentIndex + 1, 'next');
+                scheduleReturnToMain();
+            });
+            gallery.addEventListener('pointerenter', clearReturnTimer);
+            gallery.addEventListener('pointerleave', () => {
+                if (currentIndex !== 0) scheduleReturnToMain();
+            });
+            gallery.addEventListener('keydown', event => {
+                if (event.key === 'ArrowLeft') {
+                    showSlide(currentIndex - 1, 'previous');
+                    scheduleReturnToMain();
+                }
+                if (event.key === 'ArrowRight') {
+                    showSlide(currentIndex + 1, 'next');
+                    scheduleReturnToMain();
+                }
+            });
+
+            showSlide(0);
+        });
+    }
+
     function updateCVLink() {
         // Try to get the latest CV file from Assets directory
         const cvBtn = document.getElementById('cv-download-btn');
@@ -397,6 +451,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const specialProjects = {
             'pusula-gcs': 'systems',
             'burai-tech': 'systems',
+            't3gemstone-bumin-ika': 'systems',
             'githubpuller': 'tools',
             'sucu': 'tools',
             'focuspath': 'tools',
@@ -482,6 +537,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function setupFilterButtons(repos) {
         const filterButtons = document.querySelectorAll('.filter-btn');
+        const otherButton = document.querySelector('.filter-btn[data-filter="other"]');
+        const hasOtherProjects = repos.some(repo => {
+            if (!repo || repo.fork || isExcludedRepo(repo)) return false;
+            const categories = categorizeRepo(repo);
+            return categories === 'other' || categories.split(',').includes('other');
+        });
+
+        if (otherButton) {
+            otherButton.hidden = !hasOtherProjects;
+            otherButton.setAttribute('aria-hidden', String(!hasOtherProjects));
+            otherButton.setAttribute('aria-checked', hasOtherProjects ? 'false' : 'true');
+        }
+
         filterButtons.forEach(btn => {
             btn.addEventListener('click', function() {
                 filterButtons.forEach(b => b.classList.remove('active'));

@@ -69,10 +69,6 @@
                         <i class="fas fa-briefcase" aria-hidden="true"></i>
                         <span class="nav-text">Experience</span>
                     </a>
-                    <a href="/posts" role="menuitem">
-                        <i class="fas fa-pencil" aria-hidden="true"></i>
-                        <span class="nav-text">Blog</span>
-                    </a>
                     <a href="/photos" role="menuitem">
                         <i class="fas fa-camera" aria-hidden="true"></i>
                         <span class="nav-text">Photos</span>
@@ -128,12 +124,6 @@
                 </a>
             </div>
             <div role="listitem">
-                <a href="/posts">
-                    <i class="fas fa-pencil" aria-hidden="true"></i>
-                    <span class="nav-text-mobile">Blog</span>
-                </a>
-            </div>
-            <div role="listitem">
                 <a href="/photos">
                     <i class="fas fa-camera" aria-hidden="true"></i>
                     <span class="nav-text-mobile">Photos</span>
@@ -162,8 +152,15 @@
             <h2 class="section-title" id="projects-heading">Featured Projects</h2>
             <div class="projects-container" role="list" aria-label="Featured projects">
                 <div class="project-card" role="article">
-                    <div class="project-image">
-                        <img src="/Images/Projects/pusula-gcs.webp" alt="" aria-hidden="true" loading="lazy">
+                    <div class="project-gallery" data-project-gallery tabindex="0" aria-label="Pusula GCS images">
+                        <div class="project-gallery-slides">
+                            <img class="project-gallery-slide is-active" src="/Images/Projects/pusula-gcs.webp" alt="Pusula GCS main screen" loading="lazy">
+                            <img class="project-gallery-slide" src="/Images/Projects/pusula-vehicle.webp" alt="Pusula unmanned surface vehicle" loading="lazy">
+                            <img class="project-gallery-slide" src="/Images/Projects/pusula-flowchart.webp" alt="Pusula mission flowchart" loading="lazy">
+                        </div>
+                        <button class="project-gallery-control project-gallery-prev" type="button" aria-label="Previous image"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+                        <button class="project-gallery-control project-gallery-next" type="button" aria-label="Next image"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+                        <span class="project-gallery-counter" aria-live="polite">1 / 3</span>
                     </div>
                     <div class="project-content">
                         <h3>Pusula GCS</h3>
@@ -174,8 +171,15 @@
                     </div>
                 </div>
                 <div class="project-card" role="article">
-                    <div class="project-image">
-                        <img src="/Images/Projects/ayaz_buraitech.webp" alt="" aria-hidden="true" loading="lazy">
+                    <div class="project-gallery" data-project-gallery tabindex="0" aria-label="Ayaz Internal AI Assistant images">
+                        <div class="project-gallery-slides">
+                            <img class="project-gallery-slide is-active" src="/Images/Projects/ayaz_buraitech.webp" alt="Ayaz Internal AI Assistant" loading="lazy">
+                            <img class="project-gallery-slide" src="/Images/Projects/ayaz-live-deployment.webp" alt="Ayaz live deployment screen" loading="lazy">
+                            <img class="project-gallery-slide" src="/Images/Projects/ayaz-admin-panel.webp" alt="Ayaz admin panel" loading="lazy">
+                        </div>
+                        <button class="project-gallery-control project-gallery-prev" type="button" aria-label="Previous image"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+                        <button class="project-gallery-control project-gallery-next" type="button" aria-label="Next image"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+                        <span class="project-gallery-counter" aria-live="polite">1 / 3</span>
                     </div>
                     <div class="project-content">
                         <h3>Ayaz: Internal AI Asistant</h3>
@@ -183,6 +187,58 @@
                         <div class="project-link-container">
                             <a href="https://github.com/alihaydarsucu/burai-tech" class="project-link" aria-label="View Ayaz demo codes on GitHub">Demo Codes</a>
                             <a href="https://drive.google.com/file/d/18F6ZYXro4CjBK_BpPsd40cKsMGG-8af_/view?usp=sharing" class="website" target="_blank" rel="noopener noreferrer" aria-label="Watch Ayaz demo video">Video</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" role="article">
+                    <div class="project-gallery" data-project-gallery tabindex="0" aria-label="Autonomous Indoor Mapping images">
+                        <div class="project-gallery-slides">
+                            <img class="project-gallery-slide is-active" src="/Images/Projects/autonomous-mapping-ugv.webp" alt="Autonomous mapping vehicle" loading="lazy">
+                            <img class="project-gallery-slide" src="/Images/Projects/mapping-simulation.webp" alt="Autonomous mapping simulation" loading="lazy">
+                            <img class="project-gallery-slide" src="/Images/Projects/mapping-vehicle.webp" alt="Autonomous mapping vehicle" loading="lazy">
+                        </div>
+                        <button class="project-gallery-control project-gallery-prev" type="button" aria-label="Previous image"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+                        <button class="project-gallery-control project-gallery-next" type="button" aria-label="Next image"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+                        <span class="project-gallery-counter" aria-live="polite">1 / 3</span>
+                    </div>
+                    <div class="project-content">
+                        <h3>Autonomous Indoor Mapping</h3>
+                        <p>T3 Gemstone Indoor Mapping project. An autonomous UGV utilizing ROS 2 and SLAM for real-time indoor environment mapping and navigation.</p>
+                        <div class="project-link-container">
+                            <a href="https://github.com/alihaydarsucu/t3gemstone-bumin-ika" class="project-link" aria-label="View Autonomous Indoor Mapping project on GitHub">View Project</a>
+                            <a href="https://youtube.com/watch?v=YOUR_VIDEO_ID" target="_blank" rel="noopener noreferrer" class="website" aria-label="Watch Autonomous Indoor Mapping demo video">Video</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" role="article">
+                    <div class="project-gallery" data-project-gallery tabindex="0" aria-label="Terranova UGV images">
+                        <div class="project-gallery-slides">
+                            <img class="project-gallery-slide is-active" src="/Images/Projects/terranova-simulation-1.webp" alt="Terranova simulation view one" loading="lazy">
+                            <img class="project-gallery-slide" src="/Images/Projects/terranova-simulation-2.webp" alt="Terranova simulation view two" loading="lazy">
+                            <img class="project-gallery-slide" src="/Images/Projects/terranova-ugv-model.webp" alt="Terranova UGV model" loading="lazy">
+                        </div>
+                        <button class="project-gallery-control project-gallery-prev" type="button" aria-label="Previous image"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+                        <button class="project-gallery-control project-gallery-next" type="button" aria-label="Next image"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+                        <span class="project-gallery-counter" aria-live="polite">1 / 3</span>
+                    </div>
+                    <div class="project-content">
+                        <h3>Terranova UGV</h3>
+                        <p>An autonomous ground vehicle that perceives its environment with YOLOv8 and sensor fusion, maps with SLAM Toolbox, makes decisions with Behavior Tree and Nav2.</p>
+                        <div class="project-link-container">
+                            <a href="https://terranova.fly.dev/" class="website terranova-website" target="_blank" aria-label="Visit Terranova UGV website">Visit Website</a>
+                            <a href="https://youtube.com/watch?v=YOUR_VIDEO_ID" target="_blank" rel="noopener noreferrer" class="website" aria-label="Watch Terranova UGV demo video">Video</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" role="article">
+                    <div class="project-image">
+                        <img src="/Images/Projects/stm32f103-practices.png" alt="" aria-hidden="true" loading="lazy" onerror="this.src='/Images/Projects/blank.webp'">
+                    </div>
+                    <div class="project-content">
+                        <h3>STM32F103 Practices</h3>
+                        <p>Bare-metal and RTOS-based embedded software practice projects using STM32F103 microcontroller.</p>
+                        <div class="project-link-container">
+                            <a href="https://github.com/alihaydarsucu/stm32f103-practice" class="project-link" aria-label="View STM32F103 Practices project on GitHub">View Project</a>
                         </div>
                     </div>
                 </div>
@@ -195,43 +251,6 @@
                         <p>A Qt-based focus tracking application for Linux/X11 that measures productivity by comparing intended vs actual app usage. Records window changes, detects distractions, and generates SVG analytics reports.</p>
                         <div class="project-link-container">
                             <a href="https://github.com/alihaydarsucu/FocusPath" class="project-link" aria-label="View FocusPath project on GitHub">View Project</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card" role="article">
-                    <div class="project-image">
-                        <img src="/Images/Projects/sucu.webp" alt="" aria-hidden="true" loading="lazy">
-                    </div>
-                    <div class="project-content">
-                        <h3>Sucu</h3>
-                        <p>A command-line assistant for new Arch Linux users that simplifies system management, package operations, and provides interactive tutorials.</p>
-                        <div class="project-link-container">
-                            <a href="https://github.com/alihaydarsucu/sucu" class="project-link" aria-label="View Sucu project on GitHub">View Project</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card" role="article">
-                    <div class="project-image">
-                        <img src="/Images/Projects/githubpuller.webp" alt="" aria-hidden="true" loading="lazy">
-                    </div>
-                    <div class="project-content">
-                        <h3>GitHubPuller</h3>
-                        <p>A GTK4 and libadwaita app for cloning, updating, and managing multiple GitHub repositories in one place.</p>
-                        <div class="project-link-container">
-                            <a href="https://github.com/alihaydarsucu/GitHubPuller" class="project-link" aria-label="View GitHubPuller project on GitHub">View Project</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card" role="article">
-                    <div class="project-image">
-                        <img src="/Images/Projects/aybu-tdgt.webp" alt="" aria-hidden="true" loading="lazy">
-                    </div>
-                    <div class="project-content">
-                        <h3>aybuturkdunyasi.com</h3>
-                        <p>Official Website of Ankara Yıldırım Beyazıt University Turkish World Youth Community.</p>
-                        <div class="project-link-container">
-                            <a href="https://github.com/alihaydarsucu/aybuturkdunyasi.com" class="project-link" aria-label="View aybuturkdunyasi.com project on GitHub">View Project</a>
-                            <a href="https://aybuturkdunyasi.com/" class="website" target="_blank" aria-label="Visit aybuturkdunyasi.com">Visit Website</a>
                         </div>
                     </div>
                 </div>
