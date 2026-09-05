@@ -2813,10 +2813,10 @@ body.dark-mode .mobile-language-selector select {
     grid-column: span 2;
 }
 
-/* Desktop: 4th and 5th cards centered on bottom row - only on screens > 768px */
+/* Desktop: three cards per row on screens wider than 768px */
 @media (min-width: 769px) {
     .explore-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .explore-card {
@@ -2824,7 +2824,7 @@ body.dark-mode .mobile-language-selector select {
     }
 
     .explore-card:nth-child(4) {
-        grid-column: auto;
+        grid-column: 2;
     }
 }
 
