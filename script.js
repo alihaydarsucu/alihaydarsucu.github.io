@@ -340,13 +340,16 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(files => {
                 // Find the most recent CV file
-                const cvFiles = files.filter(file => 
-                    file.name.includes('AliHaydarSucu_CV_') && file.name.endsWith('.pdf')
+                const cvFiles = files.filter(file =>
+                    /^AliHaydarSucu_CV_\d{2}_\d{2}_\d{4}\.pdf$/.test(file.name)
                 );
                 
                 if (cvFiles.length > 0) {
-                    // Sort by name (which includes date) and get the latest
-                    cvFiles.sort((a, b) => b.name.localeCompare(a.name));
+                    cvFiles.sort((a, b) => {
+                        const [, dayA, monthA, yearA] = a.name.match(/_(\d{2})_(\d{2})_(\d{4})\.pdf$/);
+                        const [, dayB, monthB, yearB] = b.name.match(/_(\d{2})_(\d{2})_(\d{4})\.pdf$/);
+                        return new Date(`${yearB}-${monthB}-${dayB}`) - new Date(`${yearA}-${monthA}-${dayA}`);
+                    });
                     const latestCV = cvFiles[0];
                     cvBtn.href = `Assets/${latestCV.name}`;
                     

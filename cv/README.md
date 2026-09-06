@@ -25,10 +25,7 @@ The CV is automatically regenerated **only** when:
 
 **Note:** The automation now only triggers when CV-related files are modified, not on every commit to the repository.
 
-The generated PDF is automatically placed in the `Assets/` directory with timestamped filenames:
-
-- `AliHaydarSucu_CV_YYYYMMDD.pdf`
-- `AliHaydarSucu_Resume_DD.MM.YY.pdf`
+The generated PDF is automatically placed in the `Assets/` directory as `AliHaydarSucu_CV_DD_MM_YYYY.pdf`.
 
 ## Manual Generation
 

@@ -33,24 +33,18 @@ jobs:
           lualatex cv.tex
           lualatex cv.tex  # İkinci kez çalıştır (cross-references için)
 
-      - name: Create timestamped filename
-        id: timestamp
-        run: |
-          echo "date=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
-          echo "short_date=$(date +'%d.%m.%y')" >> $GITHUB_OUTPUT
-
       - name: Copy CV to Assets directory
         run: |
           mkdir -p Assets
-          cp cv/cv.pdf "Assets/AliHaydarSucu_CV_${{ steps.timestamp.outputs.date }}.pdf"
-          cp cv/cv.pdf "Assets/AliHaydarSucu_Resume_${{ steps.timestamp.outputs.short_date }}.pdf"
+          date=$(date +'%d_%m_%Y')
+          rm -f Assets/AliHaydarSucu_CV_*.pdf Assets/AliHaydarSucu_Resume_*.pdf
+          cp cv/cv.pdf "Assets/AliHaydarSucu_CV_${date}.pdf"
 
       - name: Update HTML files with new CV link
         run: |
-          # Update index.html
-          sed -i "s|Assets/AliHaydarSucu_CV_[0-9]\{8\}\.pdf|Assets/AliHaydarSucu_CV_${{ steps.timestamp.outputs.date }}.pdf|g" index.html
-          # Update tr.html
-          sed -i "s|Assets/AliHaydarSucu_CV_[0-9]\{8\}\.pdf|Assets/AliHaydarSucu_CV_${{ steps.timestamp.outputs.date }}.pdf|g" tr.html
+          date=$(date +'%d_%m_%Y')
+          sed -E -i "s|Assets/AliHaydarSucu_CV_[0-9]{2}_[0-9]{2}_[0-9]{4}\.pdf|Assets/AliHaydarSucu_CV_${date}.pdf|g" index.html
+          sed -E -i "s|Assets/AliHaydarSucu_CV_[0-9]{2}_[0-9]{2}_[0-9]{4}\.pdf|Assets/AliHaydarSucu_CV_${date}.pdf|g" tr.html
 
       - name: Commit and push CV
         run: |
