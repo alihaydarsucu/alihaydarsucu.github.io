@@ -7,7 +7,6 @@
 
 - [Project Overview](#project-overview)
 - [Features](#features)
-- [Blog System](#blog-system)
 - [Photos Gallery](#photos-gallery)
 - [CV Generation](#cv-generation)
 - [Tech & Structure](#tech--structure)
@@ -18,7 +17,7 @@
 
 ## Project Overview
 
-This repository contains my personal portfolio and blog website, featuring a fully automated CV generation system and a bilingual, category-based blog. The site is designed for both professional presentation and technical content sharing, with a modern, responsive UI and seamless English/Turkish support.
+This repository contains my personal portfolio website, featuring a fully automated CV generation system and bilingual content. The site is designed for professional presentation with a modern, responsive UI and seamless English/Turkish support.
 
 
 ## Features
@@ -28,25 +27,11 @@ This repository contains my personal portfolio and blog website, featuring a ful
 - **Dark/Light Mode**: Automatic system detection and manual toggle, with persistent user preference.
 - **Modern UI/UX**: Accessible, semantic HTML, ARIA labels, and visually appealing design.
 - **Automated CV Generation**: LaTeX-based, ATS-optimized, Oxford-style CV, auto-built and versioned via GitHub Actions.
-- **Dynamic Blog System**: Blog posts are written and managed locally from the admin panel, then published with category, subcategory, and language metadata.
 - **Photos Gallery**: Interactive photo gallery with search, category filtering, pagination (10 items/page), lightbox viewer with keyboard navigation, and bilingual support.
-- **Clean URL Routing**: Blog posts accessible via `/posts/slug` (EN) and `/yazilar/slug` (TR); Photos accessible via `/photos` (EN) and `/fotograflar` (TR), with .htaccess rewrite support.
+- **Clean URL Routing**: Photos accessible via `/photos` (EN) and `/fotograflar` (TR), with .htaccess rewrite support.
 - **Social & SEO**: Open Graph, Twitter Card, and SEO meta tags; social links including Chess.com, LinkedIn, GitHub.
 
 ---
-
-## Blog System
-
-- **Content Source**: Blog posts are written in the local admin editor and saved in project files.
-- **Storage Model**: Post index is stored in `data/blog-posts.json`; full article content is stored in `data/blog-content/<slug>.html`.
-- **Local Uploads**: Article images are uploaded and optimized locally into `Images/Uploads/Blog`.
-- **Category System**:
-  - Main: Technical, History, Fiction (TR); only Technical (EN)
-  - Subcategories (Technical): Systems, Embedded, AI
-- **Tab Navigation**: Blog pages feature a two-level tab system for category and subcategory filtering, with language-specific tab logic.
-- **Multilingual UI**: All blog UI elements, empty states, and buttons are translated.
-- **Share & Copy**: Blog posts have a share button that copies the clean site URL to clipboard.
-- **JSON Structure**: `data/blog-posts.json` contains post metadata used for filtering and display.
 
 ---
 
@@ -88,20 +73,17 @@ This repository contains my personal portfolio and blog website, featuring a ful
 <br>
 
 **Frontend:** HTML5, CSS3 (Flexbox/Grid), JavaScript (ES6+), Font Awesome 6<br>
-**Automation:** GitHub Actions (blog & CV workflows)<br>
+**Automation:** GitHub Actions (CV workflow)<br>
 **Other:** LaTeX (LuaLaTeX), .htaccess for clean URLs<br>
 **No backend:** All dynamic content is client-side or via GitHub Actions
 
 ```text
 .
-├── .github/workflows/         # Blog & CV automation
-│   ├── update-blog.yml        # Blog data sync
+├── .github/workflows/         # CV automation
 │   └── generate-cv.yml        # CV generation
 ├── Assets/                    # Generated CV PDFs
 ├── cv/                        # CV source files (LaTeX)
-├── data/                      # Gallery and blog data
-│   ├── blog-content/          # Article HTML files (slug-based)
-│   ├── blog-posts.json        # Blog index metadata
+├── data/                      # Gallery data
 │   └── photos.json            # Photo metadata (bilingual)
 ├── Images/                    # Icons, screenshots, projects, etc.
 ├── pages/                     # Language-specific pages
@@ -145,9 +127,8 @@ This repository contains my personal portfolio and blog website, featuring a ful
 
 ## Responsive Design
 
-- **Grid Layouts**: Home and blog pages use adaptive grid layouts (3-col, 2-col, 1-col) based on breakpoints.
+- **Grid Layouts**: Home and content pages use adaptive grid layouts (3-col, 2-col, 1-col) based on breakpoints.
 - **Hamburger Menu**: Navigation switches to mobile menu below 1035px, with logo left and hamburger right.
-- **Tab System**: Blog uses two-level tabs for category/subcategory filtering, with language-specific logic.
 - **Mobile Optimizations**: Touch targets, font scaling, and single-column layouts for small screens.
 
 ---
@@ -168,17 +149,6 @@ This repository contains my personal portfolio and blog website, featuring a ful
    git clone https://github.com/alihaydarsucu/alihaydarsucu.github.io.git
    ```
 2. Open `index.html` in your browser
-
-### Local Blog Authoring (Optional)
-
-To manage blog posts locally from the admin panel:
-
-```bash
-npm install
-npm run admin
-```
-
-Then open `/admin` (EN) or `/yonetim` (TR), write the post, and publish.
 
 ### Building the CV Locally
 
