@@ -25,13 +25,19 @@ jobs:
       - name: Install LaTeX
         run: |
           sudo apt-get update
-          sudo apt-get install -y texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra texlive-luatex
+          sudo apt-get install -y fonts-crosextra-carlito texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra texlive-luatex poppler-utils
 
       - name: Generate CV
         run: |
           cd cv
           lualatex cv.tex
           lualatex cv.tex  # İkinci kez çalıştır (cross-references için)
+          pdftotext -enc UTF-8 cv.pdf cv.txt
+          grep -q 'Türkiye' cv.txt
+          grep -q 'Yıldırım' cv.txt
+          grep -q 'AYBÜ' cv.txt
+          grep -q 'Göksu' cv.txt
+          grep -q 'MİMCE' cv.txt
 
       - name: Copy CV to Assets directory
         run: |
