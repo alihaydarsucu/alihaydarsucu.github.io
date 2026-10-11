@@ -30,28 +30,61 @@ document.addEventListener('DOMContentLoaded', function() {
         if (darkModeToggle) {
             darkModeToggle.checked = darkModeEnabled;
             darkModeToggle.addEventListener('change', function() {
-                toggleDarkMode(this.checked);
+                toggleDarkMode(this.checked, this);
             });
         }
 
         if (mobileDarkModeToggle) {
             mobileDarkModeToggle.checked = darkModeEnabled;
             mobileDarkModeToggle.addEventListener('change', function() {
-                toggleDarkMode(this.checked);
+                toggleDarkMode(this.checked, this);
             });
         }
 
-        function toggleDarkMode(enable) {
-            if (enable) {
-                document.body.classList.add('dark-mode');
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                document.body.classList.remove('dark-mode');
-                localStorage.setItem('darkMode', 'disabled');
+        function toggleDarkMode(enable, sourceInput) {
+            const apply = () => {
+                if (enable) {
+                    document.body.classList.add('dark-mode');
+                    try { localStorage.setItem('darkMode', 'enabled'); } catch (e) {}
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    try { localStorage.setItem('darkMode', 'disabled'); } catch (e) {}
+                }
+
+                if (darkModeToggle) darkModeToggle.checked = enable;
+                if (mobileDarkModeToggle) mobileDarkModeToggle.checked = enable;
+            };
+
+            const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (prefersReducedMotion || typeof document.startViewTransition !== 'function') {
+                apply();
+                return;
             }
-            
-            if (darkModeToggle) darkModeToggle.checked = enable;
-            if (mobileDarkModeToggle) mobileDarkModeToggle.checked = enable;
+
+            // Circular reveal expanding from whichever toggle was used.
+            const originEl = (sourceInput && sourceInput.closest && sourceInput.closest('.theme-toggle'))
+                || document.querySelector('.theme-toggle');
+
+            if (originEl) {
+                const rect = originEl.getBoundingClientRect();
+                const x = rect.left + rect.width / 2;
+                const y = rect.top + rect.height / 2;
+                const radius = Math.hypot(
+                    Math.max(x, window.innerWidth - x),
+                    Math.max(y, window.innerHeight - y)
+                );
+                const root = document.documentElement;
+                root.style.setProperty('--vt-x', x + 'px');
+                root.style.setProperty('--vt-y', y + 'px');
+                root.style.setProperty('--vt-r', radius + 'px');
+            }
+
+            try {
+                document.startViewTransition(apply);
+            } catch (error) {
+                apply();
+            }
         }
     }
 

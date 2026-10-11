@@ -4639,3 +4639,42 @@ body.dark-mode .article-error {
         margin-bottom: 0.5rem;
     }
 }
+
+/* ==========================================================================
+   Dark mode transition
+   --------------------------------------------------------------------------
+   When switching between light and dark mode, a circle expands from the theme
+   toggle to reveal the new theme. Powered by the View Transitions API; on
+   browsers without support (or with reduced motion) the switch is instant.
+   ========================================================================== */
+@keyframes themeReveal {
+    from {
+        clip-path: circle(0px at var(--vt-x, 50%) var(--vt-y, 50%));
+    }
+
+    to {
+        clip-path: circle(var(--vt-r, 150%) at var(--vt-x, 50%) var(--vt-y, 50%));
+    }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+    z-index: 1;
+}
+
+::view-transition-new(root) {
+    z-index: 2;
+    animation: themeReveal 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation: none !important;
+    }
+}
