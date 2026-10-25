@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (darkModeEnabled) {
             document.body.classList.add('dark-mode');
         }
+        syncHeaderLogo(darkModeEnabled);
 
         const darkModeToggle = document.querySelector('.theme-toggle input');
         const mobileDarkModeToggle = document.querySelector('.mobile-theme-toggle input');
@@ -41,6 +42,15 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
+        function syncHeaderLogo(isDark) {
+            const src = isDark
+                ? '/Images/Icons/icon-mark-dark.svg'
+                : '/Images/Icons/icon-mark.svg';
+            document.querySelectorAll('img.logo-img').forEach((img) => {
+                img.src = src;
+            });
+        }
+
         function toggleDarkMode(enable, sourceInput) {
             const apply = () => {
                 if (enable) {
@@ -51,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     try { localStorage.setItem('darkMode', 'disabled'); } catch (e) {}
                 }
 
+                syncHeaderLogo(enable);
                 if (darkModeToggle) darkModeToggle.checked = enable;
                 if (mobileDarkModeToggle) mobileDarkModeToggle.checked = enable;
             };

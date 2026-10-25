@@ -20,6 +20,17 @@
 This repository contains my personal portfolio website, featuring a fully automated CV generation system and bilingual content. The site is designed for professional presentation with a modern, responsive UI and seamless English/Turkish support.
 
 
+## Logo
+
+The mark is a **lambda** with an orange pulse: a navy (or light) Λ over a heartbeat-style heading line, used as both app icon and wordmark companion.
+
+- `Images/Icons/icon.svg` — app icon with circular field, used as the favicon and apple-touch icon
+- `Images/Icons/icon-mark.svg` — transparent mark for the header on light backgrounds
+- `Images/Icons/icon-mark-dark.svg` — transparent mark for the header on dark backgrounds
+- `Images/Icons/logo-lockup.svg` — horizontal lockup for light backgrounds
+- `Images/Icons/logo-lockup-dark.svg` — horizontal lockup for dark backgrounds
+
+
 ## Features
 
 - **Bilingual Website**: All content and navigation available in English and Turkish, with instant language switching and clean URLs for both languages.
