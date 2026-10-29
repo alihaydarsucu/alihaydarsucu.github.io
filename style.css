@@ -4672,7 +4672,97 @@ body.dark-mode .article-error {
     animation: themeReveal 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.logo-intro {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: none;
+    place-items: center;
+    background: var(--background);
+    pointer-events: none;
+}
+
+.logo-intro.is-active {
+    display: grid;
+    animation: logo-intro-dismiss 0.3s ease 1.28s forwards;
+}
+
+.logo-intro svg {
+    display: block;
+    width: min(180px, 46vw);
+    height: auto;
+    overflow: visible;
+}
+
+.logo-intro-draw {
+    fill: none;
+    stroke: #0F1C36;
+    stroke-width: 27;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+    animation: logo-intro-draw 0.62s cubic-bezier(0.5, 0, 0.25, 1) forwards;
+}
+
+.logo-intro-mark {
+    fill: #0F1C36;
+    opacity: 0;
+    animation: logo-intro-reveal 0.2s ease 0.5s forwards;
+}
+
+.logo-intro-pulse {
+    fill: none;
+    stroke: url(#logo-intro-amber);
+    stroke-width: 17;
+    stroke-linejoin: miter;
+    stroke-linecap: butt;
+    stroke-dasharray: 240;
+    stroke-dashoffset: 240;
+    animation: logo-intro-pulse 0.48s ease 0.74s forwards;
+}
+
+body.logo-intro-active {
+    overflow: hidden;
+}
+
+body.dark-mode .logo-intro {
+    background: var(--dark-bg);
+}
+
+body.dark-mode .logo-intro-draw {
+    stroke: #F8F9FA;
+}
+
+body.dark-mode .logo-intro-mark {
+    fill: #F8F9FA;
+}
+
+@keyframes logo-intro-draw {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes logo-intro-reveal {
+    to { opacity: 1; }
+}
+
+@keyframes logo-intro-pulse {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes logo-intro-dismiss {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
+    .logo-intro,
+    .logo-intro * {
+        animation: none !important;
+    }
+
     ::view-transition-old(root),
     ::view-transition-new(root) {
         animation: none !important;

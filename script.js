@@ -1,3 +1,66 @@
+function setupLogoIntro() {
+    const isAdminPage = /^\/(?:admin|yonetim)(?:\.html)?\/?$/i.test(window.location.pathname);
+    if (isAdminPage) return;
+
+    let intro = document.getElementById('logo-intro');
+    if (!intro) {
+        intro = document.createElement('div');
+        intro.className = 'logo-intro';
+        intro.id = 'logo-intro';
+        intro.setAttribute('aria-hidden', 'true');
+        intro.innerHTML = `
+            <svg viewBox="104 114 304 284" role="presentation" focusable="false">
+                <defs>
+                    <linearGradient id="logo-intro-amber" x1="0" y1="276" x2="0" y2="328" gradientUnits="userSpaceOnUse">
+                        <stop offset="0" stop-color="#FF8A55" />
+                        <stop offset="1" stop-color="#FF6B35" />
+                    </linearGradient>
+                </defs>
+                <path class="logo-intro-draw" d="M150 374 L256 138 L362 374" />
+                <path class="logo-intro-mark"
+                    d="M127.53 374 L172.47 374 L278.47 138 L233.53 138 Z M339.53 374 L384.47 374 L278.47 138 L233.53 138 Z" />
+                <path class="logo-intro-pulse"
+                    d="M174.66 328 L223 328 L235 316 L235 288 L247 276 L265 276 L277 288 L277 316 L289 328 L337.34 328" />
+            </svg>`;
+        document.body.prepend(intro);
+    }
+
+    const prefersReducedMotion = window.matchMedia
+        && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let alreadyPlayed = false;
+
+    try {
+        alreadyPlayed = sessionStorage.getItem('logoIntroPlayed') === 'true';
+        if (!alreadyPlayed && !prefersReducedMotion) {
+            sessionStorage.setItem('logoIntroPlayed', 'true');
+        }
+    } catch (error) {
+        // Play the intro if session storage is unavailable.
+    }
+
+    if (alreadyPlayed || prefersReducedMotion) {
+        intro.remove();
+        return;
+    }
+
+    document.body.classList.add('logo-intro-active');
+    intro.classList.add('is-active');
+
+    const finishIntro = () => {
+        intro.remove();
+        document.body.classList.remove('logo-intro-active');
+    };
+
+    intro.addEventListener('animationend', (event) => {
+        if (event.target === intro && event.animationName === 'logo-intro-dismiss') {
+            finishIntro();
+        }
+    });
+    window.setTimeout(finishIntro, 1900);
+}
+
+setupLogoIntro();
+
 document.addEventListener('DOMContentLoaded', function() {
     // Basit site fonksiyonları
     initializePage();
@@ -17,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
     }
-    
+
     function setupDarkMode() {
         const darkModeEnabled = localStorage.getItem('darkMode') === 'enabled';
         if (darkModeEnabled) {
