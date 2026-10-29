@@ -4672,6 +4672,11 @@ body.dark-mode .article-error {
     animation: themeReveal 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+html:not(.logo-intro-ready) body > :not(.logo-intro) {
+    visibility: hidden;
+    animation: logo-intro-startup-fallback 4s step-end forwards;
+}
+
 .logo-intro {
     position: fixed;
     inset: 0;
@@ -4682,9 +4687,27 @@ body.dark-mode .article-error {
     pointer-events: none;
 }
 
+.logo-intro::after {
+    position: absolute;
+    top: 50%;
+    left: 15%;
+    width: 70%;
+    height: 1px;
+    background: #FF6B35;
+    box-shadow: 0 0 10px rgba(255, 107, 53, 0.8);
+    content: '';
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left center;
+}
+
 .logo-intro.is-active {
     display: grid;
-    animation: logo-intro-dismiss 0.3s ease 1.28s forwards;
+    animation: logo-intro-dismiss 0.35s ease 1.4s forwards;
+}
+
+.logo-intro.is-active::after {
+    animation: embedded-boot-scan 0.3s cubic-bezier(0.65, 0, 0.35, 1) 1.4s forwards;
 }
 
 .logo-intro svg {
@@ -4694,21 +4717,11 @@ body.dark-mode .article-error {
     overflow: visible;
 }
 
-.logo-intro-draw {
-    fill: none;
-    stroke: #0F1C36;
-    stroke-width: 27;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-dasharray: 600;
-    stroke-dashoffset: 600;
-    animation: logo-intro-draw 0.62s cubic-bezier(0.5, 0, 0.25, 1) forwards;
-}
-
 .logo-intro-mark {
     fill: #0F1C36;
     opacity: 0;
-    animation: logo-intro-reveal 0.2s ease 0.5s forwards;
+    clip-path: inset(100% 0 0 0);
+    animation: logo-intro-reveal 0.7s cubic-bezier(0.5, 0, 0.25, 1) 0.25s forwards;
 }
 
 .logo-intro-pulse {
@@ -4719,31 +4732,34 @@ body.dark-mode .article-error {
     stroke-linecap: butt;
     stroke-dasharray: 240;
     stroke-dashoffset: 240;
-    animation: logo-intro-pulse 0.48s ease 0.74s forwards;
+    animation: logo-intro-pulse 0.55s ease 0.55s forwards;
 }
 
 body.logo-intro-active {
     overflow: hidden;
 }
 
-body.dark-mode .logo-intro {
-    background: var(--dark-bg);
+body.logo-intro-active > :not(.logo-intro) {
+    visibility: hidden;
 }
 
-body.dark-mode .logo-intro-draw {
-    stroke: #F8F9FA;
+body.logo-intro-revealing > :not(.logo-intro) {
+    animation: embedded-boot-in 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+body.dark-mode .logo-intro {
+    background: var(--dark-bg);
 }
 
 body.dark-mode .logo-intro-mark {
     fill: #F8F9FA;
 }
 
-@keyframes logo-intro-draw {
-    to { stroke-dashoffset: 0; }
-}
-
 @keyframes logo-intro-reveal {
-    to { opacity: 1; }
+    to {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+    }
 }
 
 @keyframes logo-intro-pulse {
@@ -4757,9 +4773,50 @@ body.dark-mode .logo-intro-mark {
     }
 }
 
+@keyframes logo-intro-startup-fallback {
+    0%,
+    99.9% {
+        visibility: hidden;
+    }
+
+    100% {
+        visibility: visible;
+    }
+}
+
+@keyframes embedded-boot-scan {
+    0% {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    18%,
+    72% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scaleX(1);
+    }
+}
+
+@keyframes embedded-boot-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .logo-intro,
-    .logo-intro * {
+    .logo-intro *,
+    body.logo-intro-revealing > :not(.logo-intro) {
         animation: none !important;
     }
 

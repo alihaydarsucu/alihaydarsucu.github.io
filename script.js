@@ -1,6 +1,9 @@
 function setupLogoIntro() {
     const isAdminPage = /^\/(?:admin|yonetim)(?:\.html)?\/?$/i.test(window.location.pathname);
-    if (isAdminPage) return;
+    if (isAdminPage) {
+        document.documentElement.classList.add('logo-intro-ready');
+        return;
+    }
 
     let intro = document.getElementById('logo-intro');
     if (!intro) {
@@ -16,11 +19,10 @@ function setupLogoIntro() {
                         <stop offset="1" stop-color="#FF6B35" />
                     </linearGradient>
                 </defs>
-                <path class="logo-intro-draw" d="M150 374 L256 138 L362 374" />
-                <path class="logo-intro-mark"
-                    d="M127.53 374 L172.47 374 L278.47 138 L233.53 138 Z M339.53 374 L384.47 374 L278.47 138 L233.53 138 Z" />
                 <path class="logo-intro-pulse"
                     d="M174.66 328 L223 328 L235 316 L235 288 L247 276 L265 276 L277 288 L277 316 L289 328 L337.34 328" />
+                <path class="logo-intro-mark"
+                    d="M127.53 374 L172.47 374 L278.47 138 L233.53 138 Z M339.53 374 L384.47 374 L278.47 138 L233.53 138 Z" />
             </svg>`;
         document.body.prepend(intro);
     }
@@ -40,15 +42,24 @@ function setupLogoIntro() {
 
     if (alreadyPlayed || prefersReducedMotion) {
         intro.remove();
+        document.documentElement.classList.add('logo-intro-ready');
         return;
     }
 
     document.body.classList.add('logo-intro-active');
     intro.classList.add('is-active');
+    document.documentElement.classList.add('logo-intro-ready');
+    let introFinished = false;
 
     const finishIntro = () => {
+        if (introFinished) return;
+        introFinished = true;
+        document.body.classList.add('logo-intro-revealing');
         intro.remove();
         document.body.classList.remove('logo-intro-active');
+        window.setTimeout(() => {
+            document.body.classList.remove('logo-intro-revealing');
+        }, 520);
     };
 
     intro.addEventListener('animationend', (event) => {
@@ -56,7 +67,7 @@ function setupLogoIntro() {
             finishIntro();
         }
     });
-    window.setTimeout(finishIntro, 1900);
+    window.setTimeout(finishIntro, 2500);
 }
 
 setupLogoIntro();
